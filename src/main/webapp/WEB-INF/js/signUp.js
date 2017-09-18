@@ -119,7 +119,7 @@ $(function() {
 			'mainbg6.jpg', 'mainbg7.jpg', 'mainbg8.jpg', 'mainbg9.jpg' ];
 	$('body').css(
 			{
-				'background-image' : 'url(./img_all/'
+				'background-image' : 'url(../img_all/'
 						+ images[Math.floor(Math.random() * images.length)]
 						+ ')'
 			});

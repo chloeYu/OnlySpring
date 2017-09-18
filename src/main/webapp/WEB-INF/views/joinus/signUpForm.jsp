@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
+<%@ include file="../include.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +12,16 @@
 		<!-- 로그인 폼 시작 -->	
 		<div class="login-signup l-attop" id="login">
 			<div class="login-signup-title">LOG IN</div>
+			<c:choose>
+			<c:when test="${not empty message }">
+				<script type="text/javascript">alert("${message}");</script>
+			</c:when>
+		</c:choose>
 			<div class="login-signup-content">
 				<div class="input-name">
 					<h2>ID</h2>
 				</div>
-				<form action="login.do" name="loginForm" method="post"
+				<form action="login" name="loginForm" method="post"
 					onsubmit="return chk()">
 					<input type="text" name="member_id" value="" class="field-input"
 						id="login_inputId" autofocus="autofocus" />
