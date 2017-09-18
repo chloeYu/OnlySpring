@@ -10,4 +10,13 @@ public class OnlyController {
 		return "chat";
 	}
 
+	@RequestMapping("/signUpForm")
+	public String signUpForm() {
+		return "signUpForm";
+	}
+	
+	@RequestMapping("/timeline")
+	public String timeline() {
+		return "timeline";
+	}
 }
