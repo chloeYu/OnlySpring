@@ -247,6 +247,12 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.4</version>
 		</dependency>
+		<!-- WEBSOCKET -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
