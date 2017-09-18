@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,7 +14,6 @@
 	border: 1px solid black;
 }
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 	// 웹 소켓 변수
 	var websock;
@@ -47,7 +47,7 @@
 	}
 	// 입장 버튼을 눌렀을 때 호출될 메소드
 	function connect() {
-		websock = new WebSocket("ws://" + root + "/chat-ws.do");
+		websock = new WebSocket("ws://" + root + "/chat-ws");
 		websock.onopen = onOpen; // 연결이 될 때 호출될 메소드 설정
 		websock.onmessage = onMessage; // 메시지가 왔을 때 호출될 메소드 설정
 		websock.onclose = onClose; // 연결이 해제될 때 호출될 메소드 설정
