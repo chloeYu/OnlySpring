@@ -89,7 +89,7 @@
 		float: left;
 	}
 	input.field-input {
-		width: calc(100% - 24px);
+		width: 100%; /*수정 김재은 */
 		margin-top: 12px;
 		background-color: rgba(2, 2, 2, 0.07);
 		border: 1px solid rgba(0, 0, 0, 0.02);
