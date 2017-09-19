@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import only.dao.MemberDao;
 import only.model.Member;
+import only.model.Post;
 
 @Service
 public class MemberServiceImpl implements MemberService {

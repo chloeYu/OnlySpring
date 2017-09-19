@@ -6,9 +6,11 @@
 	<!-- <properties resource="db.properties" /> -->
 	<typeAliases>
 		<typeAlias  type="only.model.Member" alias="member"/>
+		<typeAlias  type="only.model.Post" alias="post"/>
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="Member.xml" />
+		<mapper resource="Post.xml" />
 	</mappers>
 </configuration>

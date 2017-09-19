@@ -1,6 +1,8 @@
 package only.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,13 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import only.model.Member;
+import only.model.Post;
 import only.service.MemberService;
+import only.service.PostService;
 import only.utils.WebConstants;
 
 @Controller
 public class OnlyController {
+	static int currentPage = 1;
+	
 	@Autowired
 	private MemberService ms;
+	@Autowired
+	private PostService ps;
 	
 	@RequestMapping("/chat")
 	public String chat() {
@@ -45,6 +53,7 @@ public class OnlyController {
 			} else {
 				System.out.println("로그인 성공");
 				session.setAttribute(WebConstants.USER_ID, member_id);
+				session.setAttribute("member", member);
 				return "redirect:/timeline";
 			}
 		}
@@ -54,11 +63,42 @@ public class OnlyController {
 	public @ResponseBody List<Member> search(String searchTerm) {
 		System.out.println("Search 실행.. " + searchTerm);		
 		List<Member> result = ms.searchMember(searchTerm);
-		System.out.println(result.size());
 		return result;
 	}
+	
+	@RequestMapping("/searchResult")
+	public String searchResult(String searchTerm, Model model) {	
+		List<Member> result = ms.searchMember(searchTerm);
+		model.addAttribute("searchResult", result);
+		return "searchResult";
+	}
+	
 	@RequestMapping("/timeline")
 	public String timeline() {
 		return "timeline";
+	}
+	
+	@RequestMapping("/loadPost")
+	public @ResponseBody List<Post> loadPost(String userid, String pageNum, Model model){
+		List<Post> result = ps.getTimelinePost(userid, pageNum);
+		System.out.println("loadPost: " + result.size());
+
+/*		String[] sh = {"제목", "작성자", "내용","제목+내용"};
+		model.addAttribute("sh", sh);
+		model.addAttribute("list", list);
+		model.addAttribute("pageNum", currentPage);
+*/		return result;
+	}
+	
+	@RequestMapping("/getEachPost")
+	public @ResponseBody Post getEachPost(String pid){
+		Post post = ps.getPost(pid);
+		//System.out.println("loadPost: " + result.size());
+		return post;
+	}
+	
+	@RequestMapping("/postWrite")
+	public String postWrite() {
+		return "";
 	}
 }

@@ -10,6 +10,28 @@ $(function() {
 			$('.img_hide').addClass('img_hidden');
 		}
 	});
+	
+	// Read posts
+	var sendData = "userid="+ userid +"&pageNum=1";
+	console.log(sendData);
+	$.post('loadPost', sendData, function(data) {
+		if(data == null){
+			 $("#postList").html("No Post");
+		} else{
+			var postView;
+			for (var i = 0; i < data.length; i++) {
+				$.post('getEachPost', "pid="+data[i].pid, function(postData){
+					//results[i] = "<h3>"+postData.userid+"</h3><hr>";
+					//results[i] = results[i] + "<h3>" + postData.text + "</h3><br>";
+					//console.log(results[i]);
+					postView = buildPost(postData);
+					console.log(postView);
+					$("#postList").append(postView);
+				});
+	            
+	        }
+		}
+		});
 });
 // textarea focus일 때 작성폼 열기 끝
 // infinite scroll 구현
@@ -86,3 +108,13 @@ $(function(){
 	}
 });
 // 글 내용 없을 때 작성버튼 비활성화 끝
+
+// Post Layout Build
+function buildPost(postData){
+	var postView = "<li class='infinite_scroll'>" + postData.userid + "<hr>";
+	if(postData.text != null){
+		postView = postView + "<h3>" + postData.text + "</h3>"
+	}
+	postView = postView + "</li>";
+	return postView;
+}

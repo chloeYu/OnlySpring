@@ -3,6 +3,7 @@ package only.service;
 import java.util.List;
 
 import only.model.Member;
+import only.model.Post;
 
 public interface MemberService {
 	Member getMemberById(String member_id);
