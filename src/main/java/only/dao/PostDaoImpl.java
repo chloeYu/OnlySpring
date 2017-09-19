@@ -51,4 +51,14 @@ public class PostDaoImpl implements PostDao {
 		}
 		return post;
 	}
+
+	@Override
+	public int insertPost(Post post) {
+		return sst.insert("postns.insert", post);
+	}
+
+	@Override
+	public int nextPid() {
+		return sst.selectOne("postns.nextPid");
+	}
 }

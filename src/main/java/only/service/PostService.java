@@ -10,4 +10,8 @@ public interface PostService {
 
 	Post getPost(String pid);
 
+	int insertPost(Post post);
+
+	int nextPid();
+
 }

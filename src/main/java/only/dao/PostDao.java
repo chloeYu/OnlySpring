@@ -9,4 +9,8 @@ public interface PostDao {
 	List<Post> getTimelinePost(String userid, String pageNum);
 
 	Post getPost(String pid);
+
+	int insertPost(Post post);
+
+	int nextPid();
 }

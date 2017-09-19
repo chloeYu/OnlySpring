@@ -12,27 +12,39 @@
 		<result property="type" column="type" />
 		<result property="text" column="text" />
 	</resultMap>
-	
+
 	<select id="timelinelist" parameterType="hashMap" resultMap="postResult">
-		select * from (select a.*, rowNum rn from (select * from post where userid=#{userid} order by pid desc) a)
-		where rn between #{startRow} and #{endRow}
+		select * from (select a.*, rowNum rn from (select * from post where
+		userid=#{userid} order by pid desc) a)
+		where rn between #{startRow} and
+		#{endRow}
 		<!-- select * from post where userid=#{userid} -->
 	</select>
-	
+
 	<select id="getTimelineTotal" parameterType="String" resultType="int">
-		select count(pid) from post where userid=#{userid} 
+		select count(pid) from post where userid=#{userid}
 	</select>
-	
+
 	<select id="getType" parameterType="String" resultType="String">
-		select type from post where pid=#{pid}
+		select
+		type from post where pid=#{pid}
 	</select>
-	
+
 	<select id="getPost" parameterType="String" resultType="post">
-		select * from post where pid=#{pid}
+		select *
+		from post where pid=#{pid}
 	</select>
-	
+
 	<select id="getPostText" parameterType="String" resultType="String">
 		select text from POST_TEXT where pid=#{pid}
 	</select>
+	
+	<select id="nextPid" resultType="int">
+		select pid_seq.NEXTVAL from dual
+	</select>
+	
+	<insert id="insert" parameterType="post">
+		insert into POST values(#{pid}, sysdate, 'n', #{userid}, sysdate, #{type})
+	</insert>
 </mapper>
 

@@ -22,4 +22,14 @@ public class PostServiceImpl implements PostService{
 	public Post getPost(String pid) {
 		return pd.getPost(pid);
 	}
+
+	@Override
+	public int insertPost(Post post) {
+		return pd.insertPost(post);
+	}
+
+	@Override
+	public int nextPid() {
+		return pd.nextPid();
+	}
 }
