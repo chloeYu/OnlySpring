@@ -111,10 +111,23 @@ $(function(){
 
 // Post Layout Build
 function buildPost(postData){
+	var heart = "<div class='heart' id='heart-"+postData.userid+"'></div>";
+	var shareOut = "<div class='share_out' onclick='openLayer('layerPop',200,18)'></div>";
+	var comment = "<form action='commentWrite'>" + 
+		"<div class='commentForm'><input type='hidden' value='"+userid+"' name='userid'>"+
+		"<textarea row='1' cols='1' name='commentText' placeholder='댓글쓰기' class='comment_textarea'></textarea>"+
+		"<button class='commentBtn'>입력</button>"+
+		"<input type='hidden' value='"+postData.pid+"' name='commentPid'>" +
+		"</div></form>";
+	
 	var postView = "<li class='infinite_scroll'>" + postData.userid + "<hr>";
 	if(postData.text != null){
 		postView = postView + "<h3>" + postData.text + "</h3>"
 	}
+	postView = postView + "<div class='reactBtn'>" + heart + shareOut+ "</div>";
+	postView = postView + comment;
 	postView = postView + "</li>";
+	
+	
 	return postView;
 }
