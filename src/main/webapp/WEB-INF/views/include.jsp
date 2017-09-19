@@ -16,6 +16,7 @@
 <style type="text/css">span.err{color:red}</style>
 <script src="${path}/js/jquery.js"></script>
 <script src="${path}/js/bootstrap.min.js"></script>
+<script src="${path}/js/timeline.js"></script>
 <script src="${path}/js/signUp.js"></script>
 <script src="${path}/js/search.js"></script>
 <script type="text/javascript">

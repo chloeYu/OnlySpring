@@ -2,10 +2,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="sessionChk.jsp"%>
-<%
-	String userid = (String) session.getAttribute("sessionId");
-%>
 <!-- aside 부분 / *팔로우 추천, 광고등 -->
 <div class="timeline_aside">
 	<div class="page_margin"></div>
