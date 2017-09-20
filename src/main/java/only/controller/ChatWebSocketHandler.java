@@ -31,7 +31,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		// 전송되어 온 메시지
 		String msg = message.getPayload();
 		// 앞의 4글자를 제외한 부분을 가지고 메시지 만들기
-		TextMessage mes = new TextMessage(msg.substring(4));
+		TextMessage mes = new TextMessage(msg);
 		// Map의 모든 Value를 가져오기
 		Collection<WebSocketSession> set = users.values();
 		// set의 모든 구성 요소에 mes를 전송
