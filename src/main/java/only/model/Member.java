@@ -13,7 +13,7 @@ public class Member {
 	private String profile_image;
 	private String tel;
 	private Date birth;
-
+	
 	public String getUserid() {
 		return userid;
 	}

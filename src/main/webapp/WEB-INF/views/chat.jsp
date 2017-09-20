@@ -1,93 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="include.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>채팅</title>
-<style type="text/css">
-#chatArea {
-	width: 200px;
-	height: 100px;
-	overflow-y: auto;
-	border: 1px solid black;
-}
-</style>
-<script type="text/javascript">
-	// 웹 소켓 변수
-	var websock;
-	var url = window.location.host;//웹브라우저의 주소창의 포트까지 가져옴
-	var pathname = window.location.pathname; /* '/'부터 오른쪽에 있는 모든 경로*/
-	var appCtx = pathname.substring(0, pathname.indexOf("/", 2));
-	var root = url + appCtx;
-	
-	//문서 시작 호출메소드
-	$(document).ready(function() {
-		$('#message').keypress(function(event) {
-			var keycode = event.keyCode ? event.keyCode : event.which;
-			if (keycode == 13)
-				send();
-			event.stopPropagation();
-		});
-		$('#sendBtn').click(function() {
-			send();
-		});
-		$('#enterBtn').click(function() {
-			connect();
-		});
-		$('#exitBtn').click(function() {
-			disconnet();
-		});
-	});
-	// 메시지를 출력하는 메소드
-	function appendMessage(msg) {
-		// msg를 chatMessageArea에 추가
-		$('#chatMessageArea').append(msg + '<br/>');
-	}
-	// 입장 버튼을 눌렀을 때 호출될 메소드
-	function connect() {
-		websock = new WebSocket("ws://" + root + "/chat-ws");
-		websock.onopen = onOpen; // 연결이 될 때 호출될 메소드 설정
-		websock.onmessage = onMessage; // 메시지가 왔을 때 호출될 메소드 설정
-		websock.onclose = onClose; // 연결이 해제될 때 호출될 메소드 설정
-	}
-	// 퇴장 버튼을 눌렀을 때 호출될 메소드
-	function disconnect() {
-		// 소켓 닫기
-		websock.close();
-	}
-	function onOpen(evt) { // 연결이 되었을 때 호출될 메소드
-		appendMessage("연결되었습니다.")
-	}
-	function onMessage(evt) {//메시지가 왔을 때 호출될 메소드
-		var data = evt.data;
-		appendMessage(data);
-	}
-	function onClose(evt) { // 연결이 해제될 때 호출되는 메소드
-		appendMessage("연결을 끊었습니다.");
-	}
-	// 전송 버튼을 눌렀을 때 호출되는 메소드
-	function send() {
-		// jQuery로 쓸 때 코드
-		var nickname = $('#nickname').val();
-		var msg = $('#message').val();
-		websock.send("msg:" + nickname + ":" + msg);
-		$('#message').val("");
-	}
-</script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+	crossorigin="anonymous">
+<link rel='stylesheet prefetch'
+	href='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css'>
+<link rel="stylesheet" href="${path }/css/chat.css">
+
+<script
+	src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script
+	src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
+<script src="${path }/js/chat.js"></script>
 </head>
 <body>
-	별명 :
-	<input type="text" id="nickname" />
-	<input type="button" id="enterBtn" value="입장" />
-	<input type="button" id="exitBtn" value="퇴장" />
-	<br>
-	<input type="text" id="message" />
-	<input type="button" id="sendBtn" value="전송" />
-	<h1>대화영역</h1>
-	<div id="chatArea">
-		<div id="chatMessageArea"></div>
-	</div>
+	<!--
+Inspired by https://dribbble.com/supahfunk
+-->
+	<section class="avenue-messenger">
+		<div class="menu">
+			<div class="items">
+				<span> <a href="#" title="Minimize">&mdash;</a><br> <!--     
+     <a href="">enter email</a><br>
+     <a href="">email transcript</a><br>--> <a href="#" title="End Chat">&#10005;</a>
+
+				</span>
+			</div>
+			<div class="button">...</div>
+		</div>
+		<div class="agent-face">
+			<div class="half">
+				<img class="agent circle" src="${path }/img_all/user.png"
+					alt="">
+			</div>
+		</div>
+		<div class="chat">
+			<div class="chat-title">
+				<h1>UserName</h1>
+				<h2>NickName</h2>
+				<!--  <figure class="avatar">
+      <img src="http://askavenue.com/img/17.jpg" /></figure>-->
+			</div>
+			<div class="messages">
+				<div class="messages-content"></div>
+			</div>
+			<div class="message-box">
+				<textarea type="text" class="message-input"
+					placeholder="Type message..."></textarea>
+				<button type="submit" class="message-submit">Send</button>
+			</div>
+		</div>
 </body>
 </html>

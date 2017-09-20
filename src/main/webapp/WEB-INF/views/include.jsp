@@ -14,7 +14,6 @@
 <link href="${path}/css/timelineMobile.css" rel="stylesheet">
 <link href="${path}/css/search.css" rel="stylesheet">
 <link href="${path}/css/searchMobile.css" rel="stylesheet">
-<link href="${path}/css/chat.css" rel="stylesheet">
 <style type="text/css">span.err{color:red}</style>
 <script src="${path}/js/jquery.js"></script>
 <script src="${path}/js/bootstrap.min.js"></script>
