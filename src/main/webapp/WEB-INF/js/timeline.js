@@ -137,3 +137,32 @@ function buildPost(postData){
 	
 	return postView;
 }
+
+//파일 미리보기 
+var sel_files = [];
+
+function previewFiles() {
+	var index = 0;
+	var preview = document.querySelector('#preview');
+	var files = document.querySelector('input[type=file]').files;
+
+	function readAndPreview(file) {
+			var reader = new FileReader();
+
+			reader.addEventListener("load", function() {
+				var image = new Image();
+				image.height = 100;
+				image.title = file.name;
+				image.src = this.result;
+				preview.appendChild(image);
+				index++;
+				sel_files.push(file);
+			}, false);
+
+			reader.readAsDataURL(file);
+		}
+	if (files) {
+		[].forEach.call(files, readAndPreview);
+	}
+
+}
