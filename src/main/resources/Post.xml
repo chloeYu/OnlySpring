@@ -12,7 +12,13 @@
 		<result property="type" column="type" />
 		<result property="text" column="text" />
 	</resultMap>
-
+	
+	<resultMap type="postImage" id="postImageResult">
+		<id property="pid" column="pid" />
+		<result property="url" column="url" />
+		<result property="seq" column="seq" />
+	</resultMap>
+	
 	<select id="timelinelist" parameterType="hashMap" resultMap="postResult">
 		select * from (select a.*, rowNum rn from (select * from post where
 		userid=#{userid} order by pid desc) a)
@@ -26,17 +32,19 @@
 	</select>
 
 	<select id="getType" parameterType="String" resultType="String">
-		select
-		type from post where pid=#{pid}
+		select type from post where pid=#{pid}
 	</select>
 
 	<select id="getPost" parameterType="String" resultType="post">
-		select *
-		from post where pid=#{pid}
+		select * from post where pid=#{pid}
 	</select>
 
 	<select id="getPostText" parameterType="String" resultType="String">
 		select text from POST_TEXT where pid=#{pid}
+	</select>
+	
+	<select id="getFilePath" parameterType="String" resultMap="postImageResult">
+		select * from POST_IMAGE where pid=#{pid} order by seq
 	</select>
 	
 	<select id="nextPid" resultType="int">
@@ -45,6 +53,14 @@
 	
 	<insert id="insert" parameterType="post">
 		insert into POST values(#{pid}, sysdate, 'n', #{userid}, sysdate, #{type})
+	</insert>
+	
+	<insert id="insertText">
+		insert into POST_TEXT values (#{pid}, #{text}) 
+	</insert>
+	
+	<insert id="insertImage">
+		insert into POST_IMAGE values (#{pid}, #{url}, 1)
 	</insert>
 </mapper>
 

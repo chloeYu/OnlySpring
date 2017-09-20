@@ -23,4 +23,8 @@
 	<select id="search" parameterType="String" resultMap="memberResult">
 		select * from member where userid like '%'|| #{searchTerm} || '%'
 	</select>
+	
+	<insert id="insert" parameterType="member">
+		insert into MEMBER values (#{userid}, #{username}, #{password}, #{email}, 1, sysdate, sysdate, '/img_all/default_profile.png', null, null)
+	</insert>
 </mapper>

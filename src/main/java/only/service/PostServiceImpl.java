@@ -32,4 +32,14 @@ public class PostServiceImpl implements PostService{
 	public int nextPid() {
 		return pd.nextPid();
 	}
+
+	@Override
+	public int insertText(int pid, String text) {
+		return pd.insertText(pid, text);
+	}
+
+	@Override
+	public int insertImage(int pid, String filePath) {
+		return pd.insertImage(pid, filePath);
+	}
 }

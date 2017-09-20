@@ -9,4 +9,6 @@ public interface MemberService {
 	Member getMemberById(String member_id);
 
 	List<Member> searchMember(String searchTerm);
+
+	int insert(Member member);
 }

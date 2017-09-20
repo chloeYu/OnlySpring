@@ -13,10 +13,16 @@
 		<div class="login-signup l-attop" id="login">
 			<div class="login-signup-title">LOG IN</div>
 			<c:choose>
-			<c:when test="${not empty message }">
-				<script type="text/javascript">alert("${message}");</script>
+			<c:when test="${not empty signUpResult }">
+				<script type="text/javascript">alert("${signUpResult}");</script>
 			</c:when>
-		</c:choose>
+			</c:choose>
+			
+			<c:choose>
+			<c:when test="${not empty signUpResult }">
+				<script type="text/javascript">alert("${signUpResult}");</script>
+			</c:when>
+			</c:choose>	
 			<div class="login-signup-content">
 				<div class="input-name">
 					<h2>ID</h2>
@@ -53,11 +59,11 @@
 			<div class="login-signup-title">SIGN UP</div>
 			<div class="login-signup-content">
 				<!-- <form action="signUp.jsp" method="post"> -->
-				<form action="signUp.do" method="post">
+				<form action="signUp" method="post">
 					<div class="input-name">
 						<h2>ID</h2>
 					</div>
-					<input type="text" name="member_id" value=""
+					<input type="text" name="userid" value=""
 						class="field-input signup_id" id="member_id" onkeyup="checkId()" />
 					<div id="checkMsg">아이디를 입력하세요</div>
 					<div class="input-name input-margin">
@@ -68,7 +74,7 @@
 					<div class="input-name input-margin">
 						<h2>Nickname</h2>
 					</div>
-					<input type="text" name="nickname" value=""
+					<input type="text" name="username" value=""
 						class="field-input signup_nick" id="nickname" />
 					<div class="input-name input-margin">
 						<h2>E-Mail</h2>

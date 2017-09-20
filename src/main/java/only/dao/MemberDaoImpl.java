@@ -22,4 +22,9 @@ public class MemberDaoImpl implements MemberDao {
 	public List<Member> searchMember(String searchTerm) {
 		return sst.selectList("memberns.search", searchTerm);
 	}
+
+	@Override
+	public int insert(Member member) {
+		return sst.insert("memberns.insert", member);
+	}
 }

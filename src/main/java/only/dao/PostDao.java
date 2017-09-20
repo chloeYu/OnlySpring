@@ -13,4 +13,8 @@ public interface PostDao {
 	int insertPost(Post post);
 
 	int nextPid();
+
+	int insertText(int pid, String text);
+
+	int insertImage(int pid, String filePath);
 }

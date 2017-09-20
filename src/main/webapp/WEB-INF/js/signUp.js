@@ -54,12 +54,9 @@ function sendId() {
 		if (keyword != '') {
 			var params = "id=" + encodeURIComponent(keyword);
 			console.log(params);
-			$.post("id_check.jsp", params, function(data) {
-				var start = data.indexOf('<li>');
-				var end = data.indexOf('</li>');
-				var kk = data.slice(start + 4, end);
-				displayResult(kk);
-				console.log(kk);
+			$.post("id_check", params, function(data) {
+				console.log(data);
+				displayResult(data);
 			});
 			console.log("아이디작성하면작동");
 		} else {

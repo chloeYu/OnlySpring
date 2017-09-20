@@ -32,9 +32,36 @@ public class OnlyController {
 	public String chat() {
 		return "chat";
 	}
-
+	
+	
+	@RequestMapping("/joinus/id_check")
+	public @ResponseBody int joinusIdChk(String id) {
+		Member member = ms.getMemberById(id);
+		if(member==null) {
+			return 0;
+		}
+		else {
+			return 1;
+		}
+	}
 	@RequestMapping("/joinus/signUpForm")
 	public String signUpForm() {
+		return "joinus/signUpForm";
+	}
+	
+	
+	@RequestMapping("/joinus/signUp")
+	public String signUp(Member member, Model model) {
+		System.out.println(member.getUserid()+", " + member.getUsername() + ", " + member.getPassword() + ", " + member.getEmail());
+		int result = ms.insert(member);
+		if(result>0){
+			System.out.println("SignUp 성공");
+			model.addAttribute("signUpResult", "가입성공! 로그인하세요");
+			
+		} else{
+			System.out.println("SignUp 실패");
+			model.addAttribute("signUpResult", "가입실패<br>다시 시도하세요");
+		}
 		return "joinus/signUpForm";
 	}
 	

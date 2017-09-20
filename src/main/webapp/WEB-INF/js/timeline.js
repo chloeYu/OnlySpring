@@ -111,6 +111,7 @@ $(function(){
 
 // Post Layout Build
 function buildPost(postData){
+	console.log(postData);
 	var heart = "<div class='heart' id='heart-"+postData.userid+"'></div>";
 	var shareOut = "<div class='share_out' onclick='openLayer('layerPop',200,18)'></div>";
 	var comment = "<form action='commentWrite'>" + 
@@ -121,6 +122,9 @@ function buildPost(postData){
 		"</div></form>";
 	
 	var postView = "<li class='infinite_scroll'>" + postData.userid + "<hr>";
+	if(postData.files != null){ // if attached images or videos exist 
+		postView = postView + "<img src='"+postData.files[0]+"'>"
+	}
 	if(postData.text != null){
 		postView = postView + "<h3>" + postData.text + "</h3>"
 	}

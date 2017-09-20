@@ -23,4 +23,9 @@ public class MemberServiceImpl implements MemberService {
 	public List<Member> searchMember(String searchTerm) {
 		return md.searchMember(searchTerm);
 	}
+
+	@Override
+	public int insert(Member member) {
+		return md.insert(member);
+	}
 }

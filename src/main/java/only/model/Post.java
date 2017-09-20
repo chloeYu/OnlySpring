@@ -10,6 +10,7 @@ public class Post {
 	private Date modified; 
 	private String type;
 	private String text;
+	private String[] files;
 	
 	public int getPid() {
 		return pid;
@@ -53,6 +54,13 @@ public class Post {
 	}
 	public void setText(String text) {
 		this.text = text;
+	}
+	
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
 	}
 	
 }

@@ -10,4 +10,6 @@ public interface MemberDao {
 
 	List<Member> searchMember(String searchTerm);
 
+	int insert(Member member);
+
 }

@@ -1,6 +1,7 @@
 package only.dao;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import only.model.Post;
+import only.model.PostImage;
 import only.utils.PostType;
 
 @Repository
@@ -45,6 +47,15 @@ public class PostDaoImpl implements PostDao {
 					post.setText(text);
 				} 
 				if (i== PostType.PHOTO_VIDEO.ordinal()) {
+					System.out.println(pid);
+					List<PostImage> filePaths = sst.selectList("postns.getFilePath", pid);
+					String[] postFilePaths = new String[filePaths.size()];
+					Iterator<PostImage> it = filePaths.iterator();
+					int seq=0;
+					while(it.hasNext()) {
+						postFilePaths[seq++] = it.next().getUrl();
+					}
+					post.setFiles(postFilePaths);
 					System.out.println("Photo Video Post");
 				}
 			}
@@ -60,5 +71,21 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public int nextPid() {
 		return sst.selectOne("postns.nextPid");
+	}
+
+	@Override
+	public int insertText(int pid, String text) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("pid", Integer.toString(pid));
+		map.put("text", text);
+		return sst.insert("postns.insertText", map);
+	}
+
+	@Override
+	public int insertImage(int pid, String filePath) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("pid", Integer.toString(pid));
+		map.put("text", filePath);
+		return sst.insert("postns.insertImage", map);
 	}
 }
