@@ -75,7 +75,7 @@ public class OnlyController {
 			return "joinus/signUpForm";
 		} else {
 			if(!member.getPassword().equals(password)) {
-				System.out.println("ㅂ밀번호가 일치하지 않습니다");
+				System.out.println("밀번호가 일치하지 않습니다");
 				model.addAttribute("message", "비밀번호가 일치하지 않습니다");
 				return "joinus/signUpForm";
 			} else {

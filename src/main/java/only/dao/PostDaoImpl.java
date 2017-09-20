@@ -85,7 +85,8 @@ public class PostDaoImpl implements PostDao {
 	public int insertImage(int pid, String filePath) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("pid", Integer.toString(pid));
-		map.put("text", filePath);
+		map.put("url", filePath);
+		System.out.println("insert image: " + pid + ", " + filePath);
 		return sst.insert("postns.insertImage", map);
 	}
 }

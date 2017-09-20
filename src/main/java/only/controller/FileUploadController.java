@@ -108,11 +108,20 @@ public class FileUploadController {
 		for(int i=0; i<type.length; i++) {
 			if(type[i]=='y') {
 				if(i==0) { // Add text 
-					ps.insertText(pid, text);
+					if(ps.insertText(pid, text)>0){
+						System.out.println("Text 입력성공");
+					}else {
+						System.out.println("Text 입력실패");
+					}
 				}
 				if(i==1) { // Add Image/Video
 					String filePath = System.getProperty("catalina.home") + File.separator + "uploadFiles";
-					ps.insertImage(pid, filePath+ File.separator + imageUpload.getOriginalFilename());
+					System.out.println(imageUpload.getOriginalFilename());
+					if(ps.insertImage(pid, imageUpload.getOriginalFilename())>0) {
+						System.out.println("Image 입력성공");
+					}else {
+						System.out.println("Image 입력실패");
+					}
 				}
 			}
 		}
