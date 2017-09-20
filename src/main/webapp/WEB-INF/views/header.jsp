@@ -7,7 +7,7 @@
 	<div class="head_logo">
 		<h1 class="head_logo">
 			<a id="logo_href" href="${path}/timeline"> <img id="logo_top"
-				alt="" src="${path}/img_all/logo3.png">
+				alt="" src="${path}/img_all/logo4.png">
 			</a>
 		</h1>
 	</div>
@@ -22,10 +22,11 @@
 			</datalist>
 			<button type="submit">Search</button>
 		</form>
+		<div class="searchClear"></div>
 	</div>
 	<!-- 서치 끝 -->
 	<div class="header_profile">
-		<div class="header_wraper" data-click="profile_icon">
+		<div class="header_wraper userProfile" data-click="profile_icon">
 			<a id="user_profile_url" href="blog/<%=userid %>"> <img
 				style="vertical-align: middle" src=".${profile_img }"> <span>${name }</span>
 			</a>

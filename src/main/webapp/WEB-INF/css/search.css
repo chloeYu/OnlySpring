@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-	background-color: #3f5068;
+	background-color: #c9d0db;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -111,7 +111,8 @@ body {
 
 .header_profile .header_wraper .nav_icon .friend_list, .header_profile .header_wraper .nav_icon .alarm_list
 	 . .header_profile .header_wraper .nav_icon .message_list {
-	float: none;
+	/* float: none; */
+	clear: both;
 	margin: 5px 0 6px 0;
 	position: relative;
 }
@@ -326,7 +327,6 @@ body {
 	padding: 0 5px 1px;
 	position: relative;
 	text-decoration: none;
-	vertical-align: top;
 	white-space: nowrap;
 }
 

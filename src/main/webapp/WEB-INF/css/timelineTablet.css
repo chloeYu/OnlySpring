@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@media screen and (min-width:310px) and (max-width:1024px) {
+@media screen and (min-width:512px) and (max-width:1024px) {
 	body {
 		margin: 0;
 	}
@@ -40,8 +40,8 @@
 	}
 	.searchTerm {
 		float: left;
-		width: 40%;
-		border: 2px solid #c6a1b7;
+		width: 350px;
+		border: 2px solid #97a6bf;
 		padding: 5px;
 /* 		height: 15px; */
 		border-radius: 5px;
@@ -50,57 +50,53 @@
 		display: inline-block;
 	}
 	.searchTerm:focus {
-		color: #c6a1b7;
+		color: #97a6bf;
 	}
 	.form-wrapper button {
 		overflow: visible;
 		position: relative;
-		float: left;
+		float: right;
 		border: 0;
 		padding: 0;
 		cursor: pointer;
-		height: 28px;
+		height: 29px;
 		width: 50px;
 		font: bold 10px/15px 'lucida sans', 'trebuchet MS', 'Tahoma';
 		color: #FFF;
 		text-transform: uppercase;
-		background: #c6a1b7;
+		background: #97a6bf;
 		-moz-border-radius: 0 3px 3px 0;
 		-webkit-border-radius: 0 3px 3px 0;
 		border-radius: 0 3px 3px 0;
 		text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
 		display: inline-block;
-		left: -5px;
-		top: 2px;
+		right: 53px;
 	}
 	.form-wrapper button:hover {
-		background: #ceb3c3;
+		background: #6c7f9b;
 	}
 	.form-wrapper button:active, .form-wrapper button:focus {
-		background: #ceb3c3;
+		background: #758499;
 	}
 	.form-wrapper button:before {
 		content: '';
 		position: absolute;
 		border-width: 8px 8px 8px 0;
 		border-style: solid solid solid none;
-		border-color: transparent #c6a1b7 transparent;
+		border-color: transparent #97a6bf transparent;
 		top: 7px;
 		left: -7px;
 	}
 	.form-wrapper button:hover:before {
-		border-right-color: #ceb3c3;
+		border-right-color: #6c7f9b;
 	}
 	.form-wrapper button:focus:before {
-		border-right-color: #ceb3c3;
-	}
-	.searchClear{
-		clear: both;
+		border-right-color: #97a6bf;
 	}
 	.timeline_main {
 		width: 100%;
 		display: block;
-		background-color: #ddc9d5;
+		background-color: #c9d0db;
 		background-repeat: no-repeat;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
@@ -110,10 +106,10 @@
 		/* overflow: scroll; */
 	}
 	.timeline_post {
-		width: 90%;
+		width: 70%;
 		display: block;
 		float: left;
-		margin-left: 5%;
+		margin-left: 15%;
 	}
 	.timeline_aside {
 		position: fixed;
@@ -134,6 +130,7 @@
 	}
 	#main_container{
 		border: 1px solid #CCC;	
+		background-color: #FFF;
 	}
 	.blog_post {
 		width: 40%;
@@ -143,9 +140,10 @@
 	}
 	.infinite_scroll {
 		background-color: #FFF;
+		border-radius: 5px;
 		padding: 20px;
 		margin-bottom: 25px;
-		width: 85%;
+		width: 90%;
 		padding-top: 5px;
 	}
 	.page_margin {
@@ -170,7 +168,7 @@
 	.type_choice_box {
 		background-color: #FFF;
 		border-radius: 5px;
-		width: 85%;
+		width: 90%;
 		margin-bottom: 25px;
 		position: relative;
 		clear: both;
@@ -204,7 +202,6 @@
 	}
 	.post_view_box {
 		list-style-type: none;
-		padding-left: 5px
 	}
 	.choice_box_next {
 		display: none;
@@ -222,7 +219,7 @@
 		border-radius: 5px;
 		line-height: 22px;
 		background-color: #FFF;
-		border: 1px solid #ceb3c3;
+		border: 1px solid #adbed8;
 		transition: all 0.3s;
 		padding: 5px;
 		width: 100%;
@@ -244,7 +241,7 @@
 	.post_submit_btn {
 		font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 		width: 100%;
-		background: #c6a1b7;
+		background: #adbed8;
 		border-radius: 5px;
 		border: 0;
 		cursor: pointer;
@@ -258,7 +255,7 @@
 		font-size: 1.2rem;
 	}
 	.post_submit_btn:hover {
-		background: #ceb3c3;
+		background: #6c7f9b;
 	}
 	.img_hidden {
 		display: none;
@@ -288,7 +285,7 @@
 		border-radius: 5px;
 		line-height: 22px;
 		background-color: #FFF;
-		border: 1px solid #ceb3c3;
+		border: 1px solid #adbed8;
 		transition: all 0.3s;
 		padding: 5px;
 		width: 80%;
@@ -305,7 +302,7 @@
 		width: 15%;
 		height: 30px;
 		box-sizing: border-box;
-		background: #ceb3c3;
+		background: #adbed8;
 		border-radius: 5px;
 		border: 0;
 		cursor: pointer;

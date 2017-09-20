@@ -5,13 +5,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="path" value="${pageContext.request.contextPath }"></c:set>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <%-- <link href="${path}/css/bootstrap.min.css" rel="stylesheet"> --%>
 <link href="${path}/css/signUpFull.css" rel="stylesheet">
 <link href="${path}/css/signUpMobile.css" rel="stylesheet">
 <link href="${path}/css/timelineFull.css" rel="stylesheet">
+<link href="${path}/css/timelineTablet.css" rel="stylesheet">
 <link href="${path}/css/timelineMobile.css" rel="stylesheet">
 <link href="${path}/css/search.css" rel="stylesheet">
+<link href="${path}/css/searchMobile.css" rel="stylesheet">
 <link href="${path}/css/chat.css" rel="stylesheet">
 <style type="text/css">span.err{color:red}</style>
 <script src="${path}/js/jquery.js"></script>

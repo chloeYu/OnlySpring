@@ -119,7 +119,9 @@ function buildPost(postData){
 		"<textarea row='1' cols='1' name='commentText' placeholder='댓글쓰기' class='comment_textarea'></textarea>"+
 		"<button class='commentBtn'>입력</button>"+
 		"<input type='hidden' value='"+postData.pid+"' name='commentPid'>" +
-		"</div></form>";
+		"</div>" +
+		"<div class='postLayoutClear'></div>" +
+		"</form>";
 	
 	var postView = "<li class='infinite_scroll'>" + postData.userid + "<hr>";
 	if(postData.files != null){ // if attached images or videos exist 

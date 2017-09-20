@@ -31,15 +31,16 @@ flat(ctrl++shift+f) 절대로 금지
 flat(ctrl++shift+f) 절대로 금지 */
 @media screen and (min-width:1024px) {
 	body {
+		overflow: auto;
 		margin: 0;
 	}
 	.header {
-		background-color: #3f5068;
+		background-color: #fff;
 		width: 100%;
 		height: 50px;
 		position: fixed;
 		z-index: 999;
-		border-bottom: 1px solid #a8b1bf;
+		border-bottom: 1.5px solid #a8b1bf;
 		box-sizing: border-box;
 	}
 	.header_hidden {
@@ -82,7 +83,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		color: #97a6bf;
 	}
 	.form-wrapper button {
-		overflow: visible;
+		overflow: auto;
 		position: relative;
 		float: right;
 		border: 0;
@@ -99,7 +100,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		border-radius: 0 3px 3px 0;
 		text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
 		display: inline-block;
-		right: 50px;
+		right: 53px;
 	}
 	.form-wrapper button:hover {
 		background: #6c7f9b;
@@ -114,7 +115,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		border-style: solid solid solid none;
 		border-color: transparent #97a6bf transparent;
 		top: 7px;
-		left: -6px;
+		left: -7px;
 	}
 	.form-wrapper button:hover:before {
 		border-right-color: #6c7f9b;
@@ -125,20 +126,20 @@ flat(ctrl++shift+f) 절대로 금지 */
 	.timeline_main {
 		width: 100%;
 		display: block;
-		background-color: #3f5068;
+		background-color: #c9d0db;
 		background-repeat: no-repeat;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
 		background-position: center;
-		overflow: auto;
+		/* overflow: scroll; */
 	}
 	.timeline_post {
 		width: 40%;
 		display: block;
 		float: left;
-		margin-left: 18%;
+		margin-left: 20%;
 	}
 	.timeline_aside {
 		position: fixed;
@@ -158,7 +159,9 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: block;
 		margin-left: 2%;
 	}
-	
+	#main_container{
+		border: 1px solid #CCC;	
+	}
 	
 	.blog_post {
 		width: 40%;
@@ -168,7 +171,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 	}
 	.infinite_scroll {
 		background-color: #FFF;
-		border-radius: 5px;
 		padding: 20px;
 		margin-bottom: 25px;
 		width: 90%;
@@ -180,7 +182,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 	}
 	.aside_follow {
 		background-color: #FFF;
-		border-radius: 5px;
 		padding: 10px;
 		padding-top: 5px;
 		margin-bottom: 25px;
@@ -188,7 +189,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 	}
 	.aside_interested {
 		background-color: #FFF;
-		border-radius: 5px;
 		padding: 10px;
 		padding-top: 5px;
 		margin-bottom: 25px;
@@ -469,6 +469,9 @@ flat(ctrl++shift+f) 절대로 금지 */
 	.postVideo{
 		width: 50%; 
 		height: 240px; 
+	}
+	.postLayoutClear{
+		clear:both;
 	}
 	@keyframes heart-burst {
 		from { 
