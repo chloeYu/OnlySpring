@@ -2,17 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="sessionChk.jsp"%>
 <%@ include file="include.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>OnLy</title>
-
 </head>
 <body>
 	<div id="wrapper">
-	
-	
 		<div id="layerPop">
 			<h3>공유하기</h3>
 			<hr>
@@ -42,11 +38,11 @@
 							<textarea rows="1" cols="1" class="type_choice_textarea"
 								name="text" placeholder="What's on your mind, <%=userid%>?"></textarea>
 							<div class="write_type_choice">
-								<a class="choice_type" id="preview" onclick="deleteImageAction(i)"></a>
-								<a class="choice_type"> <br><img alt="" src="img_timeline/picture.svg"
+								<a class="choice_type"> <img alt="" src="img_timeline/picture.svg"
 									class="img_hide img_hidden type_photo" width="30px" border='0'
-									onclick='document.all.imageUpload.click();'> 
-									<input type="file" name="imageUpload" accept="image/png, image/gif, image/jpg" style='display: none;'onchange="previewFiles()" multiple>
+									onclick='document.all.imageUpload.click();'> <input
+									type="file" name="imageUpload" style='display: none;'
+									accept="image/png, image/gif, image/jpg">
 								</a> <a class="choice_type"> <img
 									src='img_timeline/video-camera.svg'
 									class="img_hide img_hidden img_video" width="30px" border='0'
@@ -62,16 +58,12 @@
 						</form>
 					</li>
 					<!-- 타입 선택 후 끝 -->
-					<li class="infinite_scroll">
-						<h3>등록된 글이 없습니다</h3>
-					</li>
 				</ol>
-				<div id="main_container"></div>
+				<div id="postList"></div>
 				<!-- 포스트 뷰 끝 -->
 			</div>
 		</div>
 		<jsp:include page="rightmenu.jsp"></jsp:include>
 	</div>
-
 </body>
 </html>

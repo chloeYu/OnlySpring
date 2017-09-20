@@ -10,6 +10,28 @@ $(function() {
 			$('.img_hide').addClass('img_hidden');
 		}
 	});
+	
+	// Read posts
+	var sendData = "userid="+ userid +"&pageNum=1";
+	console.log(sendData);
+	$.post('loadPost', sendData, function(data) {
+		if(data == null){
+			 $("#postList").html("No Post");
+		} else{
+			var postView;
+			for (var i = 0; i < data.length; i++) {
+				$.post('getEachPost', "pid="+data[i].pid, function(postData){
+					//results[i] = "<h3>"+postData.userid+"</h3><hr>";
+					//results[i] = results[i] + "<h3>" + postData.text + "</h3><br>";
+					//console.log(results[i]);
+					postView = buildPost(postData);
+					console.log(postView);
+					$("#postList").append(postView);
+				});
+	            
+	        }
+		}
+		});
 });
 // textarea focus일 때 작성폼 열기 끝
 // infinite scroll 구현
@@ -85,40 +107,33 @@ $(function(){
 		$('post_submit_btn').css('opacity',1); 
 	}
 });
-//파일 미리보기 
-var sel_files = [];
-
-function previewFiles() {
-	var index = 0;
-	var preview = document.querySelector('#preview');
-	var files = document.querySelector('input[type=file]').files;
-
-	function readAndPreview(file) {
-			var reader = new FileReader();
-
-			reader.addEventListener("load", function() {
-				var image = new Image();
-				image.height = 100;
-				image.title = file.name;
-				image.src = this.result;
-				preview.appendChild(image);
-				index++;
-				sel_files.push(file);
-			}, false);
-
-			reader.readAsDataURL(file);
-		}
-	if (files) {
-		[].forEach.call(files, readAndPreview);
-	}
-
-}
-
-function deleteImageAction(i) {
-	sel_files.splice(index, 1);
-	var id = "#preview_"+index;
-	$(id).remove();
-}
-
-
 // 글 내용 없을 때 작성버튼 비활성화 끝
+
+// Post Layout Build
+function buildPost(postData){
+	console.log(postData);
+	var heart = "<div class='heart' id='heart-"+postData.userid+"'></div>";
+	var shareOut = "<div class='share_out' onclick='openLayer('layerPop',200,18)'></div>";
+	var comment = "<form action='commentWrite'>" + 
+		"<div class='commentForm'><input type='hidden' value='"+userid+"' name='userid'>"+
+		"<textarea row='1' cols='1' name='commentText' placeholder='댓글쓰기' class='comment_textarea'></textarea>"+
+		"<button class='commentBtn'>입력</button>"+
+		"<input type='hidden' value='"+postData.pid+"' name='commentPid'>" +
+		"</div>" +
+		"<div class='postLayoutClear'></div>" +
+		"</form>";
+	
+	var postView = "<li class='infinite_scroll'>" + postData.userid + "<hr>";
+	if(postData.files != null){ // if attached images or videos exist 
+		postView = postView + "<img src='"+postData.files[0]+"'>"
+	}
+	if(postData.text != null){
+		postView = postView + "<h3>" + postData.text + "</h3>"
+	}
+	postView = postView + "<div class='reactBtn'>" + heart + shareOut+ "</div>";
+	postView = postView + comment;
+	postView = postView + "</li>";
+	
+	
+	return postView;
+}
