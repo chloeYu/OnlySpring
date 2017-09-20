@@ -85,4 +85,40 @@ $(function(){
 		$('post_submit_btn').css('opacity',1); 
 	}
 });
+//파일 미리보기 
+var sel_files = [];
+
+function previewFiles() {
+	var index = 0;
+	var preview = document.querySelector('#preview');
+	var files = document.querySelector('input[type=file]').files;
+
+	function readAndPreview(file) {
+			var reader = new FileReader();
+
+			reader.addEventListener("load", function() {
+				var image = new Image();
+				image.height = 100;
+				image.title = file.name;
+				image.src = this.result;
+				preview.appendChild(image);
+				index++;
+				sel_files.push(file);
+			}, false);
+
+			reader.readAsDataURL(file);
+		}
+	if (files) {
+		[].forEach.call(files, readAndPreview);
+	}
+
+}
+
+function deleteImageAction(i) {
+	sel_files.splice(index, 1);
+	var id = "#preview_"+index;
+	$(id).remove();
+}
+
+
 // 글 내용 없을 때 작성버튼 비활성화 끝
