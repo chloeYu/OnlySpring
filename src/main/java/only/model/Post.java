@@ -1,6 +1,9 @@
 package only.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class Post {
 	private int pid;
@@ -10,7 +13,7 @@ public class Post {
 	private Date modified; 
 	private String type;
 	private String text;
-	private String[] files;
+	private List<MultipartFile> files;
 	
 	public int getPid() {
 		return pid;
@@ -56,10 +59,10 @@ public class Post {
 		this.text = text;
 	}
 	
-	public String[] getFiles() {
+	public List<MultipartFile> getFiles() {
 		return files;
 	}
-	public void setFiles(String[] files) {
+	public void setFiles(List<MultipartFile>  files) {
 		this.files = files;
 	}
 	

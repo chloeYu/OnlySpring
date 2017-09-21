@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import only.dao.PostDao;
 import only.model.Post;
+import only.model.Post_Image;
 
 @Service
 public class PostServiceImpl implements PostService{
@@ -39,7 +40,7 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public int insertImage(int pid, String filePath) {
-		return pd.insertImage(pid, filePath);
+	public int insertImage(int pid, Post_Image postImage) {
+		return pd.insertImage(pid, postImage);
 	}
 }

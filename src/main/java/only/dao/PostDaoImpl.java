@@ -8,9 +8,11 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import only.model.Post;
 import only.model.PostImage;
+import only.model.Post_Image;
 import only.utils.PostType;
 
 @Repository
@@ -32,7 +34,20 @@ public class PostDaoImpl implements PostDao {
 		map.put("userid", userid);
 		map.put("startRow", Integer.toString(startRow));
 		map.put("endRow", Integer.toString(endRow));
-		return sst.selectList("postns.timelinelist", map);
+		List<Post> plist = sst.selectList("postns.timelinelist", map);
+		for(Post post : plist) {
+			char[] type = post.getType().toCharArray();
+			for(int i=0; i< type.length; i++) {
+				if(type[i]=='y') {
+					if(i==0) post.setText((String) sst.selectOne("postns.getPostText", post.getPid()));
+					if(i==1) {
+						List<MultipartFile> files = sst.selectList("postns.getFilePath", post.getPid());
+						post.setFiles(files);
+					}
+				}
+			}
+		}
+		return plist;
 	}
 
 	@Override
@@ -48,14 +63,13 @@ public class PostDaoImpl implements PostDao {
 				} 
 				if (i== PostType.PHOTO_VIDEO.ordinal()) {
 					System.out.println(pid);
-					List<PostImage> filePaths = sst.selectList("postns.getFilePath", pid);
+					List<MultipartFile> filePaths = post.getFiles();
 					String[] postFilePaths = new String[filePaths.size()];
-					Iterator<PostImage> it = filePaths.iterator();
+					Iterator<MultipartFile> it = filePaths.iterator();
 					int seq=0;
 					while(it.hasNext()) {
-						postFilePaths[seq++] = it.next().getUrl();
+						postFilePaths[seq++] = it.next().getOriginalFilename();
 					}
-					post.setFiles(postFilePaths);
 					System.out.println("Photo Video Post");
 				}
 			}
@@ -82,10 +96,7 @@ public class PostDaoImpl implements PostDao {
 	}
 
 	@Override
-	public int insertImage(int pid, String filePath) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("pid", Integer.toString(pid));
-		map.put("text", filePath);
-		return sst.insert("postns.insertImage", map);
+	public int insertImage(int pid, Post_Image postImage) {
+		return sst.insert("postns.insertImage", postImage);
 	}
 }

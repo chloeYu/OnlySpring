@@ -3,6 +3,7 @@ package only.service;
 import java.util.List;
 
 import only.model.Post;
+import only.model.Post_Image;
 
 public interface PostService {
 
@@ -16,6 +17,6 @@ public interface PostService {
 
 	int insertText(int pid, String text);
 
-	int insertImage(int pid, String string);
+	int insertImage(int pid, Post_Image postImage);
 
 }

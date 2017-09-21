@@ -21,9 +21,9 @@
 	
 	<select id="timelinelist" parameterType="hashMap" resultMap="postResult">
 		select * from (select a.*, rowNum rn from (select * from post where
-		userid=#{userid} order by pid desc) a)
+		userid=#{userid} order by created desc) a)
 		where rn between #{startRow} and
-		#{endRow}
+		#{endRow} order by created desc
 		<!-- select * from post where userid=#{userid} -->
 	</select>
 
@@ -55,12 +55,12 @@
 		insert into POST values(#{pid}, sysdate, 'n', #{userid}, sysdate, #{type})
 	</insert>
 	
-	<insert id="insertText">
+	<insert id="insertText" parameterType="hashMap">
 		insert into POST_TEXT values (#{pid}, #{text}) 
 	</insert>
 	
-	<insert id="insertImage">
-		insert into POST_IMAGE values (#{pid}, #{url}, 1)
+	<insert id="insertImage" parameterType="postImage">
+		insert into POST_IMAGE values (#{pid}, #{url}, #{seq})
 	</insert>
 </mapper>
 
