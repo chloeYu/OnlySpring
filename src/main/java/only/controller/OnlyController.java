@@ -1,9 +1,7 @@
 package only.controller;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -75,7 +73,7 @@ public class OnlyController {
 			return "joinus/signUpForm";
 		} else {
 			if (!member.getPassword().equals(password)) {
-				System.out.println("밀번호가 일치하지 않습니다");
+				System.out.println("비밀번호가 일치하지 않습니다");
 				model.addAttribute("message", "비밀번호가 일치하지 않습니다");
 				return "joinus/signUpForm";
 			} else {

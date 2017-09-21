@@ -40,13 +40,12 @@
 							<textarea rows="1" cols="1" class="type_choice_textarea"
 								name="text" placeholder="What's on your mind, <%=userid%>?"></textarea>
 							<div class="write_type_choice">
-								<a class="choice_type" id="preview"></a> <a class="choice_type">
-									<img alt="" src="img_timeline/picture.svg"
+								<a class="choice_type" onclick="submitAction();" id="preview"></a>
+								<a class="choice_type"> <br><img alt="" src="img_timeline/picture.svg"
 									class="img_hide img_hidden type_photo" width="30px" border='0'
 									onclick='document.all.imageUpload.click();'> <input
-									type="file" name="imageUpload" style='display: none;'
-									accept="image/png, image/gif, image/jpg"
-									onchange="previewFiles()" multiple>
+									type="file" name="imageUpload" style='display: none;' id="input_img"
+									accept="image/png, image/gif, image/jpg" onchange="previewFiles()" multiple>
 								</a> <a class="choice_type"> <img
 									src='img_timeline/video-camera.svg'
 									class="img_hide img_hidden img_video" width="30px" border='0'
