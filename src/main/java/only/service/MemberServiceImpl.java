@@ -28,4 +28,9 @@ public class MemberServiceImpl implements MemberService {
 	public int insert(Member member) {
 		return md.insert(member);
 	}
+
+	@Override
+	public void update(Member member) {
+		md.update(member);
+	}
 }
