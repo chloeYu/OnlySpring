@@ -138,31 +138,49 @@ function buildPost(postData){
 	return postView;
 }
 
-//파일 미리보기 
+//이미지 미리보기 
 var sel_files = [];
 
-function previewFiles() {
+$(document).ready(function(){
+	$("#input_img").on("change", handleImgFileSelect);
+});
+function handleImgFileSelect(e){
+	sel_files = [];
+	$("#preview").empty();
+	
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	
 	var index = 0;
-	var preview = document.querySelector('#preview');
-	var files = document.querySelector('input[type=file]').files;
-
-	function readAndPreview(file) {
-			var reader = new FileReader();
-
-			reader.addEventListener("load", function() {
-				var image = new Image();
-				image.height = 100;
-				image.title = file.name;
-				image.src = this.result;
-				preview.appendChild(image);
-				index++;
-				sel_files.push(file);
-			}, false);
-
-			reader.readAsDataURL(file);
+	
+	filesArr.forEach(function(f){
+		sel_files.push(f);
+		
+		var reader = new FileReader();
+		
+		reader.onload = function(e){
+			var image = new Image();
+			var html = "<a onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\">" +
+					"<img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'" +
+							"style='max-width: 150px; margin-left:10px; margin-right:10px;'></a>";
+			//사진 크기 <a style>로 처리. css해주세욤
+			$("#preview").append(html);
+			index++;
+			/*var img_html = "<img src='"+e.target.result+"'>";*/
 		}
-	if (files) {
-		[].forEach.call(files, readAndPreview);
-	}
+		reader.readAsDataURL(f);
+	});
+	
+}
+//이미지 미리보기 지우기
+function deleteImageAction(index) {
+    console.log("index : "+index);
+    sel_files.splice(index, 1);
 
+    var img_id = "#img_id_"+index;
+    $(img_id).remove();
+
+    $("#input_imgs").val("54");
+
+    console.log(sel_files);
 }
