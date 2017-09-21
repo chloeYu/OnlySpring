@@ -145,8 +145,8 @@ $(document).ready(function(){
 	$("#input_img").on("change", handleImgFileSelect);
 });
 function handleImgFileSelect(e){
-	/*sel_files = [];*/
-	/*$("#preview").empty()*/;
+	/*sel_files = [];
+	$("#preview").empty();*/
 	
 	var files = e.target.files;
 	var filesArr = Array.prototype.slice.call(files);
