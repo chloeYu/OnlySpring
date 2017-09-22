@@ -40,10 +40,12 @@
 							<textarea rows="1" cols="1" class="type_choice_textarea"
 								name="text" placeholder="What's on your mind, <%=userid%>?"></textarea>
 							<div class="write_type_choice">
-								<a class="choice_type" onclick="submitAction();" id="preview"></a>
+								<a class="choice_type" onclick="submitAction();" id="preview">
+								</a>
 								<a class="choice_type"> <br><img alt="" src="img_timeline/picture.svg"
 									class="img_hide img_hidden type_photo" width="30px" border='0'
-									onclick='document.all.files.click();'> <input
+									onclick='document.all.files.click();'> 
+									<input
 									type="file" name="files" style='display: none;' id="input_img"
 									accept="image/png, image/gif, image/jpg" onchange="previewFiles()" multiple>
 								<!-- </a> <a class="choice_type"> <img
@@ -52,10 +54,11 @@
 									onclick='document.all.videoUpload.click();'> <input
 									type="file" name="videoUpload" style='display: none;'
 									accept="video/mp4"> -->
-								</a> <label class="img_hide img_hidden"><br>해시태그</label><input
+								</a> 
+								<!-- <label class="img_hide img_hidden"><br>해시태그</label><input
 									class="img_hide img_hidden" type="text" name="hashtag"><br>
 								<label class="img_hide img_hidden">회원태그</label><input
-									class="img_hide img_hidden" type="text" name="membertag"><br>
+									class="img_hide img_hidden" type="text" name="membertag"><br> -->
 							</div>
 							<button type="submit" class="post_submit_btn">작성</button>
 						</form>
