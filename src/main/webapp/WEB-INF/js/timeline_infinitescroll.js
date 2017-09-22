@@ -89,7 +89,6 @@ function fetchPage(page) {
 }
 
 function addPage(page) {
-	console.log("add page : " + page);
 	getPostPage(page);
 	//fetchPage(page);
 	//addPaginationPage(page);
