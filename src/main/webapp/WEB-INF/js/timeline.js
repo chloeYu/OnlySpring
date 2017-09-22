@@ -102,10 +102,18 @@ function buildPost(postData) {
 			+ "<div class='postLayoutClear'></div>" + "</form>";
 
 	var postView = "<li class='infinite_scroll'>" + postData.userid + "<hr>";
-	if (postData.files != null) { // if attached images or videos exist
-		 for (var i = 0; i < postData.files.length; i++) {
-			 postView = postView + "<img width='250px' src='img_timeline/" + postData.files[i].url + "'>"        
-	        }
+	
+	 for (var i = 0; i < postData.files.length; i++) {
+		 if(postData.files.length == 1){ // 이미지 1개
+			postView = postView + "<div class='postImg1'><img class='postInner1' src='img_timeline/" + postData.files[i].url + "'></div>"        
+		 } else if(postData.files.length == 4){ // 이미지 4개
+			postView = postView + "<div class='postImg2'><img class='postInner2' src='img_timeline/" + postData.files[i].url + "'></div>"
+		 } else if (postData.files.length > 4){ // 이미지 4개 이상
+			postView = postView + "<div class='postImg3'><img class='postInner3' src='img_timeline/" + postData.files[i].url + "'></div>"        
+		 }
+	 }
+	if(postData.files.length>4){
+		$('.infinite_scroll .postImg3:nth-child(5)').append('<span>+MORE</span>');
 	}
 	if (postData.text != null) {
 		postView = postView + "<h3>" + postData.text + "</h3>"
