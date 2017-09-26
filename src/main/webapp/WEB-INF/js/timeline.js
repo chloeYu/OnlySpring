@@ -71,13 +71,13 @@ function buildPost(postData) {
 			+ "<div class='commentForm'><input type='hidden' value='"
 			+ userid
 			+ "' name='userid'>"
-			+ "<textarea row='1' cols='1' name='commentText' placeholder='댓글쓰기' class='comment_textarea'></textarea>"
+			+ "<textarea row='1' cols='1' name='commentText' placeholder='Comments' class='comment_textarea'></textarea>"
 			+ "<button class='commentBtn'>입력</button>"
 			+ "<input type='hidden' value='" + postData.pid
 			+ "' name='commentPid'>" + "</div>"
 			+ "<div class='postLayoutClear'></div>" + "</form>";
 
-	var postView = "<li class='infinite_scroll'>" + postData.userid + "<hr>";
+	var postView = "<li class='infinite_scroll'><div class='postUid'><span>" + postData.userid + "</span></div><hr>";
 	
 	 for (var i = 0; i < postData.files.length; i++) {
 		 if(postData.files.length == 1){ // 이미지 1개
@@ -144,7 +144,7 @@ function handleImgFileSelect(e) {
 
 				reader.onload = function(e) {
 					var image = new Image();
-					var html = "<a onclick=\"deleteImageAction("
+					var html = "<div class='imgPre'><a onclick=\"deleteImageAction("
 							+ index
 							+ ")\" id=\"img_id_"
 							+ index
@@ -154,7 +154,7 @@ function handleImgFileSelect(e) {
 							+ "\" data-file='"
 							+ f.name
 							+ "' class='selProductFile' title='Click to remove'"
-							+ "style='max-width: 150px; margin-left:10px; margin-right:10px;'></a>";
+							+ "></a></div>";
 					// 사진 크기 <a style>로 처리. css해주세욤
 					$("#preview").append(html);
 					index++;
@@ -162,7 +162,6 @@ function handleImgFileSelect(e) {
 				}
 				reader.readAsDataURL(f);
 			});
-
 }
 // 이미지 미리보기 지우기
 function deleteImageAction(index) {
@@ -173,8 +172,10 @@ function deleteImageAction(index) {
 	$(img_id).remove();
 
 	$("#input_imgs").val("54");
+
 	console.log(sel_files);
 }
+
 // 이미지 상세(확장)
 function layer_popup(el){
 
