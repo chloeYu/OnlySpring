@@ -136,7 +136,7 @@ public class OnlyController {
 
 	@RequestMapping("/profileDone")
 	public String profileDone(Member member, String birth1, Model model) {
-		ms.update(member);
+		int result = ms.update(member);
 		return "profileDone";
 	}
 }

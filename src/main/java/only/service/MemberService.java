@@ -11,4 +11,6 @@ public interface MemberService {
 	List<Member> searchMember(String searchTerm);
 
 	int insert(Member member);
+
+	int update(Member member);
 }
