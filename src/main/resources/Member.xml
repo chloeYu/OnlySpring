@@ -27,4 +27,7 @@
 	<insert id="insert" parameterType="member">
 		insert into MEMBER values (#{userid}, #{username}, #{password}, #{email}, 1, sysdate, sysdate, '/img_all/default_profile.png', null, null)
 	</insert>
+	<update id="update" parameterType="member">
+		update member set username=#{username}, password=#{password}, email=#{email}, modified=sysdate,  profile_image=#{profile_image}, tel=#{tel}, birth=#{birth} where userid=#{userid}
+	</update>
 </mapper>

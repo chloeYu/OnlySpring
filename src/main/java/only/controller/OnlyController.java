@@ -1,5 +1,6 @@
 package only.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -136,6 +137,7 @@ public class OnlyController {
 
 	@RequestMapping("/profileDone")
 	public String profileDone(Member member, String birth1, Model model) {
+		member.setBirth(Date.valueOf(birth1));
 		ms.update(member);
 		return "profileDone";
 	}
