@@ -49,31 +49,6 @@ $(function() {
  * $(this).toggleClass('bg-position'); }); });
  */
 // Like 버튼 활성화 끝
-// DimLayer
-function dEI(elementID) {
-	return document.getElementById(elementID);
-}
-// 레이어 팝업 열기
-function openLayer(IdName, tpos, lpos) {
-	var pop = dEI(IdName);
-	pop.style.top = tpos + "px";
-	pop.style.left = lpos + "%";
-	pop.style.display = "block";
-
-	var wrap = dEI("wrapper");
-	var reservation = document.createElement("div");
-	reservation.setAttribute("id", "deemed");
-	wrap.appendChild(reservation);
-}
-// 레이어 팝업 닫기
-function closeLayer(IdName) {
-	var pop = dEI(IdName);
-	pop.style.display = "none";
-	var clearEl = parent.dEI("deemed");
-	var momEl = parent.dEI("wrapper");
-	momEl.removeChild(clearEl);
-}
-// DimLayer 끝
 // 글 내용 없을 때 작성버튼 비활성화
 $(function() {
 	if ($('.type_choice_textarea').val() == '') {
@@ -89,6 +64,7 @@ $(function() {
 // Post Layout Build
 function buildPost(postData) {
 	console.log(postData);
+	
 	var heart = "<div class='heart' id='heart-" + postData.userid + "'></div>";
 	var shareOut = "<div class='share_out' onclick='openLayer('layerPop',200,18)'></div>";
 	var comment = "<form action='commentWrite'>"
@@ -109,27 +85,30 @@ function buildPost(postData) {
 		 } else if(postData.files.length == 4){ // 이미지 4개
 			postView = postView + "<div class='postImg2'><img class='postInner2' src='img_timeline/" + postData.files[i].url + "'></div>"
 		 } else if (postData.files.length > 4){ // 이미지 4개 이상
-			postView = postView + "<div class='postImg3'><img class='postInner3' src='img_timeline/" + postData.files[i].url + "'></div>"        
-			$('.infinite_scroll .postImg3:nth-child(6)').append('<span>+MORE</span>');
+			if(i==3){
+				postView  = postView + "<div class='postImg3'><img id='post"+postData.pid+"-"+i+"' class='postInner3' src='img_timeline/" + postData.files[i].url + "'><span>+More</span></div>"        
+			}else{
+				postView  = postView + "<div class='postImg3'><img id='post"+postData.pid+"-"+i+"' class='postInner3' src='img_timeline/" + postData.files[i].url + "'></div>"        
+			}
 		 }
 	 }
-	 $('.infinite_scroll .postImg3:nth-child(6)').on('click',function(){
+	 $('.infinite_scroll .postImg3:nth-child(6)').on('click',function(e){
 		 var detailContainer = '<div class="det"></div>';
 		 var appendDetail = '<div class="imgDetail" style="position:fixed; z-index:100; top:0; left:0; width:100%; height:100%;">'
-			+'<div class="dimBackground" style="position:absolute; background-color:#000; opacity:0.5; width:100%; height:100%; top:0; left:0;">'
-			+'</div>'
-			+'<div class="detailDim" style="position:absolute; top:50%; left:20%; width:38%; height:auto; background-color:#FFF; opacity:1; z-index:10;">'
-				+'<div class="postImg4">'
-					+'<img class="postInner4" src="img_timeline/">'
-				+'</div>'
-			+'</div>'
-		+'</div>';
+			 +'<div class="dimBackground" style="position:absolute; background-color:#000; opacity:0.5; width:100%; height:100%; top:0; left:0;">'
+			 +'</div>'
+			 +'<div class="detailDim" style="position:absolute; top:50%; left:20%; width:38%; height:auto; background-color:#FFF; opacity:1; z-index:10;">'
+			 +'<div class="postImg4">'
+			 +'<img class="postInner4" src="img_timeline/'+ +'">'
+			 +'</div>'
+			 +'</div>'
+			 +'</div>';
 		 
 		 var imgPr = $(this);
 		 $(this).parent().append(detailContainer);
 		 $('.det').append(appendDetail);
 		 layer_popup(imgPr);
-	 });
+	});
 	if (postData.text != null) {
 		postView = postView + "<h3>" + postData.text + "</h3>"
 	}
@@ -200,8 +179,9 @@ function deleteImageAction(index) {
 // 이미지 상세(확장)
 function layer_popup(el){
 
-    var $el = $(el);        //레이어의 id를 $el 변수에 저장
-    var isDim = $el.prev().hasClass('.postInner');   //dimmed 레이어를 감지하기 위한 boolean 변수
+    var $el = $(el);        // 레이어의 id를 $el 변수에 저장
+    var isDim = $el.prev().hasClass('.postInner');   // dimmed 레이어를 감지하기 위한
+														// boolean 변수
 
     isDim ? $('.imgDetail').fadeIn() : $el.fadeIn();
 
@@ -221,7 +201,8 @@ function layer_popup(el){
     }
 
     $el.find('a.btn-layerClose').click(function(){
-        isDim ? $('.imgDetail').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+        isDim ? $('.imgDetail').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가
+															// 닫힌다.
         return false;
     });
 

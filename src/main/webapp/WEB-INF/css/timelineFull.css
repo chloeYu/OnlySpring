@@ -583,7 +583,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 	}
 	@keyframes heart-burst {
 		from { 
-			background-position:left;
+			background-position: left;
 		}
 		to {
 			background-position: right;
