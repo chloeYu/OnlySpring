@@ -11,13 +11,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import only.model.Post;
-import only.model.PostImage;
-import only.model.Post_Image;
+import only.model.Post_Files;
 import only.utils.PostType;
 
 @Repository
 public class PostDaoImpl implements PostDao {
-	final int POSTPERPAGE = 10;
+	final int POSTPERPAGE = 5;
 
 	@Autowired
 	private SqlSessionTemplate sst;
@@ -96,7 +95,7 @@ public class PostDaoImpl implements PostDao {
 	}
 
 	@Override
-	public int insertImage(int pid, Post_Image postImage) {
-		return sst.insert("postns.insertImage", postImage);
+	public int insertImage(int pid, Post_Files postFiles) {
+		return sst.insert("postns.insertFiles", postFiles);
 	}
 }

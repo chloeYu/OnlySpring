@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import only.model.Post;
-import only.model.Post_Image;
+import only.model.Post_Files;
 import only.service.PostService;
 
 @Controller
@@ -94,7 +94,7 @@ public class FileUploadController {
 				if (i == 1) { // Add Image/Video
 					for (int j = 0; j < files.size(); j++) {
 						System.out.println(files.get(j).getOriginalFilename());
-						Post_Image postImage = new Post_Image();
+						Post_Files postImage = new Post_Files();
 						postImage.setPid(post.getPid());
 						postImage.setUrl(files.get(j).getOriginalFilename());
 						postImage.setSeq(j);

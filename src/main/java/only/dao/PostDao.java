@@ -3,7 +3,7 @@ package only.dao;
 import java.util.List;
 
 import only.model.Post;
-import only.model.Post_Image;
+import only.model.Post_Files;
 
 public interface PostDao {
 
@@ -17,5 +17,5 @@ public interface PostDao {
 
 	int insertText(int pid, String text);
 
-	int insertImage(int pid, Post_Image postImage);
+	int insertImage(int pid, Post_Files postImage);
 }
