@@ -14,14 +14,7 @@ public class Post {
 	private String type;
 	private String text;
 	private List<MultipartFile> files;
-	private int seq;
 	
-	public int getSeq() {
-		return seq;
-	}
-	public void setSeq(int seq) {
-		this.seq = seq;
-	}
 	public int getPid() {
 		return pid;
 	}

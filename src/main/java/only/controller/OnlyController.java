@@ -1,5 +1,9 @@
 package only.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import only.model.Member;
 import only.model.Post;
@@ -134,8 +140,27 @@ public class OnlyController {
 		return "changeProfile";
 	}
 
-	@RequestMapping("/profileDone")
-	public String profileDone(Member member, String birth1, Model model) {
+	@RequestMapping(value = "/profileDone")
+	public String profileDone(Member member, String birth1, Model model, MultipartFile profile_image1,
+			HttpServletRequest request) {
+		System.out.println(profile_image1.getOriginalFilename());
+		if(profile_image1.getOriginalFilename()!=null && !profile_image1.getOriginalFilename().equals("")) {
+			try {
+				byte[] bytes = profile_image1.getBytes();
+				String rootPath = request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
+				File serverFile = new File(rootPath + File.separator + profile_image1.getOriginalFilename());
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			member.setProfile_image(profile_image1.getOriginalFilename());
+		}
+		
+		if(birth1!=null) {
+			member.setBirth(Date.valueOf(birth1));
+		}
 		int result = ms.update(member);
 		return "profileDone";
 	}
