@@ -2,6 +2,8 @@ package only.model;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Member {
 	private String userid;
 	private String username;
