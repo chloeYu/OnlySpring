@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
 	
 	const postList = document.getElementById('postList');
 /*	const postListPagination = document.getElementById('post-list-pagination');*/

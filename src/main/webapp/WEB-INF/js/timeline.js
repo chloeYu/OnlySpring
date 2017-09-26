@@ -95,13 +95,13 @@ function buildPost(postData) {
 			+ "<div class='commentForm'><input type='hidden' value='"
 			+ userid
 			+ "' name='userid'>"
-			+ "<textarea row='1' cols='1' name='commentText' placeholder='댓글쓰기' class='comment_textarea'></textarea>"
+			+ "<textarea row='1' cols='1' name='commentText' placeholder='Comments' class='comment_textarea'></textarea>"
 			+ "<button class='commentBtn'>입력</button>"
 			+ "<input type='hidden' value='" + postData.pid
 			+ "' name='commentPid'>" + "</div>"
 			+ "<div class='postLayoutClear'></div>" + "</form>";
 
-	var postView = "<li class='infinite_scroll'>" + postData.userid + "<hr>";
+	var postView = "<li class='infinite_scroll'><div class='postUid'><span>" + postData.userid + "</span></div><hr>";
 	
 	 for (var i = 0; i < postData.files.length; i++) {
 		 if(postData.files.length == 1){ // 이미지 1개
@@ -110,11 +110,26 @@ function buildPost(postData) {
 			postView = postView + "<div class='postImg2'><img class='postInner2' src='img_timeline/" + postData.files[i].url + "'></div>"
 		 } else if (postData.files.length > 4){ // 이미지 4개 이상
 			postView = postView + "<div class='postImg3'><img class='postInner3' src='img_timeline/" + postData.files[i].url + "'></div>"        
+			$('.infinite_scroll .postImg3:nth-child(6)').append('<span>+MORE</span>');
 		 }
 	 }
-	if(postData.files.length>4){
-		$('.infinite_scroll .postImg3:nth-child(5)').append('<span>+MORE</span>');
-	}
+	 $('.infinite_scroll .postImg3:nth-child(6)').on('click',function(){
+		 var detailContainer = '<div class="det"></div>';
+		 var appendDetail = '<div class="imgDetail" style="position:fixed; z-index:100; top:0; left:0; width:100%; height:100%;">'
+			+'<div class="dimBackground" style="position:absolute; background-color:#000; opacity:0.5; width:100%; height:100%; top:0; left:0;">'
+			+'</div>'
+			+'<div class="detailDim" style="position:absolute; top:50%; left:20%; width:38%; height:auto; background-color:#FFF; opacity:1; z-index:10;">'
+				+'<div class="postImg4">'
+					+'<img class="postInner4" src="img_timeline/">'
+				+'</div>'
+			+'</div>'
+		+'</div>';
+		 
+		 var imgPr = $(this);
+		 $(this).parent().append(detailContainer);
+		 $('.det').append(appendDetail);
+		 layer_popup(imgPr);
+	 });
 	if (postData.text != null) {
 		postView = postView + "<h3>" + postData.text + "</h3>"
 	}
@@ -150,7 +165,7 @@ function handleImgFileSelect(e) {
 
 				reader.onload = function(e) {
 					var image = new Image();
-					var html = "<a onclick=\"deleteImageAction("
+					var html = "<div class='imgPre'><a onclick=\"deleteImageAction("
 							+ index
 							+ ")\" id=\"img_id_"
 							+ index
@@ -160,7 +175,7 @@ function handleImgFileSelect(e) {
 							+ "\" data-file='"
 							+ f.name
 							+ "' class='selProductFile' title='Click to remove'"
-							+ "style='max-width: 150px; margin-left:10px; margin-right:10px;'></a>";
+							+ "></a></div>";
 					// 사진 크기 <a style>로 처리. css해주세욤
 					$("#preview").append(html);
 					index++;
@@ -168,7 +183,6 @@ function handleImgFileSelect(e) {
 				}
 				reader.readAsDataURL(f);
 			});
-
 }
 // 이미지 미리보기 지우기
 function deleteImageAction(index) {
@@ -181,4 +195,39 @@ function deleteImageAction(index) {
 	$("#input_imgs").val("54");
 
 	console.log(sel_files);
+}
+
+// 이미지 상세(확장)
+function layer_popup(el){
+
+    var $el = $(el);        //레이어의 id를 $el 변수에 저장
+    var isDim = $el.prev().hasClass('.postInner');   //dimmed 레이어를 감지하기 위한 boolean 변수
+
+    isDim ? $('.imgDetail').fadeIn() : $el.fadeIn();
+
+    var $elWidth = ~~($el.outerWidth()),
+        $elHeight = ~~($el.outerHeight()),
+        docWidth = $(document).width(),
+        docHeight = $(document).height();
+
+    // 화면의 중앙에 레이어를 띄운다.
+    if ($elHeight < docHeight || $elWidth < docWidth) {
+        $el.css({
+            marginTop: -$elHeight /2,
+            marginLeft: -$elWidth/2
+        })
+    } else {
+        $el.css({top: 0, left: 0});
+    }
+
+    $el.find('a.btn-layerClose').click(function(){
+        isDim ? $('.imgDetail').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+        return false;
+    });
+
+    $('.body').click(function(){
+        $('.imgDetail').fadeOut();
+        return false;
+    });
+
 }
