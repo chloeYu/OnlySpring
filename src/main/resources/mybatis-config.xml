@@ -7,7 +7,7 @@
 	<typeAliases>
 		<typeAlias  type="only.model.Member" alias="member"/>
 		<typeAlias  type="only.model.Post" alias="post"/>
-		<typeAlias  type="only.model.PostFiles" alias="postFiles"/>
+		<typeAlias  type="only.model.Post_Files" alias="postFiles"/>
 	</typeAliases>
 
 	<mappers>
