@@ -19,6 +19,7 @@ $(function() {
 			$("#postList").html("No Post");
 		} else {
 			var postView;
+			console.log(data);
 			for (var i = 0; i < data.length; i++) {
 				postView = buildPost(data[i]);
 				$("#postList").append(postView);
