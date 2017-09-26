@@ -112,13 +112,14 @@ public class OnlyController {
 
 	@RequestMapping("/loadPost")
 	public @ResponseBody List<Post> loadPost(String userid, String pageNum, Model model) {
+		System.out.println("loadPost().." + userid + ","+ pageNum);
 		List<Post> result = ps.getTimelinePost(userid, pageNum);
-		System.out.println("loadPost: " + result.size());
-
 		/*
 		 * String[] sh = {"제목", "작성자", "내용","제목+내용"}; model.addAttribute("sh", sh);
 		 * model.addAttribute("list", list); model.addAttribute("pageNum", currentPage);
-		 */ return result;
+		 */ 
+		System.out.println(result.size());
+		return result;
 	}
 
 	@RequestMapping("/getEachPost")

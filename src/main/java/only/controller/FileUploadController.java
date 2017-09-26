@@ -29,16 +29,7 @@ public class FileUploadController {
 	private PostService ps;
 
 	@RequestMapping(value = "/postWrite", method = RequestMethod.POST)
-	public String postWrite(Post post, HttpServletRequest request
-	/*
-	 * @RequestParam("member_id") String member_id, @RequestParam("path") String
-	 * path,
-	 * 
-	 * @RequestParam("text") String text, @RequestParam("imageUpload")
-	 * List<MultipartFile> imageUpload,
-	 * 
-	 * @RequestParam("videoUpload") MultipartFile videoUpload
-	 */) {
+	public String postWrite(Post post, HttpServletRequest request) {
 		String rootPath =  request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
 		char[] type = { 'n', 'n', 'n', 'n', 'n', 'n', 'n' };
 		String text = post.getText();
@@ -48,7 +39,8 @@ public class FileUploadController {
 		List<MultipartFile> files = post.getFiles();
 		if (files.size() > 0) { // upload된 image파일이 있을 경우
 			for (MultipartFile file : files) {
-				type[1] = 'y';
+				if(file.getOriginalFilename().equals("")) continue;
+				else type[1] = 'y';
 				try {
 					byte[] bytes = file.getBytes();
 					// Creating the directory to store file

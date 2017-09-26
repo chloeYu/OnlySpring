@@ -1,3 +1,4 @@
+var pageInitialized = false;
 // textarea focus일 때 작성폼 열기
 $(function() {
 	$('.type_choice_textarea').on('focus', function() {
@@ -14,7 +15,8 @@ $(function() {
 	// Read posts
 	var sendData = "userid=" + userid + "&pageNum=1";
 	console.log(sendData);
-	$.post('loadPost', sendData, function(data) {
+	if(pageInitialized==true) return;
+	/*$.post('loadPost', sendData, function(data) {
 		if (data == null) {
 			$("#postList").html("No Post");
 		} else {
@@ -26,7 +28,7 @@ $(function() {
 			}
 
 		}
-	});
+	});*/
 });
 // textarea focus일 때 작성폼 열기 끝
 // infinite scroll 구현
@@ -79,7 +81,7 @@ function buildPost(postData) {
 			+ "<div class='postLayoutClear'></div>" + "</form>";
 
 	var postView = "<li class='infinite_scroll'><div class='postUid'><span>" + postData.userid + "</span></div><hr>";
-	
+	if(postData.files != null){
 	 for (var i = 0; i < postData.files.length; i++) {
 		 if(postData.files.length == 1){ // 이미지 1개
 			postView = postView + "<div class='postImg1'><img class='postInner1' src='img_timeline/" + postData.files[i].url + "'></div>"        
@@ -110,6 +112,7 @@ function buildPost(postData) {
 		 $('.det').append(appendDetail);
 		 layer_popup(imgPr);
 	});
+	}
 	if (postData.text != null) {
 		postView = postView + "<h3>" + postData.text + "</h3>"
 	}

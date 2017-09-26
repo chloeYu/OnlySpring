@@ -23,7 +23,7 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public List<Post> getTimelinePost(String userid, String pageNum) {
-		int startRow = (Integer.parseInt(pageNum) - 1) * POSTPERPAGE + 1; // 1페이지:1 2페이지: 11 3페이지:21 ...
+		int startRow = (Integer.parseInt(pageNum) - 1) * POSTPERPAGE; // 1페이지:1 2페이지: 11 3페이지:21 ...
 		int endRow = startRow + POSTPERPAGE - 1; // 1페이지: 10 2페이지: 20 3페이지: 30
 		int total = sst.selectOne("postns.getTimelineTotal", userid);
 		System.out.println("startRow: " + startRow + ", endRow: " + endRow + ", total: " + total);
@@ -34,6 +34,7 @@ public class PostDaoImpl implements PostDao {
 		map.put("startRow", Integer.toString(startRow));
 		map.put("endRow", Integer.toString(endRow));
 		List<Post> plist = sst.selectList("postns.timelinelist", map);
+		System.out.println("Post Size: " + plist.size());
 		for(Post post : plist) {
 			char[] type = post.getType().toCharArray();
 			for(int i=0; i< type.length; i++) {

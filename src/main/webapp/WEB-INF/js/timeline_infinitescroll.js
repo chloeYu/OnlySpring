@@ -50,7 +50,8 @@ function getPost() {
 
 function getPostPage(page, postsPerPage = 10) {
 	console.log("getPostPage called");
-	$.post('loadPost', "pageNum="+page, function(data) {
+	$.post('loadPost', "userid=" + userid +"&pageNum="+page, function(data) {
+		
 		console.log("returnede from loadPost")
 		if (data == null) {
 			console.log("no data to append");
