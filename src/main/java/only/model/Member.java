@@ -7,12 +7,13 @@ public class Member {
 	private String username;
 	private String password;
 	private String email;
+	private String tel;
+	private Date birth;
+	private String profile_image;
 	private int status;
 	private Date created;
 	private Date modified;
-	private String profile_image;
-	private String tel;
-	private Date birth;
+	
 	
 	public String getUserid() {
 		return userid;
