@@ -1,6 +1,6 @@
 package only.model;
 
-public class Post_Image {
+public class Post_Files {
 	private int pid;
 	private String url;
 	private int seq;

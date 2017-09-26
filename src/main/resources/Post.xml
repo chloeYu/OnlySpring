@@ -13,7 +13,7 @@
 		<result property="text" column="text" />
 	</resultMap>
 	
-	<resultMap type="postImage" id="postImageResult">
+	<resultMap type="postFiles" id="postFilesResult">
 		<id property="pid" column="pid" />
 		<result property="url" column="url" />
 		<result property="seq" column="seq" />
@@ -43,8 +43,8 @@
 		select text from POST_TEXT where pid=#{pid}
 	</select>
 	
-	<select id="getFilePath" parameterType="String" resultMap="postImageResult">
-		select * from POST_IMAGE where pid=#{pid} order by seq
+	<select id="getFilePath" parameterType="String" resultMap="postFilesResult">
+		select * from POST_FILES where pid=#{pid} order by seq
 	</select>
 	
 	<select id="nextPid" resultType="int">
@@ -59,8 +59,8 @@
 		insert into POST_TEXT values (#{pid}, #{text}) 
 	</insert>
 	
-	<insert id="insertImage" parameterType="postImage">
-		insert into POST_IMAGE values (#{pid}, #{url}, #{seq})
+	<insert id="insertFiles" parameterType="postFiles">
+		insert into POST_FILES values (#{pid}, #{url}, #{seq})
 	</insert>
 </mapper>
 
