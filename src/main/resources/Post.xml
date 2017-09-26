@@ -52,7 +52,7 @@
 	</select>
 	
 	<insert id="insert" parameterType="post">
-		insert into POST values(#{pid}, sysdate, 'n', #{userid}, sysdate, #{type})
+		insert into POST values(#{pid},#{userid}, #{type}, sysdate, sysdate,'n')
 	</insert>
 	
 	<insert id="insertText" parameterType="hashMap">
