@@ -1,59 +1,41 @@
 package only.model;
 
 public class Chat {
-	private String userid;
-	private String message;
-	private String created; // 메세지등록시간날짜
-	private String mid; // 메세지 아이디
-	private String cid; // 채팅방 룸 아이디
-	private String status; // 삭제여부
-
-	public String getUserid() {
-		return userid;
+	int chatID;
+	String fromID;
+	String toID;
+	String chatContent;
+	String chatTime;
+	
+	public int getChatID() {
+		return chatID;
 	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setChatID(int chatID) {
+		this.chatID = chatID;
 	}
-
-	public String getMessage() {
-		return message;
+	public String getFromID() {
+		return fromID;
 	}
-
-	public void setMessage(String message) {
-		this.message = message;
+	public void setFromID(String fromID) {
+		this.fromID = fromID;
 	}
-
-	public String getCreated() {
-		return created;
+	public String getToID() {
+		return toID;
 	}
-
-	public void setCreated(String created) {
-		this.created = created;
+	public void setToID(String toID) {
+		this.toID = toID;
 	}
-
-	public String getMid() {
-		return mid;
+	public String getChatContent() {
+		return chatContent;
 	}
-
-	public void setMid(String mid) {
-		this.mid = mid;
+	public void setChatContent(String chatContent) {
+		this.chatContent = chatContent;
 	}
-
-	public String getCid() {
-		return cid;
+	public String getChatTime() {
+		return chatTime;
 	}
-
-	public void setCid(String cid) {
-		this.cid = cid;
+	public void setChatTime(String chatTime) {
+		this.chatTime = chatTime;
 	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
+	
 }
