@@ -159,6 +159,9 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: block;
 		margin-left: 2%;
 	}
+	#main_container{
+		border: 1px solid #CCC;	
+	}
 	
 	.blog_post {
 		width: 40%;
@@ -172,7 +175,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 		margin-bottom: 25px;
 		width: 90%;
 		padding-top: 5px;
-		position: relative;
 	}
 	.infinite_scroll .postImg1{
 		width: 100%;
@@ -186,7 +188,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 	}
 	.infinite_scroll .postImg2{
 		width: 50%;
-		min-height: 20%;
+		min-height: 15%;
 		height: 20%;
 		display: inline-block;
 		margin: 0;
@@ -200,7 +202,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 	}
 	.infinite_scroll .postImg3{
 		width:50%;
-		min-height: 20%;
+		min-height: 15%;
 		height:20%;
 		display: inline-block;
 		margin: 0;
@@ -209,50 +211,20 @@ flat(ctrl++shift+f) 절대로 금지 */
 	.postImg3 .postInner3{
 		width:100%;
 		height: auto;
-		margin: 0;
-		position: relative;
-	}
-	.infinite_scroll .postImg4{
-		width: 100%;
-		margin:0;
-		display: block;
-		position: relative;
-	}
-	.postImg4 .postInner4{
-		width:100%;
-		height:auto;
 		display: inline-block;
-		position: relative;
+		margin: 0;
 	}
-	.infinite_scroll>img{
-		width:60%;
-	}
-	.det{
-		width:38%;
-	}
-	.infinite_scroll .postImg3:nth-child(n+7){
+	.infinite_scroll .postImg3:nth-child(n+6){
 		display: none;
 	}
-	.infinite_scroll .postImg3:nth-child(6){
+	.infinite_scroll .postImg3:nth-child(5){
 	    background-color: #000;
-	    opacity: 1;
+	    z-index: 10;
+	    opacity: 0.5;
 	    width: 50%;
 	    height: 20%;
 	    font-size: 3rem;
 	    text-align: center;
-	    position: relative;
-	    cursor: pointer;
-	}
-	.infinite_scroll .postImg3:nth-child(6) img{
-		opacity: 0.5;
-		display: inline;
-	}
-	.infinite_scroll .postImg3:nth-child(6) span{
-		position: absolute;
-		top:75px;
-		left:30px;
-		right:30px;
-		color:white;
 	}
 	.postImgCaption{
 		background-color: #000;
@@ -260,19 +232,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 		opacity: 0.5;
 		width:50%;
 		height:20%;
-	}
-	.imgPre{
-		min-width:150px;
-		min-height:100px;
-		width:150px;
-		height:100px;
-		margin: 5px;
-		display: inline-block;
-		overflow: hidden;
-	}
-	.imgPre img{
-		width:100%;
-		height:auto;
 	}
 	.postImgCaption:hover{
 		opacity: 0.2;
@@ -309,13 +268,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 	}
 	.commentView{
 		clear: both;
-	}
-	.postUid{
-		padding-top:5px;
-		padding-bottom:5px;
-	}
-	.postUid span{
-		font-size: medium;
 	}
 
 	/* .type_choice {
