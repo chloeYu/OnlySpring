@@ -24,7 +24,7 @@
 		userid=#{userid} order by created desc) a)
 		where rn between #{startRow} and
 		#{endRow} order by created desc -->
-		select * from post where userid=#{userid} limit 5
+		select * from post where userid=#{userid} order by created desc limit 5
 		<!-- select * from post where userid=#{userid} -->
 	</select>
 
