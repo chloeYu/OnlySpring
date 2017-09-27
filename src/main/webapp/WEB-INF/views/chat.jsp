@@ -59,7 +59,7 @@
 				},
 				success: function(result) {
 					if(result == 1) {
-						autoClosingAlert();
+						autoClosingAlert('#successMessage', 2000);
 					}
 				}
 		})
