@@ -1,4 +1,4 @@
-package only.utils;
+package only.controller;
 
 import java.io.IOException;
 import java.net.URLDecoder;
