@@ -35,7 +35,7 @@
 	function submitFunction() {
 		var fromID = '<%=userid%>';
 		var toID = '<%=toID%>';
-		var chatContent = $('.messages-content').val();
+		var chatContent = $('.message-input').val();
 		$.ajax({
 				type:"POST",
 				url:"./chatSubmitServlet",
@@ -45,7 +45,7 @@
 					chatContent: encodeURIComponent(chatContent),
 				}
 		});
-		$('.messages-content').val('');
+		$('.message-input').val('');
 	}
 </script>
 </head>

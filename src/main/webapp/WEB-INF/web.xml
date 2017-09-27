@@ -36,14 +36,4 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ChatSumbitServlet</display-name>
-    <servlet-name>ChatSumbitServlet</servlet-name>
-    <servlet-class>only.utils.ChatSumitServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ChatSumbitServlet</servlet-name>
-    <url-pattern>/chatSumitServlet</url-pattern>
-  </servlet-mapping>
 </web-app>

@@ -1,32 +1,22 @@
 package only.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import only.model.Chat;
 
 public class ChatDAO {
 
-	DataSource dataSource;
+	private static final String DRIVER = "com.mysql.jdbc.Driver";
+	private static final String URL = "jdbc:mysql://myonly.cxztbfpgs10d.us-west-2.rds.amazonaws.com:3306/projectonly";
+	private static final String USER = "only";
+	private static final String PW = "onlyonly";
 
 	public ChatDAO() {
-
-		try {
-			InitialContext initContext = new InitialContext();
-			Context envContext = (Context) initContext.lookup("java:/comp/env");
-			dataSource = (DataSource) envContext.lookup("jdbc/projectonly");
-		} catch (NamingException e) {
-			System.out.println(e.getMessage());
-			System.out.println("DB연결에러");
-		}
-
+		System.out.println("ChatDAO 객체생성");
 	}
 
 	public ArrayList<Chat> getChatListByID(String fromID, String toID, String chatID) {
@@ -36,7 +26,10 @@ public class ChatDAO {
 		ResultSet rs = null;
 		String SQL = "SELECT * FROM CHAT WHERE ((fromID = ? AND toID = ?) OR (fromID = ? AND toID = ?)) AND chatID > ? ORDER BY chatTime";
 		try {
-			conn = dataSource.getConnection();
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(URL, USER, PW);
+			System.out.println(conn);
+			System.out.println("Chat DB 연결완료..");
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -88,7 +81,10 @@ public class ChatDAO {
 		ResultSet rs = null;
 		String SQL = "SELECT * FROM CHAT WHERE ((fromID = ? AND toID = ?) OR (fromID = ? AND toID = ?)) AND chatID > (SELECT MAX(chatID) - ? FROM CHAT) ORDER BY chatTime";
 		try {
-			conn = dataSource.getConnection();
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(URL, USER, PW);
+			System.out.println(conn);
+			System.out.println("Chat DB 연결완료..");
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -137,9 +133,13 @@ public class ChatDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		System.out.println("Message Submit 작동중");
 		String SQL = "INSERT INTO CHAT VALUES (NULL, ?, ?, ?, NOW())";
 		try {
-			conn = dataSource.getConnection();
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(URL, USER, PW);
+			System.out.println(conn);
+			System.out.println("Chat DB 연결완료..");
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -161,6 +161,7 @@ public class ChatDAO {
 				System.out.println("DB 닫기 에러");
 			}
 		}
+		System.out.println("Message Submit 완료");
 		return -1;
 	}
 
