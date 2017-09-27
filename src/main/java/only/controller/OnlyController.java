@@ -34,7 +34,12 @@ public class OnlyController {
 	private PostService ps;
 
 	@RequestMapping("/chat")
-	public String chat() {
+	public String chat(String userID, HttpSession session) {
+		Member member = ms.getMemberById(userID);
+		if(member != null) {
+			session.setAttribute("userID", member.getUserid());
+			session.setAttribute("nickname", member.getUsername());
+		}
 		return "chat";
 	}
 
