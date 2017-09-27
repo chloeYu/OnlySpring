@@ -112,12 +112,12 @@ public class OnlyController {
 
 	@RequestMapping("/loadPost")
 	public @ResponseBody List<Post> loadPost(String userid, String pageNum, Model model) {
-		System.out.println("loadPost().." + userid + ","+ pageNum);
+		System.out.println("loadPost().." + userid + "," + pageNum);
 		List<Post> result = ps.getTimelinePost(userid, pageNum);
 		/*
 		 * String[] sh = {"제목", "작성자", "내용","제목+내용"}; model.addAttribute("sh", sh);
 		 * model.addAttribute("list", list); model.addAttribute("pageNum", currentPage);
-		 */ 
+		 */
 		System.out.println(result.size());
 		return result;
 	}
@@ -143,27 +143,31 @@ public class OnlyController {
 
 	@RequestMapping(value = "/profileDone")
 	public String profileDone(Member member, String birth1, Model model, MultipartFile profile_image1,
-			HttpServletRequest request, HttpSession session) {
-		System.out.println(profile_image1.getOriginalFilename());
-		if(profile_image1.getOriginalFilename()!=null && !profile_image1.getOriginalFilename().equals("")) {
-			try {
-				byte[] bytes = profile_image1.getBytes();
-				String rootPath = request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
-				File serverFile = new File(rootPath + File.separator + profile_image1.getOriginalFilename());
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			HttpServletRequest request, HttpSession session, String existingImage) {
+		if (profile_image1.getOriginalFilename() != null && !profile_image1.getOriginalFilename().equals("")) {
+			System.out.println("cheak in");
+			System.out.println(profile_image1.getOriginalFilename());
+			if (profile_image1.getOriginalFilename() != null && !profile_image1.getOriginalFilename().equals("")) {
+				try {
+					byte[] bytes = profile_image1.getBytes();
+					String rootPath = request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
+					File serverFile = new File(rootPath + File.separator + profile_image1.getOriginalFilename());
+					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+					stream.write(bytes);
+					stream.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				member.setProfile_image(profile_image1.getOriginalFilename());
 			}
-			member.setProfile_image(profile_image1.getOriginalFilename());
-		}
-		
-		if(birth1!=null && !birth1.equals("")) {
+		} else
+			member.setProfile_image(existingImage);
+
+		if (birth1 != null && !birth1.equals("")) {
 			member.setBirth(Date.valueOf(birth1));
 		}
 		int result = ms.update(member);
-		if(result > 0) { // session에 저장된 member를 update
+		if (result > 0) { // session에 저장된 member를 update
 			session.setAttribute("member", member);
 		}
 		return "profileDone";

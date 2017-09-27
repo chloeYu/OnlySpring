@@ -21,11 +21,11 @@
       <p>
          닉네임<input type="text" name="username" value="${member.username }">
       <p>
-         이메일<input type="text" name="email" value="${member.email }">
+         이메일<input type="email" name="email" value="${member.email }">
       <p>
-         생성날짜<input type="text" value="${member.created }" readonly>
+         생성날짜<input type="text" id="created" name="created" value="${member.created }" readonly>
       <p>
-         수정날짜<input type="text" id="modified" value="${member.modified }"
+         수정날짜<input type="text" id="modified" name="modified" value="${member.modified }"
             readonly>
       <p>
          프로필이미지<input type="file"
@@ -33,13 +33,14 @@
             accept="image/png, image/gif, image/jpg, image/bmp" > <input type="text" id="copyimagenameplace" value="${member.profile_image }">
       <p>
       <div id="imageplace"></div>
-         전화번호<input type="text" name="tel" value="${member.tel }">
+         전화번호<input type="tel" name="tel" value="${member.tel }">
       <p>
          생년월일<input type="date" name="birth1" value="${member.birth }">
       <p>
          <input type="submit" value="개인정보수정"> <input type="button"
             value="취소" onclick="exit()">
       <p>
+      <input type="hidden" name="existingImage" value="${member.profile_image }">
    </form>
 </body>
 </html>
