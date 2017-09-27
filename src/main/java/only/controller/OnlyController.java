@@ -159,7 +159,7 @@ public class OnlyController {
 			member.setProfile_image(profile_image1.getOriginalFilename());
 		}
 		
-		if(birth1!=null) {
+		if(birth1!=null && !birth1.equals("")) {
 			member.setBirth(Date.valueOf(birth1));
 		}
 		int result = ms.update(member);
