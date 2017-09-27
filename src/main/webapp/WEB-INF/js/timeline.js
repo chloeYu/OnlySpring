@@ -80,7 +80,7 @@ function buildPost(postData) {
 			+ "' name='commentPid'>" + "</div>"
 			+ "<div class='postLayoutClear'></div>" + "</form>";
 
-	var postView = "<li class='infinite_scroll'><div class='postUid'><span>" + postData.userid + "</span></div><hr>";
+	var postView = "<li class='infinite_scroll'><div class='postUid'><span>" + postData.username + "</span></div><hr>";
 	if(postData.files != null){
 	 for (var i = 0; i < postData.files.length; i++) {
 		 if(postData.files.length == 1){ // 이미지 1개

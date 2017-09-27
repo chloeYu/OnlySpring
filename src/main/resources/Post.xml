@@ -8,6 +8,7 @@
 		<result property="created" column="created" />
 		<result property="del" column="del" />
 		<result property="userid" column="userid" />
+		<result property="username" column="username" />
 		<result property="modified" column="modified" />
 		<result property="type" column="type" />
 		<result property="text" column="text" />
@@ -20,7 +21,7 @@
 	</resultMap>
 	
 	<select id="timelinelist" parameterType="String" resultMap="postResult">
- 		select * from post where userid=#{userid} order by pid desc
+ 		select p.*, m.username from post p, member m where p.userid=#{userid} and p.userid = m.userid order by pid desc;
 		<!-- select * from post where userid=#{userid} -->
 	</select>
 

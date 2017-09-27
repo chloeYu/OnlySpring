@@ -9,7 +9,8 @@ public class Post {
 	private int pid;
 	private Date created;
 	private String del; 
-	private String userid; 
+	private String userid;
+	private String username;
 	private Date modified; 
 	private String type;
 	private String text;
@@ -38,6 +39,13 @@ public class Post {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public Date getModified() {
 		return modified;
