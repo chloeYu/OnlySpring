@@ -23,6 +23,7 @@ import only.model.Post;
 import only.service.MemberService;
 import only.service.PostService;
 import only.utils.WebConstants;
+import org.json.JSONObject;
 
 @Controller
 public class OnlyController {
@@ -36,7 +37,7 @@ public class OnlyController {
 	@RequestMapping("/chat")
 	public String chat(String userID, HttpSession session) {
 		Member member = ms.getMemberById(userID);
-		if(member != null) {
+		if (member != null) {
 			session.setAttribute("userID", member.getUserid());
 			session.setAttribute("nickname", member.getUsername());
 		}
@@ -115,16 +116,96 @@ public class OnlyController {
 		return "timeline";
 	}
 
+	@RequestMapping("/postBuild")
+	public String postBuild(HttpServletRequest request, Model model) {
+		System.out.println("postBuild()..: ");
+		/*List<Object> list = request.getParameter("post");
+		System.out.println(jObj.keySet());*/
+		/*Post post = new Post();
+		// [created, modified, files,]
+		post.setUserid(jObj.getString("userid"));
+		post.setUsername(jObj.getString("username"));
+		post.setPid(Integer.valueOf(jObj.getInt("pid")));
+		post.setText(jObj.getString("text"));
+		post.setType(jObj.getString("type"));
+		//post.setFiles();
+		post.setCreated(Date.valueOf(jObj.getString("created")));
+		post.setModified(Date.valueOf(jObj.getString("modified")));
+		post.setDel(jObj.getString("del"));
+		System.out.println("post: " + post);
+		model.addAttribute("post", post);*/
+		return "postBuild";
+		/*System.out.println("loadPost().." + userid + "," + pageNum);
+		List<Post> plist = ps.getTimelinePost(userid, pageNum);
+		StringBuilder htmlBuilder = new StringBuilder();
+		// Build Posts
+		if (plist.size() == 0) {
+			htmlBuilder.append("No Post");
+		} else if (plist.size() > 0) {
+			for (int i = 0; i < plist.size(); i++) {
+				// li Tag 추가
+				htmlBuilder.append("<li class='infinite_scroll'>");
+				// Post 작성자 이름 추가
+				htmlBuilder.append("<div class='postUid'><span>" + plist.get(i).getUsername() + "</span></div><hr>");
+				// 텍스트 추가
+				if (plist.get(i).getText() != null && !plist.get(i).getText().equals("")) {
+					htmlBuilder.append("<h3>" + plist.get(i).getText() + "</h3>");
+				}
+				// 이미지 추가
+				List<MultipartFile> fileList = plist.get(i).getFiles();
+				System.out.println("Returned Image # : " + plist.get(i).getFiles().size());
+				for (int j = 0; j < fileList.size(); j++) {
+					System.out.println(fileList.get(0));
+					if (fileList.size() == 1) {
+						htmlBuilder.append("<div class='postImg1'><img class='postInner1' src='img_timeline/"
+								+ fileList.get(j).getOriginalFilename() + "'></div>");
+					} else if (fileList.size() == 2) {
+						htmlBuilder.append("<div class='postImg1'><img class='postInner1' src='img_timeline/"
+								+ fileList.get(j).getOriginalFilename() + "'></div>");
+					} else if (fileList.size() == 3) {
+						htmlBuilder.append("<div class='postImg1'><img class='postInner1' src='img_timeline/"
+								+ fileList.get(j).getOriginalFilename() + "'></div>");
+					} else if (fileList.size() == 4) {
+						htmlBuilder.append("<div class='postImg2'><img class='postInner2' src='img_timeline/"
+								+ fileList.get(j).getOriginalFilename() + "'></div>");
+					} else if (fileList.size() > 4) {
+						if (fileList.size() == 3) {
+							htmlBuilder.append("<div class='postImg3'><img class='postInner3' src='img_timeline/"
+									+ fileList.get(j).getOriginalFilename() + "'><span>+More</span></div>");
+						} else {
+							htmlBuilder.append("<div class='postImg3'><img class='postInner3' src='img_timeline/"
+									+ fileList.get(j).getOriginalFilename() + "'></div>");
+						}
+					}
+				}
+				// React div open
+				htmlBuilder.append("<div class='reactBtn'>");
+				// 좋아요 아이콘 추가
+				htmlBuilder.append("<div class='heart' id='heart-" + plist.get(i).getUserid() + "'></div>");
+				// Repost 아이콘 추가
+				htmlBuilder.append("<div class='share_out' onclick='openLayer('layerPop',200,18)'></div>");
+				// 댓글 추가
+				htmlBuilder.append("<form action='commentWrite'><div class='commentForm'><input type='hidden' value='"
+						+ userid + "' name='userid'>");
+				htmlBuilder.append(
+						"<textarea row='1' cols='1' name='commentText' placeholder='Comments' class='comment_textarea'></textarea>");
+				htmlBuilder.append("<button class='commentBtn'>입력</button>");
+				htmlBuilder.append("<input type='hidden' value='" + plist.get(i).getPid() + "' name='commentPid'></div>");
+				htmlBuilder.append("<div class='postLayoutClear'></div></form>");
+				// React div close
+				htmlBuilder.append("</li>");
+			}
+		}
+		System.out.println(htmlBuilder);
+		return htmlBuilder;*/
+	}
+
 	@RequestMapping("/loadPost")
 	public @ResponseBody List<Post> loadPost(String userid, String pageNum, Model model) {
 		System.out.println("loadPost().." + userid + "," + pageNum);
-		List<Post> result = ps.getTimelinePost(userid, pageNum);
-		/*
-		 * String[] sh = {"제목", "작성자", "내용","제목+내용"}; model.addAttribute("sh", sh);
-		 * model.addAttribute("list", list); model.addAttribute("pageNum", currentPage);
-		 */
-		System.out.println(result.size());
-		return result;
+		List<Post> plist = ps.getTimelinePost(userid, pageNum);
+
+		return plist;
 	}
 
 	@RequestMapping("/getEachPost")

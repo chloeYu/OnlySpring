@@ -16,6 +16,11 @@ public class Post {
 	private String text;
 	private List<MultipartFile> files;
 	
+	@Override
+	public String toString() {
+		return "Post [pid=" + pid + ", created=" + created + ", del=" + del + ", userid=" + userid + ", username="
+				+ username + ", modified=" + modified + ", type=" + type + ", text=" + text + ", files=" + files + "]";
+	}
 	public int getPid() {
 		return pid;
 	}

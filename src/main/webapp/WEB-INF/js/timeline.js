@@ -66,8 +66,6 @@ $(function() {
 
 // Post Layout Build
 function buildPost(postData) {
-	console.log(postData);
-	
 	var heart = "<div class='heart' id='heart-" + postData.userid + "'></div>";
 	var shareOut = "<div class='share_out' onclick='openLayer('layerPop',200,18)'></div>";
 	var comment = "<form action='commentWrite'>"
