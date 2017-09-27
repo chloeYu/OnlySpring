@@ -143,7 +143,7 @@ public class OnlyController {
 
 	@RequestMapping(value = "/profileDone")
 	public String profileDone(Member member, String birth1, Model model, MultipartFile profile_image1,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		System.out.println(profile_image1.getOriginalFilename());
 		if(profile_image1.getOriginalFilename()!=null && !profile_image1.getOriginalFilename().equals("")) {
 			try {
@@ -163,6 +163,9 @@ public class OnlyController {
 			member.setBirth(Date.valueOf(birth1));
 		}
 		int result = ms.update(member);
+		if(result > 0) { // session에 저장된 member를 update
+			session.setAttribute("member", member);
+		}
 		return "profileDone";
 	}
 }
