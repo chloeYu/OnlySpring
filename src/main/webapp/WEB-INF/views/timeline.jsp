@@ -73,9 +73,9 @@
 		</div>
 		<jsp:include page="rightmenu.jsp"></jsp:include>
 	</div>
-	<form action="changeProfile" method="post">
+<%-- 	<form action="changeProfile" method="post">
 		<input type="hidden" value="<%=userid%>" name="member_id"> <input
 			type="submit" value="개인정보수정">
-	</form>
+	</form> --%>
 </body>
 </html>

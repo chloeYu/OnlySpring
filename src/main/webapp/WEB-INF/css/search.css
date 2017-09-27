@@ -316,8 +316,7 @@ body {
  */
 .header_profile a {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background-color: transparent;
-	color: #ffffff;
+	background-color: transparent;	
 	display: inline-block;
 	font-size: 17px;
 	-moz-osx-font-smoothing: grayscale;
