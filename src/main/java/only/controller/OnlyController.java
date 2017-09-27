@@ -143,7 +143,7 @@ public class OnlyController {
 
 	@RequestMapping(value = "/profileDone")
 	public String profileDone(Member member, String birth1, Model model, MultipartFile profile_image1,
-			HttpServletRequest request, HttpSession session, String copyimagenameplace) {
+			HttpServletRequest request, HttpSession session, String existingImage) {
 		if (profile_image1.getOriginalFilename() != null && !profile_image1.getOriginalFilename().equals("")) {
 			System.out.println("cheak in");
 			System.out.println(profile_image1.getOriginalFilename());
@@ -161,7 +161,7 @@ public class OnlyController {
 				member.setProfile_image(profile_image1.getOriginalFilename());
 			}
 		} else
-			member.setProfile_image(copyimagenameplace);
+			member.setProfile_image(existingImage);
 
 		if (birth1 != null && !birth1.equals("")) {
 			member.setBirth(Date.valueOf(birth1));

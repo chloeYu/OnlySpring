@@ -30,7 +30,7 @@
       <p>
          프로필이미지<input type="file"
             id="fileload" name="profile_image1" size="40"
-            accept="image/png, image/gif, image/jpg, image/bmp" > <input type="text" id="copyimagenameplace" name="copyimagenameplace" value="${member.profile_image }">
+            accept="image/png, image/gif, image/jpg, image/bmp" > <input type="text" id="copyimagenameplace" value="${member.profile_image }">
       <p>
       <div id="imageplace"></div>
          전화번호<input type="text" name="tel" value="${member.tel }">
@@ -40,6 +40,7 @@
          <input type="submit" value="개인정보수정"> <input type="button"
             value="취소" onclick="exit()">
       <p>
+      <input type="hidden" name="existingImage" value="${member.profile_image }">
    </form>
 </body>
 </html>
