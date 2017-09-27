@@ -19,12 +19,8 @@
 		<result property="seq" column="seq" />
 	</resultMap>
 	
-	<select id="timelinelist" parameterType="hashMap" resultMap="postResult">
-		<!-- select * from (select a.*, rowNum rn from (select * from post where
-		userid=#{userid} order by created desc) a)
-		where rn between #{startRow} and
-		#{endRow} order by created desc -->
-		select * from post where userid=#{userid} order by pid desc LIMIT #{startRow}, #{endRow}
+	<select id="timelinelist" parameterType="String" resultMap="postResult">
+ 		select * from post where userid=#{userid} order by pid desc
 		<!-- select * from post where userid=#{userid} -->
 	</select>
 
