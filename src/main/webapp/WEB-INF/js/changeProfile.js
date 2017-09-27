@@ -5,7 +5,6 @@
       }
       //프로필파일 미리보기 및 선택.
       $("#fileload").on("change", function(e){
-    	  $("#copyimagenameplace").val($("#fileload").val());
          imgchk(e);
       });
    });
@@ -13,10 +12,12 @@
       var thumbext1 = document.getElementById('fileload').value; //파일을 추가한 input 박스의 값
       var thumbext = thumbext1.slice(thumbext1.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
       if(thumbext != "jpg" && thumbext != "png" &&  thumbext != "gif" &&  thumbext != "bmp"){ //확장자를 확인합니다.
-         alert('프로필은 이미지 파일(jpg, png, gif, bmp)만 등록 가능합니다.');
-      $("#fileload").val(null);
-      $("#imageplace").html(null);
+    	  alert('프로필은 이미지 파일(jpg, png, gif, bmp)만 등록 가능합니다.');
+    	  $("#fileload").val(null);
+    	  $("#imageplace").html(null);
+    	  $("#copyimagenameplace").val(null);
       } else{//이미지 미리보기 기능.
+    	   $("#copyimagenameplace").val($("#fileload").val());
            var file = e.target.files[0],
            reader = new FileReader();
            var img = new Image();
@@ -49,10 +50,6 @@
       if (changeProfile.password.value != changeProfile.password2.value) {
          alert("비밀번호랑 비밀번호확인이 일치하지 않습니다!!")
          $("#password").focus();
-         return false;
-      }
-      if(!(changeProfile.fileload.value.trim())){
-         alert("프로필사진을 선택해주십시오.");
          return false;
       }
       return true;

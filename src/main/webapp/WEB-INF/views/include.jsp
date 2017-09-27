@@ -22,6 +22,7 @@
 <script src="${path}/js/timeline_infinitescroll.js"></script>
 <script src="${path}/js/signUp.js"></script>
 <script src="${path}/js/search.js"></script>
+<script src="${path}/js/changeProfile.js"></script>
 <script type="text/javascript">
 console.log("header included");
 </script>
