@@ -120,7 +120,10 @@ public class OnlyController {
 	
 
 	@RequestMapping("/loadPost")
-	public String loadPost(String userid, String pageNum, Model model) {
+	public String loadPost(String userid, String pageNum, Model model, HttpSession session) {
+		if(userid==null || userid.equals("")) {
+			userid = (String) session.getAttribute(WebConstants.USER_ID);
+		}
 		System.out.println("loadPost().." + userid + "," + pageNum);
 		List<Post> plist = ps.getTimelinePost(userid, pageNum);
 		model.addAttribute("plist", plist);
