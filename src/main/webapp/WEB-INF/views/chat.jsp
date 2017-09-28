@@ -91,12 +91,10 @@ $('.button').click(function() {
 					d = new Date()
 					if (m != d.getMinutes()) {
 						m = d.getMinutes();
-						$(
-								'<div class="timestamp">' + d.getHours()
+						$('<div class="timestamp">' + d.getHours()
 										+ ':' + m + '</div>').appendTo(
 								$('.message:last'));
-						$(
-								'<div class="checkmark-sent-delivered">&check;</div>')
+						$('<div class="checkmark-sent-delivered">&check;</div>')
 								.appendTo($('.message:last'));
 						$('<div class="checkmark-read">&check;</div>')
 								.appendTo($('.message:last'));
@@ -152,6 +150,7 @@ $('.button').click(function() {
 		});
 	}
 	function addChat(chatName, chatContent, chatTime) {
+		if()
 		$('.messages-content').append();
 	}
 
