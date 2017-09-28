@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="sessionChk.jsp" %>
+<%@ include file="sessionChk.jsp"%>
 <c:set var="path" value="${pageContext.request.contextPath }"></c:set>
 <div class="header">
 	<!-- 상단고정바 로고 -->
@@ -14,8 +14,8 @@
 	<!-- 로고 끝 -->
 	<!-- 상단고정바 서치 -->
 	<div class="search">
-		<form class="form-wrapper cf" name="frm" action="searchResult" method="post"
-			onsubmit="return searchChk()">
+		<form class="form-wrapper cf" name="frm" action="searchResult"
+			method="post" onsubmit="return searchChk()">
 			<input list="searchResult" class="searchTerm" name="searchTerm"
 				placeholder="Search" onkeyup="runSearch()" autocomplete="off">
 			<datalist id="searchResult">
@@ -27,21 +27,21 @@
 	<!-- 서치 끝 -->
 	<div class="header_profile">
 		<div class="header_wraper userProfile" data-click="profile_icon">
-			<a id="user_profile_url" href="blog/<%=userid %>"> <img
-				style="vertical-align: middle" src=".${profile_img }"> <span>${name }</span>
+			<a id="user_profile_url" href="blog/<%=userid%>"><span
+				style="font-weight: bold; font-size: 0.7em; padding-right: 10px"><%=member.getUsername()%></span><img
+				style="vertical-align: middle"
+				src="img_timeline/<%=member.getProfile_image()%>"> <span>${name }</span>
 			</a>
 		</div>
 
 		<div class="header_wraper">
 			<div class="nav_icon">
 				<div class="friend_list">
-					<a id="friendList" href="friendList.do?userid=${sessionId }"
-						data-userid="${sessionId }">
+					<a id="friendList" href="friendList.do?userid=${sessionId }" data-userid="${sessionId }">
 						<div id="friend_notification">
 							<span>Friend List</span>
 						</div>
 					</a>
-					</form>
 				</div>
 			</div>
 			<div class="nav_icon">
@@ -65,6 +65,15 @@
 				</div>
 			</div>
 
+			<div class="dropdown">
+				<span class="dropbtn glyphicon glyphicon-triangle-bottom"
+					onClick="onlySetting()"></span>
+				<div id="myDropdown" class="dropdown-content">
+					<a href="#createPage">Create Page</a> <a href="#createGroup">Create
+						Group</a> <a href="changeProfile">Profile Setting</a> <a
+						href="#logOut">Log Out</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

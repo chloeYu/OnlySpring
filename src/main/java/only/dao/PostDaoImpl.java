@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,17 +24,14 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public List<Post> getTimelinePost(String userid, String pageNum) {
-		int startRow = (Integer.parseInt(pageNum) - 1) * POSTPERPAGE + 1; // 1페이지:1 2페이지: 11 3페이지:21 ...
-		int endRow = startRow + POSTPERPAGE - 1; // 1페이지: 10 2페이지: 20 3페이지: 30
+		int startRow = (Integer.parseInt(pageNum) - 1) * POSTPERPAGE; // 1페이지:1 2페이지: 11 3페이지:21 ...
+		int endRow = startRow + POSTPERPAGE ; // 1페이지: 10 2페이지: 20 3페이지: 30
 		int total = sst.selectOne("postns.getTimelineTotal", userid);
 		System.out.println("startRow: " + startRow + ", endRow: " + endRow + ", total: " + total);
 		if (endRow > total)
 			endRow = total;
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("userid", userid);
-		map.put("startRow", Integer.toString(startRow));
-		map.put("endRow", Integer.toString(endRow));
-		List<Post> plist = sst.selectList("postns.timelinelist", map);
+		List<Post> plist = sst.selectList("postns.timelinelist", userid, new RowBounds(startRow, POSTPERPAGE));
+		System.out.println("Post Size: " + plist.size());
 		for(Post post : plist) {
 			char[] type = post.getType().toCharArray();
 			for(int i=0; i< type.length; i++) {

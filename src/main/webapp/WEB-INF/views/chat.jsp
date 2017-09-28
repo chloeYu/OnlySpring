@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="sessionChk.jsp"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<%
+	String toID = null;
+	if (request.getParameter("toID") != null) {
+		toID = (String) request.getParameter("toID");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,11 +31,31 @@
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
 <script src="${path }/js/chat.js"></script>
+<script type="text/javascript">
+	function submitFunction() {
+		var fromID = '<%=userid%>';
+		var toID = '<%=toID%>';
+		var chatContent = $('.message-input').val();
+		$.ajax({
+				type:"POST",
+				url:"./chatSubmitServlet",
+				data: {
+					fromID: encodeURIComponent(fromID),
+					toID: encodeURIComponent(toID),
+					chatContent: encodeURIComponent(chatContent),
+				}
+		});
+		$('.message-input').val('');
+	}
+</script>
 </head>
 <body>
 	<!--
 Inspired by https://dribbble.com/supahfunk
 -->
+	<div class="alert alert-success" id="successMessage" style="display: none;">
+		<strong>메세지 전송에 성공했습니다.</strong>
+	</div>
 	<section class="avenue-messenger">
 		<div class="menu">
 			<div class="items">
@@ -42,14 +69,13 @@ Inspired by https://dribbble.com/supahfunk
 		</div>
 		<div class="agent-face">
 			<div class="half">
-				<img class="agent circle" src="${path }/img_all/user.png"
-					alt="">
+				<img class="agent circle" src="${path }/img_all/user.png" alt="">
 			</div>
 		</div>
 		<div class="chat">
 			<div class="chat-title">
-				<h1>UserName</h1>
-				<h2>NickName</h2>
+				<h1><%=userid %></h1>
+				<h2><%=username %></h2>
 				<!--  <figure class="avatar">
       <img src="http://askavenue.com/img/17.jpg" /></figure>-->
 			</div>
@@ -59,8 +85,10 @@ Inspired by https://dribbble.com/supahfunk
 			<div class="message-box">
 				<textarea type="text" class="message-input"
 					placeholder="Type message..."></textarea>
-				<button type="submit" class="message-submit">Send</button>
+				<button type="submit" class="message-submit"
+					onclick="submitFunction();">Send</button>
 			</div>
 		</div>
+	</section>
 </body>
 </html>

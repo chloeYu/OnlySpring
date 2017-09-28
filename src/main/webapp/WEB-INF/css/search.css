@@ -105,6 +105,12 @@ body {
 	height: 22px;
 }
 
+.post_header img {
+	height: 30px;
+	width: 30px;
+	border-radius: 50px;
+}
+
 .nav_icon {
 	float: left;
 }
@@ -316,8 +322,7 @@ body {
  */
 .header_profile a {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background-color: transparent;
-	color: #ffffff;
+	background-color: transparent;	
 	display: inline-block;
 	font-size: 17px;
 	-moz-osx-font-smoothing: grayscale;
@@ -332,6 +337,8 @@ body {
 
 .header_profile a img {
 	height: 38px;
+	width: 38px;
+	border-radius: 50px;
 }
 
 span {
