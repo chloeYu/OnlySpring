@@ -53,18 +53,12 @@
 				<div class='heart' id='heart-${post.userid }'></div>
 				<div class='share_out' onclick="openLayer('layerPop',200,18)"></div>
 			</div>
-			<form action='commentWrite'>
-				<div class='commentForm'>
-					<input type='hidden'
-						value='<%=session.getAttribute(WebConstants.USER_ID)%>'
-						name='userid'>
-					<textarea row='1' cols='1' name='commentText'
-						placeholder='Comments' class='comment_textarea'></textarea>
-					<button class='commentBtn'>입력</button>
-					<input type='hidden' value='${post.pid }' name='commentPid'>
-				</div>
-				<div class='postLayoutClear'></div>
-			</form>
+
+			<div class='commentForm'>
+				<textarea row='1' cols='1' name='commentText' placeholder='Comments' class='comment_textarea' id="commentText-${post.pid }"></textarea>
+				<a class='commentBtn btn btn-success' id="commentBtn-${post.pid }" onclick="writePost(event)">Enter</a>
+			</div>
+			<div class='postLayoutClear'></div>
 		</li>
 	</c:forEach>
 

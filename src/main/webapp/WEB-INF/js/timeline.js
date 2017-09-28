@@ -103,6 +103,13 @@ function buildPost(postData) {
 	return postView;
 }
 
+function writePost(event){
+	console.log(event);
+	var pid = console.log(event.target.id);
+	var comment = document.getElementById("commentText-"+pid).value;
+	console.log(text);
+//	$.post('commentWrite', )
+}
 // 이미지 미리보기
 var sel_files = [];
 
