@@ -1,17 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="sessionChk.jsp"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <%
-	String userID = null;
-	if (request.getParameter("userID") != null) {
-		userID = (String) session.getAttribute("userID");
-	}
-	String nickname = null;
-	if (request.getParameter("nickname") != null) {
-		nickname = (String) session.getAttribute("nickname");
-	}
-
 	String toID = null;
 	if (request.getParameter("toID") != null) {
 		toID = (String) request.getParameter("toID");
@@ -40,29 +32,20 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
 <script src="${path }/js/chat.js"></script>
 <script type="text/javascript">
-	function autoClosingAlert(selector, delay) {
-		var alert = $(selector).alert();
-		alert.show();
-		window.setTimeout(function { alert.hide() }, delay); 
-	}
 	function submitFunction() {
-		var fromID = '<%=userID%>';
+		var fromID = '<%=userid%>';
 		var toID = '<%=toID%>';
-		var chatContent = $('.messages-content').val();
+		var chatContent = $('.message-input').val();
 		$.ajax({
 				type:"POST",
-				url:"/chatSubmitServlet",
+				url:"./chatSubmitServlet",
 				data: {
 					fromID: encodeURIComponent(fromID),
 					toID: encodeURIComponent(toID),
 					chatContent: encodeURIComponent(chatContent),
-				},
-				success: function(result) {
-					if(result == 1) {
-						autoClosingAlert();
-					}
 				}
-		})
+		});
+		$('.message-input').val('');
 	}
 </script>
 </head>
@@ -91,8 +74,8 @@ Inspired by https://dribbble.com/supahfunk
 		</div>
 		<div class="chat">
 			<div class="chat-title">
-				<h1>${userID }</h1>
-				<h2>${nickname }</h2>
+				<h1><%=userid %></h1>
+				<h2><%=username %></h2>
 				<!--  <figure class="avatar">
       <img src="http://askavenue.com/img/17.jpg" /></figure>-->
 			</div>
