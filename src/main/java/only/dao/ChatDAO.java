@@ -144,6 +144,7 @@ public class ChatDAO {
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
 			pstmt.setString(3, chatContent);
+			System.out.println("Message Submit 완료");
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -161,7 +162,6 @@ public class ChatDAO {
 				System.out.println("DB 닫기 에러");
 			}
 		}
-		System.out.println("Message Submit 완료");
 		return -1;
 	}
 

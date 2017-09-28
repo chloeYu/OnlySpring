@@ -30,30 +30,140 @@
 	src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
-<script src="${path }/js/chat.js"></script>
 <script type="text/javascript">
-	function submitFunction() {
+$(document).ready(function() {
+var $messages = $('.messages-content'), d, h, m, i = 0;
+
+$(window).load(function() {
+	$messages.mCustomScrollbar();
+});
+
+// 전송 버튼을 눌렀을 때 호출되는 메소드
+$('.message-submit').click(function() {
+	insertMessage();
+});
+
+$(window).on('keydown', function(e) {
+	if (e.which == 13) {
+		insertMessage();
+		return false;
+	}
+})
+
+$('.button').click(function() {
+	$('.menu .items span').toggleClass('active');
+	$('.menu .button').toggleClass('active');
+});
+				// 메시지를 출력하는 메소드
+				function appendMessage(msg) { // msg를 messages-content에 추가
+			
+						$('<div class="message loading new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure><span></span></div>')
+							.appendTo($('.mCSB_container'));
+					updateScrollbar();
+					setTimeout(
+							function() {
+								$('.message.loading').remove();
+								$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
+												+ msg + '</div>')
+										.appendTo($('.mCSB_container'))
+										.addClass('new');
+								setDate();
+								updateScrollbar();
+								i++;
+							}, 1000 + (Math.random() * 20) * 100);
+				}
+				function MyMessage(msg) {
+					$('<div class="message message-personal">' + msg + '</div>')
+							.appendTo($('.mCSB_container')).addClass('new');
+					setDate();
+					updateScrollbar();
+				}
+				
+				function updateScrollbar() {
+					$messages.mCustomScrollbar("update").mCustomScrollbar(
+							'scrollTo', 'bottom', {
+								scrollInertia : 10,
+								timeout : 0
+							});
+				}
+
+				function setDate() {
+					d = new Date()
+					if (m != d.getMinutes()) {
+						m = d.getMinutes();
+						$(
+								'<div class="timestamp">' + d.getHours()
+										+ ':' + m + '</div>').appendTo(
+								$('.message:last'));
+						$(
+								'<div class="checkmark-sent-delivered">&check;</div>')
+								.appendTo($('.message:last'));
+						$('<div class="checkmark-read">&check;</div>')
+								.appendTo($('.message:last'));
+					}
+				}
+
+				function insertMessage() {
+					var fromID = '<%=userid%>';
+					var toID = '<%=toID%>';
+					var chatContent = $('.message-input').val();
+					$.ajax({
+						type:"POST",
+						url:"./chatSubmitServlet",
+						data: {
+							fromID: encodeURIComponent(fromID),
+							toID: encodeURIComponent(toID),
+							chatContent: encodeURIComponent(chatContent),
+						}, 
+						success: function(result) {
+							MyMessage(chatContent);
+						}
+					});
+					$('.message-input').val("");
+
+					/*setTimeout(function() {
+						receiveMessage();
+					}, 1000 + (Math.random() * 20) * 100);*/
+				}
+});
+	var lastID = 0;
+	function chatListFunction(type) {
 		var fromID = '<%=userid%>';
 		var toID = '<%=toID%>';
-		var chatContent = $('.message-input').val();
 		$.ajax({
-				type:"POST",
-				url:"./chatSubmitServlet",
-				data: {
-					fromID: encodeURIComponent(fromID),
-					toID: encodeURIComponent(toID),
-					chatContent: encodeURIComponent(chatContent),
+			type : "POST",
+			url : "./chatListServlet",
+			data : {
+				fromID : encodeURIComponent(fromID),
+				toID : encodeURIComponent(toID),
+				listType : type,
+			},
+			success : function(data) {
+				if (data == "")
+					return;
+				var parsed = JSON.parse(data);
+				var result = parsed.result;
+				for (var i = 0; i < result.length; i++) {
+					addChat(result[i][0].value, result[i][2].value,
+							result[i][3].value);
 				}
+				lastID = Number(parsed.last);
+			}
 		});
-		$('.message-input').val('');
 	}
+	function addChat(chatName, chatContent, chatTime) {
+		$('.messages-content').append();
+	}
+
+	
 </script>
 </head>
 <body>
 	<!--
 Inspired by https://dribbble.com/supahfunk
 -->
-	<div class="alert alert-success" id="successMessage" style="display: none;">
+	<div class="alert alert-success" id="successMessage"
+		style="display: none;">
 		<strong>메세지 전송에 성공했습니다.</strong>
 	</div>
 	<section class="avenue-messenger">
@@ -74,8 +184,8 @@ Inspired by https://dribbble.com/supahfunk
 		</div>
 		<div class="chat">
 			<div class="chat-title">
-				<h1><%=userid %></h1>
-				<h2><%=username %></h2>
+				<h1><%=userid%></h1>
+				<h2><%=username%></h2>
 				<!--  <figure class="avatar">
       <img src="http://askavenue.com/img/17.jpg" /></figure>-->
 			</div>
@@ -85,8 +195,7 @@ Inspired by https://dribbble.com/supahfunk
 			<div class="message-box">
 				<textarea type="text" class="message-input"
 					placeholder="Type message..."></textarea>
-				<button type="submit" class="message-submit"
-					onclick="submitFunction();">Send</button>
+				<button type="submit" class="message-submit">Send</button>
 			</div>
 		</div>
 	</section>
