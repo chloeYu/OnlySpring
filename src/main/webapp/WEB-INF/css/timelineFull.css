@@ -460,7 +460,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		margin-left: 5px; 
 	}
 	.commentViewMid{
-		font-size: 1.5em;
+		font-size: 0.9em;
 	}
 	.comment_textarea:focus {
 		border: 3px solid #adbed8;

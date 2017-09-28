@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import only.model.Comments;
 import only.model.Post;
 import only.model.Post_Files;
+import only.service.CommentService;
 import only.service.PostService;
+import only.utils.WebConstants;
 
 @Controller
 public class FileUploadController {
@@ -29,6 +33,9 @@ public class FileUploadController {
 
 	@Autowired
 	private PostService ps;
+	
+	@Autowired
+	private CommentService cs;
 
 	
 	@RequestMapping(value = "/postWrite", method = RequestMethod.POST)
@@ -181,5 +188,18 @@ public class FileUploadController {
 			}
 		}
 		return message;
+	}
+	
+	@RequestMapping(value = "/writeComment", method = RequestMethod.POST)
+	public String writeComment(int pid, String text, HttpSession session, Model model) {
+		Comments comment = new Comments();
+		comment.setPid(pid);
+		comment.setText(text);
+		comment.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+		int result = cs.insert(comment);
+		List<Comments> clist = cs.getComments(pid, 1);
+		model.addAttribute("clist", clist);
+		System.out.println("comment Size: "+ clist.size());
+		return "commentBuild";
 	}
 }

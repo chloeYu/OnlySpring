@@ -15,6 +15,7 @@ public class Post {
 	private String type;
 	private String text;
 	private List<MultipartFile> files;
+	private List<Comments> comments;
 	
 	@Override
 	public String toString() {
@@ -78,5 +79,10 @@ public class Post {
 	public void setFiles(List<MultipartFile>  files) {
 		this.files = files;
 	}
-	
+	public List<Comments> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
 }

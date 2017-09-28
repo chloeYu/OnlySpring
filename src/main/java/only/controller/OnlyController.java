@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import only.model.Comments;
 import only.model.Member;
 import only.model.Post;
+import only.service.CommentService;
 import only.service.MemberService;
 import only.service.PostService;
 import only.utils.WebConstants;
@@ -34,7 +36,9 @@ public class OnlyController {
 	private MemberService ms;
 	@Autowired
 	private PostService ps;
-
+	@Autowired
+	private CommentService cs;
+	
 	@RequestMapping("/chat")
 	public String chat(String userID, HttpSession session) {
 		Member member = ms.getMemberById(userID);
@@ -126,7 +130,12 @@ public class OnlyController {
 		}
 		System.out.println("loadPost().." + userid + "," + pageNum);
 		List<Post> plist = ps.getTimelinePost(userid, pageNum);
+		for(Post post: plist) {
+			List<Comments> clist = cs.getComments(post.getPid(), 1);
+			post.setComments(clist);
+		}
 		model.addAttribute("plist", plist);
+		
 		return "postBuild";
 	}
 
