@@ -19,4 +19,6 @@ public interface PostService {
 
 	int insertImage(int pid, Post_Files postImage);
 
+	String buildPost(List<Post> plist);
+
 }

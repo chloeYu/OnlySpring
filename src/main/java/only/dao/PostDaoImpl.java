@@ -30,7 +30,7 @@ public class PostDaoImpl implements PostDao {
 		System.out.println("startRow: " + startRow + ", endRow: " + endRow + ", total: " + total);
 		if (endRow > total)
 			endRow = total;
-		List<Post> plist = sst.selectList("postns.timelinelist", userid, new RowBounds(startRow, endRow));
+		List<Post> plist = sst.selectList("postns.timelinelist", userid, new RowBounds(startRow, POSTPERPAGE));
 		System.out.println("Post Size: " + plist.size());
 		for(Post post : plist) {
 			char[] type = post.getType().toCharArray();
