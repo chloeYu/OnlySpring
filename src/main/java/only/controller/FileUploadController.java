@@ -99,7 +99,8 @@ public class FileUploadController {
 				}
 			}
 		}
-		return "timeline";
+		// return "timeline";
+		return "redirect:/timeline";
 	}
 
 	/**

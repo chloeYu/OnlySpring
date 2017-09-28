@@ -1,4 +1,3 @@
-var pageInitialized = false;
 // textarea focus일 때 작성폼 열기
 $(function() {
 	$('.type_choice_textarea').on('focus', function() {
@@ -11,24 +10,6 @@ $(function() {
 			$('.img_hide').addClass('img_hidden');
 		}
 	});
-
-	// Read posts
-	var sendData = "userid=" + userid + "&pageNum=1";
-	console.log(sendData);
-	if(pageInitialized==true) return;
-	/*$.post('loadPost', sendData, function(data) {
-		if (data == null) {
-			$("#postList").html("No Post");
-		} else {
-			var postView;
-			console.log(data);
-			for (var i = 0; i < data.length; i++) {
-				postView = buildPost(data[i]);
-				$("#postList").append(postView);
-			}
-
-		}
-	});*/
 });
 // textarea focus일 때 작성폼 열기 끝
 // infinite scroll 구현
@@ -64,7 +45,7 @@ $(function() {
 });
 // 글 내용 없을 때 작성버튼 비활성화 끝
 
-// Post Layout Build
+// Post Layout Build => 사용 안함
 function buildPost(postData) {
 	var heart = "<div class='heart' id='heart-" + postData.userid + "'></div>";
 	var shareOut = "<div class='share_out' onclick='openLayer('layerPop',200,18)'></div>";
