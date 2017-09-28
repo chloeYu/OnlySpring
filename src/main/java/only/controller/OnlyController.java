@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -170,5 +171,11 @@ public class OnlyController {
 			session.setAttribute("member", member);
 		}
 		return "profileDone";
+	}
+	
+	@RequestMapping(value="/blog/{owner}")
+	public String blog(@PathVariable String owner, Model model) {
+		model.addAttribute("owner", owner);
+		return "blog/blog";
 	}
 }
