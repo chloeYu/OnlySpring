@@ -45,7 +45,8 @@
 							<input type="button" id="google_button" style='display: none;' value="확인">
 							<div id='map' style='width: 100%; height: 200px; display: none;'></div></div>
 							<div class="write_type_choice">
-								<a class="choice_type" id="preview"></a>
+								<a class="choice_type" onclick="submitAction();" id="preview">
+								</a>
 								<a class="choice_type"> <br><img alt="" src="img_timeline/picture.svg"
 									class="img_hide img_hidden type_photo" width="30px" border='0'
 									onclick='document.all.files.click();'> 
@@ -58,7 +59,7 @@
 									onclick='document.all.videoUpload.click();'> <input
 									type="file" name="videoUpload" style='display: none;'
 									accept="video/mp4"> -->
-								</a>
+								</a> 
 								<a class="choice_type"><img alt="" src="img_timeline/picture.svg"
 									class="img_hide img_hidden type_photo" width="30px" border='0'
 									id="google">
@@ -83,12 +84,8 @@
 		</div>
 		<jsp:include page="rightmenu.jsp"></jsp:include>
 	</div>
-	<form action="changeProfile" method="post">
-		<input type="hidden" value="<%=userid%>" name="member_id"> <input
-			type="submit" value="개인정보수정">
-	</form>
 	
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1aRB-FJzz3Vtd6iiZdlCCk1DCfDxWDko&libraries=places&callback=initAutocomplete1"
          async defer></script>
-</body> 
+</body>
 </html>
