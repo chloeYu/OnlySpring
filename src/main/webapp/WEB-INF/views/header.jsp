@@ -27,7 +27,8 @@
 	<!-- 서치 끝 -->
 	<div class="header_profile">
 		<div class="header_wraper userProfile" data-click="profile_icon">
-			<a id="user_profile_url" href="blog/<%=userid%>"><span style="font-weight: bold; font-size: 0.7em; padding-right: 10px"><%=member.getUsername() %></span><img
+			<a id="user_profile_url" href="blog/<%=userid%>"><span
+				style="font-weight: bold; font-size: 0.7em; padding-right: 10px"><%=member.getUsername()%></span><img
 				style="vertical-align: middle"
 				src="img_timeline/<%=member.getProfile_image()%>"> <span>${name }</span>
 			</a>
@@ -36,13 +37,11 @@
 		<div class="header_wraper">
 			<div class="nav_icon">
 				<div class="friend_list">
-					<a id="friendList" href="friendList.do?userid=${sessionId }"
-						data-userid="${sessionId }">
+					<a id="friendList" href="friendList.do?userid=${sessionId }" data-userid="${sessionId }">
 						<div id="friend_notification">
 							<span>Friend List</span>
 						</div>
 					</a>
-					</form>
 				</div>
 			</div>
 			<div class="nav_icon">
@@ -67,13 +66,12 @@
 			</div>
 
 			<div class="dropdown">
-					<span class="dropbtn glyphicon glyphicon-triangle-bottom" onClick="onlySetting()"></span>
-					<div id="myDropdown" class="dropdown-content">
-					<a href="#createPage">Create Page</a>
-					<a href="#createGroup">Create Group</a>
-					<a href="changeProfile">Profile Setting</a>
-					<a href="#logOut">Log Out</a>
-					</div>
+				<span class="dropbtn glyphicon glyphicon-triangle-bottom"
+					onClick="onlySetting()"></span>
+				<div id="myDropdown" class="dropdown-content">
+					<a href="#createPage">Create Page</a> <a href="#createGroup">Create
+						Group</a> <a href="changeProfile">Profile Setting</a> <a
+						href="#logOut">Log Out</a>
 				</div>
 			</div>
 		</div>
