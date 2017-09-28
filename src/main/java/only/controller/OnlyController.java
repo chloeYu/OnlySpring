@@ -133,11 +133,6 @@ public class OnlyController {
 		return post;
 	}
 
-/*	@RequestMapping("/postWrite")
-	public String postWrite(HttpServletRequest request) {
-		return "";
-	}*/
-
 	@RequestMapping("/changeProfile")
 	public String changeProfile(Model model, String member_id) {
 		Member member = ms.getMemberById(member_id);
