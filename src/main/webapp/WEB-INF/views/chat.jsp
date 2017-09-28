@@ -32,113 +32,114 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
 <script type="text/javascript">
 $(document).ready(function() {
-var $messages = $('.messages-content'), d, h, m, i = 0;
+	var $messages = $('.messages-content'), d, h, m, i = 0;
 
-$(window).load(function() {
-	$messages.mCustomScrollbar();
-});
+	$(window).load(function() {
+		$messages.mCustomScrollbar();
+	});
 
-// 전송 버튼을 눌렀을 때 호출되는 메소드
-$('.message-submit').click(function() {
-	insertMessage();
-});
+	chatListFunction('ten');
+	getInfiniteChat();
 
-$(window).on('keydown', function(e) {
-	if (e.which == 13) {
+	// 전송 버튼을 눌렀을 때 호출되는 메소드
+	$('.message-submit').click(function() {
 		insertMessage();
-		return false;
-	}
-})
+	});
 
-$('.button').click(function() {
-	$('.menu .items span').toggleClass('active');
-	$('.menu .button').toggleClass('active');
-});
+	$(window).on('keydown', function(e) {
+		if (e.which == 13) {
+			insertMessage();
+			return false;
+		}
+	})
+
+	$('.button').click(function() {
+		$('.menu .items span').toggleClass('active');
+		$('.menu .button').toggleClass('active');
+	});
+
 				// 메시지를 출력하는 메소드
-				function MyMessage(msg) {
-					$('<div class="message message-personal">' + msg + '</div>')
-							.appendTo($('.mCSB_container')).addClass('new');
-					setDate();
-					updateScrollbar();
-				}
+	function MyMessage(msg) {
+		$('<div class="message message-personal">' + msg + '</div>')
+					.appendTo($('.mCSB_container')).addClass('new');
+		setDate();
+		updateScrollbar();
+	}
 				
-				function appendMessage(msg) { // msg를 messages-content에 추가
+	function appendMessage(msg) { // msg를 messages-content에 추가
 			
-						$('<div class="message loading new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure><span></span></div>')
-							.appendTo($('.mCSB_container'));
-					updateScrollbar();
-					setTimeout(
-							function() {
-								$('.message.loading').remove();
-								$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
-												+ msg + '</div>')
-										.appendTo($('.mCSB_container'))
-										.addClass('new');
-								setDate();
-								updateScrollbar();
-								i++;
-							}, 1000 + (Math.random() * 20) * 100);
-				}
-				
-				function MyMessageList(msg) {
-					$('<div class="message message-personal">' + msg + '</div>')
-							.appendTo($('.mCSB_container')).addClass('new');
-					updateScrollbar();
-				}
-				
-				function appendMessageList(msg) { // msg를 messages-content에 추가
-					$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
-								+ msg + '</div>')
+		$('<div class="message loading new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure><span></span></div>')
+				.appendTo($('.mCSB_container'));
+		updateScrollbar();
+		setTimeout(
+			function() {
+				$('.message.loading').remove();
+				$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
+							+ msg + '</div>')
 							.appendTo($('.mCSB_container'))
 							.addClass('new');
-					updateScrollbar();
-				}
+				setDate();
+				updateScrollbar();
+				i++;
+			}, 1000 + (Math.random() * 20) * 100);
+	}
 				
-				function updateScrollbar() {
-					$messages.mCustomScrollbar("update").mCustomScrollbar(
-							'scrollTo', 'bottom', {
-								scrollInertia : 10,
-								timeout : 0
-							});
-				}
+	function MyMessageList(msg) {
+		$('<div class="message message-personal">' + msg + '</div>')
+				.appendTo($('.mCSB_container')).addClass('new');
+		updateScrollbar();
+	}
+				
+	function appendMessageList(msg) { // msg를 messages-content에 추가
+		$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
+				+ msg + '</div>')
+				.appendTo($('.mCSB_container'))
+				.addClass('new');
+		updateScrollbar();
+	}
+				
+	function updateScrollbar() {
+		$messages.mCustomScrollbar("update").mCustomScrollbar(
+				'scrollTo', 'bottom', {
+					scrollInertia : 10,
+					timeout : 0
+		});
+	}
 
-				function setDate() {
-					d = new Date()
-					if (m != d.getMinutes()) {
-						m = d.getMinutes();
-						$('<div class="timestamp">' + d.getHours()
-										+ ':' + m + '</div>').appendTo(
-								$('.message:last'));
-						$('<div class="checkmark-sent-delivered">&check;</div>')
-								.appendTo($('.message:last'));
-						$('<div class="checkmark-read">&check;</div>')
-								.appendTo($('.message:last'));
-					}
-				}
+	function setDate() {
+		d = new Date()
+		if (m != d.getMinutes()) {
+			m = d.getMinutes();
+			$('<div class="timestamp">' + d.getHours()
+							+ ':' + m + '</div>').appendTo(
+				$('.message:last'));
+			$('<div class="checkmark-sent-delivered">&check;</div>')
+							.appendTo($('.message:last'));
+			$('<div class="checkmark-read">&check;</div>')
+							.appendTo($('.message:last'));
+		}
+	}
 
-				function insertMessage() {
-					var fromID = '<%=userid%>';
-					var toID = '<%=toID%>';
-					var chatContent = $('.message-input').val();
-					$.ajax({
-						type:"POST",
-						url:"./chatSubmitServlet",
-						data: {
-							fromID: encodeURIComponent(fromID),
-							toID: encodeURIComponent(toID),
-							chatContent: encodeURIComponent(chatContent),
-						}, 
-						success: function(result) {
-							MyMessage(chatContent);
-						}
-					});
-					$('.message-input').val("");
-
+	function insertMessage() {
+		var fromID = '<%=userid%>';
+		var toID = '<%=toID%>';
+		var chatContent = $('.message-input').val();
+		
+		$.ajax({
+			type:"POST",
+			url:"./chatSubmitServlet",
+			data: {
+					fromID: encodeURIComponent(fromID),
+					toID: encodeURIComponent(toID),
+					chatContent: encodeURIComponent(chatContent),
+			}
+		});
+		$('.message-input').val("");
 					/*setTimeout(function() {
 						receiveMessage();
 					}, 1000 + (Math.random() * 20) * 100);*/
-				}
-});
+	}
+
 	var lastID = 0;
 	function chatListFunction(type) {
 		var fromID = '<%=userid%>';
@@ -164,19 +165,25 @@ $('.button').click(function() {
 			}
 		});
 	}
+	
 	function addChat(chatName, chatContent, chatTime) {
 		var fromID = '<%=userid%>';
 		var toID = '<%=toID%>';
-		var my = MyMessageList(chatContent);
-		var other = appendMessageList(chatContent);
-		var date = $('<div class="timestamp">' + chatTime +'</div>')
-						.appendTo($('.message:last'));
 		
-		if (fromID == <%=userid%>) {
-			$('.messages-content').append(my + date);
-		} else	
-			$('.messages-content').append(other + date);
+		if(fromID = '<%=userid%>') {
+			$('<div class="message message-personal">' + chatContent + '</div>')
+					.appendTo($('.mCSB_container')).addClass('new');
+			$('<div class="timestamp">' + chatTime +'</div>')
+					.appendTo($('.message:last'));
+		}
+		updateScrollbar();
 	}
+	function getInfiniteChat() {
+		setInterval(function() {
+			chatListFunction(lastID);
+		}, 3000);
+	}
+});
 </script>
 </head>
 <body>
@@ -219,5 +226,6 @@ Inspired by https://dribbble.com/supahfunk
 			</div>
 		</div>
 	</section>
+
 </body>
 </html>

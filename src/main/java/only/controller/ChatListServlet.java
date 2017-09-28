@@ -1,6 +1,7 @@
 package only.controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -29,10 +30,10 @@ public class ChatListServlet extends HttpServlet {
 				|| listType.equals("")) {
 			response.getWriter().write("");
 		} else if (listType.equals("ten"))
-			response.getWriter().write(getTen(fromID, toID));
+			response.getWriter().write(getTen(URLDecoder.decode(fromID, "utf-8"), URLDecoder.decode(toID, "utf-8")));
 		else {
 			try {
-				response.getWriter().write(getID(fromID, toID, listType));
+				response.getWriter().write(getID(URLDecoder.decode(fromID, "utf-8"), URLDecoder.decode(toID, "utf-8"), listType));
 			} catch (Exception e) {
 				response.getWriter().write("");
 			}
@@ -48,16 +49,16 @@ public class ChatListServlet extends HttpServlet {
 			return "";
 		for (int i = 0; i < chatList.size(); i++) {
 			result.append("[{\"value\": \"" + chatList.get(i).getFromID() + "\"},");
-			result.append("[{\"value\": \"" + chatList.get(i).getToID() + "\"},");
-			result.append("[{\"value\": \"" + chatList.get(i).getChatContent() + "\"},");
-			result.append("[{\"value\": \"" + chatList.get(i).getChatTime() + "\"},");
+			result.append("{\"value\": \"" + chatList.get(i).getToID() + "\"},");
+			result.append("{\"value\": \"" + chatList.get(i).getChatContent() + "\"},");
+			result.append("{\"value\": \"" + chatList.get(i).getChatTime() + "\"}]");
 			if (i != chatList.size() - 1)
 				result.append(",");
 		}
 		result.append("], \"last\":\"" + chatList.get(chatList.size() - 1).getChatID() + "\"}");
 		return result.toString();
 	}
-	
+
 	public String getID(String fromID, String toID, String chatID) {
 		StringBuffer result = new StringBuffer("");
 		result.append("{\"result\":[");
@@ -67,9 +68,9 @@ public class ChatListServlet extends HttpServlet {
 			return "";
 		for (int i = 0; i < chatList.size(); i++) {
 			result.append("[{\"value\": \"" + chatList.get(i).getFromID() + "\"},");
-			result.append("[{\"value\": \"" + chatList.get(i).getToID() + "\"},");
-			result.append("[{\"value\": \"" + chatList.get(i).getChatContent() + "\"},");
-			result.append("[{\"value\": \"" + chatList.get(i).getChatTime() + "\"},");
+			result.append("{\"value\": \"" + chatList.get(i).getToID() + "\"},");
+			result.append("{\"value\": \"" + chatList.get(i).getChatContent() + "\"},");
+			result.append("{\"value\": \"" + chatList.get(i).getChatTime() + "\"}]");
 			if (i != chatList.size() - 1)
 				result.append(",");
 		}

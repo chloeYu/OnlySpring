@@ -41,7 +41,7 @@ public class ChatDAO {
 			while (rs.next()) {
 				Chat chat = new Chat();
 				chat.setChatID(rs.getInt("chatID"));
-				chat.setFromID(rs.getString("formID"));
+				chat.setFromID(rs.getString("fromID"));
 				chat.setToID(rs.getString("toID"));
 				chat.setChatContent(rs.getString("chatContent"));
 				int chatTime = Integer.parseInt(rs.getString("chatTime").substring(11, 13));
@@ -95,7 +95,7 @@ public class ChatDAO {
 			while (rs.next()) {
 				Chat chat = new Chat();
 				chat.setChatID(rs.getInt("chatID"));
-				chat.setFromID(rs.getString("formID"));
+				chat.setFromID(rs.getString("fromID"));
 				chat.setToID(rs.getString("toID"));
 				chat.setChatContent(rs.getString("chatContent"));
 				int chatTime = Integer.parseInt(rs.getString("chatTime").substring(11, 13));
