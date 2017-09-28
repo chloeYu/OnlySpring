@@ -55,6 +55,13 @@ $('.button').click(function() {
 	$('.menu .button').toggleClass('active');
 });
 				// 메시지를 출력하는 메소드
+				function MyMessage(msg) {
+					$('<div class="message message-personal">' + msg + '</div>')
+							.appendTo($('.mCSB_container')).addClass('new');
+					setDate();
+					updateScrollbar();
+				}
+				
 				function appendMessage(msg) { // msg를 messages-content에 추가
 			
 						$('<div class="message loading new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure><span></span></div>')
@@ -72,10 +79,18 @@ $('.button').click(function() {
 								i++;
 							}, 1000 + (Math.random() * 20) * 100);
 				}
-				function MyMessage(msg) {
+				
+				function MyMessageList(msg) {
 					$('<div class="message message-personal">' + msg + '</div>')
 							.appendTo($('.mCSB_container')).addClass('new');
-					setDate();
+					updateScrollbar();
+				}
+				
+				function appendMessageList(msg) { // msg를 messages-content에 추가
+					$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
+								+ msg + '</div>')
+							.appendTo($('.mCSB_container'))
+							.addClass('new');
 					updateScrollbar();
 				}
 				
@@ -150,11 +165,18 @@ $('.button').click(function() {
 		});
 	}
 	function addChat(chatName, chatContent, chatTime) {
-		if()
-		$('.messages-content').append();
+		var fromID = '<%=userid%>';
+		var toID = '<%=toID%>';
+		var my = MyMessageList(chatContent);
+		var other = appendMessageList(chatContent);
+		var date = $('<div class="timestamp">' + chatTime +'</div>')
+						.appendTo($('.message:last'));
+		
+		if (fromID == <%=userid%>) {
+			$('.messages-content').append(my + date);
+		} else	
+			$('.messages-content').append(other + date);
 	}
-
-	
 </script>
 </head>
 <body>
@@ -183,8 +205,7 @@ Inspired by https://dribbble.com/supahfunk
 		</div>
 		<div class="chat">
 			<div class="chat-title">
-				<h1><%=userid%></h1>
-				<h2><%=username%></h2>
+				<h1><%=toID%></h1>
 				<!--  <figure class="avatar">
       <img src="http://askavenue.com/img/17.jpg" /></figure>-->
 			</div>

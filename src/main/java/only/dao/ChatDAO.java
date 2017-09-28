@@ -50,8 +50,7 @@ public class ChatDAO {
 					timeType = "오후";
 					chatTime -= 12;
 				}
-				chat.setChatTime(rs.getString("chatTime").substring(0, 11) + " " + timeType + " " + chatTime + ":"
-						+ rs.getString("chatTime").substring(14, 16) + "");
+				chat.setChatTime(timeType + " " + chatTime + ":" + rs.getString("chatTime").substring(14, 16) + "");
 				chatList.add(chat);
 			}
 		} catch (Exception e) {
