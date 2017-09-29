@@ -38,13 +38,13 @@
 		<div class="header_wraper userApplication">
 			<div class="nav_icon">
 				<div class="friend_list">
-					<a id="friendList" href="friendList?userid=${sessionId }" data-userid="${sessionId }">
+					<div id="friendList" onclick="FriendListLoad()">
 						<div id="friend_notification">
 							<span>Friend List</span>
 						</div>
-					</a>
+					</div>
 				</div>
-						<div class="friendlistplace friendlistopened">안녕ㅎㅎggggggggggggggggggggggggggggggggggggggggggggggggggg</div>
+						<div class="friendlistplace friendlistopened"><h2>친구목록</h2>1번친구<ㅔ</div>
 			</div>
 			<div class="nav_icon">
 				<div class="alarm_list" data-click="alarm_list_icon">
@@ -78,4 +78,7 @@
 		</div>
 	</div>
 </div>
+<form id="formfriend" action="friendList">
+<input type="hidden" id="member_id" name="member_id" value="<%=userid%>">
+</form>
 <!-- 상단고정바 끝 -->
