@@ -193,7 +193,7 @@ public class FileUploadController {
 	@RequestMapping(value = "/writeComment", method = RequestMethod.POST)
 	public String writeComment(int pid, String text, HttpSession session, Model model) {
 		Comments comment = new Comments();
-		comment.setPid(pid);
+		comment.setRef_id(pid);
 		comment.setText(text);
 		comment.setUserid((String) session.getAttribute(WebConstants.USER_ID));
 		int result = cs.insert(comment);

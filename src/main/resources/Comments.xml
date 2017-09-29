@@ -14,8 +14,8 @@
 	</resultMap>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="cid">
-		insert into Comments (pid, userid, text, created, modified, del)
-  		values (#{pid}, #{userid}, #{text}, now(), now(), 'n')
+		insert into Comments (ref_id, userid, text, created, modified, del)
+  		values (#{ref_id}, #{userid}, #{text}, now(), now(), 'n')
 	</insert>
 	
 	<select id="list" parameterType="int" resultMap="commentsResult">

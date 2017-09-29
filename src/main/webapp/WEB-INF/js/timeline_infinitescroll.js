@@ -72,6 +72,7 @@ function getPostPage(page) {
 function writePost(e){
 	var pid = e.target.id.split('-')[1];
 	var text = $('#commentText-'+pid).val();
+	console.log(pid);
 	if(text==null || text==""){
 		alert("댓글을 입력하세요");
 	}

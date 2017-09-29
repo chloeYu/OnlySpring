@@ -11,10 +11,11 @@ public class Comments {
 	private Date modified; 
 	private String del;
 	
-	public int getPid() {
+
+	public int getRef_id() {
 		return ref_id;
 	}
-	public void setPid(int ref_id) {
+	public void setRef_id(int ref_id) {
 		this.ref_id = ref_id;
 	}
 	public String getUserid() {
