@@ -57,47 +57,7 @@ $(document).ready(function() {
 		$('.menu .items span').toggleClass('active');
 		$('.menu .button').toggleClass('active');
 	});
-
-				// 메시지를 출력하는 메소드
-	function MyMessage(msg) {
-		$('<div class="message message-personal">' + msg + '</div>')
-					.appendTo($('.mCSB_container')).addClass('new');
-		setDate();
-		updateScrollbar();
-	}
-				
-	function appendMessage(msg) { // msg를 messages-content에 추가
-			
-		$('<div class="message loading new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure><span></span></div>')
-				.appendTo($('.mCSB_container'));
-		updateScrollbar();
-		setTimeout(
-			function() {
-				$('.message.loading').remove();
-				$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
-							+ msg + '</div>')
-							.appendTo($('.mCSB_container'))
-							.addClass('new');
-				setDate();
-				updateScrollbar();
-				i++;
-			}, 1000 + (Math.random() * 20) * 100);
-	}
-				
-	function MyMessageList(msg) {
-		$('<div class="message message-personal">' + msg + '</div>')
-				.appendTo($('.mCSB_container')).addClass('new');
-		updateScrollbar();
-	}
-				
-	function appendMessageList(msg) { // msg를 messages-content에 추가
-		$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
-				+ msg + '</div>')
-				.appendTo($('.mCSB_container'))
-				.addClass('new');
-		updateScrollbar();
-	}
-				
+					
 	function updateScrollbar() {
 		$messages.mCustomScrollbar("update").mCustomScrollbar(
 				'scrollTo', 'bottom', {
@@ -175,13 +135,22 @@ $(document).ready(function() {
 					.appendTo($('.mCSB_container')).addClass('new');
 			$('<div class="timestamp">' + chatTime +'</div>')
 					.appendTo($('.message:last'));
+			$('<div class="checkmark-sent-delivered">&check;</div>')
+			.appendTo($('.message:last'));
+		} else {
+			$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
+					+ msg + '</div>')
+					.appendTo($('.mCSB_container'))
+					.addClass('new');
+			$('<div class="checkmark-read">&check;</div>')
+			.appendTo($('.message:last'));
 		}
 		updateScrollbar();
 	}
 	function getInfiniteChat() {
 		setInterval(function() {
 			chatListFunction(lastID);
-		}, 3000);
+		}, 1000);
 	}
 });
 </script>
