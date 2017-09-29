@@ -1,5 +1,16 @@
-// textarea focus일 때 작성폼 열기
-$(function() {var a = false;
+// 글 내용 없을 때 작성버튼 비활성화
+//$(function() {
+//	if ($('.type_choice_textarea').val() == '') {
+//		$('post_submit_btn').prop('disabled', true);
+//		$('post_submit_btn').css('opacity', 0.5);
+//	} else {
+//		$('post_submit_btn').prop('disabled', false);
+//		$('post_submit_btn').css('opacity', 1);
+//	}
+//});
+// 글 내용 없을 때 작성버튼 비활성화 끝
+$(function() {
+	var a = false;
 	$(".friend_list").on("click", function(){
 		if(a){
 			$(".friendlistplace").addClass("friendlistopened")
@@ -12,14 +23,32 @@ $(function() {var a = false;
 		}
 		return false;
 	});
+	$('.post_submit_btn').prop('disabled',true);
+	// textarea focus일 때 작성폼 열기
 	$('.type_choice_textarea').on('focus', function() {
 		$(this).css("height", "150px");
 		$('.img_hide').removeClass('img_hidden');
 	});
+	// 내용 작성시 submit 활성화
+	$('.type_choice_textarea').on('keyup',function(){
+		if ($('.type_choice_textarea').val()==''){
+			$('.post_submit_btn').prop('disabled',true);
+			$('.post_submit_btn').css('opacity',0.5);
+		} else {
+			$('.post_submit_btn').prop('disabled', false);
+			$('.post_submit_btn').css('opacity', 1);
+		}
+	})
+	// blur시 비활성화
 	$('.type_choice_textarea').on('blur', function() {
-		if ($('textarea[name="text"]').val() == '') {
+		if ($('.type_choice_textarea').val() == '') {
 			$(this).css("height", "30px");
 			$('.img_hide').addClass('img_hidden');
+			$('.post_submit_btn').prop('disabled',true);
+			$('.post_submit_btn').css('opacity',0.5);
+			$("#pac-input").hide();
+			$("#map").hide();
+			$("#google_button").hide();
 		}
 	});
 	//지도
@@ -30,7 +59,6 @@ $(function() {var a = false;
 	});
 });
 
-// textarea focus일 때 작성폼 열기 끝
 // infinite scroll 구현
 /*
  * var page = 4; $(window) .scroll( function() { if
@@ -52,17 +80,6 @@ $(function() {var a = false;
  * $(this).toggleClass('bg-position'); }); });
  */
 // Like 버튼 활성화 끝
-// 글 내용 없을 때 작성버튼 비활성화
-$(function() {
-	if ($('.type_choice_textarea').val() == '') {
-		$('post_submit_btn').prop('disabled', true);
-		$('post_submit_btn').css('opacity', 0.5);
-	} else {
-		$('post_submit_btn').prop('disabled', false);
-		$('post_submit_btn').css('opacity', 1);
-	}
-});
-// 글 내용 없을 때 작성버튼 비활성화 끝
 
 // Post Layout Build => 사용 안함
 function buildPost(postData) {
@@ -216,25 +233,30 @@ function layer_popup(el){
 
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
-function onlySetting() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+$(function() {
+	$('.profileDropdown').on('click', function() {
+		if ($('.dropdown-content').hasClass('show')) {
+			$('.dropdown-content').removeClass('show');
+		} else {
+			$('.dropdown-content').addClass('show');
+		}
+	});
+});
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
+	if (!event.target.matches('.profileDropdown')) {
 
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+				openDropdown.classList.remove('show');
+			}
+		}
+	}
 }
-
 //지도
 var google_map_place;
 
