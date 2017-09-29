@@ -8,10 +8,12 @@
 		<typeAlias  type="only.model.Member" alias="member"/>
 		<typeAlias  type="only.model.Post" alias="post"/>
 		<typeAlias  type="only.model.Post_Files" alias="postFiles"/>
+		<typeAlias  type="only.model.Comments" alias="comments"/>
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="Member.xml" />
 		<mapper resource="Post.xml" />
+		<mapper resource="Comments.xml" />
 	</mappers>
 </configuration>

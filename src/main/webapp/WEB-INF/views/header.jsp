@@ -27,14 +27,15 @@
 	<!-- 서치 끝 -->
 	<div class="header_profile">
 		<div class="header_wraper userProfile" data-click="profile_icon">
-			<a id="user_profile_url" href="blog/<%=userid%>"><span
-				style="font-weight: bold; font-size: 0.7em; padding-right: 10px"><%=member.getUsername()%></span><img
-				style="vertical-align: middle"
-				src="img_timeline/<%=member.getProfile_image()%>"> <span>${name }</span>
+			<a id="user_profile_url" href="blog/<%=userid%>">
+				<span class="userProfileName"><%=member.getUsername()%></span>
+				<span class="userProfileImg_span">
+					<img style="vertical-align: middle" src="img_timeline/<%=member.getProfile_image()%>"> 
+				</span>
 			</a>
 		</div>
 
-		<div class="header_wraper">
+		<div class="header_wraper userApplication">
 			<div class="nav_icon">
 				<div class="friend_list">
 					<a id="friendList" href="friendList.do?userid=${sessionId }" data-userid="${sessionId }">
@@ -66,8 +67,7 @@
 			</div>
 
 			<div class="dropdown">
-				<span class="dropbtn glyphicon glyphicon-triangle-bottom"
-					onClick="onlySetting()"></span>
+				<span class="profileDropdown"></span>
 				<div id="myDropdown" class="dropdown-content">
 					<a href="#createPage">Create Page</a> <a href="#createGroup">Create
 						Group</a> <a href="changeProfile">Profile Setting</a> <a

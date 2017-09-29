@@ -93,22 +93,19 @@ body {
 
 .header_profile {
 	width: 40%;
-	display: inline-block;
-	float: right;
-	left: 80px;
-	top: 10px;
+    display: inline-block;
+    position: absolute;
+    right: 250px;
+}
+
+.header_profile:after{
+	clear:both;
 }
 
 .header_profile .header_wraper {
 	display: inline-block;
 	padding: 0 50px 0 0;
 	height: 22px;
-}
-
-.post_header img {
-	height: 30px;
-	width: 30px;
-	border-radius: 50px;
 }
 
 .nav_icon {
@@ -335,10 +332,56 @@ body {
 	white-space: nowrap;
 }
 
-.header_profile a img {
-	height: 38px;
-	width: 38px;
-	border-radius: 50px;
+#user_profile_url{
+	position:absolute;
+}
+.userApplication{
+	position:absolute;
+	right:0;
+}
+.userProfile{
+	right: 300px;
+    position: absolute;
+    top: 5px;
+}
+
+.userProfileName{
+	font-weight: bold;
+    font-size: 0.9em;
+    padding-right: 10px;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+}
+
+.userProfileImg_span{
+	height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    position: absolute;
+    overflow: hidden;
+}
+.userProfileImg_span img {
+	position: relative;
+    width: auto;
+    height: 100%;
+}
+.postProfileImg_span{
+	height: 32px;
+    width: 32px;
+    border-radius: 50px;
+    position: absolute;
+    overflow: hidden;
+}
+.postProfileImg_span img{
+	position: relative;
+    width: auto;
+    height: 100%;
+}
+.postProfileName{
+	position:absolute;
+	top: 15px;
+    left: 60px;
 }
 
 span {

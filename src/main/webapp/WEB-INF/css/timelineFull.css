@@ -191,6 +191,10 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: inline-block;
 		margin: 0;
 		overflow:hidden;
+		float:left;
+	}
+	.postImg2:after{
+		clear:both;
 	}
 	.postImg2 .postInner2{
 		width:100%;
@@ -205,6 +209,10 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: inline-block;
 		margin: 0;
 		overflow:hidden;
+		float:left;
+	}
+	.postImg3:after{
+		clear:both;
 	}
 	.postImg3 .postInner3{
 		width:100%;
@@ -313,6 +321,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 	.postUid{
 		padding-top:5px;
 		padding-bottom:5px;
+		height: 30px;
 	}
 	.postUid span{
 		font-size: medium;

@@ -26,7 +26,6 @@
 		<div class="timeline_post">
 			<div class="page_margin"></div>
 			<div id="main_container">
-				<ol class="post_view_box">
 					<li class="type_choice_box" id="infinite_container">
 						<form action="postWrite" method="post"
 							enctype="multipart/form-data">
@@ -74,7 +73,6 @@
 						</form>
 					</li>
 					<!-- 타입 선택 후 끝 -->
-				</ol>
 				<div id="postList">
 					
 				</div>
