@@ -69,3 +69,15 @@ function getPostPage(page) {
 });
 
 
+function writePost(e){
+	var pid = e.target.id.split('-')[1];
+	var text = $('#commentText-'+pid).val();
+	if(text==null || text==""){
+		alert("댓글을 입력하세요");
+	}
+	$.post('writeComment', "pid="+pid+"&text="+text, function(data){
+		alert("댓글 작성 성공");
+		console.log(data);
+		$('#commentView-'+pid).append(data);
+	});
+}

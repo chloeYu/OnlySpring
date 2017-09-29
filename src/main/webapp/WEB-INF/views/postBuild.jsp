@@ -55,6 +55,19 @@
 				<div class='heart' id='heart-${post.userid }'></div>
 				<div class='share_out' onclick="openLayer('layerPop',200,18)"></div>
 			</div>
+			<div class="commentView" id="commentView-${post.pid }">
+			<c:if test="${not empty post.comments }">
+				<hr>
+				<c:forEach var="comment" items="${post.comments }">
+					<div class="commentSpace">
+						<span class="commentViewMid">${comment.userid }</span>
+						<span class="commentViewText">${comment.text }</span>
+						<br>
+						<a href="">like</a><a href="">reply</a><span class="commentViewCre">${comment.created }</span>
+					</div>
+				</c:forEach>
+			</c:if>
+			</div>
 			<form action='commentWrite'>
 				<div class='commentForm'>
 					<input type='hidden'
