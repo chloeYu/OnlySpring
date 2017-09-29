@@ -1,0 +1,21 @@
+.comment .react {
+	color: lightgrey;
+	font-size: 0.7em;
+}
+
+.commentTh {
+	width: 50px;
+	height: 40px;
+	vertical-align: top;
+}
+
+.commentReact {
+	display: inline;
+	padding-left: 1em;
+	font-size: 0.8em;
+	color: #ccc;
+}
+
+.commentReact i{
+	padding: 5px;
+}
