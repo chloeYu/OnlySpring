@@ -101,7 +101,13 @@ public class OnlyController {
 			}
 		}
 	}
-
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/joinus/signUpForm";
+	}
+	
+	
 	@RequestMapping("/search")
 	public @ResponseBody List<Member> search(String searchTerm) {
 		System.out.println("Search 실행.. " + searchTerm);

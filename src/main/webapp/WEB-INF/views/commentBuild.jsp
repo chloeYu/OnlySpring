@@ -10,9 +10,11 @@
 	<c:forEach var="comment" items="${clist }">
 	<div class="commentSpace">
 		<span class="commentViewMid">${comment.userid }</span>
-		<span class="commentViewCre">${comment.created }</span>
-		<br>
 		<span class="commentViewText">${comment.text }</span>
+		<br>
+		<a>Like</a><a>Reply</a>
+		<span class="commentViewCre">${comment.created }</span>
+		
 	</div>
 	<br>
 	</c:forEach>
