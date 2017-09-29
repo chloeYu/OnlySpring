@@ -315,7 +315,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		padding-left: 20px;
 		padding-right: 20px;
 	}
-	.commentView{
+	.commentAfter{
 		clear: both;
 	}
 	.postUid{
@@ -459,13 +459,14 @@ flat(ctrl++shift+f) 절대로 금지 */
 		cursor: pointer;
 		color: white;
 		display: block;
+	    text-align: center;
+    	padding: 7px;
 	}
 	.commentBtn:after{
 		clear:both;
 	}
 	.commentView{
 		position: relative;
-		top: 15px;
 	}
 	.commentViewMid{
 		font-weight: bold;
