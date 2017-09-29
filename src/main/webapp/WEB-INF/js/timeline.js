@@ -328,3 +328,8 @@ function initAutocomplete1() {
     	  $("#google_place_view").append(google_map_place+" 에서");
       });
  }
+function FriendListLoad(){
+	alert($("#member_id").val());
+	$("#formfriend").submit();
+	return true;
+}

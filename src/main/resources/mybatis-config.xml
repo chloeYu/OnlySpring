@@ -9,11 +9,13 @@
 		<typeAlias  type="only.model.Post" alias="post"/>
 		<typeAlias  type="only.model.Post_Files" alias="postFiles"/>
 		<typeAlias  type="only.model.Comments" alias="comments"/>
+		<typeAlias  type="only.model.Friendlist" alias="friendlist"/>
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="Member.xml" />
 		<mapper resource="Post.xml" />
 		<mapper resource="Comments.xml" />
+		<mapper resource="Friendlist.xml" />
 	</mappers>
 </configuration>
