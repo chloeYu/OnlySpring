@@ -1,13 +1,13 @@
 // 글 내용 없을 때 작성버튼 비활성화
-$(function() {
-	if ($('.type_choice_textarea').val() == '') {
-		$('post_submit_btn').prop('disabled', true);
-		$('post_submit_btn').css('opacity', 0.5);
-	} else {
-		$('post_submit_btn').prop('disabled', false);
-		$('post_submit_btn').css('opacity', 1);
-	}
-});
+//$(function() {
+//	if ($('.type_choice_textarea').val() == '') {
+//		$('post_submit_btn').prop('disabled', true);
+//		$('post_submit_btn').css('opacity', 0.5);
+//	} else {
+//		$('post_submit_btn').prop('disabled', false);
+//		$('post_submit_btn').css('opacity', 1);
+//	}
+//});
 // 글 내용 없을 때 작성버튼 비활성화 끝
 $(function() {
 	$('.post_submit_btn').prop('disabled',true);
@@ -33,6 +33,9 @@ $(function() {
 			$('.img_hide').addClass('img_hidden');
 			$('.post_submit_btn').prop('disabled',true);
 			$('.post_submit_btn').css('opacity',0.5);
+			$("#pac-input").hide();
+			$("#map").hide();
+			$("#google_button").hide();
 		}
 	});
 	//지도

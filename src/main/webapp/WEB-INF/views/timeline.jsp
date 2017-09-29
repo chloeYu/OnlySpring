@@ -58,12 +58,10 @@
 									type="file" name="videoUpload" style='display: none;'
 									accept="video/mp4"> -->
 								</a>
-								<a class="choice_type"><img alt="" src="img_timeline/picture.svg"
-									class="img_hide img_hidden type_photo" width="30px" border='0'
-									id="google">
-									<input type="button" name="google" style='display: none;' 
-									id="google" onclick="google()">
-									</a>
+								<a class="choice_type">
+									<img alt="" src="img_timeline/picture.svg" class="img_hide img_hidden type_photo" width="30px" border='0' id="google">
+									<input type="button" name="google" style='display: none;' id="google_button" onclick="google()">
+								</a>
 								<!-- <label class="img_hide img_hidden"><br>해시태그</label><input
 									class="img_hide img_hidden" type="text" name="hashtag"><br>
 								<label class="img_hide img_hidden">회원태그</label><input
