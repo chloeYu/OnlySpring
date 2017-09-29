@@ -37,12 +37,13 @@
 		<div class="header_wraper">
 			<div class="nav_icon">
 				<div class="friend_list">
-					<a id="friendList" href="friendList.do?userid=${sessionId }" data-userid="${sessionId }">
+					<a id="friendList" href="friendList?userid=${sessionId }" data-userid="${sessionId }">
 						<div id="friend_notification">
 							<span>Friend List</span>
 						</div>
 					</a>
 				</div>
+						<div class="friendlistplace friendlistopened">안녕ㅎㅎggggggggggggggggggggggggggggggggggggggggggggggggggg</div>
 			</div>
 			<div class="nav_icon">
 				<div class="alarm_list" data-click="alarm_list_icon">

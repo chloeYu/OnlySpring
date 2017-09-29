@@ -1,5 +1,17 @@
 // textarea focus일 때 작성폼 열기
-$(function() {
+$(function() {var a = false;
+	$(".friend_list").on("click", function(){
+		if(a){
+			$(".friendlistplace").addClass("friendlistopened")
+			$(".friendlistplace").removeClass("friendlistopenedshow")
+			a=!a;
+		} else{
+			$(".friendlistplace").removeClass("friendlistopened")
+			$(".friendlistplace").addClass("friendlistopenedshow")
+			a=!a;
+		}
+		return false;
+	});
 	$('.type_choice_textarea').on('focus', function() {
 		$(this).css("height", "150px");
 		$('.img_hide').removeClass('img_hidden');
