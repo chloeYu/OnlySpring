@@ -1,13 +1,38 @@
-// textarea focus일 때 작성폼 열기
+// 글 내용 없을 때 작성버튼 비활성화
 $(function() {
+	if ($('.type_choice_textarea').val() == '') {
+		$('post_submit_btn').prop('disabled', true);
+		$('post_submit_btn').css('opacity', 0.5);
+	} else {
+		$('post_submit_btn').prop('disabled', false);
+		$('post_submit_btn').css('opacity', 1);
+	}
+});
+// 글 내용 없을 때 작성버튼 비활성화 끝
+$(function() {
+	$('.post_submit_btn').prop('disabled',true);
+	// textarea focus일 때 작성폼 열기
 	$('.type_choice_textarea').on('focus', function() {
 		$(this).css("height", "150px");
 		$('.img_hide').removeClass('img_hidden');
 	});
+	// 내용 작성시 submit 활성화
+	$('.type_choice_textarea').on('keyup',function(){
+		if ($('.type_choice_textarea').val()==''){
+			$('.post_submit_btn').prop('disabled',true);
+			$('.post_submit_btn').css('opacity',0.5);
+		} else {
+			$('.post_submit_btn').prop('disabled', false);
+			$('.post_submit_btn').css('opacity', 1);
+		}
+	})
+	// blur시 비활성화
 	$('.type_choice_textarea').on('blur', function() {
-		if ($('textarea[name="text"]').val() == '') {
+		if ($('.type_choice_textarea').val() == '') {
 			$(this).css("height", "30px");
 			$('.img_hide').addClass('img_hidden');
+			$('.post_submit_btn').prop('disabled',true);
+			$('.post_submit_btn').css('opacity',0.5);
 		}
 	});
 	//지도
@@ -18,7 +43,6 @@ $(function() {
 	});
 });
 
-// textarea focus일 때 작성폼 열기 끝
 // infinite scroll 구현
 /*
  * var page = 4; $(window) .scroll( function() { if
@@ -40,17 +64,6 @@ $(function() {
  * $(this).toggleClass('bg-position'); }); });
  */
 // Like 버튼 활성화 끝
-// 글 내용 없을 때 작성버튼 비활성화
-$(function() {
-	if ($('.type_choice_textarea').val() == '') {
-		$('post_submit_btn').prop('disabled', true);
-		$('post_submit_btn').css('opacity', 0.5);
-	} else {
-		$('post_submit_btn').prop('disabled', false);
-		$('post_submit_btn').css('opacity', 1);
-	}
-});
-// 글 내용 없을 때 작성버튼 비활성화 끝
 
 // Post Layout Build => 사용 안함
 function buildPost(postData) {

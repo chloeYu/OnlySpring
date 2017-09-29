@@ -400,6 +400,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		font-weight: 700;
 		margin-bottom: 10px;
 		font-size: 1.2rem;
+		opacity: 0.5;
 	}
 	.post_submit_btn:hover {
 		background: #6c7f9b;
@@ -444,6 +445,9 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: block;
 		float: left;
 	}
+	.comment_textarea:after{
+		clear:both;
+	}
 	.commentBtn{
 		float: left;
 		width: 15%;
@@ -455,6 +459,9 @@ flat(ctrl++shift+f) 절대로 금지 */
 		cursor: pointer;
 		color: white;
 		display: block;
+	}
+	.commentBtn:after{
+		clear:both;
 	}
 	.commentView{
 		position: relative;
