@@ -79,6 +79,6 @@ function writePost(e){
 	$.post('writeComment', "pid="+pid+"&text="+text, function(data){
 		alert("댓글 작성 성공");
 		console.log(data);
-		$('#commentView-'+pid).append(data);
+		$('#commentView-'+pid).html(data);
 	});
 }

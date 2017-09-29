@@ -59,12 +59,15 @@
 			<div class="commentView" id="commentView-${post.pid }">
 			<c:if test="${not empty post.comments }">
 				<c:forEach var="comment" items="${post.comments }">
-					<div class="commentSpace">
-						<span class="commentViewMid">${comment.userid }</span>
-						<span class="commentViewText">${comment.text }</span>
-						<br>
-						<a href="">like</a><a href="">reply</a><span class="commentViewCre">${comment.created }</span>
-					</div>
+					<table class="commentSpace"">
+						<tr><td rowspan="2" style="padding-right: 0.5em;"><span class="commentViewMid">${comment.userid }</span></td>
+						<td><span class="commentViewMid">${comment.created }</span>
+						</td>
+						</tr>
+						<tr><td><div class="comment react"><span class="commentViewText">${comment.text }</span>
+							<i class="fa fa-heart"></i><i class="fa fa-mail-reply"></i>
+							</div></td></tr>						
+					</table>
 				</c:forEach>
 				<div class="commentAfter"></div>
 			</c:if>
