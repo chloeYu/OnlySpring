@@ -44,7 +44,7 @@
 						</div>
 					</div>
 				</div>
-						<div class="friendlistplace friendlistopened"><h2>친구목록</h2>1번친구<ㅔ</div>
+						<div class="friendlistplace friendlistopened"><h2>친구목록</h2><div id="friendload"></div></div>
 			</div>
 			<div class="nav_icon">
 				<div class="alarm_list" data-click="alarm_list_icon">

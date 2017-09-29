@@ -329,7 +329,8 @@ function initAutocomplete1() {
       });
  }
 function FriendListLoad(){
-	alert($("#member_id").val());
-	$("#formfriend").submit();
-	return true;
+	$.get("friendList", "member_id="+$("#member_id").val(), function(data){
+		$("#friendload").html(data);
+	});
+	return false;
 }
