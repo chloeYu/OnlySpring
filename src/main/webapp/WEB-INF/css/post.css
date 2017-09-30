@@ -9,6 +9,10 @@
 	vertical-align: top;
 }
 
+.commentTh img{
+	height: 30px;
+}
+
 .commentReact {
 	display: inline;
 	padding-left: 1em;
@@ -18,4 +22,8 @@
 
 .commentReact i{
 	padding: 5px;
+}
+
+.commentTh .userProfileImg_span{
+	
 }

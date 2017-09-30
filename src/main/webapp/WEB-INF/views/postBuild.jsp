@@ -58,10 +58,20 @@
 				<hr>
 				<c:forEach var="comment" items="${post.comments }">
 					<div class="commentSpace">
+						<table><tr>
+						<td class="commentTh">
+						<img src="img_timeline/<%=member.getProfile_image()%>">
+						</td><td>
 						<span class="commentViewMid">${comment.userid }</span>
 						<span class="commentViewCre">${comment.created }</span>
 						<br>
 						<span class="commentViewText">${comment.text }</span>
+						<div class="commentReact">
+						<i class="fa fa-mail-reply"></i>
+						<i class="fa fa-heart"></i>
+						</div>
+						</td></tr>
+						</table>
 					</div>
 				</c:forEach>
 			</c:if>
