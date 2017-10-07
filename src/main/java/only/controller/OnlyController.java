@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.context.BootstrapWith;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import only.model.Comments;
+import only.model.Likes;
 import only.model.Member;
 import only.model.Post;
 import only.service.CommentService;
+import only.service.LikesService;
 import only.service.MemberService;
 import only.service.PostService;
 import only.utils.WebConstants;
@@ -38,7 +41,9 @@ public class OnlyController {
 	private PostService ps;
 	@Autowired
 	private CommentService cs;
-	
+	@Autowired
+	private LikesService ls;
+
 	@RequestMapping("/chat")
 	public String chat(String userID, HttpSession session) {
 		Member member = ms.getMemberById(userID);
@@ -121,24 +126,40 @@ public class OnlyController {
 		return "timeline";
 	}
 
-	
-
 	@RequestMapping("/loadPost")
 	public String loadPost(String userid, String pageNum, Model model, HttpSession session) {
-		if(userid==null || userid.equals("")) {
+		if (userid == null || userid.equals("")) {
 			userid = (String) session.getAttribute(WebConstants.USER_ID);
 		}
-		System.out.println("loadPost().." + userid + "," + pageNum);
+		// System.out.println("loadPost().." + userid + "," + pageNum);
 		List<Post> plist = ps.getTimelinePost(userid, pageNum);
-		for(Post post: plist) {
-			List<Comments> clist = cs.getComments(post.getPid(), 1);
-			post.setComments(clist);
+		for (Post post : plist) {
+			post.setCommentCount(cs.getCommentCount(post.getPid(), 0));
+			post.setIsLiked(isLiked(userid, post.getPid(), WebConstants.POST));
 		}
 		model.addAttribute("plist", plist);
-		
+
 		return "postBuild";
 	}
 
+	@RequestMapping("/loadComment")
+	public String loadComment(int ref_id, int ref_type, int pageNum, Model model, HttpSession session) {
+		// System.out.println("loacomment().." + ref_id + "," + ref_type + ", " + pageNum);
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		List<Comments> clist = cs.getComments(ref_id, ref_type, pageNum);
+		for (Comments comment : clist) {
+			comment.setCommentCount(cs.getCommentCount(comment.getCid(), 1));
+			comment.setIsLiked(isLiked(userid, comment.getCid(), WebConstants.COMMENT));
+		}
+		model.addAttribute("ref_type", ref_type);
+		model.addAttribute("ref_id", ref_id);
+		model.addAttribute("ref_c_num", cs.getCommentCount(ref_id, ref_type));
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("COMMENTS_PER_PAGE", WebConstants.COMMENTS_PER_PAGE);
+		model.addAttribute("clist", clist);
+		return "commentBuild";
+	}
+	
 	@RequestMapping("/getEachPost")
 	public @ResponseBody Post getEachPost(String pid) {
 		Post post = ps.getPost(pid);
@@ -184,10 +205,47 @@ public class OnlyController {
 		}
 		return "profileDone";
 	}
-	
-	@RequestMapping(value="/blog/{owner}")
+
+	@RequestMapping(value = "/blog/{owner}")
 	public String blog(@PathVariable String owner, Model model) {
 		model.addAttribute("owner", owner);
 		return "blog/blog";
+	}
+
+	// User가 해당 포스트 좋아요를 눌렀는지 체크
+	// @RequestMapping(value = "/isLiked")
+	private boolean isLiked(String userid, int lid, int type) {
+		// type { 0: post / 1: comment}
+		Likes l = new Likes();
+		l.setUserid(userid);
+		l.setLid(lid);
+		l.setType(type); // 0: post 1: comment
+		int result = ls.isLiked(l);
+		// System.out.println(userid + ", " + lid + ", " + type + "=> "+result);
+		if(result>0)
+			return true;
+		else 
+			return false;
+	}
+
+	// 좋아요 Toggle
+	@RequestMapping(value = "/toggleLikes")
+	public @ResponseBody int toggleHeart(String userid, int lid, int type) {
+		// type { 0: post / 1: comment}
+		int count = 0;
+		// System.out.println(userid + ", " + lid + ", " + type);
+		Likes l = new Likes();
+		l.setUserid(userid);
+		l.setLid(lid);
+		l.setType(type); // 0: post 1: comment
+		ls.toggleLikes(l);
+		if(type ==0) {
+			count = ps.getLikesCount(lid);
+		}
+		else{
+			count = cs.getLikesCount(lid);
+		}
+		System.out.println("toggleLikes: " + count);
+		return count;
 	}
 }

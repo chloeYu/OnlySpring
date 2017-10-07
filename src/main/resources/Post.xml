@@ -5,12 +5,13 @@
 <mapper namespace="postns">
 	<resultMap type="post" id="postResult">
 		<id property="pid" column="pid" />
+		<result property="userid" column="userid" />
+		<result property="type" column="type" />
+		<result property="likes" column="likes" />
 		<result property="created" column="created" />
 		<result property="del" column="del" />
-		<result property="userid" column="userid" />
 		<result property="username" column="username" />
 		<result property="modified" column="modified" />
-		<result property="type" column="type" />
 		<result property="text" column="text" />
 	</resultMap>
 	
@@ -49,8 +50,12 @@
 		select IFNULL(MAX(pid), 0) + 1 from post
 	</select>
 	
+	<select id="getLikesCount" parameterType="int" resultType="int">
+		select likes from post where pid = #{lid}
+	</select>
+	
 	<insert id="insert" parameterType="post">
-		insert into POST values(#{pid},#{userid}, #{type}, now(), now(),'n')
+		insert into POST values(#{pid},#{userid}, #{type}, 0, now(), now(),'n')
 	</insert>
 	
 	<insert id="insertText" parameterType="hashMap">

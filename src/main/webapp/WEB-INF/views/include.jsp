@@ -30,6 +30,7 @@ span.err {
 <script src="${path}/js/signUp.js"></script>
 <script src="${path}/js/search.js"></script>
 <script src="${path}/js/changeProfile.js"></script>
+<script src="${path}/js/post.js"></script>
 <script type="text/javascript">
 	console.log("header included");
 </script>

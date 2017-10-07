@@ -18,4 +18,6 @@ public interface PostDao {
 	int insertText(int pid, String text);
 
 	int insertImage(int pid, Post_Files postImage);
+
+	int getLikesCount(int lid);
 }

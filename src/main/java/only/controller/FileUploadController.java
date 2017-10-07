@@ -191,15 +191,23 @@ public class FileUploadController {
 	}
 	
 	@RequestMapping(value = "/writeComment", method = RequestMethod.POST)
-	public String writeComment(int pid, String text, HttpSession session, Model model) {
+	public String writeComment(int ref_id, String text, int ref_type, HttpSession session, Model model) {
 		Comments comment = new Comments();
-		comment.setPid(pid);
+		comment.setRef_id(ref_id);
 		comment.setText(text);
 		comment.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+		if(ref_type==0) comment.setRe_level(0);
+		else comment.setRe_level(1);
+		
 		int result = cs.insert(comment);
-		List<Comments> clist = cs.getComments(pid, 1);
+		model.addAttribute("ref_id", ref_id);
+		model.addAttribute("ref_type", ref_type);
+		model.addAttribute("pageNum", 1);
+		
+		/*List<Comments> clist = cs.getComments(ref_id, ref_type, 1);
 		model.addAttribute("clist", clist);
 		System.out.println("comment Size: "+ clist.size());
-		return "commentBuild";
+		*/
+		return "redirect:/loadComment";
 	}
 }

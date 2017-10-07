@@ -3,25 +3,25 @@ package only.model;
 import java.sql.Date;
 
 public class Comments {
-	private int ref_id;
-	private String userid; 
 	private int cid; 
+	private int ref_id;
+	private int re_level;
+	private String userid;
 	private String text;
+	private int likes;
+	private boolean isLiked;
 	private Date created;
 	private Date modified; 
 	private String del;
+	private int commentCount;
 	
-	public int getPid() {
-		return ref_id;
-	}
-	public void setPid(int ref_id) {
-		this.ref_id = ref_id;
-	}
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	
+	
+	@Override
+	public String toString() {
+		return "Comments [cid=" + cid + ", ref_id=" + ref_id + ", re_level=" + re_level + ", userid=" + userid
+				+ ", text=" + text + ", likes=" + likes + ", created=" + created + ", modified=" + modified + ", del="
+				+ del + ", commentCount=" + commentCount + "]";
 	}
 	public int getCid() {
 		return cid;
@@ -29,6 +29,26 @@ public class Comments {
 	public void setCid(int cid) {
 		this.cid = cid;
 	}
+	public int getRef_id() {
+		return ref_id;
+	}
+	public void setRef_id(int ref_id) {
+		this.ref_id = ref_id;
+	}
+	
+	public int getRe_level() {
+		return re_level;
+	}
+	public void setRe_level(int re_level) {
+		this.re_level = re_level;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	
 	public String getText() {
 		return text;
 	}
@@ -53,4 +73,23 @@ public class Comments {
 	public void setDel(String del) {
 		this.del = del;
 	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+	public boolean getIsLiked() {
+		return isLiked;
+	}
+	public void setIsLiked(boolean isLiked) {
+		this.isLiked = isLiked;
+	}
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+	
 }

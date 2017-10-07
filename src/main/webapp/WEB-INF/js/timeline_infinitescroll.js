@@ -1,5 +1,46 @@
 var isLastPage = false;
 $(function() {
+	$('body').on('click', '.sendBtn', function(event){
+		var ref_type = 0; // 0 post / 1 comment
+		if(event.target.id.split('-')[1]=='comment'){
+			ref_type = 1;
+		}
+		var ref_id = event.target.id.split('-')[2];
+		console.log('#commentText-post-'+ref_id);
+		
+		console.log(ref_id + ", " + text);
+		var text = "";
+		if(ref_type == 0){
+			text = $('#commentText-post-'+ref_id).val();
+		} else{
+			text = $('#commentText-comment-'+ref_id).val();
+		}
+		if(text==null || text==""){
+			alert("댓글을 입력하세요");
+			return;
+		}
+		
+		var $this = $(this);
+		$this.removeClass('sendBtn').addClass('disableSendBtn');
+		$.post('writeComment', "ref_id="+ref_id+"&text="+text+"&ref_type="+ref_type, function(data){
+			
+			alert("댓글 작성 성공");
+			if(ref_type==0){
+				$('#commentText-post-'+ref_id).val("");
+				$('#commentView-'+ref_id).html(data);
+			}
+			else{
+				$('#commentView-comment-'+ref_id).children('div').remove();
+				$('#commentText-comment-'+ref_id).val("");
+				$('#commentView-comment-'+ref_id).append(data);
+				if($('#comment-comment-'+ref_id).css('display')!='none'){
+					$('#comment-comment-'+ref_id).hide();
+				}
+			}
+			$this.removeClass('disableSendBtn').addClass('sendBtn');
+		});
+	});
+	
 	const postList = document.getElementById('postList');
 /*	const postListPagination = document.getElementById('post-list-pagination');*/
 	let page = 0;
@@ -26,10 +67,9 @@ $(function() {
 	}
 
 function getPostPage(page) {
-	console.log("getPostPage called");
 	if(!isLastPage){
 		$.post('loadPost', "userid=" + userid +"&pageNum="+page, function(data) {
-			console.log("returned from loadPost<start>" + data.trim()+"<end>" )
+			/*console.log("returned from loadPost<start>" + data.trim()+"<end>" );*/
 			if (data.trim() == "" && page == 1) {
 				$("#postList").append("No Post");
 				isLastPage = true;
@@ -41,6 +81,17 @@ function getPostPage(page) {
 				console.log(data)
 				$("#postList").append(data);
 			}
+			var cList = $('.commentView');
+			$.each(cList, function(key, value){
+				var ref_id = cList[key].id.split('-')[1];
+				var ref_type = 0; // 0 : post
+				console.log(key+": " + ref_id);
+				$.post('loadComment', "ref_id="+ref_id+"&ref_type=0&pageNum=1", function(cdata){
+					console.log(cdata);
+					$("#"+cList[key].id).html(cdata);
+				});
+			});
+			
 			$('.infinite_scroll .postImg3:nth-child(6)').on('click',function(e){
 				console.log("popup!");
 				 var detailContainer = '<div class="det"></div>';
@@ -67,18 +118,4 @@ function getPostPage(page) {
 		getPostPage(page);
 	}
 });
-
-
-function writePost(e){
-	var pid = e.target.id.split('-')[1];
-	var text = $('#commentText-'+pid).val();
-	if(text==null || text==""){
-		alert("댓글을 입력하세요");
-	}
-	$.post('writeComment', "pid="+pid+"&text="+text, function(data){
-		alert("댓글 작성 성공");
-		console.log(data);
-		$('#commentView-'+pid).append(data);
-	});
-}
 

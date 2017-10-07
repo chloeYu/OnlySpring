@@ -43,4 +43,9 @@ public class PostServiceImpl implements PostService{
 	public int insertImage(int pid, Post_Files postImage) {
 		return pd.insertImage(pid, postImage);
 	}
+
+	@Override
+	public int getLikesCount(int lid) {
+		return pd.getLikesCount(lid);
+	}
 }

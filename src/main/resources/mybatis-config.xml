@@ -10,6 +10,7 @@
 		<typeAlias  type="only.model.Post_Files" alias="postFiles"/>
 		<typeAlias  type="only.model.Comments" alias="comments"/>
 		<typeAlias  type="only.model.Friendlist" alias="friendlist"/>
+		<typeAlias  type="only.model.Likes" alias="likes"/>
 	</typeAliases>
 
 	<mappers>
@@ -17,5 +18,6 @@
 		<mapper resource="Post.xml" />
 		<mapper resource="Comments.xml" />
 		<mapper resource="Friendlist.xml" />
+		<mapper resource="Likes.xml" />
 	</mappers>
 </configuration>

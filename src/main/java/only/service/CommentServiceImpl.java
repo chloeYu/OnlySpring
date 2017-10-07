@@ -19,7 +19,17 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<Comments> getComments(int ref_id, int pageNum) {
-		return cd.getComments(ref_id, pageNum);
+	public List<Comments> getComments(int ref_id, int ref_type, int pageNum) {
+		return cd.getComments(ref_id, ref_type, pageNum);
+	}
+
+	@Override
+	public int getLikesCount(int lid) {
+		return cd.getLikesCount(lid);
+	}
+
+	@Override
+	public int getCommentCount(int ref_id, int re_level) {
+		return cd.getCommentCount(ref_id, re_level);
 	}
 }

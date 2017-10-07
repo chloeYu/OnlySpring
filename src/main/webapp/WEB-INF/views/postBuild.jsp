@@ -11,9 +11,9 @@
 			<div class='postUid'>
 				<c:if test="${not empty post.username }">
 					<div class="post_header">
-						<a href="blog/${post.userid }"> 
-						<img style="vertical-align: middle" src="img_timeline/<%=member.getProfile_image()%>"> 
-						<span>[${post.pid }]${post.username }</span>
+						<a href="blog/${post.userid }"> <img
+							style="vertical-align: middle"
+							src="img_timeline/<%=member.getProfile_image()%>"> <span>[${post.pid }]${post.username }</span>
 						</a>
 					</div>
 				</c:if>
@@ -50,35 +50,28 @@
 				<h3>${post.text }</h3>
 			</c:if>
 			<div class='reactBtn'>
-				<div class='heart' id='heart-${post.userid }'></div>
+				<a onclick="fa_heart_click(event)">
+				<c:if test="${post.isLiked==true }">
+					<div class='heart on' id='post-${member.userid }-${post.pid }'></div>
+				</c:if>
+				<c:if test="${post.isLiked==false }">
+					<div class='heart' id='post-${member.userid }-${post.pid }'></div>
+				</c:if>
+				</a>
+				<div class='heartCount' id="heartCount-${post.pid }">
+					<div id="post-likes-${post.pid}"
+						style="display: table-cell; vertical-align: middle;">
+						<span>${post.likes }</span>
+					</div>
+				</div>
 				<div class='share_out' onclick="openLayer('layerPop',200,18)"></div>
 			</div>
-			<div class="commentView" id="commentView-${post.pid }">
-			<c:if test="${not empty post.comments }">
-				<hr>
-				<c:forEach var="comment" items="${post.comments }">
-					<div class="commentSpace">
-						<table><tr>
-						<td class="commentTh">
-						<img src="img_timeline/<%=member.getProfile_image()%>">
-						</td><td>
-						<span class="commentViewMid">${comment.userid }</span>
-						<span class="commentViewCre">${comment.created }</span>
-						<br>
-						<span class="commentViewText">${comment.text }</span>
-						<div class="commentReact">
-						<i class="fa fa-mail-reply"></i>
-						<i class="fa fa-heart"></i>
-						</div>
-						</td></tr>
-						</table>
-					</div>
-				</c:forEach>
-			</c:if>
-			</div>
+			<hr>
+			<div class="commentView" id="commentView-${post.pid }"></div>
 			<div class='commentForm'>
-				<textarea row='1' cols='1' name='commentText' placeholder='Comments' class='comment_textarea' id="commentText-${post.pid }"></textarea>
-				<a class='commentBtn btn btn-success' id="commentBtn-${post.pid }" onclick="writePost(event)">Enter</a>
+				<textarea row='1' cols='1' name='commentText' placeholder='Comments'
+					class='comment_textarea' id="commentText-post-${post.pid }"></textarea>
+				<div class='sendBtn' id="commentBtn-post-${post.pid }"></div>
 			</div>
 			<div class='postLayoutClear'></div>
 		</li>

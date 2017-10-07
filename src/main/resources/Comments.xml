@@ -5,20 +5,47 @@
 <mapper namespace="commentsns">
 	<resultMap type="comments" id="commentsResult">
 		<id property="cid" column="cid" />
+		<result property="ref_id" column="ref_id" />
+		<result property="re_level" column="re_level" />
 		<result property="userid" column="userid" />
-		<result property="pid" column="pid" />
 		<result property="text" column="text" />
 		<result property="created" column="created" />
 		<result property="modified" column="modified" />
 				<result property="del" column="del" />
 	</resultMap>
 	
-	<insert id="insert" useGeneratedKeys="true" keyProperty="cid">
-		insert into Comments (pid, userid, text, created, modified, del)
-  		values (#{pid}, #{userid}, #{text}, now(), now(), 'n')
+	<!-- <insert id="insert" useGeneratedKeys="true" keyProperty="cid">
+		insert into Comments (ref_id, re_level, userid, text, likes, created, modified, del)
+  		values (#{ref_id}, #{re_level}, #{userid}, #{text}, 0, now(), now(), 'n')
+	</insert> -->
+	
+	<insert id="insert" parameterType="comments">
+		{call insert_comment(#{ref_id},#{re_level},#{userid},#{text})}
 	</insert>
 	
-	<select id="list" parameterType="int" resultMap="commentsResult">
-		select * from comments where ref_id=#{ref_id} order by cid desc
+	
+	<select id="list" parameterType="hashMap" resultMap="commentsResult">
+		select * from comments where ref_id=#{ref_id} 
+		<if test="re_level == 0">
+		and re_level = 0 
+		</if>
+		<if test="re_level != 0">
+		and re_level != 0 
+		</if>
+		order by cid desc
+	</select>
+	
+	<select id="getLikesCount" parameterType="int" resultType="int">
+		select likes from comments where cid = #{lid}
+	</select>
+	
+	<select id="getCommentCount" parameterType="hashMap" resultType="int">
+		select count(cid) from comments where ref_id=#{ref_id}
+		<if test="re_level == 0">
+		and re_level = 0 
+		</if>
+		<if test="re_level != 0">
+		and re_level != 0 
+		</if>
 	</select>
 </mapper>

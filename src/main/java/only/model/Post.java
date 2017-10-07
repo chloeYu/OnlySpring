@@ -16,6 +16,10 @@ public class Post {
 	private String text;
 	private List<MultipartFile> files;
 	private List<Comments> comments;
+	private int commentCount;
+	private int likes;
+	private boolean isLiked;
+
 	
 	@Override
 	public String toString() {
@@ -84,5 +88,23 @@ public class Post {
 	}
 	public void setComments(List<Comments> comments) {
 		this.comments = comments;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+	public boolean getIsLiked() {
+		return isLiked;
+	}
+	public void setIsLiked(boolean isLiked) {
+		this.isLiked = isLiked;
 	}
 }

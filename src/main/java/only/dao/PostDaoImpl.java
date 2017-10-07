@@ -33,6 +33,7 @@ public class PostDaoImpl implements PostDao {
 		List<Post> plist = sst.selectList("postns.timelinelist", userid, new RowBounds(startRow, POSTPERPAGE));
 		System.out.println("Post Size: " + plist.size());
 		for(Post post : plist) {
+			System.out.println(post.getPid());
 			char[] type = post.getType().toCharArray();
 			for(int i=0; i< type.length; i++) {
 				if(type[i]=='y') {
@@ -95,5 +96,10 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public int insertImage(int pid, Post_Files postFiles) {
 		return sst.insert("postns.insertFiles", postFiles);
+	}
+
+	@Override
+	public int getLikesCount(int lid) {
+		return sst.selectOne("postns.getLikesCount", lid);
 	}
 }
