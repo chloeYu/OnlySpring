@@ -6,11 +6,11 @@ String userid = (String) session.getAttribute(WebConstants.USER_ID);
 String username = (String) session.getAttribute("username");
 Member member = (Member) session.getAttribute("member");
 if(userid==null || userid.equals("")){
-	response.sendRedirect("joinus/signUpForm");
+	response.sendRedirect("/only/joinus/signUpForm");
 	return;
 }
 if(member==null){
-	response.sendRedirect("joinus/signUpForm");
+	response.sendRedirect("/only/joinus/signUpForm");
 	return;
 }
 %>

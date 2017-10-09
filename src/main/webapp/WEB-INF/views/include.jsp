@@ -17,7 +17,7 @@
 <link href="${path}/css/searchMobile.css" rel="stylesheet">
 <link href="${path}/css/header.css" rel="stylesheet">
 <link href="${path}/css/post.css" rel="stylesheet">
-
+<link href="${path}/css/blog.css" rel="stylesheet">
 <style type="text/css">
 span.err {
 	color: red

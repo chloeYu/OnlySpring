@@ -1,0 +1,154 @@
+body.blogLayout{
+	background-color: #e9ebee;
+    background-image: none !important;
+}
+
+#globalContainer{
+	width: 981px;
+	margin: 0 auto;
+}
+#mainContainer{
+
+    position: relative;
+    zoom: 1;
+	margin-left: -1px;
+    display: block;
+    width: 100%;
+}
+
+#leftCol{
+	display: none;
+    float: left;
+    padding: 20px 0 0 2px;
+    position: relative;
+    width: 179px;
+    word-wrap: break-word;
+}
+#contentCol{
+	background: none;
+    padding-top: 0;
+}
+#rightCol{
+	margin-right: -5px;
+    width: 122px;
+}
+
+.blogTopSection{
+	border: 1px solid #d3d6db;
+    border-radius: 0 0 3px 3px;
+    margin: 0;
+    padding: 0;
+}
+
+#profileCover{
+	margin: -1px -1px 0;
+}
+
+.coverWrap{
+	display: block;
+    position: relative;
+    height: 315px;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.coverWrap .photo{
+	image-rendering: optimizeQuality;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.blogProfileName{
+	bottom: 50px;
+    left: 201px;
+    position: absolute;
+}
+
+.h1ProfileName{
+	font-family: Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 500;
+    line-height: 30px;
+    max-width: 275px;
+    position: relative;
+    font-weight: bold;
+    text-shadow: -1px 0 lightgrey, 0 1px lightgrey, 1px 0 lightgrey, 0 -1px lightgrey;
+}
+
+.profileHeadLine{
+	position: relative;
+    width: 100%;
+    z-index: 4;
+    min-height: 41px;
+    background-color: #ffffff;
+}
+
+.profileNav{
+	clear: right;
+    padding-left: 201px;
+    width: 649px;
+}
+
+.profileNav ul li{
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.profileNav ul li a {
+	border-right: 1px solid #e9eaed;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    height: 43px;
+    line-height: 3.05;
+    padding: 0 17px;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.profileThumb{
+	overflow: hidden;
+}
+
+.profilePicThumb{
+	box-shadow: none;
+    left: 15px;
+    margin-top: 0;
+    top: -14px;
+    
+    background: rgba(0, 0, 0, .3);
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .07);
+    display: block;
+    left: 23px;
+    margin-top: -121px;
+    padding: 1px;
+    position: absolute;
+}
+
+.profilePicThumb img{
+	display: block;
+	height: 160px;
+    width: 160px;
+    
+    background-color: #fff;
+    border: 4px solid #fff;
+    border-radius: 2px;
+}
+.blog_main {
+    width: 981px;
+    display: block;
+    background-color: pink;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    /* overflow: scroll; */
+}
+

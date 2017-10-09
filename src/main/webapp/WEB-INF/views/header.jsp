@@ -27,7 +27,7 @@
 	<!-- 서치 끝 -->
 	<div class="header_profile">
 		<div class="header_wraper userProfile" data-click="profile_icon">
-			<a id="user_profile_url" href="blog/<%=userid%>">
+			<a id="user_profile_url" href="${path }/blog/<%=userid%>">
 				<span class="userProfileName"><%=member.getUsername()%></span>
 				<span class="userProfileImg_span">
 					<img style="vertical-align: middle" src="img_timeline/<%=member.getProfile_image()%>"> 
