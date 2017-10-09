@@ -128,4 +128,42 @@ public class PostDaoImpl implements PostDao {
 		map.put("member", member);
 		return sst.insert("postns.insertMemberTag", map);
 	}
+
+	@Override
+	public List<Post> getBlogPost(String ownerid, String pageNum) {
+		int startRow = (Integer.parseInt(pageNum) - 1) * POSTPERPAGE; // 1페이지:1 2페이지: 11 3페이지:21 ...
+		int endRow = startRow + POSTPERPAGE ; // 1페이지: 10 2페이지: 20 3페이지: 30
+		int total = sst.selectOne("postns.getBlogTotal", ownerid);
+		System.out.println("startRow: " + startRow + ", endRow: " + endRow + ", total: " + total);
+		if (endRow > total)
+			endRow = total;
+		List<Post> plist = sst.selectList("postns.bloglist", ownerid, new RowBounds(startRow, POSTPERPAGE));
+		System.out.println("Post Size: " + plist.size());
+		for(Post post : plist) {
+			System.out.println(post.getPid());
+			char[] type = post.getType().toCharArray();
+			for(int i=0; i< type.length; i++) {
+				if(type[i]=='y') {
+					if(i==PostType.TEXT.ordinal()) post.setText((String) sst.selectOne("postns.getPostText", post.getPid()));
+					if(i==PostType.PHOTO_VIDEO.ordinal()) {
+						List<MultipartFile> files = sst.selectList("postns.getFilePath", post.getPid());
+						post.setFiles(files);
+					}
+					if(i==PostType.LOCATION.ordinal()) {
+						System.out.println("get location : " + post.getPid());
+						Post_Location location = sst.selectOne("postns.getLocation", post.getPid());
+						post.setPlace(location.getPlace());
+						post.setLat(location.getLat());
+						post.setLng(location.getLng());
+					}
+					if(i==PostType.TAG_FRIENDS.ordinal()) {
+						System.out.println("get tagged friends : + " + post.getPid());
+						List<String> taggedFriendList = sst.selectList("postns.getTaggedFriends", post.getPid());
+						post.setTaggedFriend(taggedFriendList);
+					}
+				}
+			}
+		}
+		return plist;
+	}
 }

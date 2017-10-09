@@ -32,9 +32,17 @@
  		select p.*, m.username from post p, member m where p.userid=#{userid} and p.userid = m.userid order by pid desc;
 		<!-- select * from post where userid=#{userid} -->
 	</select>
+	
+	<select id="bloglist" parameterType="String" resultMap="postResult">
+		select p.*, m.username from post p, member m where p.userid=#{ownerid} and p.userid = m.userid order by pid desc;
+	</select>
 
 	<select id="getTimelineTotal" parameterType="String" resultType="int">
 		select count(pid) from post where userid=#{userid}
+	</select>
+	
+	<select id="getBlogTotal" parameterType="String" resultType="int">
+		select count(pid) from post where userid=#{ownerid}
 	</select>
 
 	<select id="getType" parameterType="String" resultType="String">

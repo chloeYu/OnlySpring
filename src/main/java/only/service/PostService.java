@@ -26,4 +26,6 @@ public interface PostService {
 
 	int insertMemberTag(int pid, String member);
 
+	List<Post> getBlogPost(String ownerid, String pageNum);
+
 }

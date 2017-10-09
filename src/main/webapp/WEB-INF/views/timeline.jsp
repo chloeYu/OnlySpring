@@ -93,9 +93,7 @@
 					</li>
 					<!-- 타입 선택 후 끝 -->
 				</ol>
-				<div id="postList">
-					
-				</div>
+				<div id="postList"></div>
 				<!-- 포스트 뷰 끝 -->
 			</div>
 		</div>

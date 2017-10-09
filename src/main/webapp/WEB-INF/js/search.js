@@ -208,7 +208,7 @@ function sendSearch() {
 			var params = "searchTerm=" + encodeURIComponent(keyword);
 			console.log(params);
 			$.ajax({
-				url : "search",
+				url : "/only/search",
 				type : "POST",
 				data : params,
 				success : function(data) {

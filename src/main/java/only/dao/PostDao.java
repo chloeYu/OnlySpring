@@ -25,4 +25,6 @@ public interface PostDao {
 	int insertLocation(int pid, Post_Location location);
 
 	int insertMemberTag(int pid, String member);
+
+	List<Post> getBlogPost(String ownerid, String pageNum);
 }

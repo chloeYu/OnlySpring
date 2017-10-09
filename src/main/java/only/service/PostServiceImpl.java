@@ -59,4 +59,9 @@ public class PostServiceImpl implements PostService{
 	public int insertMemberTag(int pid, String member) {
 		return pd.insertMemberTag(pid, member);
 	}
+
+	@Override
+	public List<Post> getBlogPost(String ownerid, String pageNum) {
+		return pd.getBlogPost(ownerid, pageNum);
+	}
 }

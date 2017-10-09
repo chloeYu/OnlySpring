@@ -115,10 +115,11 @@ public class OnlyController {
 		return result;
 	}
 
-	@RequestMapping("/searchResult")
-	public String searchResult(String searchTerm, Model model) {
+	@RequestMapping(value= {"/searchResult", "/blog/searchResult"})
+	public String searchResult(String searchTerm, HttpServletRequest request, Model model) {
 		List<Member> result = ms.searchMember(searchTerm);
 		model.addAttribute("searchResult", result);
+		System.out.println(request.getServerName());
 		return "searchResult";
 	}
 
@@ -143,6 +144,23 @@ public class OnlyController {
 		return "postBuild";
 	}
 
+	@RequestMapping("/loadBlog")
+	public String loadBlog(String ownerid, String userid, String pageNum, Model model, HttpSession session) {
+		System.out.println("loadBlog called");
+		if (userid == null || userid.equals("")) {
+			userid = (String) session.getAttribute(WebConstants.USER_ID);
+		}
+		// System.out.println("loadPost().." + userid + "," + pageNum);
+		List<Post> plist = ps.getBlogPost(ownerid, pageNum);
+		for (Post post : plist) {
+			post.setCommentCount(cs.getCommentCount(post.getPid(), 0));
+			post.setIsLiked(isLiked(userid, post.getPid(), WebConstants.POST));
+		}
+		model.addAttribute("plist", plist);
+
+		return "postBuild";
+	}	
+	
 	@RequestMapping("/loadComment")
 	public String loadComment(int ref_id, int ref_type, int pageNum, Model model, HttpSession session) {
 		// System.out.println("loacomment().." + ref_id + "," + ref_type + ", " + pageNum);
@@ -209,7 +227,9 @@ public class OnlyController {
 
 	@RequestMapping(value = "/blog/{owner}")
 	public String blog(@PathVariable String owner, Model model) {
-		model.addAttribute("owner", owner);
+		System.out.println("owner: " + owner);
+		Member blogOwner = ms.getMemberById(owner);
+		model.addAttribute("owner", blogOwner);
 		return "blog/blog";
 	}
 
