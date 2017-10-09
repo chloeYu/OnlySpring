@@ -4,6 +4,7 @@ import java.util.List;
 
 import only.model.Post;
 import only.model.Post_Files;
+import only.model.Post_Location;
 
 public interface PostService {
 
@@ -20,5 +21,9 @@ public interface PostService {
 	int insertImage(int pid, Post_Files postImage);
 
 	int getLikesCount(int lid);
+
+	int insertLocation(int pid, Post_Location location);
+
+	int insertMemberTag(int pid, String member);
 
 }

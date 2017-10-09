@@ -13,13 +13,23 @@ public class Post {
 	private String username;
 	private Date modified; 
 	private String type;
+	// Text
 	private String text;
+	// Audio & Video
 	private List<MultipartFile> files;
+	// Comments
 	private List<Comments> comments;
 	private int commentCount;
+	// Like
 	private int likes;
 	private boolean isLiked;
-
+	// Map Location
+	private String place;
+	private float lat;
+	private float lng;
+	// Tagged Friends
+	private List<String> taggedFriend;
+	
 	
 	@Override
 	public String toString() {
@@ -107,4 +117,28 @@ public class Post {
 	public void setIsLiked(boolean isLiked) {
 		this.isLiked = isLiked;
 	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
+	}
+	public float getLat() {
+		return lat;
+	}
+	public void setLat(float lat) {
+		this.lat = lat;
+	}
+	public float getLng() {
+		return lng;
+	}
+	public void setLng(float lng) {
+		this.lng = lng;
+	}
+	public List<String> getTaggedFriend() {
+		return taggedFriend;
+	}
+	public void setTaggedFriend(List<String> taggedFriend) {
+		this.taggedFriend = taggedFriend;
+	}	
 }

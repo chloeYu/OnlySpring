@@ -1,4 +1,4 @@
-.commentViewText{
+.commentViewText {
 	float: left;
 }
 
@@ -33,7 +33,7 @@
 	height: 20px;
 	float: right;
 	display: inline-block;
-    float: left;
+	float: left;
 }
 
 .heartCount {
@@ -49,7 +49,7 @@
 	color: #ccc;
 }
 
-.heartCount.comment{
+.heartCount.comment {
 	position: relative;
 	height: 20px;
 	width: 20px;
@@ -61,6 +61,7 @@
 	float: left;
 	color: #ccc;
 }
+
 .reply {
 	position: relative;
 	cursor: pointer;
@@ -70,54 +71,155 @@
 	background-repeat: no-repeat;
 	background-size: 40%;
 	display: inline-block;
-    height: 20px;
-    width: 40px;
-    float: left;
+	height: 20px;
+	width: 40px;
+	float: left;
 }
 
-.commentForm{
+.commentForm {
 	margin-top: 20px;
 }
-.comment_text{
+
+.comment_text {
 	align-items: center;
-    background-color: #fff;
-    /* border: 1px solid #dddfe2; */
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    float: left;
-    width:100%;
+	background-color: #fff;
+	/* border: 1px solid #dddfe2; */
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+	float: left;
+	width: 100%;
 }
 
-.comment_text input{
+.comment_text input {
 	width: 90%;
 	border-radius: 10px;
 }
 
-.comment_text .sendBtn{
-	width: 20px;
-	height: 20px;
+.tagInput table {
+	width: 100%;
+	height: 1.5em;
+	border-color: #adbed8;
+	border-bottom-width: thin;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.withWho {
+	background: #e2e8f6;
+	border-right: 1px dotted #dddfe2;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+	margin-right: 6px;
+	min-width: 29px;
+	padding: 8px 6px 6px 8px;
+	position: relative;
+	text-align: center;
+	white-space: nowrap;
+	z-index: 1;
+	vertical-align: middle;
+}
+
+.tagInput input {
+	height: 100%;
+	border-color: transparent;
+	border-bottom-width: thin;
+	font-size: 1em;
+	padding-left: 10px;
+}
+
+.friendTagListSpan {
+	border-width: 0;
+	box-sizing: border-box;
+	width: 100%;
+	padding-top: 9px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 4px;
+	position: relative;
+}
+
+.friendTagSpan {
+	background: #e9ebee;
+	border: 1px solid #9cb4d8;
+	border-radius: 2px;
+	color: #162643;
+	cursor: default;
+	float: left;
+	height: 1.3em;
+	margin: 0 2px 2px 0;
+	padding: 0 18px 0 3px;
+	position: relative;
+	white-space: nowrap;
+}
+
+#friendTagList {
 	
 }
 
+.bloc {
+  display:inline-block; overflow:hidden; 
+  /* border:solid black 1px; */
+}
+
+.bloc > select {
+  padding:10px; 
+  margin:-5px -20px -5px -5px;
+  
+}
+
+.bloc > select > option:hover {
+  box-shadow: 0 0 10px 100px #4A8CF7 inset; color: white;
+}
+
+.comment_text .sendBtn {
+	width: 20px;
+	height: 20px;
+}
+
 .sendBtn {
-    background-image: url(https://cdn2.iconfinder.com/data/icons/dark-action-bar-2/96/send-128.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 30px;
-    width: 30px;
-    display: inline-block;
+	background-image:
+		url(https://cdn2.iconfinder.com/data/icons/dark-action-bar-2/96/send-128.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+}
+
+.removeMapBtn {
+	background-image:
+		url(http://icons.iconarchive.com/icons/iconsmind/outline/512/Remove-icon.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 12px;
+	width: 12px;
+	display: inline-block;
+	margin-left: 5px;
+}
+
+.removeTagBtn {
+	background-image:
+		url(http://icons.iconarchive.com/icons/iconsmind/outline/512/Remove-icon.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 12px;
+	width: 12px;
+	display: inline-block;
+	margin-left: 5px;
 }
 
 .disableSendBtn {
-    background-image: url(https://cdn2.iconfinder.com/data/icons/flat-icons-web/40/More-128.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 30px;
-    width: 30px;
-    display: inline-block;
+	background-image:
+		url(https://cdn2.iconfinder.com/data/icons/flat-icons-web/40/More-128.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 30px;
+	width: 30px;
+	display: inline-block;
 }
 
-.replyForm{
+.replyForm {
 	width: 100%;
 }

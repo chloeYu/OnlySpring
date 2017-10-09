@@ -9,6 +9,9 @@
 //	}
 //});
 // 글 내용 없을 때 작성버튼 비활성화 끝
+var latitude  = 36.322473;
+var longitude = 127.412501;
+
 $(function() {
 	var a = false;
 	$(".friend_list").on("click", function(){
@@ -56,6 +59,15 @@ $(function() {
 		$("#pac-input").show();
 		$("#map").show();
 		$("#google_button").show();
+		getLocation();
+		setTimeout(initAutocomplete1, 500);
+	});
+	
+	$('body').on('click', '.removeMapBtn', function(){
+		$('#google_place_view').html('');
+		$('#lat').val(0.0);
+		$('#lng').val(0.0);
+		$('#place').val('');
 	});
 });
 
@@ -262,8 +274,8 @@ var google_map_place;
 
 function initAutocomplete1() {
     var map = new google.maps.Map(document.getElementById('map'), {
-    	center: {lat: 36.322473, lng: 127.412501},
-      zoom: 18,
+    	center: {lat: latitude, lng: longitude},
+      zoom: 16,
       mapTypeId: 'roadmap'
     });
 
@@ -311,8 +323,8 @@ function initAutocomplete1() {
           position: place.geometry.location
         }));
         
-        google_map_place = place.name;
-
+        /*google_map_place = place.name;*/
+        google_map_place = place;
         if (place.geometry.viewport) {
           bounds.union(place.geometry.viewport);
         } else {
@@ -322,12 +334,35 @@ function initAutocomplete1() {
       map.fitBounds(bounds);
     });
     google.maps.event.addDomListener(google_button, 'click', function(){
-    		$("#pac-input").hide();
-    		$("#map").hide();
-    		$("#google_button").hide();
-    	  $("#google_place_view").append(google_map_place+" 에서");
-      });
+    	$("#pac-input").hide();
+    	$("#map").hide();
+    	$("#google_button").hide();
+    	$("#google_place_view").html(google_map_place.name+" 에서");
+    	$("#google_place_view").append("<div class='removeMapBtn'></div>");
+    	$("#place").val(google_map_place.name);
+    	$("#lat").val(google_map_place.geometry.location.lat());
+    	$("#lng").val(google_map_place.geometry.location.lng());
+//+google_map_place.geometry.location + ", " + google_map_place.geometry.location.lat()
+    });
  }
+
+function getLocation(){
+    {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else{x.innerHTML="Geolocation is not supported by this browser.";}
+    }
+
+}
+
+function showPosition(position) {
+    latitude  = position.coords.latitude;
+    longitude = position.coords.longitude;
+/*    alert('latitude:' + latitude + 'longitude:' + longitude );*/
+}
+
 function FriendListLoad(){
 	$.get("friendList", "member_id="+$("#member_id").val(), function(data){
 		$("#friendload").html(data);

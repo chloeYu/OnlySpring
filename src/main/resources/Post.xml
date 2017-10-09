@@ -21,6 +21,13 @@
 		<result property="seq" column="seq" />
 	</resultMap>
 	
+	<resultMap type="location" id="locationResult">
+		<id property="pid" column="pid" />
+		<result property="place" column="place" />
+		<result property="lat" column="lat" />
+		<result property="lng" column="lng" />
+	</resultMap>
+	
 	<select id="timelinelist" parameterType="String" resultMap="postResult">
  		select p.*, m.username from post p, member m where p.userid=#{userid} and p.userid = m.userid order by pid desc;
 		<!-- select * from post where userid=#{userid} -->
@@ -65,5 +72,21 @@
 	<insert id="insertFiles" parameterType="postFiles">
 		insert into POST_FILES values (#{pid}, #{url}, #{seq})
 	</insert>
+	
+	<insert id="insertLocation" parameterType="location">
+		insert into POST_LOCATION values(#{pid}, #{place}, #{lat}, #{lng})
+	</insert>
+	
+	<insert id="insertMemberTag" parameterType="hashMap">
+		insert into POST_MEMBERTAG values(#{pid}, #{member})
+	</insert>
+	
+	<select id="getLocation" parameterType="int" resultType="location">
+		select * from POST_LOCATION where pid = #{pid}
+	</select>
+	
+	<select id="getTaggedFriends" parameterType="int" resultType="string">
+		select userid from POST_MEMBERTAG where pid=#{pid}
+	</select>
 </mapper>
 

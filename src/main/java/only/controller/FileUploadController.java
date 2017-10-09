@@ -23,8 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 import only.model.Comments;
 import only.model.Post;
 import only.model.Post_Files;
+import only.model.Post_Location;
 import only.service.CommentService;
 import only.service.PostService;
+import only.utils.PostType;
 import only.utils.WebConstants;
 
 @Controller
@@ -48,13 +50,13 @@ public class FileUploadController {
 		char[] type = { 'n', 'n', 'n', 'n', 'n', 'n', 'n' };
 		String text = post.getText();
 		if (text != null && !text.equals("")) {
-			type[0] = 'y';
+			type[PostType.TEXT.ordinal()] = 'y';
 		}
 		List<MultipartFile> files = post.getFiles();
 		if (files.size() > 0) { // upload된 image파일이 있을 경우
 			for (MultipartFile file : files) {
 				if(file.getOriginalFilename().equals("")) continue;
-				else type[1] = 'y';
+				else type[PostType.PHOTO_VIDEO.ordinal()] = 'y';
 				try {
 					byte[] bytes = file.getBytes();
 					// Creating the directory to store file
@@ -75,8 +77,14 @@ public class FileUploadController {
 				}
 			}
 		}
-
-		// Add Post
+		if(post.getPlace() != null && !post.getPlace().equals("")) {
+			type[PostType.LOCATION.ordinal()] = 'y';
+		}
+		System.out.println(post.getTaggedFriend().size()+"명의 친구 Tagged");
+		if(post.getTaggedFriend() != null && post.getTaggedFriend().size()>0) {
+			type[PostType.TAG_FRIENDS.ordinal()]='y';
+		}
+		
 		System.out.println(String.copyValueOf(type) + String.copyValueOf(type).length());
 		post.setType(String.copyValueOf(type));
 		int pid = ps.nextPid();
@@ -90,14 +98,14 @@ public class FileUploadController {
 		}
 		for (int i = 0; i < type.length; i++) {
 			if (type[i] == 'y') {
-				if (i == 0) { // Add text
+				if (i == PostType.TEXT.ordinal()) { // Add text
 					if (ps.insertText(pid, text) > 0) {
 						System.out.println("Text 입력성공");
 					} else {
 						System.out.println("Text 입력실패");
 					}
 				}
-				if (i == 1) { // Add Image/Video
+				if (i == PostType.PHOTO_VIDEO.ordinal()) { // Add Image/Video
 					for (int j = 0; j < files.size(); j++) {
 						System.out.println(files.get(j).getOriginalFilename());
 						Post_Files postImage = new Post_Files();
@@ -109,6 +117,25 @@ public class FileUploadController {
 						} else {
 							System.out.println("Image 입력실패");
 						}
+					}
+				}
+				if (i == PostType.LOCATION.ordinal()) { // Add location
+					Post_Location location = new Post_Location();
+					location.setPid(pid);
+					location.setPlace(post.getPlace());
+					location.setLat(post.getLat());
+					location.setLng(post.getLng());
+						
+					System.out.println(location.getPlace() + location.getLat());
+					if (ps.insertLocation(pid, location) > 0) {
+						System.out.println("location 입력성공");
+					} else {
+						System.out.println("location 입력실패");
+					}
+				}
+				if(i == PostType.TAG_FRIENDS.ordinal()) {
+					for(String member : post.getTaggedFriend()) {
+						int r = ps.insertMemberTag(pid, member);
 					}
 				}
 			}

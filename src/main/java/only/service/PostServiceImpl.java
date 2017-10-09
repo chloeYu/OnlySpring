@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import only.dao.PostDao;
 import only.model.Post;
 import only.model.Post_Files;
+import only.model.Post_Location;
 
 @Service
 public class PostServiceImpl implements PostService{
@@ -47,5 +48,15 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public int getLikesCount(int lid) {
 		return pd.getLikesCount(lid);
+	}
+
+	@Override
+	public int insertLocation(int pid, Post_Location location) {
+		return pd.insertLocation(pid, location);
+	}
+
+	@Override
+	public int insertMemberTag(int pid, String member) {
+		return pd.insertMemberTag(pid, member);
 	}
 }

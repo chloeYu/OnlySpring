@@ -111,6 +111,7 @@ public class OnlyController {
 	public @ResponseBody List<Member> search(String searchTerm) {
 		System.out.println("Search 실행.. " + searchTerm);
 		List<Member> result = ms.searchMember(searchTerm);
+		System.out.println(result.size() + " returned");
 		return result;
 	}
 

@@ -9,11 +9,23 @@
 	<c:forEach var="post" items="${plist }">
 		<li class='infinite_scroll'>
 			<div class='postUid'>
-				<c:if test="${not empty post.username }">
+				<c:if test="${not empty post.username }">	
 					<div class="post_header">
 						<a href="blog/${post.userid }"> <img
 							style="vertical-align: middle"
 							src="img_timeline/<%=member.getProfile_image()%>"> <span>[${post.pid }]${post.username }</span>
+							<c:if test="${not empty post.taggedFriend or not empty post.place }"> is 
+							</c:if>
+							<c:if test="${not empty post.taggedFriend }">
+								<c:forEach var="friend" items="${post.taggedFriend }" varStatus="status">
+									<c:if test="${status.first == true }"> with </c:if>
+									<c:if test="${status.first == false }"> & </c:if>
+									<a href="blog/${friend }">${friend}</a>
+								</c:forEach>
+							</c:if>
+							<c:if test="${not empty post.place }">
+							@ <a class="searchByLocation" id="${post.lat }-${post.lng}"style="color:#0000FF;text-align:left">${post.place}</a></div>
+							</c:if>
 						</a>
 					</div>
 				</c:if>
@@ -46,7 +58,14 @@
 						</div>
 					</c:if>
 				</c:forEach>
-			</c:if> <c:if test="${not empty post.text }">
+			</c:if> 
+			<c:if test="${not empty post.place }">
+				<c:if test="${empty post.files }">
+					<iframe width="100%" height="200px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=${post.lat},${post.lng }&hl=es;z=14&amp;output=embed"></iframe><br />
+				</c:if>
+				
+			</c:if> 
+			<c:if test="${not empty post.text }">
 				<h3>${post.text }</h3>
 			</c:if>
 			<div class='reactBtn'>

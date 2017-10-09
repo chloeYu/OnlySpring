@@ -7,6 +7,56 @@ function searchChk() {
 	}
 }
 
+$(function(){
+	/*$("#friendTagInput").on('input', function () {
+		var val = this.value;
+	    if($('#friendTagList').find('option').filter(function(){
+	        return this.value.toUpperCase() === val.toUpperCase();        
+	    }).length) {
+	    	var id = $("#friendTagList").children(":selected").attr("id");
+	    	console.log(id);
+	    	addedFriends.push(this.value);
+	    	console.log(addedFriends);
+	        //send ajax request
+	    	console.log(this.id);
+	    	console.log(this);
+	        alert(this.id);
+	        $("#selectedfriends > span:last-child").before("<span class='friendTagSpan'>"+this.value+"<a><div class='removeTagBtn'></div></a></span>");
+	        $("#friendTagInput").val('');
+	    	$("#friendTagList").html('');
+
+	    }
+	});*/
+	
+	$("#friendTagList").change(function() {
+		  var id = $(this).children(":selected").attr("data");
+		  var text = $(this).children(":selected").text();
+		  console.log(id);
+		  console.log(text);
+		  
+		  $("#selectedfriends > span:last-child").before("<span data-userid='"+id+"' class='friendTagSpan'>"+this.value+"<a><div class='removeTagBtn'></div></a></span>");
+	      $("#friendTag").append("<input type='hidden' name='taggedFriend' id='taggedFriend-"+id+"' value='"+id+"'>");
+		  $("#friendTagInput").val('');
+	      $("#friendTagList").html('');
+	      $(".bloc").hide();
+	      addedFriends.push(id);
+	      console.log(addedFriends);
+	      lastKeyword[1] = '';
+	});
+	
+	$('body').on('click', '.removeTagBtn', function(event){
+		console.log($(event.target).parents('span'));
+		console.log($(event.target).parents('span').text());
+		var id = $(event.target).parents('span').attr('data-userid');
+		$(event.target).parents('span').remove();
+		console.log(id);
+		addedFriends = jQuery.grep(addedFriends, function(value) {
+			  return value != id
+			});
+		$('#taggedFriend-'+id).remove();
+	});
+	
+});
 $(document).ready(
 		function() {
 			/* 검색결과 오른쪽 마우스 이벤트 등록 */
@@ -81,7 +131,7 @@ $(document).ready(
 
 // this is from another SO post...
 $(document).bind("click", function(event) {
-	/* document.getElementById("rmenu").className = "hide"; */
+	/* document.getElementById("rmenu").classNrunSame = "hide"; */
 	var rmenu = document.getElementsByName("rmenu");
 	var i;
 	for (i = 0; i < rmenu.length; i++) {
@@ -115,46 +165,86 @@ function mouseY(evt) {
 }
 
 // 검색 자동완성
-var check = false;
-var lastKeyword = '';
-var loopSearchKeyword = false;
-function runSearch() {
-	if (check == false) {
-		setTimeout("sendSearch();", 200);
-		loopSearchKeyword = true;
+// var check = false;
+var lastKeyword = ["", ""];
+// var loopSearchKeyword = false;
+var searchType = 0; // 0: 검색창 1: FriendTag
+var addedFriends = [];
+
+function runSearch(event) {
+	if(event.target.id=='friendTagInput'){
+		searchType = 1;
+	} else{
+		searchType = 0;
 	}
-	check = true;
+	//if (check == false) {
+	sendSearch();
+	//	setTimeout("sendSearch();", 200);
+	//	loopSearchKeyword = true;
+	//}
+	//check = true;
 }
 function sendSearch() {
-	if (loopSearchKeyword == false) {
-		return;
+	var keyword = '';
+	//if (loopSearchKeyword == false) {
+	//	return;
+	//}
+	if(searchType == 0){
+		console.log("searchtype: " + searchType);
+		keyword = $('.searchTerm').val();
+	} else if (searchType == 1){
+		keyword = $('#friendTagInput').val();
 	}
-	var keyword = $('.searchTerm').val();
+	console.log("keyword:" + keyword);
 	if (keyword == '') {
-		lastKeyword = '';
-	} else if (keyword != lastKeyword) {
-		lastKeyword = keyword;
+		lastKeyword[searchType] = '';
+		if(searchType==1){
+			$("#friendTagList").html('');
+		    $(".bloc").hide();
+		}
+	} else if (keyword != lastKeyword[searchType]) {
+		lastKeyword[searchType] = keyword;
 		if (keyword != '') {
 			var params = "searchTerm=" + encodeURIComponent(keyword);
 			console.log(params);
-
 			$.ajax({
 				url : "search",
 				type : "POST",
 				data : params,
 				success : function(data) {
 					var results = [];
+					var size = 0;
 			        for (var i = 0; i < data.length; i++) {
 			            var u = {
 			                userid: data[i].userid + "",
 			                username: data[i].username,
 			                email: data[i].email
 			            };
-			            results[i] = "<option value='"+data[i].userid+"'><br>";
+			            if (addedFriends.indexOf(data[i].userid) < 0){
+			            	size++;
+			            	results[i] = "<option data='"+data[i].userid+"'>"+data[i].username+"</option><br>";
+			            }
 			        }
 					console.log(results);
-					$("#searchResult").html(results);
-
+					if(searchType == 0){
+						$("#searchResult").html(results);						
+					} else if(searchType ==1){
+						if(size > 10) size = 10;
+						if(size == 1) size = 2;
+						var p = $("#friendTagInput");
+						var offset = p.offset();
+						console.log(offset.left + ", " + offset.bottom);
+						$("#friendTagList").attr('size', size+1);
+						$(".bloc").show();
+		            	//$("#friendTagList").offset({ top: offset.bottom, left: offset.left});
+		            	$(".bloc").offset({ top: offset.bottom, left: offset.left});
+		            	$("#friendTagList").html(results);
+//		            	$("#friendTagList").prop("selectedIndex", -1);
+		            	$("#friendTagList").attr('size', size);
+		            	if(data == null || data == ''){
+		            		$(".bloc").hide();
+		            	}
+					}
 				},
 				error : function() {
 					console.log("자동완성기능 에러");
@@ -163,7 +253,7 @@ function sendSearch() {
 		} else {
 		}
 	}
-	setTimeout("sendSearch();", 200);
+	//setTimeout("sendSearch();", 200);
 }
 
 

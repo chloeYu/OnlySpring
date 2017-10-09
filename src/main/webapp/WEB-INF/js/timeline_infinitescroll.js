@@ -41,6 +41,15 @@ $(function() {
 		});
 	});
 	
+	$('body').on('click', '#friendTagBtn', function(){
+		console.log("friendTagBtn clicked");
+		if($('#addFriend').css('display')=='none'){
+			$('#addFriend').show();	
+		}else{
+			$('#addFriend').hide();
+		}
+	})
+	
 	const postList = document.getElementById('postList');
 /*	const postListPagination = document.getElementById('post-list-pagination');*/
 	let page = 0;

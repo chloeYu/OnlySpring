@@ -21,7 +21,7 @@
 	</select>
 
 	<select id="search" parameterType="String" resultMap="memberResult">
-		select * from member where userid like '%'|| #{searchTerm} || '%'
+		select * from member where username LIKE CONCAT('%',#{searchTerm},'%')
 	</select>
 	
 	<insert id="insert" parameterType="member">

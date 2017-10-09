@@ -11,6 +11,7 @@
 		<typeAlias  type="only.model.Comments" alias="comments"/>
 		<typeAlias  type="only.model.Friendlist" alias="friendlist"/>
 		<typeAlias  type="only.model.Likes" alias="likes"/>
+		<typeAlias  type="only.model.Post_Location" alias="location"/>
 	</typeAliases>
 
 	<mappers>

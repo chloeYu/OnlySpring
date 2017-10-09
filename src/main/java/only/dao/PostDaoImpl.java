@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import only.model.Post;
 import only.model.Post_Files;
+import only.model.Post_Location;
 import only.utils.PostType;
 
 @Repository
@@ -37,10 +38,22 @@ public class PostDaoImpl implements PostDao {
 			char[] type = post.getType().toCharArray();
 			for(int i=0; i< type.length; i++) {
 				if(type[i]=='y') {
-					if(i==0) post.setText((String) sst.selectOne("postns.getPostText", post.getPid()));
-					if(i==1) {
+					if(i==PostType.TEXT.ordinal()) post.setText((String) sst.selectOne("postns.getPostText", post.getPid()));
+					if(i==PostType.PHOTO_VIDEO.ordinal()) {
 						List<MultipartFile> files = sst.selectList("postns.getFilePath", post.getPid());
 						post.setFiles(files);
+					}
+					if(i==PostType.LOCATION.ordinal()) {
+						System.out.println("get location : " + post.getPid());
+						Post_Location location = sst.selectOne("postns.getLocation", post.getPid());
+						post.setPlace(location.getPlace());
+						post.setLat(location.getLat());
+						post.setLng(location.getLng());
+					}
+					if(i==PostType.TAG_FRIENDS.ordinal()) {
+						System.out.println("get tagged friends : + " + post.getPid());
+						List<String> taggedFriendList = sst.selectList("postns.getTaggedFriends", post.getPid());
+						post.setTaggedFriend(taggedFriendList);
 					}
 				}
 			}
@@ -101,5 +114,18 @@ public class PostDaoImpl implements PostDao {
 	@Override
 	public int getLikesCount(int lid) {
 		return sst.selectOne("postns.getLikesCount", lid);
+	}
+
+	@Override
+	public int insertLocation(int pid, Post_Location location) {
+		return sst.insert("postns.insertLocation", location);
+	}
+
+	@Override
+	public int insertMemberTag(int pid, String member) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("pid", Integer.toString(pid));
+		map.put("member", member);
+		return sst.insert("postns.insertMemberTag", map);
 	}
 }

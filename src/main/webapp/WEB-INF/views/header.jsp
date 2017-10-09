@@ -17,7 +17,7 @@
 		<form class="form-wrapper cf" name="frm" action="searchResult"
 			method="post" onsubmit="return searchChk()">
 			<input list="searchResult" class="searchTerm" name="searchTerm"
-				placeholder="Search" onkeyup="runSearch()" autocomplete="off">
+				placeholder="Search" onkeyup="runSearch(event)" autocomplete="off">
 			<datalist id="searchResult">
 			</datalist>
 			<button type="submit">Search</button>
