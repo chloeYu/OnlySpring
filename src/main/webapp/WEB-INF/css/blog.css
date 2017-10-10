@@ -312,23 +312,24 @@ body.blogLayout {
 	line-height: 18px;
 }
 
-.updateMain{
+.updateMain {
 	background-color: #fff;
-    word-wrap: break-word;
-    height: 100%;
+	word-wrap: break-word;
+	height: 100%;
 }
 
-.updateMainBox{
+.updateMainBox {
 	align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    height: 74px;
-    justify-content: center;
-    min-width: 84px;
-    padding: 16px;
-    position: relative;
-    text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	height: 200px;
+	justify-content: center;
+	min-width: 84px;
+	padding: 16px;
+	position: relative;
+	text-align: center;
 }
+
 .updateMainBox div span {
 	display: inline-block;
 	margin-left: 6px;
@@ -336,15 +337,33 @@ body.blogLayout {
 	font-weight: bold;
 }
 
-#thumbProfileImg{
+#thumbProfileImg {
 	bottom: 0;
-    cursor: inherit;
-    font-size: 1000px !important;
-    height: 100px;
-    margin: 0;
-    opacity: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    outline: none;
+	cursor: inherit;
+	font-size: 1000px !important;
+	width: 50%;
+	left: 0;
+	margin: 0;
+	opacity: 0;
+	padding: 0;
+	position: absolute;
+	outline: none;
+}
+
+.imageUpdateLabel {
+	position: absolute;
+	bottom: 40%;
+	width: 100%;
+	vertical-align: middle;
+	font-weight: bold;
+	font-size: 1.3em;
+	color: #fff;
+	cursor: pointer;
+	text-shadow: 0px 0 lightgrey, 0 2px lightgrey, 2px 0 lightgrey, 0 -2px
+		lightgrey;
+	position: absolute;
+	bottom: 40%;
+	left: 0;
+	background: transparent;
+    border: none;
 }

@@ -116,7 +116,7 @@ public class OnlyController {
 		return result;
 	}
 
-	@RequestMapping(value= {"/searchResult", "/blog/searchResult"})
+	@RequestMapping(value = { "/searchResult", "/blog/searchResult" })
 	public String searchResult(String searchTerm, HttpServletRequest request, Model model) {
 		List<Member> result = ms.searchMember(searchTerm);
 		model.addAttribute("searchResult", result);
@@ -160,11 +160,12 @@ public class OnlyController {
 		model.addAttribute("plist", plist);
 
 		return "postBuild";
-	}	
-	
+	}
+
 	@RequestMapping("/loadComment")
 	public String loadComment(int ref_id, int ref_type, int pageNum, Model model, HttpSession session) {
-		// System.out.println("loacomment().." + ref_id + "," + ref_type + ", " + pageNum);
+		// System.out.println("loacomment().." + ref_id + "," + ref_type + ", " +
+		// pageNum);
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
 		List<Comments> clist = cs.getComments(ref_id, ref_type, pageNum);
 		for (Comments comment : clist) {
@@ -179,7 +180,7 @@ public class OnlyController {
 		model.addAttribute("clist", clist);
 		return "commentBuild";
 	}
-	
+
 	@RequestMapping("/getEachPost")
 	public @ResponseBody Post getEachPost(String pid) {
 		Post post = ps.getPost(pid);
@@ -244,9 +245,9 @@ public class OnlyController {
 		l.setType(type); // 0: post 1: comment
 		int result = ls.isLiked(l);
 		// System.out.println(userid + ", " + lid + ", " + type + "=> "+result);
-		if(result>0)
+		if (result > 0)
 			return true;
-		else 
+		else
 			return false;
 	}
 
@@ -261,37 +262,59 @@ public class OnlyController {
 		l.setLid(lid);
 		l.setType(type); // 0: post 1: comment
 		ls.toggleLikes(l);
-		if(type ==0) {
+		if (type == 0) {
 			count = ps.getLikesCount(lid);
-		}
-		else{
+		} else {
 			count = cs.getLikesCount(lid);
 		}
 		System.out.println("toggleLikes: " + count);
 		return count;
 	}
-	
+
 	// 이미지 파일 불러오기
-	@RequestMapping(value="/getImages")
-	public @ResponseBody List<String> getImages(String userid, int pageNum){
+	@RequestMapping(value = "/getImages")
+	public @ResponseBody List<String> getImages(String userid, int pageNum) {
 		List<String> imageFiles = ps.getImagesByUserid(userid, pageNum);
 		return imageFiles;
 	}
+
 	// 총 이미지 수 리턴
-	@RequestMapping(value="/getImageTotal")
-	public @ResponseBody int getImageTotal(String userid){
+	@RequestMapping(value = "/getImageTotal")
+	public @ResponseBody int getImageTotal(String userid) {
 		int total = ps.getImageTotal(userid);
 		return total;
 	}
-	
-	// ThumbProfile Image Update
-	@RequestMapping(value="/updateProfileImage", method=RequestMethod.GET)
-	public String updateProfileImage(@RequestParam("url") String url, HttpSession session){
+
+	// ThumbProfile Image Update - existing image
+	@RequestMapping(value = "/updateProfileImage", method = RequestMethod.GET)
+	public String updateProfileImage(@RequestParam("url") String url, HttpSession session) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
 		int result = ms.updateThumbProfile(userid, url);
 		Member member = (Member) session.getAttribute("member");
 		member.setProfile_image(url);
-		return "redirect:blog/"+userid;
+		return "redirect:blog/" + userid;
 	}
-	
+
+	// ThumbProfile Image Update - new image
+	@RequestMapping(value = "/updateProfileImage", method = RequestMethod.POST)
+	public String updateProfileImage2(MultipartFile file, HttpServletRequest request, HttpSession session) {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		System.out.println("Uploaded File: " + file.getOriginalFilename());
+		Member member = (Member) session.getAttribute("member");
+		if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
+			try {
+				byte[] bytes = file.getBytes();
+				String rootPath = request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
+				File serverFile = new File(rootPath + File.separator + file.getOriginalFilename());
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			int result = ms.updateThumbProfile(userid, file.getOriginalFilename());
+			member.setProfile_image(file.getOriginalFilename());
+		}
+		return "redirect:blog/" + userid;
+	}
 }

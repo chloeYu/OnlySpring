@@ -19,6 +19,39 @@ $(function(){
 	
 });
 
+$(document).ready(function() {
+	$("#thumbProfileImg").on("change", handleProfileImgSelect);
+});
+function handleProfileImgSelect(e) {
+	/*
+	 * sel_files = []; $("#preview").empty();
+	 */
+
+	var file = e.target.files[0];
+	console.log(file);
+
+	var reader = new FileReader();
+
+	reader.onload = function(e) {
+			var image = new Image();
+			var html ="<img src=\""
+					+ e.target.result
+					+ "\" data-file='"
+					+ file.name
+					+ "' style='height: 100%; width: 100%;'>"
+					+ "<input type='submit' class='imageUpdateLabel' value='Upload'>";
+			// 사진 크기 <a style>로 처리. css해주세욤
+					$("#uploadedImage").html(html);
+					// var img_html = "<img src='"+e.target.result+"'>";
+	}
+	reader.readAsDataURL(file);
+}
+
+function imagePreview(image){
+	console.log("image clicked" + image);
+	$('#uploadedImage').html('<img src="../img_timeline/'+image+'" width="100%">');
+	$('#aaaaa').append('<a href="/only/updateProfileImage?url='+image+'" class="imageUpdateLabel">Update</a>');
+}
 function imageLoad(picLoad){
 	picLoad++;
 	if(picLoad>1){
@@ -32,7 +65,7 @@ function imageLoad(picLoad){
 				loadedImage++;
 				console.log(value);
 				$('.photoDisplay').append('<td>'+
-						'<a style="display: inline-block" href="/only/updateProfileImage?url='+value+'">'+
+						'<a style="display: inline-block" onclick="imagePreview(\''+value+'\')">'+
 						'<img src="../img_timeline/'+value+' width="112" height="150"></a></td>');
 			});
 			$('.photoDisplay').append('</tr></table>');

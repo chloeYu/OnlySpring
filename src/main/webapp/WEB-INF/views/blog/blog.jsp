@@ -40,16 +40,16 @@
 						<div class="profileHeadline">
 							<div class="profileNav">
 								<ul stype="border-left: 1px solid #e9eaed;">
-									<li><a>Timeline</a></li>
+									<li><a href='/only/timeline'>Timeline</a></li>
 									<li><a>About</a></li>
-									<li><a>Friends</a></li>
+									<li><a href='/only/friendsPage'>Friends</a></li>
 									<li><a>Photo</a></li>
 								</ul>
 							</div>
 							<div class="profileThumb">
 								<div class="photoContainer">
 									<a class="profilePicThumb"> 
-										<img src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-1/p240x240/12189038_10208306516209197_5877572499878530668_n.jpg?oh=575b2b6e27c8a227d743bfe997d697b6&oe=5A415E36">
+										<img src="../img_timeline/${owner.profile_image }">
 										<c:if test="${owner.userid eq member.userid }">
 											<div class="thumbImageUpdate">
 												<div class="editCoverBtnHover">

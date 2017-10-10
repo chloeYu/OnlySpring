@@ -10,20 +10,23 @@
 			</div>
 			<div class="updateMain">
 				<div style="border-bottom: 1px solid #e9ebee; /* display: flex; padding: 4px; */">
+					<form method="post" action="/only/updateProfileImage" enctype="multipart/form-data">
 					<div class= "updateMainBox" style="width: 95%; position: relative; flex: 1 1 0%;">
+						
 						<div>
 							<div style="bottom: 0; left: 0; width: 50%; position: absolute; right: 0; top: 0;">
-								<div class="">
-									<span> + Upload Photo</span>
+								<div class="imageUpdateLabel" style="color: #ccc; text-shadow: none;">
+									<div> + Upload Photo</div>
 								</div>
 							</div>
-							<a href="#"><input type="file" title="Choose a file to upload" accept="image/*" id="thumbProfileImg"></a>
+								<a href="#"><input type="file" name="file" title="Choose a file to upload" accept="image/*" id="thumbProfileImg"></a>				
 						</div>
-						<div style="bottom: 0; left: 50%; position: absolute; right: 0; top: 0;;">
-						<div id="uploadedImage" style="width: 100%">asdf</div>				
+						
+						<div id="aaaaa" style="bottom: 0; left: 50%; position: absolute; right: 0; top: 0;;">
+							<div id="uploadedImage" style="width: 100%"></div>				
+						</div>
 					</div>
-					</div>
-					
+					</form>
 					<hr>
 					<div style="margin-top: 20px; margin-left: 8px; argin-right: 8px; display: block;">
 						<div style="overflow: hidden;">
