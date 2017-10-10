@@ -51,7 +51,7 @@
 	display: block;
 }
 .friendlistopened{
-display: none;
+	display: none;
 }
 .dropdown{
 	background-image: url("../img_all/more.png");
