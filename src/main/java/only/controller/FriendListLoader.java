@@ -20,13 +20,8 @@ public class FriendListLoader {
 		model.addAttribute("listFriend",listFriend);
 	return "friendList";	
 	}
-	@RequestMapping("/friendaccpet")
-	public String Friendaccpet(Model model, String member_id, String member_id2) {
-		
-		return "friendList";
-	}
-	@RequestMapping("/friendrefuse")
-	public String Friendrefuse(Model model, String member_id, String member_id2) {
+	@RequestMapping("/friendupdate")
+	public String Friendaccpet(Model model, String member_id, String member_id2, int status) {
 		
 		return "friendList";
 	}

@@ -21,7 +21,7 @@
 	</select>
 
 	<select id="search" parameterType="String" resultMap="memberResult">
-		select * from member where userid like '%'|| #{searchTerm} || '%'
+		select * from member where username LIKE CONCAT('%',#{searchTerm},'%')
 	</select>
 	
 	<insert id="insert" parameterType="member">
@@ -31,4 +31,9 @@
 	<update id="update" parameterType="member">
 		update member set username=#{username}, password=#{password}, email=#{email}, modified=now(),  profile_image=#{profile_image}, tel=#{tel}, birth=#{birth} where userid=#{userid}
 	</update>
+	
+	<update id="updateThumbProfile" parameterType="hashMap">
+		update member set profile_image=#{url} where userid=#{userid}
+	</update>
+	
 </mapper>

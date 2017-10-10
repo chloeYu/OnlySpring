@@ -5,12 +5,13 @@
 <mapper namespace="postns">
 	<resultMap type="post" id="postResult">
 		<id property="pid" column="pid" />
+		<result property="userid" column="userid" />
+		<result property="type" column="type" />
+		<result property="likes" column="likes" />
 		<result property="created" column="created" />
 		<result property="del" column="del" />
-		<result property="userid" column="userid" />
 		<result property="username" column="username" />
 		<result property="modified" column="modified" />
-		<result property="type" column="type" />
 		<result property="text" column="text" />
 	</resultMap>
 	
@@ -20,15 +21,38 @@
 		<result property="seq" column="seq" />
 	</resultMap>
 	
+	<resultMap type="location" id="locationResult">
+		<id property="pid" column="pid" />
+		<result property="place" column="place" />
+		<result property="lat" column="lat" />
+		<result property="lng" column="lng" />
+	</resultMap>
+	
 	<select id="timelinelist" parameterType="String" resultMap="postResult">
  		select p.*, m.username from post p, member m where p.userid=#{userid} and p.userid = m.userid order by pid desc;
 		<!-- select * from post where userid=#{userid} -->
+	</select>
+	
+	<select id="bloglist" parameterType="String" resultMap="postResult">
+		select p.*, m.username from post p, member m where p.userid=#{ownerid} and p.userid = m.userid order by pid desc;
 	</select>
 
 	<select id="getTimelineTotal" parameterType="String" resultType="int">
 		select count(pid) from post where userid=#{userid}
 	</select>
+	
+	<select id="getBlogTotal" parameterType="String" resultType="int">
+		select count(pid) from post where userid=#{ownerid}
+	</select>
 
+	<select id="getImagesByUserid" parameterType="String" resultType='String'>
+		select url from POST_FILES where pid in (select pid from post where userid = #{userid} order by pid); 
+	</select>
+	
+	<select id="getImageTotal" parameterType="String" resultType="int">
+		select count(*) from POST_FILES where pid in (select pid from post where userid = #{userid} order by pid); 
+	</select>
+	
 	<select id="getType" parameterType="String" resultType="String">
 		select type from post where pid=#{pid}
 	</select>
@@ -49,8 +73,12 @@
 		select IFNULL(MAX(pid), 0) + 1 from post
 	</select>
 	
+	<select id="getLikesCount" parameterType="int" resultType="int">
+		select likes from post where pid = #{lid}
+	</select>
+	
 	<insert id="insert" parameterType="post">
-		insert into POST values(#{pid},#{userid}, #{type}, now(), now(),'n')
+		insert into POST values(#{pid},#{userid}, #{type}, 0, now(), now(),'n')
 	</insert>
 	
 	<insert id="insertText" parameterType="hashMap">
@@ -60,5 +88,21 @@
 	<insert id="insertFiles" parameterType="postFiles">
 		insert into POST_FILES values (#{pid}, #{url}, #{seq})
 	</insert>
+	
+	<insert id="insertLocation" parameterType="location">
+		insert into POST_LOCATION values(#{pid}, #{place}, #{lat}, #{lng})
+	</insert>
+	
+	<insert id="insertMemberTag" parameterType="hashMap">
+		insert into POST_MEMBERTAG values(#{pid}, #{member})
+	</insert>
+	
+	<select id="getLocation" parameterType="int" resultType="location">
+		select * from POST_LOCATION where pid = #{pid}
+	</select>
+	
+	<select id="getTaggedFriends" parameterType="int" resultType="string">
+		select userid from POST_MEMBERTAG where pid=#{pid}
+	</select>
 </mapper>
 
