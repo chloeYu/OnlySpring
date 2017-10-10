@@ -27,8 +27,7 @@
 				<div class="input-name">
 					<h2>ID</h2>
 				</div>
-				<form action="login" name="loginForm" method="post"
-					onsubmit="return chk()">
+				<form action="login" name="loginForm" method="post">
 					<input type="text" name="member_id" value="" class="field-input"
 						id="login_inputId" autofocus="autofocus" />
 					<div class="input-name input-margin">

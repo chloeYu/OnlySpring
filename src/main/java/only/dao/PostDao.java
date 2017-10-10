@@ -27,4 +27,8 @@ public interface PostDao {
 	int insertMemberTag(int pid, String member);
 
 	List<Post> getBlogPost(String ownerid, String pageNum);
+
+	List<String> getImagesByUserid(String userid, int pageNum);
+
+	int getImageTotal(String userid);
 }

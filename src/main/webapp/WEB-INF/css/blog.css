@@ -294,6 +294,7 @@ body.blogLayout {
 	background-color: #fff;
 	border-radius: 3px;
 	position: relative;
+	overflow-y: scroll;
 }
 
 .updateContainer .title {
@@ -311,9 +312,10 @@ body.blogLayout {
 	line-height: 18px;
 }
 
-.uploadMain{
+.updateMain{
 	background-color: #fff;
     word-wrap: break-word;
+    height: 100%;
 }
 
 .updateMainBox{
@@ -338,7 +340,7 @@ body.blogLayout {
 	bottom: 0;
     cursor: inherit;
     font-size: 1000px !important;
-    height: 300px;
+    height: 100px;
     margin: 0;
     opacity: 0;
     padding: 0;

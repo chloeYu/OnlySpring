@@ -79,8 +79,8 @@ public class FileUploadController {
 		}
 		if(post.getPlace() != null && !post.getPlace().equals("")) {
 			type[PostType.LOCATION.ordinal()] = 'y';
+			System.out.println(post.getTaggedFriend().size()+"명의 친구 Tagged");
 		}
-		System.out.println(post.getTaggedFriend().size()+"명의 친구 Tagged");
 		if(post.getTaggedFriend() != null && post.getTaggedFriend().size()>0) {
 			type[PostType.TAG_FRIENDS.ordinal()]='y';
 		}

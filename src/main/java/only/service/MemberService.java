@@ -14,4 +14,6 @@ public interface MemberService {
 
 	int update(Member member);
 
+	int updateThumbProfile(String userid, String url);
+
 }

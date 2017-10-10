@@ -45,6 +45,14 @@
 		select count(pid) from post where userid=#{ownerid}
 	</select>
 
+	<select id="getImagesByUserid" parameterType="String" resultType='String'>
+		select url from POST_FILES where pid in (select pid from post where userid = #{userid} order by pid); 
+	</select>
+	
+	<select id="getImageTotal" parameterType="String" resultType="int">
+		select count(*) from POST_FILES where pid in (select pid from post where userid = #{userid} order by pid); 
+	</select>
+	
 	<select id="getType" parameterType="String" resultType="String">
 		select type from post where pid=#{pid}
 	</select>

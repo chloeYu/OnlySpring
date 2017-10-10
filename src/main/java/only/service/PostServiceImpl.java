@@ -64,4 +64,14 @@ public class PostServiceImpl implements PostService{
 	public List<Post> getBlogPost(String ownerid, String pageNum) {
 		return pd.getBlogPost(ownerid, pageNum);
 	}
+
+	@Override
+	public List<String> getImagesByUserid(String userid, int pageNum) {
+		return pd.getImagesByUserid(userid, pageNum);
+	}
+
+	@Override
+	public int getImageTotal(String userid) {
+		return pd.getImageTotal(userid);
+	}
 }

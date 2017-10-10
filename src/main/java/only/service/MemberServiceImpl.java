@@ -33,4 +33,9 @@ public class MemberServiceImpl implements MemberService {
 	public int update(Member member) {
 		return md.update(member);
 	}
+
+	@Override
+	public int updateThumbProfile(String userid, String url) {
+		return md.updateThumbProfile(userid, url);
+	}
 }

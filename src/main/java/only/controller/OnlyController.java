@@ -16,6 +16,7 @@ import org.springframework.test.context.BootstrapWith;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -269,4 +270,28 @@ public class OnlyController {
 		System.out.println("toggleLikes: " + count);
 		return count;
 	}
+	
+	// 이미지 파일 불러오기
+	@RequestMapping(value="/getImages")
+	public @ResponseBody List<String> getImages(String userid, int pageNum){
+		List<String> imageFiles = ps.getImagesByUserid(userid, pageNum);
+		return imageFiles;
+	}
+	// 총 이미지 수 리턴
+	@RequestMapping(value="/getImageTotal")
+	public @ResponseBody int getImageTotal(String userid){
+		int total = ps.getImageTotal(userid);
+		return total;
+	}
+	
+	// ThumbProfile Image Update
+	@RequestMapping(value="/updateProfileImage", method=RequestMethod.GET)
+	public String updateProfileImage(@RequestParam("url") String url, HttpSession session){
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		int result = ms.updateThumbProfile(userid, url);
+		Member member = (Member) session.getAttribute("member");
+		member.setProfile_image(url);
+		return "redirect:blog/"+userid;
+	}
+	
 }

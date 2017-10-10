@@ -1,6 +1,8 @@
 package only.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,15 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int update(Member member) {
 		return sst.update("memberns.update", member);
+	}
+
+	@Override
+	public int updateThumbProfile(String userid, String url) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		map.put("url", url);
+		return sst.update("memberns.updateThumbProfile", map);
+		
+				
 	}
 }

@@ -19,6 +19,7 @@ import only.utils.PostType;
 @Repository
 public class PostDaoImpl implements PostDao {
 	final int POSTPERPAGE = 5;
+	final int IMAGEPERPAGE = 5;
 
 	@Autowired
 	private SqlSessionTemplate sst;
@@ -165,5 +166,22 @@ public class PostDaoImpl implements PostDao {
 			}
 		}
 		return plist;
+	}
+
+	@Override
+	public List<String> getImagesByUserid(String userid, int pageNum) {
+		int startRow = (pageNum- 1) * IMAGEPERPAGE; // 1페이지:1 2페이지: 11 3페이지:21 ...
+		int endRow = startRow + IMAGEPERPAGE ; // 1페이지: 10 2페이지: 20 3페이지: 30
+		int total = sst.selectOne("postns.getImageTotal", userid);
+		if (endRow > total)
+			endRow = total;
+		List<String> imageList = sst.selectList("postns.getImagesByUserid", userid, new RowBounds(startRow, POSTPERPAGE));
+		
+		return imageList;
+	}
+
+	@Override
+	public int getImageTotal(String userid) {
+		return sst.selectOne("postns.getImageTotal", userid);
 	}
 }

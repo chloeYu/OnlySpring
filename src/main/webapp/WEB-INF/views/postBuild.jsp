@@ -34,12 +34,12 @@
 				<c:forEach var="file" items="${post.files }" varStatus="i">
 					<c:if test="${post.files.size() < 4 }">
 						<div class="postImg1">
-							<img class="postInner1" src='img_timeline/${file.url }'>
+							<img class="postInner1" src='${path }/only/img_timeline/${file.url }'>
 						</div>
 					</c:if>
 					<c:if test="${post.files.size() == 4 }">
 						<div class="postImg2">
-							<img class="postInner2" src='img_timeline/${file.url }'>
+							<img class="postInner2" src='${path }/only/img_timeline/${file.url }'>
 						</div>
 					</c:if>
 					<c:if test="${post.files.size() > 4 }">
@@ -47,12 +47,12 @@
 							<c:choose>
 								<c:when test="${i.index == 3}">
 									<img id='post${post.pid }-${i.index}' class="postInner3"
-										src='img_timeline/${file.url }'>
+										src='${path }/only/img_timeline/${file.url }'>
 									<span>+More</span>
 								</c:when>
 								<c:otherwise>
 									<img id='post${post.pid }-${i.index}' class="postInner3"
-										src='img_timeline/${file.url }'>
+										src='${path }/only/img_timeline/${file.url }'>
 								</c:otherwise>
 							</c:choose>
 						</div>

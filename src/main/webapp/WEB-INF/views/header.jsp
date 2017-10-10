@@ -30,7 +30,7 @@
 			<a id="user_profile_url" href="${path }/blog/<%=userid%>">
 				<span class="userProfileName"><%=member.getUsername()%></span>
 				<span class="userProfileImg_span">
-					<img style="vertical-align: middle" src="img_timeline/<%=member.getProfile_image()%>"> 
+					<img style="vertical-align: middle" src="${path}/img_timeline/<%=member.getProfile_image()%>"> 
 				</span>
 			</a>
 		</div>
@@ -71,7 +71,7 @@
 				<span class="profileDropdown"></span>
 				<div id="myDropdown" class="dropdown-content">
 					<a href="#createPage">Create Page</a> <a href="#createGroup">Create
-						Group</a> <a href="changeProfile">Profile Setting</a> <a
+						Group</a> <a href="/only/changeProfile">Profile Setting</a> <a
 						href="logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
 				</div>
 			</div>
