@@ -54,7 +54,7 @@ function sendId() {
 		if (keyword != '') {
 			var params = "id=" + encodeURIComponent(keyword);
 			console.log(params);
-			$.post("id_check", params, function(data) {
+			$.post("/only/id_check", params, function(data) {
 				console.log(data);
 				displayResult(data);
 			});

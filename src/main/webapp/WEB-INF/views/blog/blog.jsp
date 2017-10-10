@@ -9,8 +9,12 @@
 <title>${owner.username }</title>
 </head>
 <body class="blogLayout">
+	<c:if test="${owner.userid eq member.userid }">
+		<%@ include file="updatePic.jsp" %>
+	</c:if>
 	<div id="header"><jsp:include page="../header.jsp"></jsp:include></div>
 	<div class="header_hidden"></div>
+	
 	<div id="globalContainer">
 		<div id="mainContainer">
 			<div id="leftCol"></div>
@@ -22,6 +26,12 @@
 								<a class="coverWrap"> <img class="photo"
 									src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/c0.78.960.355/561844_4028233778472_1070318011_n.jpg?oh=1dfb165db2d646245354101f9be80a00&oe=5A872339">
 								</a>
+								<c:if test="${owner.userid eq member.userid }">
+									<div class="coverImageUpdate">
+										<div class="editCoverBtn"></div>
+									</div>
+								</c:if>
+								</div>
 							</div>
 							<div class="blogProfileName">
 								<h1 class="h1ProfileName">Bokyung Yu</h1>
@@ -38,9 +48,20 @@
 							</div>
 							<div class="profileThumb">
 								<div class="photoContainer">
-									<a class="profilePicThumb"> <img
-										src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-1/p240x240/12189038_10208306516209197_5877572499878530668_n.jpg?oh=575b2b6e27c8a227d743bfe997d697b6&oe=5A415E36">
+									<a class="profilePicThumb"> 
+										<img src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-1/p240x240/12189038_10208306516209197_5877572499878530668_n.jpg?oh=575b2b6e27c8a227d743bfe997d697b6&oe=5A415E36">
+										<c:if test="${owner.userid eq member.userid }">
+											<div class="thumbImageUpdate">
+												<div class="editCoverBtnHover">
+													<table>
+													<tr><td><div class="editCoverBtn"></div></td>
+													<td><span>Update Profile Picture</span></td>
+													</table>
+												</div>
+											</div>
+										</c:if>
 									</a>
+									
 								</div>
 							</div>
 						</div>
@@ -56,9 +77,6 @@
 										<input type="hidden" value="<%=userid%>" name="userid">
 										<input type="hidden"
 											value="<%=application.getRealPath("/fileSave")%>" name="path">
-										<%
-											System.out.println("path=" + application.getRealPath("/fileSave"));
-										%>
 										<c:if test="${owner.userid eq member.userid }">
 											<textarea rows="1" cols="1" class="type_choice_textarea"
 												name="text"

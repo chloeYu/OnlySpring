@@ -19,7 +19,7 @@ function fa_heart_click(event){
 		console.log("좋아요 취소");
 		action = 0;
 	}
-	$.post('toggleLikes', "userid="+userid+"&lid="+lid+"&type="+ltype, function(data){
+	$.post('/only/toggleLikes', "userid="+userid+"&lid="+lid+"&type="+ltype, function(data){
 		console.log(data);
 		$(event.target).toggleClass('on');
 		console.log(ltype);
@@ -49,7 +49,7 @@ function viewComment(event){
 	var ref_type = event.target.id.split('-')[2]; // 0 post / 1 comment
 	var pageNum = event.target.id.split('-')[3];
 	
-	$.post('loadComment', "ref_id="+ref_id+"&ref_type="+ref_type+"&pageNum="+pageNum, function(data){
+	$.post('/only/loadComment', "ref_id="+ref_id+"&ref_type="+ref_type+"&pageNum="+pageNum, function(data){
 		console.log(data);
 		if(ref_type==0){
 			$('#'+event.target.id).hide();
