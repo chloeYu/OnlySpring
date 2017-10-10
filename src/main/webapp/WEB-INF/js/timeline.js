@@ -364,7 +364,7 @@ function showPosition(position) {
 }
 
 function FriendListLoad(){
-	$.get("friendList", "member_id="+$("#member_id").val(), function(data){
+	$.get("/only/friendList", "member_id="+$("#member_id").val(), function(data){
 		$("#friendload").html(data);
 	});
 	return false;
