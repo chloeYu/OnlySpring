@@ -23,10 +23,14 @@
 		<c:forEach var="friend" items="${listFriend }">
 			<c:if test="${friend.status!=0}">
 				<c:if test="${friend.status==2 }">
-					<c:if test="${friend.uid1 != member.userid }">${friend.uid1 }</c:if>
-					<c:if test="${friend.uid2 != member.userid }">${friend.uid2 }</c:if>
-					<button onclick="">수락</button>
-					<button onclick="">거절</button>
+					<c:if test="${friend.uid1 != member.userid }">${friend.uid1 }
+					<button onclick="updateFriendstatus(1,${friend.uid1 })">수락</button>
+					<button onclick="updateFriendstatus(0,${friend.uid1 })">거절</button>
+					</c:if>
+					<c:if test="${friend.uid2 != member.userid }">${friend.uid2 }
+					<button onclick="updateFriendstatus(1,${friend.uid2 })">수락</button>
+					<button onclick="updateFriendstatus(0,${friend.uid2 })">거절</button>
+					</c:if>
 					<p>
 				</c:if>
 			</c:if>
