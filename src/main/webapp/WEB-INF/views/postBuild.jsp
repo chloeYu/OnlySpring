@@ -11,9 +11,9 @@
 			<div class='postUid'>
 				<c:if test="${not empty post.username }">	
 					<div class="post_header">
-						<a href="blog/${post.userid }"> <img
-							style="vertical-align: middle"
-							src="img_timeline/<%=member.getProfile_image()%>"> <span>[${post.pid }]${post.username }</span>
+						<a href="blog/${post.userid }"> 
+						<img style="vertical-align: middle" src="img_timeline/<%=member.getProfile_image()%>">
+						<span>[${post.pid }]${post.username }</span>
 							<c:if test="${not empty post.taggedFriend or not empty post.place }"> is 
 							</c:if>
 							<c:if test="${not empty post.taggedFriend }">

@@ -82,7 +82,7 @@ $(document).ready(
 						var followId = "#followText-"+_target;
 						/*console.log(_target);*/
 						var sendData = "userid2=" + _target;
-						$.post('followChk.jsp', sendData, function(data) {
+						$.post('/only/followChk.jsp', sendData, function(data) {
 							console.log("data true: "+ data.indexOf("true"));
 							console.log("data false: "+ data.indexOf("false"));
 							if (data.indexOf("true") > 0) {
