@@ -19,8 +19,8 @@
 		<h2>친구요청</h2>
 		<c:forEach var="friend" items="${requestList }">
 			${friend.username }
-			<a href="/only/friendupdate/1/${friend.uid1}/${friend.uid2}">수락</a>
-			<a href="/only/friendupdate/0/${friend.uid1}/${friend.uid2}">거절</a>
+			<a href="/only/friendupdate/1/${friend.userid}/${member.userid}">수락</a>
+			<a href="/only/friendupdate/0/${friend.userid}/${member.userid}">거절</a>
 			<p>		
 		</c:forEach>
 	</c:if>

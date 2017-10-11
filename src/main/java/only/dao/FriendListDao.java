@@ -6,6 +6,7 @@ import only.model.Friendlist;
 import only.model.Member;
 
 public interface FriendListDao {
+
 	public List<Member> friendListLoad(String member_id);
 
 	public List<Member> pendingListLoad(String member_id);

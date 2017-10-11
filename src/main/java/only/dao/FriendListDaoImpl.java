@@ -18,7 +18,6 @@ public class FriendListDaoImpl implements FriendListDao {
 		return sst.selectList("friendlistns.friendList", member_id);
 	}
 
-	@Override
 	public List<Member> pendingListLoad(String member_id) {
 		return sst.selectList("friendlistns.pendingList", member_id);
 	}
