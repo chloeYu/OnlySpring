@@ -16,15 +16,14 @@ $(function() {
 	var a = false;
 	$(".friend_list").on("click", function(){
 		if(a){
-			$(".friendlistplace").addClass("friendlistopened")
-			$(".friendlistplace").removeClass("friendlistopenedshow")
-			a=!a;
+			$(".friendlistplace").addClass("disapper").removeClass("show");
 		} else{
-			$(".friendlistplace").removeClass("friendlistopened")
-			$(".friendlistplace").addClass("friendlistopenedshow")
-			a=!a;
+			$.get("/only/friendList", "member_id="+$("#member_id").val(), function(data){
+				$("#friendload").html(data);
+			});
+			$(".friendlistplace").removeClass("disapper").addClass("show");
 		}
-		return false;
+		a=!a;
 	});
 	$('.post_submit_btn').prop('disabled',true);
 	// textarea focus일 때 작성폼 열기
@@ -257,6 +256,11 @@ $(function() {
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
+	if(!event.target.matches('.friendlistplace')){
+		if($(".friendlistplace").hasClass("show")){
+			$(".friendlistplace").removeClass("show");
+		}
+	}
 	if (!event.target.matches('.profileDropdown')) {
 
 		var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -361,15 +365,4 @@ function showPosition(position) {
     latitude  = position.coords.latitude;
     longitude = position.coords.longitude;
 /*    alert('latitude:' + latitude + 'longitude:' + longitude );*/
-}
-
-function FriendListLoad(){
-	$.get("/only/friendList", "member_id="+$("#member_id").val(), function(data){
-		$("#friendload").html(data);
-	});
-	return false;
-}
-
-function updateFriendstatus(status, member_id1, member_id2){
-	return false;
 }
