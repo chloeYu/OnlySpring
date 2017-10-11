@@ -8,32 +8,26 @@
 <title>FriendList</title>
 </head>
 <body>
-	<c:if test="${not empty listFriend }">
-		<c:forEach var="friend" items="${listFriend }">
-			<c:if test="${friend.status!=0}">
-				<c:if test="${friend.status==1 }">
-					<c:if test="${friend.uid1 != member.userid }">${friend.uid1 }<p>
-					</c:if>
-					<c:if test="${friend.uid2 != member.userid }">${friend.uid2 }<p>
-					</c:if>
-				</c:if>
-			</c:if>
+	<c:if test="${not empty friendList }">
+		<h2>친구</h2>
+		<c:forEach var="friend" items="${friendList }">
+			
+			${friend.username }<p>
 		</c:forEach>
-		<h2>친구신청</h2>
-		<c:forEach var="friend" items="${listFriend }">
-			<c:if test="${friend.status!=0}">
-				<c:if test="${friend.status==2 }">
-					<c:if test="${friend.uid1 != member.userid }">${friend.uid1 }
-					<button onclick="updateFriendstatus(1,${friend.uid1 })">수락</button>
-					<button onclick="updateFriendstatus(0,${friend.uid1 })">거절</button>
-					</c:if>
-					<c:if test="${friend.uid2 != member.userid }">${friend.uid2 }
-					<button onclick="updateFriendstatus(1,${friend.uid2 })">수락</button>
-					<button onclick="updateFriendstatus(0,${friend.uid2 })">거절</button>
-					</c:if>
-					<p>
-				</c:if>
-			</c:if>
+	</c:if>
+	<c:if test="${not empty requestList }">
+		<h2>친구요청</h2>
+		<c:forEach var="friend" items="${requestList }">
+			${friend.username }
+			<a href="/only/friendupdate/1/${friend.uid1}/${friend.uid2}">수락</a>
+			<a href="/only/friendupdate/0/${friend.uid1}/${friend.uid2}">거절</a>
+			<p>		
+		</c:forEach>
+	</c:if>
+	<c:if test="${not empty pendingList }">
+		<h2>대기중 요청</h2>
+		<c:forEach var="friend" items="${pendingList }">
+			${friend.username }<p>
 		</c:forEach>
 	</c:if>
 </body>

@@ -64,7 +64,7 @@
 									onclick='document.all.files.click();'> 
 									<input
 									type="file" name="files" style='display: none;' id="input_img"
-									accept="image/png, image/gif, image/jpg" onchange="previewFiles()" multiple>
+									accept="image/*, video/*" onchange="previewFiles()" multiple>
 								<!-- </a> <a class="choice_type"> <img
 									src='img_timeline/video-camera.svg'
 									class="img_hide img_hidden img_video" width="30px" border='0'

@@ -38,7 +38,7 @@ function handleProfileImgSelect(e) {
 					+ e.target.result
 					+ "\" data-file='"
 					+ file.name
-					+ "' style='height: 100%; width: 100%;'>"
+					+ "' style='max-width: 100%; max-height: 100%;'>"
 					+ "<input type='submit' class='imageUpdateLabel' value='Upload'>";
 			// 사진 크기 <a style>로 처리. css해주세욤
 					$("#uploadedImage").html(html);
@@ -49,7 +49,7 @@ function handleProfileImgSelect(e) {
 
 function imagePreview(image){
 	console.log("image clicked" + image);
-	$('#uploadedImage').html('<img src="../img_timeline/'+image+'" width="100%">');
+	$('#uploadedImage').html('<img src="../img_timeline/'+image+'" style="max-width: 100%; max-height:100%;">');
 	$('#aaaaa').append('<a href="/only/updateProfileImage?url='+image+'" class="imageUpdateLabel">Update</a>');
 }
 function imageLoad(picLoad){
@@ -66,7 +66,7 @@ function imageLoad(picLoad){
 				console.log(value);
 				$('.photoDisplay').append('<td>'+
 						'<a style="display: inline-block" onclick="imagePreview(\''+value+'\')">'+
-						'<img src="../img_timeline/'+value+' width="112" height="150"></a></td>');
+						'<img src="../img_timeline/'+value+'" width="150" height="150"></a></td>');
 			});
 			$('.photoDisplay').append('</tr></table>');
 			$.post('/only/getImageTotal', "userid="+userid, function(total){

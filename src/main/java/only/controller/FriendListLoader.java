@@ -7,8 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
 import only.model.Friendlist;
+import only.model.Member;
 import only.service.*;
 import only.utils.WebConstants;
 
@@ -18,22 +22,34 @@ public class FriendListLoader {
 	private FriendListService fs;
 	
 	@RequestMapping("/friendList")
-	public String FriendList(Model model, String member_id) {
-		List<Friendlist> listFriend =fs.FriendListLoad(member_id);
-		model.addAttribute("listFriend",listFriend);
+	public String friendList(Model model, String member_id) {
+		List<Member> friendList =fs.friendListLoad(member_id);
+		List<Member> pendingList = fs.pendingListLoad(member_id);
+		List<Member> requestList = fs.rquestList(member_id);
+		model.addAttribute("friendList",friendList); // 친구 리스트
+		model.addAttribute("pendingList",pendingList); // 대기 리스트 (uid1: 사용자)
+		model.addAttribute("requestList",requestList); // 요청 리스트 (uid2: 사용자)
 		return "friendList";	
 	}
-	@RequestMapping("/friendupdate")
-	public String Friendaccpet(Model model, String member_id, String member_id2, int status) {
-		
+	@RequestMapping("/friendupdate/{status}/{uid1}/{uid2}")
+	public String Friendaccpet(Friendlist Friendlist, Model model, @PathVariable int status, @PathVariable String uid1, @PathVariable String uid2) {
+		Friendlist.setStatus(status);
+		Friendlist.setUid1(uid1);
+		Friendlist.setUid2(uid2);
+		fs.update(Friendlist);
 		return "friendList";
 	}
 	
 	@RequestMapping("/friendsPage")
 	public String friendsPage(HttpSession session, Model model) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
-		List<Friendlist> listFriend =fs.FriendListLoad(userid);
-		model.addAttribute("listFriend",listFriend);
+		List<Member> friendList =fs.friendListLoad(userid);
+		List<Member> pendingList = fs.pendingListLoad(userid);
+		List<Member> requestList = fs.rquestList(userid);
+		model.addAttribute("friendList",friendList);
+		model.addAttribute("pendingList",pendingList);
+		model.addAttribute("requestList",requestList);
+		
 		return "friendsPage";	
 	}
 }

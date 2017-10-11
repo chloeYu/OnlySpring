@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="${path}/js/updateProfile.js"></script>
-<div class="updateWraper" style="display: none; width: 100%; height: 100vh; background-color: rgba(0, 0, 0, 0.6)">
+<div class="updateWraper" style="display: none; position: fixed; width: 100%; height: 100vh; background-color: rgba(0, 0, 0, 0.6)">
 	<div class="helper" style="#position: absolute; #top: 50%;  display: table-cell; height: 50%; vertical-align: middle;">
-		<div class="updateContainer" style="#position: relative; #top: -50%; width: 785px; margin: 0 auto;">
+		<div class="updateContainer" style="#position: relative; #top: -50%; width: 785px; height:50%; margin: 0 auto;">
 			<div class="title">
 				<div style="float: right"><div id="updatePicRemoveBtn"></div></div>
 				<div><h3>Update Profile Picture</h3></div>
@@ -23,7 +23,7 @@
 						</div>
 						
 						<div id="aaaaa" style="bottom: 0; left: 50%; position: absolute; right: 0; top: 0;;">
-							<div id="uploadedImage" style="width: 100%"></div>				
+							<div id="uploadedImage" style="width: 100%; height:100%;"></div>				
 						</div>
 					</div>
 					</form>

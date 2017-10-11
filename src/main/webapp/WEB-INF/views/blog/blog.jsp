@@ -24,7 +24,7 @@
 						<div id="profileCover">
 							<div class="coverImage">
 								<a class="coverWrap"> <img class="photo"
-									src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/c0.78.960.355/561844_4028233778472_1070318011_n.jpg?oh=1dfb165db2d646245354101f9be80a00&oe=5A872339">
+									src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/10003947_660008940702023_1929238428_n.jpg?oh=4901bc77850509fc8f63039df808f13f&oe=5A823F20">
 								</a>
 								<c:if test="${owner.userid eq member.userid }">
 									<div class="coverImageUpdate">
@@ -42,7 +42,7 @@
 								<ul stype="border-left: 1px solid #e9eaed;">
 									<li><a href='/only/timeline'>Timeline</a></li>
 									<li><a>About</a></li>
-									<li><a href='/only/friendsPage'>Friends</a></li>
+									<li><a onclick="getFriendList()">Friends</a></li>
 									<li><a>Photo</a></li>
 								</ul>
 							</div>

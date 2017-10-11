@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import only.dao.FriendListDao;
 import only.model.Friendlist;
+import only.model.Member;
 
 @Service
 public class FriendListServiceImpl implements FriendListService {
@@ -14,7 +15,22 @@ public class FriendListServiceImpl implements FriendListService {
 	private FriendListDao fd;
 
 	@Override
-	public List<Friendlist> FriendListLoad(String member_id) {
-		return fd.FriendListLoad(member_id);
+	public List<Member> friendListLoad(String member_id) {
+		return fd.friendListLoad(member_id);
+	}
+
+	@Override
+	public List<Member> pendingListLoad(String member_id) {
+		return fd.pendingListLoad(member_id);
+	}
+
+	@Override
+	public List<Member> rquestList(String member_id) {
+		return fd.rquestList(member_id);
+	}
+
+	@Override
+	public int update(Friendlist Friendlist) {
+		return fd.update(Friendlist);
 	}
 }

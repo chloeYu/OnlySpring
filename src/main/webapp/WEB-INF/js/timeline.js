@@ -369,3 +369,7 @@ function FriendListLoad(){
 	});
 	return false;
 }
+
+function updateFriendstatus(status, member_id1, member_id2){
+	return false;
+}
