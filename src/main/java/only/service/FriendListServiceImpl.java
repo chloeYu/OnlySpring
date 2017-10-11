@@ -17,4 +17,9 @@ public class FriendListServiceImpl implements FriendListService {
 	public List<Friendlist> FriendListLoad(String member_id) {
 		return fd.FriendListLoad(member_id);
 	}
+
+	@Override
+	public int update(Friendlist Friendlist) {
+		return fd.update(Friendlist);
+	}
 }

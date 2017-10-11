@@ -6,4 +6,5 @@ import only.model.Friendlist;
 
 public interface FriendListService {
 	public List<Friendlist> FriendListLoad(String member_id);
+	int update(Friendlist Friendlist);
 }

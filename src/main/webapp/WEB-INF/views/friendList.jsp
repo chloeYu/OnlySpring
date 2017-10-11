@@ -24,12 +24,8 @@
 			<c:if test="${friend.status!=0}">
 				<c:if test="${friend.status==2 }">
 					<c:if test="${friend.uid1 != member.userid }">${friend.uid1 }
-					<button onclick="updateFriendstatus(1,${friend.uid1 })">수락</button>
-					<button onclick="updateFriendstatus(0,${friend.uid1 })">거절</button>
-					</c:if>
-					<c:if test="${friend.uid2 != member.userid }">${friend.uid2 }
-					<button onclick="updateFriendstatus(1,${friend.uid2 })">수락</button>
-					<button onclick="updateFriendstatus(0,${friend.uid2 })">거절</button>
+					<a href="/only/friendupdate/1/${friend.uid1}/${friend.uid2}">수락</a>
+					<a href="/only/friendupdate/0/${friend.uid1}/${friend.uid2}">거절</a>
 					</c:if>
 					<p>
 				</c:if>

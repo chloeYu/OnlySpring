@@ -17,4 +17,9 @@ public class FriendListDaoImpl implements FriendListDao {
 		return sst.selectList("friendlistns.select", member_id);
 	}
 
+	@Override
+	public int update(Friendlist Friendlist) {
+		return sst.update("friendlistns.update", Friendlist);
+	}
+
 }

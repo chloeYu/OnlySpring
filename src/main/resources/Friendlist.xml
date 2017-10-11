@@ -10,7 +10,7 @@
 	<select id="select" parameterType="String" resultMap="friendlistResult">
 		select * from follow where uid1=#{member_id} or uid2=#{member_id}
 	</select>
-	<update id="accpet" parameterType="friendlist">
+	<update id="update" parameterType="friendlist">
 		update follow set status=#{status} where uid1=#{uid1} and uid2=#{uid2}
 	</update>
 </mapper>
