@@ -5,7 +5,7 @@ var scrollHandler = function(){
 var picLoad = 0;
 var loadedImage = 0;
 $(function(){
-	$('body').on('click', '.thumbImageUpdate', function(){
+	$('body').on('click', '.editCoverBtn', function(){
 		if(picLoad==0){
 			imageLoad(picLoad);
 		}
@@ -23,9 +23,6 @@ $(document).ready(function() {
 	$("#thumbProfileImg").on("change", handleProfileImgSelect);
 });
 function handleProfileImgSelect(e) {
-	/*
-	 * sel_files = []; $("#preview").empty();
-	 */
 
 	var file = e.target.files[0];
 	console.log(file);
@@ -79,4 +76,16 @@ function imageLoad(picLoad){
 	console.log("thumbImageUpdate Clickeed");
 	$(".updateWraper").css("display", "table");
 	$("body").css("overflow", "hidden");
+}
+
+function getFriendList(){
+	var urlParse = window.location.href.split('/');
+	var owner = urlParse[urlParse.length-1];
+	console.log(owner);
+	$.post('/only/getFriendListByUserid', "userid="+owner, function(data){
+		console.log(data);
+		$('.blogTimelineCapsule').hide();
+		$('.blogFriendList').html(data);
+		$('.blogFriendList').show();
+	});
 }

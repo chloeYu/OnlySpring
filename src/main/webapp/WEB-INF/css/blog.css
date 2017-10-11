@@ -81,7 +81,7 @@ body.blogLayout {
 
 .editCoverBtn {
 	background-image:
-		url(http://www.iconsdb.com/icons/preview/gray/instagram-6-xxl.png);
+		url(http://simpleicon.com/wp-content/uploads/camera-6-256x256.png);
 	position: relative;
 	width: 30px;
 	height: 30px;
@@ -366,4 +366,40 @@ body.blogLayout {
 	left: 0;
 	background: transparent;
     border: none;
+}
+
+/* 사진첩 CSS */
+.blogFriendList{
+	margin: 18px 0 0 0;
+    width: 851px;
+}
+
+.blogFriendList .container{
+	background: #fff;
+    border: 1px solid #ced0d4;
+    border-radius: 3px;
+    margin-bottom: 31px;
+}
+
+.blogFriendList .container .title{
+	background: #f6f7f9;
+    border-bottom: 1px solid #d3d6db;
+    border-radius: 2px 2px 0 0;
+    margin-bottom: 15px;
+    min-height: 66px;
+    padding-top: 16px;
+}
+
+.friendListWraper{
+	padding: 0 14px 0 15px;
+}
+
+.friendListView{
+	border: 1px solid #e9ebee;
+    display: inline-block;
+    margin: 0 0 13px 13px;
+    padding: 0 10px 0 0;
+    position: relative;
+    vertical-align: top;
+    width: 380px;
 }

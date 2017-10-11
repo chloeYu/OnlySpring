@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import only.model.Friendlist;
 import only.model.Member;
@@ -40,16 +40,15 @@ public class FriendListLoader {
 		return "friendList";
 	}
 	
-	@RequestMapping("/friendsPage")
-	public String friendsPage(HttpSession session, Model model) {
-		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+	@RequestMapping("/getFriendListByUserid")
+	public String getFriendListByUserid(String userid, HttpSession session, Model model) {
 		List<Member> friendList =fs.friendListLoad(userid);
 		List<Member> pendingList = fs.pendingListLoad(userid);
 		List<Member> requestList = fs.rquestList(userid);
 		model.addAttribute("friendList",friendList);
 		model.addAttribute("pendingList",pendingList);
 		model.addAttribute("requestList",requestList);
-		
-		return "friendsPage";	
+		System.out.println("getFriendByUserId" + friendList.size() + ", " + pendingList.size() + ", " +requestList.size());
+		return "blog/blogFriendList";	
 	}
 }

@@ -30,7 +30,6 @@
 					<li class="type_choice_box" id="infinite_container">
 						<form action="postWrite" method="post"
 							enctype="multipart/form-data">
-							<%-- onsubmit='return sendChat(JSON.stringify({type:"post",from:"<%=id%>"}));' --%>
 							<input type="hidden" value="<%=userid%>" name="userid">
 							<input type="hidden"
 								value="<%=application.getRealPath("/fileSave")%>" name="path">
