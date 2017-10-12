@@ -30,6 +30,7 @@ import only.service.CommentService;
 import only.service.LikesService;
 import only.service.MemberService;
 import only.service.PostService;
+import only.service.TextMessageListService;
 import only.utils.WebConstants;
 import org.json.JSONObject;
 
@@ -45,6 +46,8 @@ public class OnlyController {
 	private CommentService cs;
 	@Autowired
 	private LikesService ls;
+	@Autowired
+	private TextMessageListService tmls;
 
 	// 채팅 컨트롤러
 	@RequestMapping("/chat")
@@ -57,6 +60,12 @@ public class OnlyController {
 		return "chat";
 	}
 
+	@RequestMapping("/messageList")
+	public String messageList(Model model) {
+		List<Chat> messageList = tmls.getChatMessageList();
+		model.addAttribute("messageList", messageList);
+		return "chat";
+	}
 	// 채팅 컨트롤러 끝
 	
 	

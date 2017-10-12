@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="messages">
-	<resultMap type="message" id="messageResult">
+	<resultMap type="chat" id="messageResult">
 		<id property="chatID" column="chatID" />
 		<result property="fromID" column="fromID" />
 		<result property="toID" column="toID" />
@@ -11,7 +11,7 @@
 		<result property="chatTime" column="chatTime" />
 	</resultMap>
 
-	<select id="messageList" resultType="message">
+	<select id="messageList" resultType="chat">
 		SELECT *
         FROM chat
         ORDER BY toID

@@ -228,9 +228,18 @@ $(document).ready(function() {
 		updateScrollbar();
 	}
 	
-	// 친구목록 불러오기
-	function friendList() {
-		
+	// 메시지 목록 불러오기
+	function MessageList() {
+		$.ajax({
+			type : "POST",
+			url : "/messageList",
+			data : ${messageList},
+			success : function() {
+				$('.people').append('<li class="person" data-chat="person1"><img src="/only/img_all/user.png" alt=""/>'+ 
+						'<span class="name">'+ ${toID} +'</span><span class="time">' + ${chatTime}
+						+ '</span><span class="preview">'+ ${chatContent} +'</span></li>')
+			}
+		});
 	}
 });
 </script>
@@ -288,6 +297,7 @@ $(document).ready(function() {
                     <span class="preview">I was wondering...</span>
                 </li>
             </ul>
+            ${messageList}
         </div>
 <!-- 친구목록 끝 -->
 </body>
