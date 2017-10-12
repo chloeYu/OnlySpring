@@ -297,7 +297,16 @@ $(document).ready(function() {
                     <span class="preview">I was wondering...</span>
                 </li>
             </ul>
-            ${messageList}
+        <c:forEach var="row" items="${messageList}">
+        <table>
+        <tr>
+            <td>${row.chatID}</td>
+            <td>${row.fromID}</td>
+            <td>${row.toID}</td>
+            <td>${row.chatContent}</td>
+        </tr>
+        </table>
+        </c:forEach>
         </div>
 <!-- 친구목록 끝 -->
 </body>
