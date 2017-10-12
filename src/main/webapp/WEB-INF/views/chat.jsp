@@ -32,14 +32,71 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	var $messages = $('.messages-content'), d, h, m, i = 0;
-
+	var websocket;
+	var url = window.location.host;// 웹브라우저의 주소창의 포트까지 가져옴
+	var pathname = window.location.pathname;
+	var appCtx = pathname.substring(0, pathname.indexOf("/", 2));
+	var root = url + appCtx;
+	
+	var $messages = $('.messages-content'), d, h, m, i = 0; // 스크롤
+	
+	// 웹소켓 커넥션
+	function connect() { 
+		websocket = new WebSocket("ws://" + root + "/chat-ws");
+		websocket.onmessage = onMessage;
+	}
+	
+	// 웹소켓 디커넥션
+	function disconnect() { 
+		websocket.close();
+	}
+	
+	function onMessage(event) {
+		appendMessage(event.data);
+	}
+	
+	function appendMessage(jsonString) {
+		var fromID = null;
+		var toID = null;
+		var chatContent = null;
+		
+		$.each(JSON.parse(jsonString), function(key, value) {
+			if (key === 'fromID')
+				fromID = value;
+			if (key === 'toID')
+				toID = value;
+			if (key === 'chatContent')
+				chatContent = value;
+		});
+		
+		if(fromID === '<%=userid%>') {
+			$('<div class="message message-personal">' + chatContent + '</div>')
+					.appendTo($('.mCSB_container')).addClass('new');
+			setDate();
+			$('<div class="checkmark-sent-delivered">&check;</div>')
+			.appendTo($('.message:last'));
+		} else {
+			$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
+					+ chatContent + '</div>')
+					.appendTo($('.mCSB_container'))
+					.addClass('new');
+			setDate();
+			$('<div class="checkmark-read">&check;</div>')
+					.appendTo($('.message:last'));
+		}
+		updateScrollbar();
+	}
+	
 	$(window).load(function() {
+		connect();
 		$messages.mCustomScrollbar();
 	});
 
+	$(window).on('unload', (function() {
+		disconnect();
+	}));
+	
 	chatListFunction('ten');
-	getInfiniteChat();
 
 	// 전송 버튼을 눌렀을 때 호출되는 메소드
 	$('.message-submit').click(function() {
@@ -58,6 +115,12 @@ $(document).ready(function() {
 		$('.menu .button').toggleClass('active');
 	});
 					
+	$('.endChat').click(function () {
+		disconnect();
+		$('.menu .items span').removeClass('active');
+		$('.menu .button').removeClass('active');
+	});
+	
 	function updateScrollbar() {
 		$messages.mCustomScrollbar("update").mCustomScrollbar(
 				'scrollTo', 'bottom', {
@@ -75,8 +138,6 @@ $(document).ready(function() {
 				$('.message:last'));
 			$('<div class="checkmark-sent-delivered">&check;</div>')
 							.appendTo($('.message:last'));
-			$('<div class="checkmark-read">&check;</div>')
-							.appendTo($('.message:last'));
 		}
 	}
 
@@ -88,13 +149,20 @@ $(document).ready(function() {
 		$.ajax({
 			type:"POST",
 			url:"./chatSubmitServlet",
-			data: {
+			data: { 
 					fromID: encodeURIComponent(fromID),
 					toID: encodeURIComponent(toID),
-					chatContent: encodeURIComponent(chatContent),
+					chatContent: encodeURIComponent(chatContent)
+			},
+			success: function () {
+				websocket.send(JSON.stringify({
+					fromID : "<%=userid%>",
+					toID : "<%=toID%>",
+					chatContent : $('.message-input').val()
+				}));
+				$('.message-input').val("");
 			}
 		});
-		$('.message-input').val("");
 					/*setTimeout(function() {
 						receiveMessage();
 					}, 1000 + (Math.random() * 20) * 100);*/
@@ -127,10 +195,7 @@ $(document).ready(function() {
 	}
 	
 	function addChat(chatName, chatContent, chatTime) {
-		var fromID = '<%=userid%>';
-		var toID = '<%=toID%>';
-		
-		if(fromID = '<%=userid%>') {
+		if(chatName == '<%=userid%>') {
 			$('<div class="message message-personal">' + chatContent + '</div>')
 					.appendTo($('.mCSB_container')).addClass('new');
 			$('<div class="timestamp">' + chatTime +'</div>')
@@ -139,18 +204,15 @@ $(document).ready(function() {
 			.appendTo($('.message:last'));
 		} else {
 			$('<div class="message new"><figure class="avatar"><img src="/only/img_all/user.png" /></figure>'
-					+ msg + '</div>')
+					+ chatContent + '</div>')
 					.appendTo($('.mCSB_container'))
 					.addClass('new');
+			$('<div class="timestamp">' + chatTime +'</div>')
+					.appendTo($('.message:last'));
 			$('<div class="checkmark-read">&check;</div>')
-			.appendTo($('.message:last'));
+					.appendTo($('.message:last'));
 		}
 		updateScrollbar();
-	}
-	function getInfiniteChat() {
-		setInterval(function() {
-			chatListFunction(lastID);
-		}, 1000);
 	}
 });
 </script>
@@ -168,7 +230,7 @@ Inspired by https://dribbble.com/supahfunk
 			<div class="items">
 				<span> <a href="#" title="Minimize">&mdash;</a><br> <!--     
      <a href="">enter email</a><br>
-     <a href="">email transcript</a><br>--> <a href="#" title="End Chat">&#10005;</a>
+     <a href="">email transcript</a><br>--> <a href="#" title="End Chat" class="endChat">&#10005;</a>
 
 				</span>
 			</div>
