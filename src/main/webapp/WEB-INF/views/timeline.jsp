@@ -97,6 +97,8 @@
 			</div>
 		</div>
 		<jsp:include page="rightmenu.jsp"></jsp:include>
+		
+	<!-- 채팅 메신저 -->
 		<jsp:include page="chat.jsp"></jsp:include>
 		
 	</div>
