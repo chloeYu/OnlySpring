@@ -233,11 +233,11 @@ $(document).ready(function() {
 		$.ajax({
 			type : "POST",
 			url : "/messageList",
-			data : ${messageList},
+			data : "${messageList}",
 			success : function() {
 				$('.people').append('<li class="person" data-chat="person1"><img src="/only/img_all/user.png" alt=""/>'+ 
-						'<span class="name">'+ ${toID} +'</span><span class="time">' + ${chatTime}
-						+ '</span><span class="preview">'+ ${chatContent} +'</span></li>')
+						'<span class="name">'+ '${toID}' +'</span><span class="time">' + '${chatTime}'
+						+ '</span><span class="preview">'+ '${chatContent}' +'</span></li>')
 			}
 		});
 	}
