@@ -9,18 +9,148 @@ Body
 *::after {
   box-sizing: border-box;
 }
+/* 친구목록 */
+/* .friendList {
+	position: fixed;
+	border-left: solid 1px #e1e1e1;
+	right : 0;
+	width: 240px;
+	height:100%;
+	background-color: #fafafa;
+	transform: translateX(240px);
+    -webkit-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
+} */
 
-body {
-  background: -webkit-linear-gradient(315deg, #044f48, #345093);
-  background: linear-gradient(135deg, #044f48, #345093);
-  background-size: cover;
-  background: #fff;
-  font-family: 'Avenir', 'Open Sans', sans-serif;
-  font-size: 14px;
-  line-height: 1.3;
-  overflow: hidden;
+.left {
+  position: fixed;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  border: 1px solid #e6e6e6;
+  background-color: #fff;
+  transform: translateX(300px);
+  -webkit-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
+  -moz-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
 }
-
+.left .top {
+  position: relative;
+  width: 100%;
+  height: 96px;
+  padding: 29px;
+}
+.left .top:after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: block;
+  width: 80%;
+  height: 1px;
+  content: '';
+  background-color: #e6e6e6;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+.left input {
+  float: left;
+  width: 188px;
+  height: 42px;
+  padding: 0 15px;
+  border: 1px solid #e6e6e6;
+  background-color: #eceff1;
+  border-radius: 21px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+}
+.left input:focus {
+  outline: none;
+}
+.left a.searchF {
+  display: block;
+  float: left;
+  width: 42px;
+  height: 42px;
+  margin-left: 10px;
+  border: 1px solid #e6e6e6;
+  background-color: #00b0ff;
+  background-image: url("https://s11.postimg.org/dpuahewmn/name_type.png");
+  background-repeat: no-repeat;
+  background-position: top 12px left 14px;
+  border-radius: 50%;
+}
+.left .people {
+  margin-left: -1px;
+  border-right: 1px solid #e6e6e6;
+  border-left: 1px solid #e6e6e6;
+  width: calc(100% + 2px);
+}
+.left .people .person {
+  position: relative;
+  width: 100%;
+  padding: 12px 10% 16px;
+  cursor: pointer;
+  background-color: #fff;
+}
+.left .people .person:after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: block;
+  width: 80%;
+  height: 1px;
+  content: '';
+  background-color: #e6e6e6;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+.left .people .person img {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  border-radius: 50%;
+}
+.left .people .person .name {
+  font-size: 14px;
+  line-height: 22px;
+  color: #1a1a1a;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+}
+.left .people .person .time {
+  font-size: 12px;
+  position: absolute;
+  top: 16px;
+  right: 10%;
+  padding: 0 0 5px 5px;
+  color: #999;
+  background-color: #fff;
+}
+.left .people .person .preview {
+  font-size: 12px;
+  display: inline-block;
+  overflow: hidden !important;
+  width: 70%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #999;
+}
+.left .people .person.active, .left .people .person:hover {
+  margin-top: -1px;
+  margin-left: -1px;
+  padding-top: 13px;
+  border: 0;
+  background-color: #00b0ff;
+  width: calc(100% + 2px);
+  padding-left: calc(10% + 1px);
+}
+.left .people .person.active span, .left .people .person:hover span {
+  color: #fff;
+  background: transparent;
+}
+.left .people .person.active:after, .left .people .person:hover:after {
+  display: none;
+}
+/* 친구목록 끝 */
 .bg {
   width: 100%;
   height: 100%;
@@ -508,6 +638,9 @@ Bounce
   }
 }
 .avenue-messenger {
+  font-family: 'Avenir', 'Open Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.3;
   opacity: 1;
   border-radius: 20px;
   height: calc(100% - 60px) !important;
@@ -520,12 +653,12 @@ Bounce
   */
   background: rgba(255, 255, 255, 0.9);
   position: fixed;
-  right: 20px;
+  right: 250px;
   bottom: 20px;
   margin: auto;
   z-index: 10;
   box-shadow: 2px 10px 40px rgba(22, 20, 19, 0.4);
-  /*  transform: translateX(300px);*/
+  transform: translateY(600px);
   -webkit-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
   -moz-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
 }
@@ -716,6 +849,9 @@ box-shadow: 0px 0px 10px rgba(0,0,0,.8);*/
     bottom: 0 !important;
     border-radius: 0 !important;
     background: #fff;
+    transform: translateX(100%);
+    -webkit-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
+    -moz-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
   }
 
   .avenue-messenger div.agent-face {

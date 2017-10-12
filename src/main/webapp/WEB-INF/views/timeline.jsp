@@ -97,6 +97,8 @@
 			</div>
 		</div>
 		<jsp:include page="rightmenu.jsp"></jsp:include>
+		<jsp:include page="chat.jsp"></jsp:include>
+		
 	</div>
 	
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1aRB-FJzz3Vtd6iiZdlCCk1DCfDxWDko&libraries=places&&callback=initAutocomplete1"
