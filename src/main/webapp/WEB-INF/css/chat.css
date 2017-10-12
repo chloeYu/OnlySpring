@@ -32,6 +32,9 @@ Body
   -webkit-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
   -moz-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
 }
+.left.active {
+	  transform: translateX(0);
+}
 .left .top {
   position: relative;
   width: 100%;

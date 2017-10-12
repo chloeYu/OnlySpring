@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="messages">
+	<resultMap type="message" id="messageResult">
+		<id property="chatID" column="chatID" />
+		<result property="fromID" column="fromID" />
+		<result property="toID" column="toID" />
+		<result property="chatContent" column="chatContent" />
+		<result property="chatTime" column="chatTime" />
+	</resultMap>
+
+	<select id="messageList" resultType="message">
+		SELECT *
+        FROM chat
+        ORDER BY toID
+	</select>
+	
+</mapper>

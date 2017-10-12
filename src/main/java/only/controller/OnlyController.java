@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import only.model.Chat;
 import only.model.Comments;
 import only.model.Likes;
 import only.model.Member;
@@ -45,6 +46,7 @@ public class OnlyController {
 	@Autowired
 	private LikesService ls;
 
+	// 채팅 컨트롤러
 	@RequestMapping("/chat")
 	public String chat(String userID, HttpSession session) {
 		Member member = ms.getMemberById(userID);
@@ -55,6 +57,9 @@ public class OnlyController {
 		return "chat";
 	}
 
+	// 채팅 컨트롤러 끝
+	
+	
 	@RequestMapping("/joinus/id_check")
 	public @ResponseBody int joinusIdChk(String id) {
 		Member member = ms.getMemberById(id);

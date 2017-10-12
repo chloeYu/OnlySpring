@@ -54,7 +54,7 @@ $(document).ready(function() {
 	function onMessage(event) {
 		appendMessage(event.data);
 	}
-	
+	// 웹소켓에 저장된 메세지 출력
 	function appendMessage(jsonString) {
 		var fromID = null;
 		var toID = null;
@@ -91,25 +91,25 @@ $(document).ready(function() {
 		connect();
 		$messages.mCustomScrollbar();
 	});
-
+	
 	$(window).on('unload', (function() {
 		disconnect();
 	}));
-	
-	chatListFunction('ten');
 
 	// 전송 버튼을 눌렀을 때 호출되는 메소드
 	$('.message-submit').click(function() {
 		insertMessage();
 	});
-
+	
+	//엔터키 조작
 	$(window).on('keydown', function(e) {
 		if (e.which == 13) {
 			insertMessage();
 			return false;
 		}
 	})
-
+	
+	//채팅창 미니메뉴 
 	$('.button').click(function() {
 		$('.menu .items span').toggleClass('active');
 		$('.menu .button').toggleClass('active');
@@ -121,6 +121,12 @@ $(document).ready(function() {
 		$('.menu .button').removeClass('active');
 	});
 	
+	//친구목록창 열기
+	$('#message_notification').click(function() {
+		$('.left').toggleClass('active');
+	});
+	
+	//스크롤바 펑션
 	function updateScrollbar() {
 		$messages.mCustomScrollbar("update").mCustomScrollbar(
 				'scrollTo', 'bottom', {
@@ -128,7 +134,8 @@ $(document).ready(function() {
 					timeout : 0
 		});
 	}
-
+	
+	//시간 
 	function setDate() {
 		d = new Date()
 		if (m != d.getMinutes()) {
@@ -140,7 +147,8 @@ $(document).ready(function() {
 							.appendTo($('.message:last'));
 		}
 	}
-
+	
+	//메세지 저장
 	function insertMessage() {
 		var fromID = '<%=userid%>';
 		var toID = '<%=toID%>';
@@ -167,7 +175,11 @@ $(document).ready(function() {
 						receiveMessage();
 					}, 1000 + (Math.random() * 20) * 100);*/
 	}
-
+	
+	//메세지 리스트 갯수
+	chatListFunction('ten');
+	
+	//메세지 리스트 불러오기
 	var lastID = 0;
 	function chatListFunction(type) {
 		var fromID = '<%=userid%>';
@@ -194,6 +206,7 @@ $(document).ready(function() {
 		});
 	}
 	
+	//메세지 리스트 CSS
 	function addChat(chatName, chatContent, chatTime) {
 		if(chatName == '<%=userid%>') {
 			$('<div class="message message-personal">' + chatContent + '</div>')
@@ -213,6 +226,11 @@ $(document).ready(function() {
 					.appendTo($('.message:last'));
 		}
 		updateScrollbar();
+	}
+	
+	// 친구목록 불러오기
+	function friendList() {
+		
 	}
 });
 </script>
@@ -268,37 +286,6 @@ $(document).ready(function() {
                     <span class="name">Thomas Bangalter</span>
                     <span class="time">2:09 PM</span>
                     <span class="preview">I was wondering...</span>
-                </li>
-                <li class="person" data-chat="person2">
-                    <img src="https://s3.postimg.org/yf86x7z1r/img2.jpg" alt="" />
-                    <span class="name">Dog Woofson</span>
-                    <span class="time">1:44 PM</span>
-                    <span class="preview">I've forgotten how it felt before</span>
-                </li>
-                <li class="person" data-chat="person3">
-                    <img src="https://s3.postimg.org/h9q4sm433/img3.jpg" alt="" />
-                    <span class="name">Louis CK</span>
-                    <span class="time">2:09 PM</span>
-                    <span class="preview">But we’re probably gonna need a new carpet.</span>
-                </li>
-                <li class="person" data-chat="person4">
-                    <img src="https://s3.postimg.org/quect8isv/img4.jpg" alt="" />
-                    <span class="name">Bo Jackson</span>
-                    <span class="time">2:09 PM</span>
-                    <span class="preview">It’s not that bad...</span>
-                </li>
-                <li class="person" data-chat="person5">
-                    <img src="https://s16.postimg.org/ete1l89z5/img5.jpg" alt="" />
-                    <span class="name">Michael Jordan</span>
-                    <span class="time">2:09 PM</span>
-                    <span class="preview">Wasup for the third time like is 
-you bling bitch</span>
-                </li>
-                <li class="person" data-chat="person6">
-                    <img src="https://s30.postimg.org/kwi7e42rh/img6.jpg" alt="" />
-                    <span class="name">Drake</span>
-                    <span class="time">2:09 PM</span>
-                    <span class="preview">howdoyoudoaspace</span>
                 </li>
             </ul>
         </div>

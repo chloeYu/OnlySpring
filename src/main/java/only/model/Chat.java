@@ -38,4 +38,9 @@ public class Chat {
 		this.chatTime = chatTime;
 	}
 	
+	@Override
+	public String toString() {
+		return "Chat [chatID=" + chatID + ", fromID=" + fromID + ", toID=" + toID + ", chatContent="
+                + chatContent + ", chatTime=" + chatTime + "]";
+	}
 }

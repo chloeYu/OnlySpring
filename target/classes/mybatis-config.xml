@@ -5,6 +5,7 @@
 <configuration>
 	<!-- <properties resource="db.properties" /> -->
 	<typeAliases>
+		<typeAlias  type="only.model.Chat" alias="chat"/>
 		<typeAlias  type="only.model.Member" alias="member"/>
 		<typeAlias  type="only.model.Post" alias="post"/>
 		<typeAlias  type="only.model.Post_Files" alias="postFiles"/>
@@ -15,6 +16,7 @@
 	</typeAliases>
 
 	<mappers>
+		<mapper resource="TextMessageList.xml" />
 		<mapper resource="Member.xml" />
 		<mapper resource="Post.xml" />
 		<mapper resource="Comments.xml" />
