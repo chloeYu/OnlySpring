@@ -19,17 +19,18 @@
 		<result property="status" column="status" />
 		<result property="created" column="created" />
 		<result property="modified" column="modified" />
+		<result property="relation" column="relation" />
 	</resultMap>
 	<select id="friendList" parameterType="String" resultMap="memberResult">
-		select a.* from (select m.* from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{member_id} or f.uid2=#{member_id} ))) a where a.userid != #{member_id}
+		select a.* from (select m.*, f.status as relation from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{member_id} or f.uid2=#{member_id} ))) a where a.userid != #{member_id}
 	</select>
 	
 	<select id="pendingList" parameterType="String" resultMap="memberResult">
-		select member.* from member join follow on (uid2 = userid) where follow.status = 2 and uid1=#{member_id}
+		select member.*, follow.status as relation from member join follow on (uid2 = userid) where follow.status = 2 and uid1=#{member_id}
 	</select>
 	
 	<select id="requestList" parameterType="String" resultMap="memberResult">
-		select member.* from member join follow on (uid1 = userid )where follow.status = 2 and uid2=#{member_id}
+		select member.*, follow.status as relation from member join follow on (uid1 = userid )where follow.status = 2 and uid2=#{member_id}
 	</select>
 	
 	<update id="update" parameterType="friendlist">

@@ -119,16 +119,18 @@ public class OnlyController {
 	}
 
 	@RequestMapping("/search")
-	public @ResponseBody List<Member> search(String searchTerm) {
+	public @ResponseBody List<Member> search(String searchTerm, HttpSession session) {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
 		System.out.println("Search 실행.. " + searchTerm);
-		List<Member> result = ms.searchMember(searchTerm);
+		List<Member> result = ms.searchMember(searchTerm, userid);
 		System.out.println(result.size() + " returned");
 		return result;
 	}
 
 	@RequestMapping(value = { "/searchResult", "/blog/searchResult" })
-	public String searchResult(String searchTerm, HttpServletRequest request, Model model) {
-		List<Member> result = ms.searchMember(searchTerm);
+	public String searchResult(String searchTerm, HttpServletRequest request, HttpSession session, Model model) {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		List<Member> result = ms.searchMember(searchTerm, userid);
 		model.addAttribute("searchResult", result);
 		System.out.println(request.getServerName());
 		return "searchResult";
@@ -245,6 +247,7 @@ public class OnlyController {
 		return "blog/blog";
 	}
 
+	
 	// User가 해당 포스트 좋아요를 눌렀는지 체크
 	// @RequestMapping(value = "/isLiked")
 	private boolean isLiked(String userid, int lid, int type) {

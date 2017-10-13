@@ -1,7 +1,10 @@
 package only.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,8 @@ import only.utils.WebConstants;
 @Controller
 public class FriendListLoader {
 	@Autowired
+	private MemberService ms;
+	@Autowired
 	private FriendListService fs;
 	
 	@RequestMapping("/friendList")
@@ -32,20 +37,29 @@ public class FriendListLoader {
 		return "friendList";	
 	}
 	@RequestMapping("/friendupdate/{status}/{uid1}/{uid2}")
-	public String Friendaccpet(Friendlist Friendlist, Model model, @PathVariable int status, @PathVariable String uid1, @PathVariable String uid2) {
+	public void Friendaccpet(Friendlist Friendlist, Model model, @PathVariable int status, @PathVariable String uid1, @PathVariable String uid2, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Friendlist.setStatus(status);
 		Friendlist.setUid1(uid1);
 		Friendlist.setUid2(uid2);
 		fs.update(Friendlist);
-		return "friendList";
+		String referer = request.getHeader("Referer");
+		System.out.println(referer);
+		response.sendRedirect(referer);
+		//return "friendList";
 	}
 	
-	@RequestMapping(value="/blog/{owner}/friendList/{pageNum}")
-	public String friendListByUser(@PathVariable String owner, @PathVariable int pageNum, Model model){
-		System.out.println("friendList called");
-		return "";
+	@RequestMapping("/blog/{owner}/friendList/{pageNum}")
+	public String friendListByUser(@PathVariable String owner, @PathVariable String pageNum, Model model){
+		Member blogOwner = ms.getMemberById(owner);
+		List<Member> friendList = fs.friendListLoad(owner);
+		System.out.println("returned size" + friendList.size());
+		model.addAttribute("owner", blogOwner);
+		model.addAttribute("friendList",friendList);
+		
+		return "blog/blogFriendList";
 	}
-	@RequestMapping("/getFriendListByUserid")
+	
+	/*@RequestMapping("/getFriendListByUserid")
 	public String getFriendListByUserid(String userid, HttpSession session, Model model) {
 		List<Member> friendList =fs.friendListLoad(userid);
 		List<Member> pendingList = fs.pendingListLoad(userid);
@@ -55,5 +69,5 @@ public class FriendListLoader {
 		model.addAttribute("requestList",requestList);
 		System.out.println("getFriendByUserId" + friendList.size() + ", " + pendingList.size() + ", " +requestList.size());
 		return "blog/blogFriendList";	
-	}
+	}*/
 }

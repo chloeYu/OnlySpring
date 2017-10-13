@@ -20,8 +20,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> searchMember(String searchTerm) {
-		return md.searchMember(searchTerm);
+	public List<Member> searchMember(String searchTerm, String userid) {
+		return md.searchMember(searchTerm, userid);
 	}
 
 	@Override

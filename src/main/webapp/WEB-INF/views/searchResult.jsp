@@ -31,7 +31,7 @@
 								<td valign="middle" width="10%"><img src='${path}/${member.profile_image }'></td>
 								<td valign="middle" align="left">
 								<a href="#" class="test" id="test-${member.userid}">
-								<h3 onclick="location.href='${path}/blog/${member.userid}'">${member.userid}</h3>
+								<h3 onclick="location.href='${path}/blog/${member.userid}'">${member.userid} - ${member.relation }</h3>
 										<%-- <div class="hide" id="rmenu-${member.userid}" name="rmenu">
 											<ul>
 												<li><a href="${path}/blog/${member.userid}">Visit</a></li>

@@ -21,8 +21,11 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public List<Member> searchMember(String searchTerm) {
-		return sst.selectList("memberns.search", searchTerm);
+	public List<Member> searchMember(String searchTerm, String userid) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		map.put("searchTerm", searchTerm);
+		return sst.selectList("memberns.search", map);
 	}
 
 	@Override

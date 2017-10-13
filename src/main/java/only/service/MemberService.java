@@ -8,7 +8,7 @@ import only.model.Post;
 public interface MemberService {
 	Member getMemberById(String member_id);
 
-	List<Member> searchMember(String searchTerm);
+	List<Member> searchMember(String searchTerm, String userid);
 
 	int insert(Member member);
 

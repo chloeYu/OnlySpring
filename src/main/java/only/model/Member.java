@@ -15,6 +15,7 @@ public class Member {
 	private int status;
 	private Date created;
 	private Date modified;
+	private int relation;
 	
 	
 	public String getUserid() {
@@ -95,6 +96,12 @@ public class Member {
 
 	public void setBirth(Date birth) {
 		this.birth = birth;
+	}
+	public int getRelation() {
+		return relation;
+	}
+	public void setRelation(int relation) {
+		this.relation = relation;
 	}
 
 }
