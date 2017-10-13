@@ -40,6 +40,11 @@ public class FriendListLoader {
 		return "friendList";
 	}
 	
+	@RequestMapping(value="/blog/{owner}/friendList/{pageNum}")
+	public String friendListByUser(@PathVariable String owner, @PathVariable int pageNum, Model model){
+		System.out.println("friendList called");
+		return "";
+	}
 	@RequestMapping("/getFriendListByUserid")
 	public String getFriendListByUserid(String userid, HttpSession session, Model model) {
 		List<Member> friendList =fs.friendListLoad(userid);
