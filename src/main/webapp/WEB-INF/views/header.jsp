@@ -36,15 +36,15 @@
 		</div>
 
 		<div class="header_wraper userApplication">
-			<div class="nav_icon">
-				<div class="friend_list">
-					<div id="friendList">
-						<div id="friend_notification">
-							<span>Friend List</span>
+			<div class="nav_icon instant">
+				<div class="friend_list instant">
+					<div class="instant" id="friendList">
+						<div class="instant" id="friend_notification">
+							<span class="instant">Friend List</span>
 						</div>
 					</div>
 				</div>
-						<div class="friendlistplace disapper"><h2>친구목록</h2><div id="friendload"></div></div>
+						<div class="friendlistplace disapper instant"><h2 class="flh2 instant">친구목록</h2><div class="instant" id="friendload"></div></div>
 			</div>
 			<div class="nav_icon">
 				<div class="alarm_list" data-click="alarm_list_icon">

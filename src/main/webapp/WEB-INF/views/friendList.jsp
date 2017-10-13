@@ -7,27 +7,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>FriendList</title>
 </head>
-<body>
+<body class="instant">
 	<c:if test="${not empty friendList }">
-		<h2>친구</h2>
+		<hr class="instant"><h2 class="flh2 instant">친구</h2><hr class="instant">
 		<c:forEach var="friend" items="${friendList }">
 			
-			${friend.username }<p>
+			<p class="flp instant">${friend.username }</p>
 		</c:forEach>
 	</c:if>
 	<c:if test="${not empty requestList }">
-		<h2>친구요청</h2>
+	<hr class="instant"><h2 class="flh2 instant">친구요청</h2><hr class="instant">
 		<c:forEach var="friend" items="${requestList }">
 			${friend.username }
-			<a href="/only/friendupdate/1/${friend.userid}/${member.userid}">수락</a>
-			<a href="/only/friendupdate/0/${friend.userid}/${member.userid}">거절</a>
-			<p>		
+			<a class="instant" href="/only/friendupdate/1/${friend.userid}/${member.userid}">수락</a>
+			<a class="instant" href="/only/friendupdate/0/${friend.userid}/${member.userid}">거절</a>
+			<p class="flp instant">		
 		</c:forEach>
 	</c:if>
 	<c:if test="${not empty pendingList }">
-		<h2>대기중 요청</h2>
+		<hr class="instant"><h2 class="flh2 instant">대기중 요청</h2><hr class="instant">
 		<c:forEach var="friend" items="${pendingList }">
-			${friend.username }<p>
+			<p class="flp instant">${friend.username }</p>
 		</c:forEach>
 	</c:if>
 </body>

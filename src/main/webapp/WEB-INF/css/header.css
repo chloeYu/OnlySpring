@@ -34,11 +34,9 @@
 
 .dropdown a:hover {background-color: #f1f1f1}
 
-.show {display:block;}
-
 .friendlistplace{
 	position: absolute;
-    background-color: #f9f9f9;
+    background-color: white;
     width: 200px;
     overflow-x: hidden;
     word-wrap:break-word;
@@ -47,6 +45,8 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     top: 50px;
+    border-radius: 5px;
+    border: solid black 2px;
 }
 
 .dropdown{
@@ -99,3 +99,12 @@
 .dropdown a:hover {
 	background-color: #f1f1f1
 	}
+
+.flh2{
+	text-align: center;
+	font-size: large;
+	font-weight: bold;
+}
+.flp{
+	text-align: center;
+}

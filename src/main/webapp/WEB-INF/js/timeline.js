@@ -11,9 +11,9 @@
 // 글 내용 없을 때 작성버튼 비활성화 끝
 var latitude  = 36.322473;
 var longitude = 127.412501;
+var a = false;
 
 $(function() {
-	var a = false;
 	$(".friend_list").on("click", function(){
 		if(a){
 			$(".friendlistplace").addClass("disapper").removeClass("show");
@@ -256,11 +256,6 @@ $(function() {
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-	if(!event.target.matches('.friendlistplace')){
-		if($(".friendlistplace").hasClass("show")){
-			$(".friendlistplace").removeClass("show");
-		}
-	}
 	if (!event.target.matches('.profileDropdown')) {
 
 		var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -270,6 +265,12 @@ window.onclick = function(event) {
 			if (openDropdown.classList.contains('show')) {
 				openDropdown.classList.remove('show');
 			}
+		}
+	}
+	if(!event.target.matches('.instant')){
+		if(a){
+			$(".friendlistplace").addClass("disapper").removeClass("show");
+			a=!a;
 		}
 	}
 }
