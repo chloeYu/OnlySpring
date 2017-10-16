@@ -47,16 +47,6 @@ public class OnlyController {
 	private TextMessageListService tmls;
 
 	// 채팅 컨트롤러
-	@RequestMapping("/chat")
-	public String chat(String userID, HttpSession session) {
-		Member member = ms.getMemberById(userID);
-		if (member != null) {
-			session.setAttribute("userID", member.getUserid());
-			session.setAttribute("nickname", member.getUsername());
-		}
-		return "chat";
-	}
-
 	@RequestMapping(value = "/messageList", method = RequestMethod.POST)
 	public @ResponseBody List<Chat> messageList(Model model, HttpSession session) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
