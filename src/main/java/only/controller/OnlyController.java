@@ -133,6 +133,9 @@ public class OnlyController {
 		List<Member> result = ms.searchMember(searchTerm, userid);
 		model.addAttribute("searchResult", result);
 		System.out.println(request.getServerName());
+		for(Member m : result) {
+			System.out.println(m);
+		}
 		return "searchResult";
 	}
 

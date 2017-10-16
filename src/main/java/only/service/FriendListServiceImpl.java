@@ -15,8 +15,8 @@ public class FriendListServiceImpl implements FriendListService {
 	private FriendListDao fd;
 
 	@Override
-	public List<Member> friendListLoad(String member_id) {
-		return fd.friendListLoad(member_id);
+	public List<Member> friendListLoad(String owner, String userid) {
+		return fd.friendListLoad(owner, userid);
 	}
 
 	@Override
@@ -32,5 +32,20 @@ public class FriendListServiceImpl implements FriendListService {
 	@Override
 	public int update(Friendlist Friendlist) {
 		return fd.update(Friendlist);
+	}
+
+	@Override
+	public Friendlist getFriendList(String uid1, String uid2) {
+		return fd.getFriendList(uid1, uid2);
+	}
+
+	@Override
+	public int insertRequest(Friendlist f) {
+		return fd.insertRequest(f);
+	}
+
+	@Override
+	public int insertUserSwitchedRequest(Friendlist f) {
+		return fd.insertUserSwitchedRequest(f);
 	}
 }

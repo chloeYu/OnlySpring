@@ -11,35 +11,32 @@ body {
 }
 
 .search_view_box {
-	list-style-type: none;
+    border-bottom: 1px solid #e3e6e9;
+    margin: 0;
+    padding: 12px;
 }
 
 .search_main {
-	width: 100%;
+	width: 496px;
+	padding-left: 0;
+	padding-right: 10px;
+	margin-top: 44px !important;
+	/* 	width: 100%;
 	display: block;
-	/* background-color: #3f5068; */
-	overflow: auto;
+ */ /* background-color: #3f5068; */
+	/* 	overflow: auto;*/
 }
 
 .search_post {
-	width: 40%;
-	display: block;
-	float: left;
-	margin-left: 18%;
+ 	border: 1px solid #dddfe2;
+    background-color: #fff;
+	margin-top: 10px;
+    position: relative;
+    display: block;
 }
 
-.search_view_box {
-	list-style-type: none;
-}
-
-.search_result {
-	background-color: #FFF;
-	border-radius: 5px;
-	padding: 20px;
-	padding-top: 20px;
-	margin-bottom: 25px;
-	width: 90%;
-	padding-top: 5px;
+.clearfix {
+	zoom: 1;
 }
 
 .search_result .search_profile {
@@ -139,26 +136,26 @@ body {
 	
 }
 
-#alarm_notification span, #message_notification span, #friend_notification span{
+#alarm_notification span, #message_notification span,
+	#friend_notification span {
 	display: none;
 }
 
-.heart span{
+.heart span {
 	display: none;
 }
 
-.heart:hover span{
+.heart:hover span {
 	display: inline;
 }
 
-.heart:hover span:after{
+.heart:hover span:after {
 	display: inline;
 }
-.navImage:hover span,
-#friend_notification:hover span,
-#alarm_notification:hover span,
-#message_notification:hover span
-{ /*the span will display just on :hover state*/
+
+.navImage:hover span, #friend_notification:hover span,
+	#alarm_notification:hover span, #message_notification:hover span {
+	/*the span will display just on :hover state*/
 	padding: 5px;
 	display: block;
 	position: absolute;
@@ -170,11 +167,9 @@ body {
 	text-align: center;
 }
 
-.navImage:hover span:after,
-.heart:hover span:after,
-#friend_notification:hover span:after,
-#alarm_notification:hover span:after,
-#message_notification:hover span:after {
+.navImage:hover span:after, .heart:hover span:after,
+	#friend_notification:hover span:after, #alarm_notification:hover span:after,
+	#message_notification:hover span:after {
 	/*the span will display just on :hover state*/
 	padding: 5px;
 	display: block;
@@ -201,7 +196,6 @@ body {
 	float: left;
 	overflow: visible;
 }
-
 
 #friend_notification {
 	position: relative;
@@ -233,7 +227,6 @@ body {
 	overflow: visible;
 }
 
-
 .alarm_list .navImage {
 	position: relative;
 	cursor: pointer;
@@ -248,7 +241,6 @@ body {
 	float: left;
 	overflow: visible;
 }
-
 
 #alarm_notification {
 	position: relative;
@@ -310,8 +302,6 @@ body {
 	overflow: visible;
 }
 
-
-
 /* .header_profile .header_wraper .alarm_list {
    display: inline-block;
 }
@@ -322,7 +312,7 @@ body {
  */
 .header_profile a {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background-color: transparent;	
+	background-color: transparent;
 	display: inline-block;
 	font-size: 17px;
 	-moz-osx-font-smoothing: grayscale;
@@ -371,36 +361,37 @@ span {
 	white-space: nowrap;
 	overflow: hidden;
 }
+
 #displayChatList span ul {
 	padding: 0;
 	color: #000;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+
 #displayChatList span ul li {
 	border-bottom: 1px solid #adbed8;
 	color: #000;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+
 #displayChatList span ul li:last-child {
 	border-bottom: 0;
 	color: #000;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
-#displayChatList span ul li a{
+
+#displayChatList span ul li a {
 	color: #000;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+
 .chatListToggle {
 	display: none;
 }
-
-
-
-
 
 #chatRoomDisplay .sentMsg {
 	float: right;
@@ -451,4 +442,151 @@ span {
 	float: left;
 	width: 20px;
 	margin-right: 10px;
+}
+
+.search_post .rightMargin {
+	margin-right: 12px;
+	margin-bottom: 10px;
+}
+
+.search_post .leftFloat {
+	float: left;
+}
+
+.search_post a {
+	display: block;
+	color: #365899;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.search_post a img {
+	width: 72px;
+	height: 72px;
+}
+
+.search_detail {
+	height: auto;
+	margin-top: 8px;
+	position: relative;
+	display: block;
+}
+
+.memberListAction{
+	margin-left: 4px;
+    margin-right: 2px;
+    position: relative;
+    top: -4px;
+    float:right;
+    display: inline-flex;
+}
+
+.friendBtn{
+	display: inline-block;
+    vertical-align: top;
+}
+
+.friendBtn>a{
+	border-radius: 2px 0 0 2px;
+    margin-left: 0 !important;
+    display: inline-block;
+    margin: 0 !important;
+    position: relative;
+    z-index: 1;
+    background-color: #f6f7f9;
+    border-color: #ced0d4 !important;
+    color: #4b4f56;
+    line-height: 22px;
+    border: 1px solid;
+    box-sizing: content-box;
+    font-size: 12px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: bold;
+    justify-content: center;
+    padding: 0 12px;
+    position: relative;
+    text-align: center;
+    text-shadow: none;
+    vertical-align: middle;
+}
+.addFriend{
+	background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/961454-200.png);
+    background-size: 54px 330px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    bottom: 1px;
+    background-position: center;
+	position: relative;
+    vertical-align: middle;
+    background-size: 115%;
+}
+
+.checkFriend{
+	background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/1283376-200.png);
+    background-size: 54px 330px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    bottom: 1px;
+    position: relative;
+    vertical-align: middle;
+    background-size: 100%;
+}
+
+.uiPopover{
+	display: inline-block;
+}
+
+.uiPopover a{
+	border-radius: 0 2px 2px 0;;
+    margin-left: 0 !important;
+    display: inline-block;
+    margin: 0 !important;
+    position: relative;
+    z-index: 1;
+    background-color: #f6f7f9;
+    border-color: #ced0d4 !important;
+    color: #4b4f56;
+    line-height: 22px;
+    border: 1px solid;
+    border-left: none;
+    box-sizing: content-box;
+    font-size: 12px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: bold;
+    justify-content: center;
+    padding: 0 8px;
+    position: relative;
+    text-align: center;
+    text-shadow: none;
+    vertical-align: middle;
+    line-height: 22px;
+}
+
+.expandBtn{
+	width: 25px;
+    height: 25px;
+    background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/615120-200.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.friend-dropdown{
+	display: none;
+	background-color: #f9f9f9;
+    overflow: hidden;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.friendBtn:hover .friend-dropdown{
+	display: block;
+}
+
+.friend-dropdown a{
+	padding: 2px;
+	margin: 5px 15px;
+	font-size: 0.8em;
 }
