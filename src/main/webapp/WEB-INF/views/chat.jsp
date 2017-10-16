@@ -90,6 +90,7 @@ $(document).ready(function() {
 	$(window).load(function() {
 		connect();
 		$messages.mCustomScrollbar();
+		MessageList();
 	});
 	
 	$(window).on('unload', (function() {
