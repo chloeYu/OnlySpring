@@ -217,7 +217,9 @@ flat(ctrl++shift+f) 절대로 금지 */
 		position: relative;
 	}
 	.infinite_scroll .postImg4{
-		width: 100%;
+		width: 80%;
+		min-height: 20%;
+		height: 20%;
 		margin:0;
 		display: block;
 		position: relative;
@@ -233,6 +235,17 @@ flat(ctrl++shift+f) 절대로 금지 */
 	}
 	.det{
 		width:38%;
+		display: none;
+	}
+	.detailDim{
+		position:absolute; 
+		top:20%; 
+		left:30%; 
+		width:38%; 
+		height:auto; 
+		background-color:#FFF; 
+		opacity:1; 
+		z-index:10;
 	}
 	.infinite_scroll .postImg3:nth-child(n+7){
 		display: none;

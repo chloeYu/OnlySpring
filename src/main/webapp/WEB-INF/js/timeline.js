@@ -207,40 +207,40 @@ function deleteImageAction(index) {
 }
 
 // 이미지 상세(확장)
-function layer_popup(el){
-
-    var $el = $(el);        // 레이어의 id를 $el 변수에 저장
-    var isDim = $el.prev().hasClass('.postInner');   // dimmed 레이어를 감지하기 위한
-														// boolean 변수
-
-    isDim ? $('.imgDetail').fadeIn() : $el.fadeIn();
-
-    var $elWidth = ~~($el.outerWidth()),
-        $elHeight = ~~($el.outerHeight()),
-        docWidth = $(document).width(),
-        docHeight = $(document).height();
-
-    // 화면의 중앙에 레이어를 띄운다.
-//    if ($elHeight < docHeight || $elWidth < docWidth) {
-//        $el.css({
-//            marginTop: -$elHeight /2,
-//            marginLeft: -$elWidth/2
-//        })
-//    } else {
-//        $el.css({top: 0, left: 0});
-//    }
-
-    $el.find('a.btn-layerClose').click(function(){
-        isDim ? $('.imgDetail').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가
-															// 닫힌다.
-        return false;
-    });
-
-    $('.body').click(function(){
-        $('.imgDetail').fadeOut();
-        return false;
-    });
-}
+//function layer_popup(el){
+//
+//    var $el = $(el);        // 레이어의 id를 $el 변수에 저장
+//    var isDim = $el.prev().hasClass('.postInner');   // dimmed 레이어를 감지하기 위한
+//														// boolean 변수
+//
+//    isDim ? $('.imgDetail').fadeIn() : $el.fadeIn();
+//
+//    var $elWidth = ~~($el.outerWidth()),
+//        $elHeight = ~~($el.outerHeight()),
+//        docWidth = $(document).width(),
+//        docHeight = $(document).height();
+//
+//    // 화면의 중앙에 레이어를 띄운다.
+////    if ($elHeight < docHeight || $elWidth < docWidth) {
+////        $el.css({
+////            marginTop: -$elHeight /2,
+////            marginLeft: -$elWidth/2
+////        })
+////    } else {
+////        $el.css({top: 0, left: 0});
+////    }
+//
+//    $el.find('a.btn-layerClose').click(function(){
+//        isDim ? $('.imgDetail').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가
+//															// 닫힌다.
+//        return false;
+//    });
+//
+//    $('.body').click(function(){
+//        $('.imgDetail').fadeOut();
+//        return false;
+//    });
+//}
 
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
@@ -250,6 +250,11 @@ $(function() {
 			$('.dropdown-content').removeClass('show');
 		} else {
 			$('.dropdown-content').addClass('show');
+		}
+	});
+	$('.dimClose').on('click', function(){
+		if($('.det').hasClass('show')){
+			$('.det').removeClass('show');
 		}
 	});
 });
@@ -273,6 +278,12 @@ window.onclick = function(event) {
 			a=!a;
 		}
 	}
+//	if(!event.target.matches('.det')){
+//		if(a){
+//			$('.det').removeClass('show');
+//			a=!a;
+//		}
+//	}
 }
 //지도
 var google_map_place;
