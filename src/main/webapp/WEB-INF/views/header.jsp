@@ -14,7 +14,7 @@
 	<!-- 로고 끝 -->
 	<!-- 상단고정바 서치 -->
 	<div class="search">
-		<form class="form-wrapper cf" name="frm" action="searchResult"
+		<form class="form-wrapper cf" name="frm" action="/only/searchResult"
 			method="post" onsubmit="return searchChk()">
 			<input list="searchResult" class="searchTerm" name="searchTerm"
 				placeholder="Search" onkeyup="runSearch(event)" autocomplete="off">

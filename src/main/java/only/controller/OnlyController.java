@@ -127,7 +127,7 @@ public class OnlyController {
 		return result;
 	}
 
-	@RequestMapping(value = { "/searchResult", "/blog/searchResult" })
+	@RequestMapping(value = { "/searchResult"})
 	public String searchResult(String searchTerm, HttpServletRequest request, HttpSession session, Model model) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
 		List<Member> result = ms.searchMember(searchTerm, userid);
