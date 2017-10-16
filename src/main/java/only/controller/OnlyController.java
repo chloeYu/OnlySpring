@@ -245,6 +245,12 @@ public class OnlyController {
 		return "profileDone";
 	}
 
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/timeline";
+	}
+	
 	@RequestMapping(value = "/blog/{owner}")
 	public String blog(@PathVariable String owner, Model model) {
 		System.out.println("owner: " + owner);
@@ -306,19 +312,25 @@ public class OnlyController {
 
 	// ThumbProfile Image Update - existing image
 	@RequestMapping(value = "/updateProfileImage", method = RequestMethod.GET)
-	public String updateProfileImage(@RequestParam("url") String url, HttpSession session) {
+	public String updateProfileImage(@RequestParam("url") String url, @RequestParam("type") int updateType, HttpSession session) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
-		int result = ms.updateThumbProfile(userid, url);
 		Member member = (Member) session.getAttribute("member");
-		member.setProfile_image(url);
+		int result = 0;
+		if(updateType == 0) {
+			result = ms.updateCoverProfile(userid, url);
+			member.setCover_image(url);
+		} else if (updateType == 1){
+			result = ms.updateThumbProfile(userid, url);
+			member.setProfile_image(url);
+		}
 		return "redirect:blog/" + userid;
 	}
 
 	// ThumbProfile Image Update - new image
 	@RequestMapping(value = "/updateProfileImage", method = RequestMethod.POST)
-	public String updateProfileImage2(MultipartFile file, HttpServletRequest request, HttpSession session) {
+	public String updateProfileImage2(MultipartFile file, int updateType, HttpServletRequest request, HttpSession session) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
-		System.out.println("Uploaded File: " + file.getOriginalFilename());
+		System.out.println("Uploaded File: " + file.getOriginalFilename() + ", " + updateType);
 		Member member = (Member) session.getAttribute("member");
 		if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
 			try {
@@ -331,8 +343,15 @@ public class OnlyController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			int result = ms.updateThumbProfile(userid, file.getOriginalFilename());
-			member.setProfile_image(file.getOriginalFilename());
+			if(updateType==0) {
+				ms.updateCoverProfile(userid, file.getOriginalFilename());
+				 member.setCover_image(file.getOriginalFilename());
+				
+			} else if(updateType==1) {
+				 ms.updateThumbProfile(userid, file.getOriginalFilename());
+				 member.setProfile_image(file.getOriginalFilename());
+			}
+			
 		}
 		return "redirect:blog/" + userid;
 	}

@@ -4,8 +4,19 @@ var scrollHandler = function(){
 
 var picLoad = 0;
 var loadedImage = 0;
+var updateType = 0;
 $(function(){
 	$('body').on('click', '.editCoverBtn', function(){
+		if($(this).attr('data-type')=='cover'){
+			updateType = 0; // cover이미지 수정
+			$("#updateType").val("0");
+			console.log("Cover " + $("#updateType").val());
+		} else if($(this).attr('data-type')=='thumb'){
+			updateType = 1; // thumb이지미 수정
+			$("#updateType").val("1");
+			console.log("Thumb " + $("#updateType").val())
+		}
+		console.log($(this).attr('data-type'));
 		if(picLoad==0){
 			imageLoad(picLoad);
 		}
@@ -47,7 +58,7 @@ function handleProfileImgSelect(e) {
 function imagePreview(image){
 	console.log("image clicked" + image);
 	$('#uploadedImage').html('<img src="../img_timeline/'+image+'" style="max-width: 100%; max-height:100%;">');
-	$('#aaaaa').append('<a href="/only/updateProfileImage?url='+image+'" class="imageUpdateLabel">Update</a>');
+	$('#aaaaa').append('<a href="/only/updateProfileImage?url='+image+'&type='+updateType+'" class="imageUpdateLabel">Update</a>');
 }
 function imageLoad(picLoad){
 	picLoad++;

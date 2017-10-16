@@ -11,6 +11,7 @@
 			<div class="updateMain">
 				<div style="border-bottom: 1px solid #e9ebee; /* display: flex; padding: 4px; */">
 					<form method="post" action="/only/updateProfileImage" enctype="multipart/form-data">
+					<input type="hidden" id="updateType" name="updateType">
 					<div class= "updateMainBox" style="width: 95%; position: relative; flex: 1 1 0%;">
 						
 						<div>
