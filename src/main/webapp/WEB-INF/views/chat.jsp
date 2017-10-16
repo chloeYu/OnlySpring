@@ -230,14 +230,42 @@ $(document).ready(function() {
 	
 	// 메시지 목록 불러오기
 	function MessageList() {
+		
 		$.ajax({
 			type : "POST",
-			url : "/messageList",
-			data : "${messageList}",
-			success : function() {
-				$('.people').append('<li class="person" data-chat="person1"><img src="/only/img_all/user.png" alt=""/>'+ 
-						'<span class="name">'+ '${toID}' +'</span><span class="time">' + '${chatTime}'
-						+ '</span><span class="preview">'+ '${chatContent}' +'</span></li>')
+			url : "${path}/messageList",
+			dataType : "json",
+			success : function(data) {
+				var chatID = null;
+				var fromID = null;
+				var toID = null;
+				var chatContent = null;
+				var chatTime = null;
+				var timeType = '오전';
+				
+				$.each(data, function(key, list) {
+					chatID = list.chatID;
+					fromID = list.fromID;
+					toID = list.toID;
+					chatContent = list.chatContent;
+					chatTime = list.chatTime;
+					
+					var ampm = chatTime.substring(11,13);
+					if(ampm >= 12) {
+						timeType = '오후';
+						ampm -= 12;
+					}
+					var resultTime = timeType + " " + ampm + ":" + chatTime.substring(14,16 + "");
+					if(fromID=='<%=userid%>') {
+						$('.people').append('<li class="person" data-chat="person1"><img src="/only/img_all/user.png" alt=""/>'+ 
+							'<span class="name">'+ toID +'</span><span class="time">' + resultTime
+							+ '</span><span class="preview">'+ chatContent +'</span></li>');
+					} else if(toID=='<%=userid%>') {
+						$('.people').append('<li class="person" data-chat="person1"><img src="/only/img_all/user.png" alt=""/>'+ 
+								'<span class="name">'+ fromID +'</span><span class="time">' + resultTime
+								+ '</span><span class="preview">'+ chatContent +'</span></li>');
+					}
+				});	
 			}
 		});
 	}
@@ -245,7 +273,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<!-- 채팅창 -->
+	<!-- 채팅창 -->
 	<div class="alert alert-success" id="successMessage"
 		style="display: none;">
 		<strong>메세지 전송에 성공했습니다.</strong>
@@ -255,7 +283,8 @@ $(document).ready(function() {
 			<div class="items">
 				<span> <a href="#" title="Minimize">&mdash;</a><br> <!--     
      <a href="">enter email</a><br>
-     <a href="">email transcript</a><br>--> <a href="#" title="End Chat" class="endChat">&#10005;</a>
+     <a href="">email transcript</a><br>--> <a href="#" title="End Chat"
+					class="endChat">&#10005;</a>
 
 				</span>
 			</div>
@@ -282,32 +311,19 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</section>
-<!-- 채팅창 끝 -->
-<!-- 친구목록 -->
-        <div class="left">
-            <div class="top">
-                <input type="text" />
-                <a href="javascript:;" class="searchF"></a>
-            </div>
-            <ul class="people">
-                <li class="person" data-chat="person1">
-                    <img src="https://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
-                    <span class="name">Thomas Bangalter</span>
-                    <span class="time">2:09 PM</span>
-                    <span class="preview">I was wondering...</span>
-                </li>
-            </ul>
-        <c:forEach var="row" items="${messageList}">
-        <table>
-        <tr>
-            <td>${row.chatID}</td>
-            <td>${row.fromID}</td>
-            <td>${row.toID}</td>
-            <td>${row.chatContent}</td>
-        </tr>
-        </table>
-        </c:forEach>
-        </div>
-<!-- 친구목록 끝 -->
+	<!-- 채팅창 끝 -->
+	<!-- 친구목록 -->
+	<div class="left">
+		<div class="top">
+			<input type="text" /> <a href="javascript:;" class="searchF"></a>
+		</div>
+		<ul class="people">
+			<li class="person" data-chat="person1"><img
+				src="https://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" /> <span
+				class="name">Thomas Bangalter</span> <span class="time">2:09
+					PM</span> <span class="preview">I was wondering...</span></li>
+		</ul>
+	</div>
+	<!-- 친구목록 끝 -->
 </body>
 </html>

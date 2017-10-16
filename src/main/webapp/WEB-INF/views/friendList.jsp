@@ -11,8 +11,7 @@
 	<c:if test="${not empty friendList }">
 		<hr class="instant"><h2 class="flh2 instant">친구</h2><hr class="instant">
 		<c:forEach var="friend" items="${friendList }">
-			
-			<p class="flp instant">${friend.username }</p>
+			<div class="fld instant"><p class="instant">${friend.username }</p></div>
 		</c:forEach>
 	</c:if>
 	<c:if test="${not empty requestList }">

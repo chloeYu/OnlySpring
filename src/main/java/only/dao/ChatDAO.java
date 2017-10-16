@@ -132,7 +132,7 @@ public class ChatDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		System.out.println("Message Submit 작동중");
-		String SQL = "INSERT INTO CHAT VALUES (NULL, ?, ?, ?, NOW())";
+		String SQL = "INSERT INTO CHAT VALUES (NULL, ?, ?, ?, NOW(), CONCAT(LEAST(?, ?), '-',GREATEST(?, ?)))";
 		try {
 			Class.forName(DRIVER);
 			conn = DriverManager.getConnection(URL, USER, PW);
@@ -142,6 +142,10 @@ public class ChatDAO {
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
 			pstmt.setString(3, chatContent);
+			pstmt.setString(4, fromID);
+			pstmt.setString(5, toID);
+			pstmt.setString(6, fromID);
+			pstmt.setString(7, toID);
 			System.out.println("Message Submit 완료");
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
