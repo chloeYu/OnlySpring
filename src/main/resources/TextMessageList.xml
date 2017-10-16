@@ -11,10 +11,15 @@
 		<result property="chatTime" column="chatTime" />
 	</resultMap>
 
-	<select id="messageList" resultType="chat">
+	<select id="messageList" parameterType="String" resultMap="messageResult">
+		SELECT * FROM
+		(
 		SELECT *
-        FROM chat
-        ORDER BY toID
+		FROM chat
+		ORDER BY chatTime DESC
+		) AS subQuery
+		GROUP BY DATE_FORMAT(chatTime,'%Y-%m-%d'), fromID=#{fromID}
+		ORDER BY fromID=#{fromID} DESC, chatTime DESC limit 1;
 	</select>
-	
+
 </mapper>

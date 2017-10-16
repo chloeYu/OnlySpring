@@ -57,11 +57,14 @@ public class OnlyController {
 		return "chat";
 	}
 
-	@RequestMapping("/messageList")
-	public String messageList(Model model) {
-		List<Chat> messageList = tmls.getChatMessageList();
+	@RequestMapping(value = "/messageList", method = RequestMethod.POST)
+	public @ResponseBody List<Chat> messageList(Model model, HttpSession session) {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		List<Chat> messageList = tmls.getChatMessageList(userid);
 		model.addAttribute("messageList", messageList);
-		return "chat";
+		System.out.println(messageList);
+		
+		return messageList;
 	}
 	// 채팅 컨트롤러 끝
 
