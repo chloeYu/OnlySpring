@@ -104,21 +104,21 @@ function getPostPage(page) {
 				});
 				
 				$('.infinite_scroll .postImg3:nth-child(6)').on('click',function(e){
-					console.log("popup!");
-					 var detailContainer = '<div class="det"></div>';
-					 var appendDetail = '<div class="imgDetail" style="position:fixed; z-index:100; top:0; left:0; width:100%; height:100%;">'
-						 +'<div class="dimBackground" style="position:absolute; background-color:#000; opacity:0.5; width:100%; height:100%; top:0; left:0;">'
-						 +'</div>'
-						 +'<div class="detailDim" style="position:absolute; top:50%; left:20%; width:38%; height:auto; background-color:#FFF; opacity:1; z-index:10;">'
-						 +'<div class="postImg4">'
-						 +'<img class="postInner4" src="img_timeline/'+ +'">'
-						 +'</div>'
-						 +'</div>'
-						 +'</div>';
-					 
+//					console.log("popup!");
+//					 var detailContainer = '<div class="det"></div>';
+//					 var appendDetail = '<div class="imgDetail" style="position:fixed; z-index:100; top:0; left:0; width:100%; height:100%;">'
+//						 +'<div class="dimBackground" style="position:absolute; background-color:#000; opacity:0.5; width:100%; height:100%; top:0; left:0;">'
+//						 +'</div>'
+//						 +'<div class="detailDim" style="position:absolute; top:50%; left:20%; width:38%; height:auto; background-color:#FFF; opacity:1; z-index:10;">'
+//						 +'<div class="postImg4">'
+//						 +'<img class="postInner4" src="img_timeline/'+ data +'">'
+//						 +'</div>'
+//						 +'</div>'
+//						 +'</div>';
+//					 
 					 var imgPr = $(this);
-					 $(this).parent().append(detailContainer);
-					 $('.det').append(appendDetail);
+//					 $(this).parent().append(detailContainer);
+//					 $('.det').append(appendDetail);
 					 layer_popup(imgPr);
 				});
 			});
@@ -152,6 +152,8 @@ function getPostPage(page) {
 					});
 				});
 				
+				
+				
 				$('.infinite_scroll .postImg3:nth-child(6)').on('click',function(e){
 					console.log("popup!");
 					 var detailContainer = '<div class="det"></div>';
@@ -160,7 +162,7 @@ function getPostPage(page) {
 						 +'</div>'
 						 +'<div class="detailDim" style="position:absolute; top:50%; left:20%; width:38%; height:auto; background-color:#FFF; opacity:1; z-index:10;">'
 						 +'<div class="postImg4">'
-						 +'<img class="postInner4" src="img_timeline/'+ +'">'
+						 +'<img class="postInner4" src="img_timeline/'+  +'">'
 						 +'</div>'
 						 +'</div>'
 						 +'</div>';

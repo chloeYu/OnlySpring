@@ -89,7 +89,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		border: 0;
 		padding: 0;
 		cursor: pointer;
-		height: 29px;
+		height: 32px;
 		width: 50px;
 		font: bold 10px/15px 'lucida sans', 'trebuchet MS', 'Tahoma';
 		color: #FFF;
@@ -100,7 +100,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		border-radius: 0 3px 3px 0;
 		text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
 		display: inline-block;
-		right: 53px;
+		right: 54px;
 	}
 	.form-wrapper button:hover {
 		background: #6c7f9b;
@@ -205,6 +205,10 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: inline-block;
 		margin: 0;
 		overflow:hidden;
+		float: left;
+	}
+	.infinite_scroll .postImg3:after{
+		clear: both;
 	}
 	.postImg3 .postInner3{
 		width:100%;
