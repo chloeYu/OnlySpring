@@ -90,6 +90,7 @@ $(document).ready(function() {
 	$(window).load(function() {
 		connect();
 		$messages.mCustomScrollbar();
+		MessageList();
 	});
 	
 	$(window).on('unload', (function() {
@@ -230,14 +231,32 @@ $(document).ready(function() {
 	
 	// 메시지 목록 불러오기
 	function MessageList() {
+		
 		$.ajax({
 			type : "POST",
-			url : "/messageList",
-			data : "${messageList}",
-			success : function() {
+			url : "${path}/messageList",
+			dataType : "json",
+			success : function(data) {
+				var toID = null;
+				var chatContent = null;
+				var chatTime = null;
+				var timeType = '오전';
+				
+				$.each(data, function(key, list) {
+					toID = list.toID;
+					chatContent = list.chatContent;
+					chatTime = list.chatTime;
+				});
+				
+				var ampm = chatTime.substring(11,13);
+				if(chatTime >= 12) {
+					timeType = '오후';
+					chatTime -= 12;
+				}
+				var resultTime = timeType + " " + ampm + ":" + chatTime.substring(14,16 + "")
 				$('.people').append('<li class="person" data-chat="person1"><img src="/only/img_all/user.png" alt=""/>'+ 
-						'<span class="name">'+ '${toID}' +'</span><span class="time">' + '${chatTime}'
-						+ '</span><span class="preview">'+ '${chatContent}' +'</span></li>')
+						'<span class="name">'+ toID +'</span><span class="time">' + resultTime
+						+ '</span><span class="preview">'+ chatContent +'</span></li>')
 			}
 		});
 	}
@@ -297,16 +316,6 @@ $(document).ready(function() {
                     <span class="preview">I was wondering...</span>
                 </li>
             </ul>
-        <c:forEach var="row" items="${messageList}">
-        <table>
-        <tr>
-            <td>${row.chatID}</td>
-            <td>${row.fromID}</td>
-            <td>${row.toID}</td>
-            <td>${row.chatContent}</td>
-        </tr>
-        </table>
-        </c:forEach>
         </div>
 <!-- 친구목록 끝 -->
 </body>

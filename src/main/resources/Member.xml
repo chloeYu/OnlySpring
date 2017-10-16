@@ -14,6 +14,8 @@
 		<result property="status" column="status" />
 		<result property="created" column="created" />
 		<result property="modified" column="modified" />
+		<result property="uid1" column="uid2" />
+		<result property="uid2" column="uid1" />
 		<result property="relation" column="relation" />
 	</resultMap>
 
@@ -21,8 +23,8 @@
 		select * from member where userid=#{member_id}
 	</select>
 
-	<select id="search" parameterType="String" resultMap="memberResult">
-		select m.*, f.status as relation from (select * from member where username LIKE CONCAT('%',#{searchTerm},'%') m, follow f where (uid1=#{userid} and uid2=#{searchTerm}) or (uid2=#{userid} and uid1=#{searchTerm})   
+	<select id="search" parameterType="hashMap" resultMap="memberResult">
+		select m.*, f.uid1 as uid2, f.uid2 as uid1, f.status as relation from (select * from member where username LIKE CONCAT('%',#{searchTerm},'%')) m left join follow f on ((userid=uid1 and uid2=#{userid}) or (userid=uid2 and uid1=#{userid}))
 	</select>
 	
 	<insert id="insert" parameterType="member">

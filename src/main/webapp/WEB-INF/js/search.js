@@ -28,6 +28,54 @@ $(function(){
 	    }
 	});*/
 	
+	// 친구 요청 or 신구요청 승인/거절 or 친구요청취소
+	$('body').on('click', '.friend-dropdown', function(e){
+		console.log(userid);
+		console.log($(e.target));
+		console.log($(e.target).attr("data-user"));
+		console.log($(e.target).attr("class"));
+		if($(e.target).attr('class')=='accept'){
+			console.log("accept request");
+			$.post('/only/friendupdate', "uid1="+$(e.target).attr('data-user')+"&uid2="+userid+'&status=1', function(data){
+				if(data>0){
+					$(e.currentTarget).parent().html('<a class="hidden_elem">' +
+							'<div class="checkFriend"></div>Friend</a>' +
+							'<div class="friend-dropdown">' +
+							'<a class="unfriend" data-user="'+ $(e.target).attr('data-user') +
+							'" data-uid1="'+$(e.target).attr('data-user')+'" data-uid2="'+userid+'">Unfriend</a></div>');
+				}
+			});
+		}else if($(e.target).attr('class')=='reject'){
+			$.post('/only/friendupdate', "uid1="+$(e.target).attr('data-user')+"&uid2="+userid+'&status=0', function(data){
+				if(data>0){
+					$(e.currentTarget).parent().html('<a class="friendRequestBtn"  data-user="'+$(e.target).attr('data-user')+'"><div class="addFriend"></div>Add Friend</a>');
+				}
+			});
+			
+		}else if($(e.target).attr('class')=='cancel'){
+			$.post('/only/friendupdate', "uid1="+userid+"&uid2="+$(e.target).attr('data-user')+'&status=0', function(data){
+				$(e.currentTarget).parent().html('<a class="friendRequestBtn"  data-user="'+$(e.target).attr('data-user')+'"><div class="addFriend"></div>Add Friend</a>');
+			});
+		}
+		else if($(e.target).attr('class')=='unfriend'){
+			$.post('/only/friendupdate', "uid1="+$(e.target).attr('data-uid1')+"&uid2="+$(e.target).attr('data-uid2')+'&status=0', function(data){
+				$(e.currentTarget).parent().html('<a class="friendRequestBtn"  data-user="'+$(e.target).attr('data-user')+'"><div class="addFriend"></div>Add Friend</a>');
+			});
+		}
+	});
+	
+	$('body').on('click', '.friendRequestBtn', function(e){
+		console.log($(e.target).attr('data-user'));
+		$.post('/only/friendupdate', "uid1="+userid+"&uid2="+$(e.target).attr('data-user')+'&status=2', function(data){
+			if(data>0){
+				$(e.currentTarget).parent().html('<a class="friendRequestCancel">'+
+						'<div class="addFriend"></div>Friend Request Sent</a>'+
+						'<div class="friend-dropdown">' +
+						'<a class="cancel" data-user="'+$(e.target).attr('data-user')+'">Cancel Request</a></div>');
+			}
+		});
+	})
+	
 	$("#friendTagList").change(function() {
 		  var id = $(this).children(":selected").attr("data");
 		  var text = $(this).children(":selected").text();

@@ -19,11 +19,11 @@
 									<div> + Upload Photo</div>
 								</div>
 							</div>
-								<a href="#"><input type="file" name="file" title="Choose a file to upload" accept="image/*" id="thumbProfileImg"></a>				
+							<input type="file" name="file" title="Choose a file to upload" accept="image/*" style="width: 100%; height: 100%; " id="thumbProfileImg">
 						</div>
 						
 						<div id="aaaaa" style="bottom: 0; left: 50%; position: absolute; right: 0; top: 0;;">
-							<div id="uploadedImage" style="width: 100%; height:100%;"></div>				
+							<div id="uploadedImage" style="width: 50%; height: 100%;"></div>				
 						</div>
 					</div>
 					</form>

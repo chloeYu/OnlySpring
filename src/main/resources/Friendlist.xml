@@ -19,10 +19,29 @@
 		<result property="status" column="status" />
 		<result property="created" column="created" />
 		<result property="modified" column="modified" />
+		<result property="uid1" column="uid1" />
+		<result property="uid2" column="uid2" />
 		<result property="relation" column="relation" />
 	</resultMap>
-	<select id="friendList" parameterType="String" resultMap="memberResult">
-		select a.* from (select m.*, f.status as relation from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{member_id} or f.uid2=#{member_id} ))) a where a.userid != #{member_id}
+	
+	<select id="getFriendList" parameterType="hashMap" resultType="friendlist">
+		select * from follow where uid1=#{uid1} and uid2=#{uid2} 
+	</select>
+	
+	<insert id="insert">
+		insert into follow values(#{uid1}, #{uid2}, #{status})
+	</insert>
+	
+	<update id="insertUserSwitchedRequest">
+		update follow set uid1=#{uid1}, uid2=#{uid2}, status=#{status} where uid1=#{uid2} and uid2=#{uid1}
+	</update>
+	
+	<select id="friendList" parameterType="hashMap" resultMap="memberResult">
+		<!-- select a.* from (select m.*, f.status as relation from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{member_id} or f.uid2=#{member_id} ))) a where a.userid != #{member_id} -->
+		<!-- select m.*, f.uid1 as uid2, f.uid2 as uid1, f.status as relation from (select * from member where username LIKE CONCAT('%',#{searchTerm},'%')) m left join follow f on ((userid=uid1 and uid2=#{userid}) or (userid=uid2 and uid1=#{userid}))	 -->
+		select b.*, f.uid1 , f.uid2 , f.status as relation from (select a.* from (select m.* from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{owner} or f.uid2=#{owner} ))) a where a.userid != #{owner}) b left join follow f on ((userid=uid1 and uid2=#{userid}) or (userid=uid2 and uid1=#{userid}));
+		
+	
 	</select>
 	
 	<select id="pendingList" parameterType="String" resultMap="memberResult">

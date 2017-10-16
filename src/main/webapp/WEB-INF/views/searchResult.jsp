@@ -1,75 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="sessionChk.jsp"%>
-<%@ include file="include.jsp" %>
+<%@ include file="include.jsp"%>
+<html>
 <body>
 	<!-- 상단고정바 시작 -->
 	<div id="header"><jsp:include page="header.jsp"></jsp:include></div>
 	<!-- 상단고정바 끝 -->
 	<div class="header_hidden"></div>
 	<!-- 내용 들어갈 부분 -->
-
-	<div class="search_main">
-		<!-- 포스트작성 / 뷰 부분 -->
-		<div class="search_post">
-			<div class="page_margin"></div>
-			<!-- 테스트 -->
-			<!--  -->
-			<ol class="search_view_box">
-				<!-- 타입 선택 후 끝 -->
-				<li><span style="color: #ffffff; font-weight: bold;">Search Result</span>
-					<hr></li>
-				<c:if test="${empty searchResult }">
-					<li class="infinite_scroll"><h3>검색 결과가 없습니다</h3></li>
-				</c:if>
-				<c:if test="${not empty searchResult }">
-				<li class="search_result">
-					<div class="search_profile">
-						<table width=100%>
-							<c:forEach items="${searchResult }" var="member">
-								<tr>
-								<td valign="middle" width="10%"><img src='${path}/${member.profile_image }'></td>
-								<td valign="middle" align="left">
-								<a href="#" class="test" id="test-${member.userid}">
-								<h3 onclick="location.href='${path}/blog/${member.userid}'">${member.userid} - ${member.relation }</h3>
-										<%-- <div class="hide" id="rmenu-${member.userid}" name="rmenu">
-											<ul>
-												<li><a href="${path}/blog/${member.userid}">Visit</a></li>
-												<%if(sendT.equals("") || sendT==null || sendT.equals(getT)){
-													System.out.println("본인 생략");
-												} else{%>
-												<li><a href="#" id="follow"
-													data-followid="<%=member.getUserid()%>"><span
-														id="followText-<%=member.getUserid()%>">Follow</span></a></li>
-												<li><a href="#" class="chatStart <%=chatroom%>"
-													id="<%=chatroom%>" data-sendT="<%=sendT%>"
-													data-getT="<%=getT%>">Send Message</a></li>
-												<%} %>
-
-											</ul>
-										</div> --%>
-										</a>
-										</td>
-								</tr>
-								<%-- <tr>
-								<td colspan="2">
-									<hr><%=member.getEmail()%><br> <%=member.getProfile_image()%><br>
-									<%=member.getBirth()%><br>
-									<hr>
-								</td>
-								</tr> --%>
-						</c:forEach>
-						</table>
+	<div
+		style="border-left: 0; margin-left: 172px; padding-left: 11px; padding-top: 11px;">
+		<div class="search_main">
+			<div class="search_post">
+				<div class="search_view_box">
+					<c:if test="${empty searchResult }">
+						<div>
+							<h3>검색 결과가 없습니다</h3>
 						</div>
-						</li>
-				</c:if>
-			</ol>
-			<!-- 포스트 뷰 끝 -->
+					</c:if>
+					<c:if test="${not empty searchResult }">
+						<c:forEach items="${searchResult }" var="result">
+							<div class="search_view_box">
+								<div>
+									<div class="clearfix" style="overflow: hidden;">
+										<a class="rightMargin leftFloat"> <img
+											src='${path}/img_timeline/${result.profile_image }'>
+										</a>
+										<div style="overflow: hidden;">
+											<div class="search_detail">
+												<div class="clearfix">
+													<c:if test="${result.userid ne member.userid}">
+													<div class="memberListAction">
+														<!-- 친구 액션 버튼 -->
+														<div style="display: inline-block; vertical-align: middle; white-space: nowrap;">
+															<div class="friendBtn">
+																<c:if test="${result.relation == 1 }">
+																	<a class="hidden_elem"><div class="checkFriend"></div>Friend</a>
+																	<div class="friend-dropdown">
+																			<a class="unfriend" data-user="${result.userid }" data-uid1="${result.uid1 }" data-uid2="${result.uid2 }">Unfriend</a>
+																		</div>
+																</c:if>
+																<c:if test="${result.relation == 2 }">
+																	<c:if test="${result.uid1 eq result.userid }"> <!-- 검색회원이 친구요청을 한 경우 -->
+																		<a class="friendRequestAdd"><div class="addFriend"></div>Respond to Friend Request</a>
+																		<div class="friend-dropdown">
+																			<a class="accept" data-user="${result.userid }">Accept</a>
+																			<a class="reject" data-user="${result.userid }">Reject</a>
+																		</div>
+																	</c:if>
+																	<c:if test="${result.uid2 eq result.userid }"> <!-- 검색회원에게 친구요청을 한 경우 -->
+																		<a class="friendRequestCancel"><div class="addFriend"></div>Friend Request Sent</a>
+																		<div class="friend-dropdown">
+																			<a class="cancel" data-user="${result.userid }">Cancel Request</a>
+																		</div>
+																	</c:if>
+																</c:if>
+																<c:if test="${result.relation == 0 }">
+																	<a class="friendRequestBtn"  data-user='${result.userid }'><div class="addFriend"></div>Add Friend</a>
+																</c:if>
+															</div>
+														</div>
+														<!-- 친구 추가액션 버튼 onMouseOver -->
+														<div class="uiPopover" style="display: inline-block; vertical-align: middle; white-space: nowrap;">
+															<a class="">
+																<span style="margin-right: 4px;">
+																	<div class="expandBtn"></div>
+																</span>
+															</a>
+														</div>
+													</div>
+													</c:if>
+													<a>
+														<span style=" font-size: 16px; font-weight: bold;     color: #365899;" onclick="location.href='${path}/blog/${result.userid}'">
+														${result.username}	</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</c:if>
+				</div>
+				<!-- 포스트 뷰 끝 -->
+			</div>
 		</div>
-		<!-- 포스트작성 / 뷰 끝 -->
-		<!-- aside 부분 / *팔로우 추천, 광고등 -->
-		<jsp:include page="rightmenu.jsp"></jsp:include>
+		<div>
+			
+		</div>
 	</div>
-	<!-- 내용 들어갈 부분 끝 -->
 </body>
 </html>

@@ -48,7 +48,7 @@
 												<div
 													style="height: 100px; display: inline-block; vertical-align: middle"></div>
 												<a href="/only/blog/${friend.userid }" class="test"
-													id="test-${friend.userid }" style="color: #365899;">${friend.username }</a>
+													id="test-${friend.userid }" style="color: #365899;">${friend.username } ${friend.uid1} ${friend.uid2} ${friend.relation }</a>
 											</div>
 										</div>
 									</li>
