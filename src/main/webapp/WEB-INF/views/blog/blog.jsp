@@ -26,7 +26,7 @@
 					<div class="blogTimelineContent" id="recent_capsule_container">
 						<ol class="post_view_box">
 							<li class="type_choice_box" id="infinite_container">
-								<form action="postWrite" method="post"
+								<form action="/only/postWrite" method="post"
 									enctype="multipart/form-data">
 									<input type="hidden" value="<%=userid%>" name="userid">
 									<input type="hidden"
@@ -71,7 +71,7 @@
 									</div>
 									<div class="write_type_choice">
 										<a class="choice_type" id="preview"></a> <br> <img alt=""
-											src="img_timeline/picture.svg"
+											src="${path}/img_timeline/picture.svg"
 											class="img_hide img_hidden type_photo" width="30px"
 											border='0' onclick='document.all.files.click();'> <input
 											type="file" name="files" style='display: none;'
@@ -86,6 +86,7 @@
 						<div id="postList"></div>
 					</div>
 					<div class="blogTimelineMenu">
+						<!-- 사진 타일 -->
 						<div
 							style="bottom: 0px; left: 54px; top: auto; z-index: 0; width: 323px;">
 							<span display="inline">
@@ -94,8 +95,51 @@
 										<li class="photos_tile_col">
 											<div style="border-radius: 3px; background-color: #ffffff">
 												<div class="tile_title_wraper">
-													<a href="#"><span
+													<a href="/only/blog/${owner.userid }/photos"><span
 														style="font-size: 16px; line-height: 20px;">Photo</span></a>
+												</div>
+												<div style="padding: 0 5px 4px 5px;">
+													<table>
+														<tr>
+														<c:forEach var="photo" items="${photoList }" begin="0"  end="5"  varStatus="status">
+														<td><div style="width:101px; height:101px;"><img src="${path }/img_timeline/${photo}" style="width:100px; height:100px;"></div>
+														<c:if test="${status.count %3 ==0 }">
+															</tr><tr>
+														</c:if>
+														</c:forEach>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</li>
+									</div>
+									<div id="friends_tile"></div>
+								</ol>
+							</span>
+						</div>
+						<!-- 친구 타일 -->
+						<div
+							style="bottom: 0px; left: 54px; top: auto; z-index: 0; width: 323px;">
+							<span display="inline">
+								<ol class="blogMenuList">
+									<div id="photos_tile">
+										<li class="photos_tile_col">
+											<div style="border-radius: 3px; background-color: #ffffff">
+												<div class="tile_title_wraper">
+													<a href="/only/blog/${owner.userid }/friendList"><span
+														style="font-size: 16px; line-height: 20px;">Friends</span></a>
+												</div>
+												<div style="padding: 0 5px 4px 5px;">
+													<table>
+														<tr>
+														<c:forEach var="friend" items="${friendList }" begin="0" end="8" varStatus="status">
+														<td><div style="width:101px; height:101px;"><img src="${path }/img_timeline/${friend.profile_image}" style="width:100px; height:100px;"></div>
+														<c:if test="${status.count %3 ==0 }">
+															</tr><tr>
+														</c:if>
+														</c:forEach>
+														</tr>
+													</table>
 												</div>
 											</div>
 										</li>

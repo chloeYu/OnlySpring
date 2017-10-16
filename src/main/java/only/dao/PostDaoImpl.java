@@ -19,7 +19,7 @@ import only.utils.PostType;
 @Repository
 public class PostDaoImpl implements PostDao {
 	final int POSTPERPAGE = 5;
-	final int IMAGEPERPAGE = 5;
+	final int IMAGEPERPAGE = 12;
 
 	@Autowired
 	private SqlSessionTemplate sst;
@@ -175,7 +175,7 @@ public class PostDaoImpl implements PostDao {
 		int total = sst.selectOne("postns.getImageTotal", userid);
 		if (endRow > total)
 			endRow = total;
-		List<String> imageList = sst.selectList("postns.getImagesByUserid", userid, new RowBounds(startRow, POSTPERPAGE));
+		List<String> imageList = sst.selectList("postns.getImagesByUserid", userid, new RowBounds(startRow, IMAGEPERPAGE));
 		
 		return imageList;
 	}

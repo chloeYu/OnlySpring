@@ -1,4 +1,4 @@
-var isLastPage = [false, false, false]; // timeline
+var isLastPage = [false, false, false, false]; // timeline, blog, friends, photos
 $(function() {
 	$('body').on('click', '.sendBtn', function(event){
 		var ref_type = 0; // 0 post / 1 comment
@@ -109,7 +109,7 @@ function getPostPage(page) {
 				});
 			});
 		}
-	} else if(window.location.href.indexOf('http://' + window.location.host + '/only/blog') > -1  && window.location.href.indexOf('friendList') < 0){
+	} else if(window.location.href.indexOf('http://' + window.location.host + '/only/blog') > -1  && window.location.href.indexOf('friendList') < 0 && window.location.href.indexOf('photos') < 0){
 		if(!isLastPage[1]){
 			var url = window.location.href.split('/');
 			var owner = url[url.length-1];
@@ -163,6 +163,26 @@ function getPostPage(page) {
 				else {
 					console.log(data)
 					$("#friendListDisplay").append(data);
+				}				
+			});
+		}
+	}
+	else if(window.location.href.indexOf('http://' + window.location.host + '/only/blog') > -1 && window.location.href.indexOf('photos') > -1){
+		if(!isLastPage[3]){
+			var url = window.location.href.split('/');
+			var owner = url[url.length-2];
+			console.log(owner);
+			$.post('/only/appendPictureList', "owner="+owner+"&pageNum="+page, function(data) {
+				if (data.trim() == "" && page == 1) {
+					$("#photoListDisplay").append("No Photo");
+					isLastPage[3] = true;
+				} else if(data.trim() == "" && page > 1){
+					$("#photoListDisplay").append("<li style='text-align:center; font-weight:bold;font-style: italic; margin-bottom: 30px;'><h3>No More Photos</h3></li>");
+					isLastPage[3] = true;
+				}
+				else {
+					console.log(data)
+					$("#photoListDisplay").append(data);
 				}				
 			});
 		}

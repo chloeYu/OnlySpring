@@ -90,6 +90,61 @@ body.blogLayout {
 	cursor: pointer;
 }
 
+.userIcon{
+	background-image:
+		url(https://www.facebook.com/rsrc.php/v3/ym/r/IKrON1RLHfZ.png);
+	position: relative;
+	width: 30px;
+	height: 30px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	cursor: pointer;	
+	display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.emailIcon{
+	background-image:
+		url(http://icons.iconarchive.com/icons/uiconstock/socialmedia/512/Email-icon.png);
+	position: relative;
+	width: 30px;
+	height: 30px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	cursor: pointer;	
+	display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.telIcon{
+	background-image:
+		url(https://cdn4.iconfinder.com/data/icons/social-icons-6/40/phone-512.png);
+	position: relative;
+	width: 30px;
+	height: 30px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	cursor: pointer;	
+	display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.birthIcon{
+	background-image:
+		url(http://www.iconsdb.com/icons/preview/dim-gray/birthday-cake-xxl.png);
+	position: relative;
+	width: 30px;
+	height: 30px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	cursor: pointer;	
+	display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
 .editCoverBtnHover {
 	bottom: 5px;
 	left: 5px;
@@ -399,6 +454,14 @@ body.blogLayout {
 	padding-top: 16px;
 }
 
+.blogFriendList .container .seeMore {
+	background: #f6f7f9;
+    border-top: 1px solid #d3d6db;
+    border-radius: 2px 2px 0 0;
+    min-height: 30px;
+    padding-top: 8px;
+}
+
 .friendListWraper {
 	padding: 0 14px 0 15px;
 }
@@ -411,4 +474,20 @@ body.blogLayout {
 	position: relative;
 	vertical-align: top;
 	width: 380px;
+}
+
+.about ul li{
+	margin-bottom: 10px; 
+}
+
+#photoListDisplay{
+	position: relative;
+    transition-property: width, height;
+    transition-duration: 500ms;
+}
+
+.photoDisplayElement{
+	display: inline-block;
+    transition-property: margin-left, margin-right, margin-top;
+    transition-duration: 500ms;
 }
