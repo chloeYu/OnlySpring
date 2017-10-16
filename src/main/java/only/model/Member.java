@@ -12,6 +12,7 @@ public class Member {
 	private String tel;
 	private Date birth;
 	private String profile_image;
+	private String cover_image;
 	private int status;
 	private Date created;
 	private Date modified;
@@ -88,6 +89,14 @@ public class Member {
 
 	public void setProfile_image(String profile_image) {
 		this.profile_image = profile_image;
+	}
+	
+	public String getCover_image() {
+		return cover_image;
+	}
+
+	public void setCover_image(String cover_image) {
+		this.cover_image = cover_image;
 	}
 
 	public String getTel() {

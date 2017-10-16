@@ -47,4 +47,12 @@ public class MemberDaoImpl implements MemberDao {
 		
 				
 	}
+
+	@Override
+	public int updateCoverProfile(String userid, String url) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		map.put("url", url);
+		return sst.update("memberns.updateCoverProfile", map);
+	}
 }
