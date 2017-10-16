@@ -22,7 +22,7 @@
 			<ul stype="border-left: 1px solid #e9eaed;">
 				<li><a href='/only/blog/${owner.userid }'>Timeline</a></li>
 				<li><a>About</a></li>
-				<li><a href="/only/blog/${owner.userid }/friendList/1">
+				<li><a href="/only/blog/${owner.userid }/friendList">
 						<!-- onclick="getFriendList()" -->Friends
 				</a></li>
 				<li><a>Photo</a></li>

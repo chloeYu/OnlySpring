@@ -40,8 +40,10 @@
 		<!-- select a.* from (select m.*, f.status as relation from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{member_id} or f.uid2=#{member_id} ))) a where a.userid != #{member_id} -->
 		<!-- select m.*, f.uid1 as uid2, f.uid2 as uid1, f.status as relation from (select * from member where username LIKE CONCAT('%',#{searchTerm},'%')) m left join follow f on ((userid=uid1 and uid2=#{userid}) or (userid=uid2 and uid1=#{userid}))	 -->
 		select b.*, f.uid1 , f.uid2 , f.status as relation from (select a.* from (select m.* from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{owner} or f.uid2=#{owner} ))) a where a.userid != #{owner}) b left join follow f on ((userid=uid1 and uid2=#{userid}) or (userid=uid2 and uid1=#{userid}));
-		
+	</select>
 	
+	<select id="getTotalFriend" parameterType="String" resultType="int">
+		select count(userid) from (select a.* from (select m.* from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{owner} or f.uid2=#{owner} ))) a where a.userid != #{owner}) b left join follow f on ((userid=uid1 and uid2=#{userid}) or (userid=uid2 and uid1=#{userid}));
 	</select>
 	
 	<select id="pendingList" parameterType="String" resultMap="memberResult">

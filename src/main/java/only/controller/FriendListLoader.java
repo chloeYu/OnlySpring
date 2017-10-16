@@ -75,17 +75,26 @@ public class FriendListLoader {
 		return fs.update(f);
 	}
 	
-	@RequestMapping("/blog/{owner}/friendList/{pageNum}")
-	public String friendListByUser(@PathVariable String owner, @PathVariable String pageNum, HttpSession session, Model model) {
+	@RequestMapping("/blog/{owner}/friendList")
+	public String friendListByUser(@PathVariable String owner, HttpSession session, Model model) {
+		Member blogOwner = ms.getMemberById(owner);
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);		
+		model.addAttribute("owner", blogOwner);
+		return "blog/blogFriendList";
+	}
+
+	
+	@RequestMapping("/appendFriendList")
+	public String friendList(String owner, int pageNum, HttpSession session, Model model) {
 		Member blogOwner = ms.getMemberById(owner);
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
-		List<Member> friendList = fs.friendListLoad(owner, userid);
+		List<Member> friendList = fs.friendListLoad(owner, userid, pageNum);
 		
 		System.out.println("returned size" + friendList.size());
 		model.addAttribute("owner", blogOwner);
 		model.addAttribute("friendList", friendList);
 
-		return "blog/blogFriendList";
+		return "blog/friendList";
 	}
 
 	/*

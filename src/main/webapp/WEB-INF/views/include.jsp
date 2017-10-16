@@ -26,6 +26,8 @@ span.err {
 <script src="${path}/js/jquery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="${path}/js/timeline.js"></script>
+<c:if test="">
+</c:if>
 <script src="${path}/js/timeline_infinitescroll.js"></script>
 <script src="${path}/js/signUp.js"></script>
 <script src="${path}/js/search.js"></script>
