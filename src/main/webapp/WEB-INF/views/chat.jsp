@@ -375,12 +375,7 @@ $(document).ready(function() {
 			<input type="text" /> <a href="javascript:;" class="searchF"></a>
 		</div>
 		<ul class="people">
-			<li class="person" data-chat="person1">
-				<img src="https://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" /> 
-				<span class="name">Thomas Bangalter</span> 
-				<span class="time">2:09	PM</span> 
-				<span class="preview">I was wondering...</span>
-			</li>
+			<!-- 최근 메시지 목록 불러오는 곳 -->
 		</ul>
 	</div>
 	<!-- 메시지 리스트 오른쪽 끝 -->
