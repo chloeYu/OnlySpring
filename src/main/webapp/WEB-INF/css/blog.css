@@ -90,7 +90,7 @@ body.blogLayout {
 	cursor: pointer;
 }
 
-.userIcon{
+.userIcon {
 	background-image:
 		url(https://www.facebook.com/rsrc.php/v3/ym/r/IKrON1RLHfZ.png);
 	position: relative;
@@ -98,13 +98,13 @@ body.blogLayout {
 	height: 30px;
 	background-size: 100%;
 	background-repeat: no-repeat;
-	cursor: pointer;	
+	cursor: pointer;
 	display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
+	vertical-align: middle;
+	margin-right: 10px;
 }
 
-.emailIcon{
+.emailIcon {
 	background-image:
 		url(http://icons.iconarchive.com/icons/uiconstock/socialmedia/512/Email-icon.png);
 	position: relative;
@@ -112,13 +112,13 @@ body.blogLayout {
 	height: 30px;
 	background-size: 100%;
 	background-repeat: no-repeat;
-	cursor: pointer;	
+	cursor: pointer;
 	display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
+	vertical-align: middle;
+	margin-right: 10px;
 }
 
-.telIcon{
+.telIcon {
 	background-image:
 		url(https://cdn4.iconfinder.com/data/icons/social-icons-6/40/phone-512.png);
 	position: relative;
@@ -126,24 +126,26 @@ body.blogLayout {
 	height: 30px;
 	background-size: 100%;
 	background-repeat: no-repeat;
-	cursor: pointer;	
+	cursor: pointer;
 	display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
+	vertical-align: middle;
+	margin-right: 10px;
 }
 
-.birthIcon{
+.birthIcon {
 	background-image:
-		url(http://www.iconsdb.com/icons/preview/dim-gray/birthday-cake-xxl.png);
+		url(https://d30y9cdsu7xlg0.cloudfront.net/png/15082-200.png);
 	position: relative;
 	width: 30px;
 	height: 30px;
 	background-size: 100%;
 	background-repeat: no-repeat;
-	cursor: pointer;	
+	cursor: pointer;
 	display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
+	vertical-align: middle;
+	margin-right: 10px;
+	background-size: 140%;
+	opacity: 0.4;
 }
 .editCoverBtnHover {
 	bottom: 5px;
@@ -456,10 +458,10 @@ body.blogLayout {
 
 .blogFriendList .container .seeMore {
 	background: #f6f7f9;
-    border-top: 1px solid #d3d6db;
-    border-radius: 2px 2px 0 0;
-    min-height: 30px;
-    padding-top: 8px;
+	border-top: 1px solid #d3d6db;
+	border-radius: 2px 2px 0 0;
+	min-height: 30px;
+	padding-top: 8px;
 }
 
 .friendListWraper {
@@ -476,18 +478,18 @@ body.blogLayout {
 	width: 380px;
 }
 
-.about ul li{
-	margin-bottom: 10px; 
+.about ul li {
+	margin-bottom: 10px;
 }
 
-#photoListDisplay{
+#photoListDisplay {
 	position: relative;
-    transition-property: width, height;
-    transition-duration: 500ms;
+	transition-property: width, height;
+	transition-duration: 500ms;
 }
 
-.photoDisplayElement{
+.photoDisplayElement {
 	display: inline-block;
-    transition-property: margin-left, margin-right, margin-top;
-    transition-duration: 500ms;
+	transition-property: margin-left, margin-right, margin-top;
+	transition-duration: 500ms;
 }
