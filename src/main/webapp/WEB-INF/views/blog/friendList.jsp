@@ -16,7 +16,7 @@
 						</div>
 					</c:if>
 					<c:if test="${friend.relation == 2 }">
-						<c:if test="${result.uid1 eq result.userid }">
+						<c:if test="${friend.uid1 eq friend.userid }">
 							<!-- 검색회원이 친구요청을 한 경우 -->
 							<a class="friendRequestAdd"><div class="addFriend"></div>Respond
 								to Friend Request</a>
