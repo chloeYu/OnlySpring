@@ -47,10 +47,10 @@ public class FriendListLoader {
 		Friendlist.setUid1(uid1);
 		Friendlist.setUid2(uid2);
 		fs.update(Friendlist);
-		String referer = request.getHeader("Referer");
-		System.out.println(referer);
-		response.sendRedirect(referer);
-		// return "friendList";
+//		String referer = request.getHeader("Referer");
+//		System.out.println(referer);
+//		response.sendRedirect(referer);
+//		 return "friendList";
 	}
 
 	@RequestMapping(value="/friendupdate", method = RequestMethod.POST)

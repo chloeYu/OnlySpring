@@ -38,7 +38,7 @@
 	position: absolute;
     background-color: white;
     width: 200px;
-    min-height: 200px;
+    min-height: 800px;
     overflow-x: hidden;
     word-wrap:break-word;
     overflow-y: hidden;
@@ -126,4 +126,19 @@
 }
 .instant hr{
 	margin: 0px;
+}
+.popupLayer {
+	position: absolute;
+	display: none; 
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 350px;
+	height: 150px;
+	padding: 10px;
+}
+
+.popupLayer div {
+	position: absolute;
+	top: 5px;
+	right: 5px;
 }

@@ -29,8 +29,13 @@
 	</resultMap>
 	
 	<select id="timelinelist" parameterType="String" resultMap="postResult">
- 		select p.*, m.username from post p, member m where p.userid=#{userid} and p.userid = m.userid order by pid desc;
+ 		<!-- select p.*, m.username from post p, member m where p.userid=#{userid} and p.userid = m.userid order by pid desc; -->
 		<!-- select * from post where userid=#{userid} -->
+		<!-- 친구 포스트 추가 -->
+		<!-- select p.*, m.username from post p, member m where p.userid in (select distinct(userid) from (select m.* from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{userid} or f.uid2=#{userid} ))) a) and p.userid = m.userid order by pid desc; -->
+		<!-- 친구 포스트 + 멤버 태그 추가 -->
+		select filtered_post.*, m.username from (select p.* from post p where userid in (select distinct(userid) from (select m.* from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{userid} or f.uid2=#{userid} ))) a) or pid in (select distinct(pid) from post_membertag where userid = #{userid})) filtered_post, member m where  filtered_post.userid = m.userid order by pid desc;
+		
 	</select>
 	
 	<select id="bloglist" parameterType="String" resultMap="postResult">
