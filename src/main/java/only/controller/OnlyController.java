@@ -139,6 +139,11 @@ public class OnlyController {
 	public String timeline() {
 		return "timeline";
 	}
+	
+	@RequestMapping("/page")
+	public String page() {
+		return "page/page";
+	}
 
 	@RequestMapping("/loadPost")
 	public String loadPost(String userid, String pageNum, Model model, HttpSession session) {
@@ -280,11 +285,6 @@ public class OnlyController {
 
 		model.addAttribute("owner", blogOwner);
 		return "blog/blogPictureList";
-	}
-	
-	@RequestMapping("/page")
-	public String page() {
-		return "page/page";
 	}
 
 	@RequestMapping("/pagemain/{userid}")

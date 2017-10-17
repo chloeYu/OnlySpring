@@ -115,9 +115,7 @@
 			</div>
 			<div id="pageTimeline_right">
 				<h2>pageTimeline_right</h2>
-				<p id="pagetext"></p>
-				<p><%=username %></p>
-				<p id="d"></p>
+				
 			</div>
 		</div>
 	</div>
