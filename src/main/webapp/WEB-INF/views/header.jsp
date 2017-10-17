@@ -70,7 +70,7 @@
 			<div class="dropdown">
 				<span class="profileDropdown"></span>
 				<div id="myDropdown" class="dropdown-content">
-					<a href="#createPage">Create Page</a> <a href="#createGroup">Create
+					<a href="${path }/page">Page</a> <a href="#createGroup">Create
 						Group</a> <a href="/only/changeProfile">Profile Setting</a> <a
 						href="/only/logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
 				</div>

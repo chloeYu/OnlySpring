@@ -18,6 +18,7 @@
 <link href="${path}/css/header.css" rel="stylesheet">
 <link href="${path}/css/post.css" rel="stylesheet">
 <link href="${path}/css/blog.css" rel="stylesheet">
+<link href="${path}/css/page.css" rel="stylesheet">
 <style type="text/css">
 span.err {
 	color: red
@@ -35,6 +36,7 @@ span.err {
 <script src="${path}/js/post.js"></script>
 <script src="${path}/js/blog.js"></script>
 <script src="${path}/js/friendlist.js"></script>
+<script src="${path}/js/page.js"></script>
 <script type="text/javascript">
 	console.log("header included");
 </script>
