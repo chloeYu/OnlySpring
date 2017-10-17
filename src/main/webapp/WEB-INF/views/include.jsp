@@ -18,13 +18,13 @@
 <link href="${path}/css/header.css" rel="stylesheet">
 <link href="${path}/css/post.css" rel="stylesheet">
 <link href="${path}/css/blog.css" rel="stylesheet">
+<link href="${path}/css/page.css" rel="stylesheet">
 <style type="text/css">
 span.err {
 	color: red
 }
 </style>
 <script src="${path}/js/jquery.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="${path}/js/timeline.js"></script>
 <c:if test="">
@@ -36,6 +36,7 @@ span.err {
 <script src="${path}/js/post.js"></script>
 <script src="${path}/js/blog.js"></script>
 <script src="${path}/js/friendlist.js"></script>
+<script src="${path}/js/page.js"></script>
 <script type="text/javascript">
 	console.log("header included");
 </script>
