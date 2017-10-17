@@ -44,7 +44,7 @@
 						</div>
 					</div>
 				</div>
-						<div class="friendlistplace disapper instant"><h2 class="flh2 instant">친구목록</h2><div class="instant" id="friendload"></div></div>
+						<div class="friendlistplace disapper instant"><div class="instant" id="friendload"></div></div>
 			</div>
 			<div class="nav_icon">
 				<div class="alarm_list" data-click="alarm_list_icon">
