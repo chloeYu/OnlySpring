@@ -50,6 +50,16 @@ public class OnlyController {
 	private TextMessageListService tmls;
 
 	// 채팅 컨트롤러
+	@RequestMapping("/chat")
+	public String chat(String userID, HttpSession session) {
+		Member member = ms.getMemberById(userID);
+		if (member != null) {
+			session.setAttribute("userID", member.getUserid());
+			session.setAttribute("nickname", member.getUsername());
+		}
+		return "chat";
+	}
+
 	@RequestMapping(value = "/messageList", method = RequestMethod.POST)
 	public @ResponseBody List<Chat> messageList(Model model, HttpSession session) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
@@ -59,6 +69,18 @@ public class OnlyController {
 
 		return messageList;
 	}
+	/*@RequestMapping(value = "/toIDsender", method = RequestMethod.POST)
+	public @ResponseBody List<Chat> toIDsender(@RequestParam("toID") String toID, @RequestParam("fromID") String fromID, Model model, HttpSession session) {
+		Chat cm = new Chat();
+		cm.setToID(toID);
+		cm.setFromID(fromID);
+		List<Chat> toIDsender = tmls.getToIDsender(cm);
+		model.addAttribute("toIDsender", toIDsender);
+		System.out.println(toID);
+		System.out.println(fromID);
+		
+		return toIDsender;
+	}*/
 	// 채팅 컨트롤러 끝
 
 	@RequestMapping("/id_check")
@@ -267,7 +289,7 @@ public class OnlyController {
 		List<String> photoList = ps.getImagesByUserid(userid, 1);
 		model.addAttribute("owner", blogOwner);
 		model.addAttribute("friendList", friendList);
-		model.addAttribute("photoList", photoList);		
+		model.addAttribute("photoList", photoList);
 		return "blog/about";
 	}
 
@@ -290,7 +312,7 @@ public class OnlyController {
 		model.addAttribute("photoList", photoList);
 		return "blog/photoList";
 	}
-	
+
 	// User가 해당 포스트 좋아요를 눌렀는지 체크
 	// @RequestMapping(value = "/isLiked")
 	private boolean isLiked(String userid, int lid, int type) {
