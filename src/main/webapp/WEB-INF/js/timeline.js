@@ -367,3 +367,11 @@ function showPosition(position) {
     longitude = position.coords.longitude;
 /*    alert('latitude:' + latitude + 'longitude:' + longitude );*/
 }
+
+function friendupdate(status, uid1, uid2){
+	$.post("/only/friendupdate/"+status+"/"+uid1+"/"+uid2, function(data){
+		$.get("/only/friendList", "member_id="+$("#member_id").val(), function(data){
+			$("#friendload").html(data);
+		});
+	});
+}
