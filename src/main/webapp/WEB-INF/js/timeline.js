@@ -68,8 +68,17 @@ $(function() {
 		$('#lng').val(0.0);
 		$('#place').val('');
 	});
+	
 });
-
+$(function(){
+	// 이미지 상세화면 닫기
+	$('.dimClose').on('click', function(){
+		console.log('click');
+//		if($('.det').hasClass('show')){
+		$(this).parents().children('.det').addClass('hide').removeClass('show');
+//		}
+	});
+});
 // infinite scroll 구현
 /*
  * var page = 4; $(window) .scroll( function() { if
@@ -250,11 +259,6 @@ $(function() {
 			$('.dropdown-content').removeClass('show');
 		} else {
 			$('.dropdown-content').addClass('show');
-		}
-	});
-	$('.dimClose').on('click', function(){
-		if($('.det').hasClass('show')){
-			$('.det').removeClass('show');
 		}
 	});
 });
