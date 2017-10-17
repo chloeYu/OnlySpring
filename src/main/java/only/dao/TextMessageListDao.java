@@ -7,4 +7,5 @@ import only.model.Chat;
 public interface TextMessageListDao {
 	
 	public List<Chat> getChatMessageList(String userid);
+	
 }
