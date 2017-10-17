@@ -134,7 +134,21 @@
 													<table>
 														<tr>
 														<c:forEach var="friend" items="${friendList }" begin="0" end="8" varStatus="status">
-														<td><div style="width:101px; height:101px;"><img src="${path }/img_timeline/${friend.profile_image}" style="width:100px; height:100px;"></div>
+														<td>
+														<div style="width:101px; height:101px;">
+														<div style="width: 100%; height: 100%;">
+														<div style="background: linear-gradient(transparent, rgba(0, 0, 0, .7)); bottom: 0; color: #fff; left: 0; padding: 5px; position: absolute; right: 0;">
+															<div style="font-size: 12px; line-height: 16px;">${friend.username }</div>
+														</div>
+														<a href="${path }/blog/${friend.userid}">
+															
+															<img src="${path }/img_timeline/${friend.profile_image}" style="width:100px; height:100px;">
+															
+														
+															
+														</a>
+														</div>
+														</div>
 														<c:if test="${status.count %3 ==0 }">
 															</tr><tr>
 														</c:if>
