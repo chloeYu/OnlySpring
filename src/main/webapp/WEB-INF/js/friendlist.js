@@ -1,7 +1,6 @@
-$(function(){
+/*$(function(){
 	console.log("friendlist loaded");
 	$('body').on('click', '.fld', function(e){
-		console.log("눌밈");
 		var sWidth = window.innerWidth;
 		var sHeight = window.innerHeight;
 
@@ -33,4 +32,4 @@ $(function(){
 
 function closeLayer(obj) {
 	$(obj).parent().parent().hide();
-}
+}*/

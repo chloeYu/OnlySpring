@@ -275,6 +275,7 @@ window.onclick = function(event) {
 	if(!event.target.matches('.instant')){
 		if(a){
 			$(".friendlistplace").addClass("disapper").removeClass("show");
+			$(".popupLayer").css("display","none");
 			a=!a;
 		}
 	}
