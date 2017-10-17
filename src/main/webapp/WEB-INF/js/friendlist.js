@@ -1,5 +1,7 @@
-$(".flp").on("click", function(e) {
-		alert("눌림!!");
+$(function(){
+	console.log("friendlist loaded");
+	$('body').on('click', '.fld', function(e){
+		console.log("눌밈");
 		var sWidth = window.innerWidth;
 		var sHeight = window.innerHeight;
 
@@ -27,6 +29,8 @@ $(".flp").on("click", function(e) {
 			"position" : "absolute"
 		}).show();
 	});
+});
+
 function closeLayer(obj) {
 	$(obj).parent().parent().hide();
 }
