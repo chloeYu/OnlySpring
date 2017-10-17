@@ -281,6 +281,18 @@ public class OnlyController {
 		model.addAttribute("owner", blogOwner);
 		return "blog/blogPictureList";
 	}
+	
+	@RequestMapping("/page")
+	public String page() {
+		return "page/page";
+	}
+
+	@RequestMapping("/pagemain/{userid}")
+	public String pagemain(@PathVariable String userid, Model model ) {
+		Member pageOwner = ms.getMemberById(userid);
+		model.addAttribute("owner", pageOwner);
+		return "page/pagemain";
+	}
 
 	// 블로그 Photos 불러오기
 	@RequestMapping(value = "/appendPictureList")
