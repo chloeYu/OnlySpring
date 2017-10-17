@@ -665,6 +665,9 @@ Bounce
   -webkit-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
   -moz-transition: 0.3s all ease-out 0.1s, transform 0.2s ease-in;
 }
+.avenue-messenger.active {
+  transform: translateY(0);
+}
 
 .avenue-messenger div.agent-face {
   position: absolute;

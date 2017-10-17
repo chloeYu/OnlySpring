@@ -23,5 +23,4 @@
 		) AS subQuery
 		GROUP BY chatRoom
 	</select>
-
 </mapper>

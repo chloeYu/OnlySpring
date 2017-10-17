@@ -52,8 +52,20 @@ $(document).ready(function() {
 	}
 	
 	function onMessage(event) {
-		appendMessage(event.data);
+		var type = null;
+		
+		$.each(JSON.parse(event.data), function(key, value) {
+			if(key === 'type'){
+				type = value;
+				if(type === 'message'){
+					appendMessage(event.data);
+				} else if (type === 'messageList') {
+					MessageList();
+				}
+			}
+		});
 	}
+	
 	// 웹소켓에 저장된 메세지 출력
 	function appendMessage(jsonString) {
 		var fromID = null;
@@ -99,13 +111,24 @@ $(document).ready(function() {
 
 	// 전송 버튼을 눌렀을 때 호출되는 메소드
 	$('.message-submit').click(function() {
-		insertMessage();
+		var toID = $(this).data('toid');
+		insertMessage(toID);
+	});
+	
+	// 영역 밖 Click시 이벤트
+	$("body").click(function(e) { 
+	     if($(".avenue-messenger").css("display") == "block") {
+	          if(!$('.avenue-messenger').has(e.target).length) { 
+	        	  $('.avenue-messenger').css("transform","translateY(600px)");
+	          } 
+	     }
 	});
 	
 	//엔터키 조작
 	$(window).on('keydown', function(e) {
+		var toID = $('.message-submit').data('toid');
 		if (e.which == 13) {
-			insertMessage();
+			insertMessage(toID);
 			return false;
 		}
 	})
@@ -117,7 +140,6 @@ $(document).ready(function() {
 	});
 					
 	$('.endChat').click(function () {
-		disconnect();
 		$('.menu .items span').removeClass('active');
 		$('.menu .button').removeClass('active');
 	});
@@ -150,9 +172,9 @@ $(document).ready(function() {
 	}
 	
 	//메세지 저장
-	function insertMessage() {
+	function insertMessage(toIDsender) {
 		var fromID = '<%=userid%>';
-		var toID = '<%=toID%>';
+		var toID = toIDsender;
 		var chatContent = $('.message-input').val();
 		
 		$.ajax({
@@ -165,11 +187,13 @@ $(document).ready(function() {
 			},
 			success: function () {
 				websocket.send(JSON.stringify({
+					type : "message", // type : "friendRequest", post reply
 					fromID : "<%=userid%>",
 					toID : "<%=toID%>",
 					chatContent : $('.message-input').val()
 				}));
 				$('.message-input').val("");
+				MessageListAction();
 			}
 		});
 					/*setTimeout(function() {
@@ -177,14 +201,16 @@ $(document).ready(function() {
 					}, 1000 + (Math.random() * 20) * 100);*/
 	}
 	
-	//메세지 리스트 갯수
+	//채팅창 메세지 리스트 갯수
 	chatListFunction('ten');
 	
-	//메세지 리스트 불러오기
+	//채팅창 메세지 리스트 불러오기
 	var lastID = 0;
-	function chatListFunction(type) {
+	function chatListFunction(type, toIDsender) {
 		var fromID = '<%=userid%>';
-		var toID = '<%=toID%>';
+		var toID = toIDsender;
+
+		
 		$.ajax({
 			type : "POST",
 			url : "./chatListServlet",
@@ -207,7 +233,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	//메세지 리스트 CSS
+	//채팅창 메세지 리스트 CSS
 	function addChat(chatName, chatContent, chatTime) {
 		if(chatName == '<%=userid%>') {
 			$('<div class="message message-personal">' + chatContent + '</div>')
@@ -229,7 +255,14 @@ $(document).ready(function() {
 		updateScrollbar();
 	}
 	
-	// 메시지 목록 불러오기
+	//최신 메시지 목록 불러오기 액션
+	function MessageListAction() {
+		websocket.send(JSON.stringify({
+			type : "messageList" // type : "friendRequest", post reply
+		}));
+	}
+	
+	//최신 메시지 목록 불러오기
 	function MessageList() {
 		
 		$.ajax({
@@ -237,19 +270,26 @@ $(document).ready(function() {
 			url : "${path}/messageList",
 			dataType : "json",
 			success : function(data) {
+				var type = null;
 				var chatID = null;
 				var fromID = null;
 				var toID = null;
 				var chatContent = null;
 				var chatTime = null;
-				var timeType = '오전';
+				var chatRoom = null;
 				
+				var timeType = '오전';
+				// fromID > toID toID-fromID ; fromID < fromID=-toID
+				// chatRoom = fromID+'-'+toID; 
+				$('.people').html('');
 				$.each(data, function(key, list) {
 					chatID = list.chatID;
 					fromID = list.fromID;
-					toID = list.toID;
+					toID = list.toID;	
 					chatContent = list.chatContent;
 					chatTime = list.chatTime;
+					chatRoom = list.chatRoom;
+					console.log(chatContent);
 					
 					var ampm = chatTime.substring(11,13);
 					if(ampm >= 12) {
@@ -257,19 +297,35 @@ $(document).ready(function() {
 						ampm -= 12;
 					}
 					var resultTime = timeType + " " + ampm + ":" + chatTime.substring(14,16 + "");
-					if(fromID=='<%=userid%>') {
-						$('.people').append('<li class="person" data-chat="person1"><img src="/only/img_all/user.png" alt=""/>'+ 
-							'<span class="name">'+ toID +'</span><span class="time">' + resultTime
-							+ '</span><span class="preview">'+ chatContent +'</span></li>');
-					} else if(toID=='<%=userid%>') {
-						$('.people').append('<li class="person" data-chat="person1"><img src="/only/img_all/user.png" alt=""/>'+ 
+					
+					if(fromID ==='<%=userid%>') {
+							$('.people').prepend('<li class="person" data-toID=' + toID + ' data-fromID=' + fromID + '><img src="/only/img_all/user.png" alt=""/>'+ 
+									'<span class="name">'+ toID +'</span><span class="time">' + resultTime
+									+ '</span><span class="preview">'+ chatContent +'</span></li>');
+					} else if(toID ==='<%=userid%>') {
+						$('.people').prepend('<li class="person" data-toID=' + fromID + ' data-toID=' + toID + '><img src="/only/img_all/user.png" alt=""/>'+ 
 								'<span class="name">'+ fromID +'</span><span class="time">' + resultTime
 								+ '</span><span class="preview">'+ chatContent +'</span></li>');
-					}
+					}	
 				});	
 			}
-		});
+	 	});
 	}
+	
+	// 클릭 시 toID 전달 및 채팅창 팝업
+	$(document).on('click','.person', function() {
+		
+		var toID = $(this).data('toid');
+		var type = "ten";
+
+		$('.mCSB_container').html('');
+		chatListFunction(type, toID);
+		
+		$('.avenue-messenger').css("transform","translateY(0px)");
+		
+		$('.chat-title').html('<h1>'+ toID + '</h1>');
+		$('.message-submit').attr("data-toID",toID);
+	});
 });
 </script>
 </head>
@@ -279,6 +335,7 @@ $(document).ready(function() {
 		style="display: none;">
 		<strong>메세지 전송에 성공했습니다.</strong>
 	</div>
+	<!-- 채팅창 시작 -->
 	<section class="avenue-messenger">
 		<div class="menu">
 			<div class="items">
@@ -298,9 +355,7 @@ $(document).ready(function() {
 		</div>
 		<div class="chat">
 			<div class="chat-title">
-				<h1><%=toID%></h1>
-				<!--  <figure class="avatar">
-      <img src="http://askavenue.com/img/17.jpg" /></figure>-->
+				<h1 class="toID"><%=toID %></h1>
 			</div>
 			<div class="messages">
 				<div class="messages-content"></div>
@@ -308,23 +363,25 @@ $(document).ready(function() {
 			<div class="message-box">
 				<textarea type="text" class="message-input"
 					placeholder="Type message..."></textarea>
-				<button type="submit" class="message-submit">Send</button>
+				<button type="submit" class="message-submit" data-toID="">Send</button>
 			</div>
 		</div>
 	</section>
 	<!-- 채팅창 끝 -->
-	<!-- 친구목록 -->
+	<!-- 메시지 리스트 오른쪽 -->
 	<div class="left">
 		<div class="top">
 			<input type="text" /> <a href="javascript:;" class="searchF"></a>
 		</div>
 		<ul class="people">
-			<li class="person" data-chat="person1"><img
-				src="https://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" /> <span
-				class="name">Thomas Bangalter</span> <span class="time">2:09
-					PM</span> <span class="preview">I was wondering...</span></li>
+			<li class="person" data-chat="person1">
+				<img src="https://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" /> 
+				<span class="name">Thomas Bangalter</span> 
+				<span class="time">2:09	PM</span> 
+				<span class="preview">I was wondering...</span>
+			</li>
 		</ul>
 	</div>
-	<!-- 친구목록 끝 -->
+	<!-- 메시지 리스트 오른쪽 끝 -->
 </body>
 </html>

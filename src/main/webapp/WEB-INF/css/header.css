@@ -4,60 +4,59 @@
 
 .dropbtn:hover, .dropbtn:focus {
 	cursor: pointer;
-	color: #00ffff;
-}
+    color: #00ffff;
+} 
 
 .dropdown {
-	float: right;
-	position: relative;
-	display: inline-block;
+    float: right;
+    position: relative;
+    display: inline-block;
+    
 }
 
 .dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f9f9f9;
-	min-width: 160px;
-	overflow: auto;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	right: 0;
-	z-index: 1;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    right: 0;
+    z-index: 1;
 }
 
 .dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
-.dropdown a:hover {
-	background-color: #f1f1f1
-}
+.dropdown a:hover {background-color: #f1f1f1}
 
-.friendlistplace {
+.friendlistplace{
 	position: absolute;
-	background-color: white;
-	width: 200px;
-	max-height: 363px;
-	overflow-x: hidden;
-	word-wrap: break-word;
-	overflow-y: hidden;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	z-index: 1;
-	top: 50px;
+    background-color: white;
+    width: 200px;
+    min-height: 800px;
+    overflow-x: hidden;
+    word-wrap:break-word;
+    overflow-y: hidden;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 50px;
 }
 
-.dropdown {
+.dropdown{
 	background-image: url("../img_all/more.png");
 	background-size: 80%;
-	background-repeat: no-repeat;
-	background-position: 5px;
+    background-repeat: no-repeat;
+    background-position: 5px;
 	width: 40px;
-	height: 40px;
-	position: absolute;
-	top: 5px;
-	right: 10px;
+    height: 40px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
 }
 
 .disapper {
@@ -66,74 +65,80 @@
 
 .profileDropdown:hover, .profileDropdown:focus {
 	cursor: pointer;
-	color: #00ffff;
-}
+    color: #00ffff;
+} 
 
 .profileDropdown {
 	position: relative;
-	display: inline-block;
-	width: 100%;
-	height: 100%;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
 }
 
 .dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f9f9f9;
-	min-width: 160px;
-	overflow: auto;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	right: 0;
-	top: 43px;
-	z-index: 1;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    right: 0;
+    top:43px;
+    z-index: 1;
 }
 
 .dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
 .dropdown a:hover {
 	background-color: #f1f1f1
-}
-
-.fld {
+	}
+.fld{
 	text-align: center;
 	-webkit-transition: background-color 0.5s;
-	transition: background-color 0.5s;
-	padding: 5px;
-	padding-left: 0px;
+	 transition: background-color 0.5s;
+	 padding: 5px;
+	 padding-left: 0px;
 }
-
-.flp {
+.flp{
 	text-align: center;
 }
-
-.fld:hover {
+.fld:hover{
 	cursor: pointer;
 	background-color: #c9d0db;
 }
-
-.flp:hover {
+.flp:hover{
 	cursor: pointer;
 }
-
-.flh2 {
+.flh2{
 	text-align: center;
 	font-weight: bolder;
 	font-size: larger;
-	padding: 9px;
-	height: 40px;
+	padding: 10px;
 }
-
-.instant p {
+.instant p{
 	width: 198px;
 	height: 18px;
 }
-
-.instant hr {
+.instant hr{
 	margin: 0px;
-	height: 0px;
+}
+.popupLayer {
+	position: absolute;
+	display: none; 
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 350px;
+	height: 150px;
+	padding: 10px;
+}
+
+.popupLayer div {
+	position: absolute;
+	top: 5px;
+	right: 5px;
 }

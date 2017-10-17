@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <c:if test="${not empty friendList }">
+<c:if test="${not empty friendList }">
 	<hr class="instant">
 	<h2 class="flh2 instant">친구</h2>
 	<hr class="instant">
@@ -10,7 +10,7 @@
 			<p class="instant">${friend.username }</p>
 		</div>
 	</c:forEach>
-</c:if> --%>
+</c:if>
 <c:if test="${not empty requestList }">
 	<hr class="instant">
 	<h2 class="flh2 instant">친구요청</h2>

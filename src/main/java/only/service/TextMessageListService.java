@@ -7,5 +7,5 @@ import only.model.Chat;
 public interface TextMessageListService {
 	
 	public List<Chat> getChatMessageList(String userid);
-
+	
 }
