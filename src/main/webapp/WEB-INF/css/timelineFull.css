@@ -34,60 +34,56 @@ flat(ctrl++shift+f) 절대로 금지 */
 		overflow: auto;
 		margin: 0;
 	}
-	.displayShow{
+	.displayShow {
 		display: block;
 	}
 	.ic_title {
-		width:100%;
-		background:#F8F8F8;
-		text-align:center;
+		width: 100%;
+		background: #F8F8F8;
+		text-align: center;
 	}
-	
 	.ic_title p {
-		padding:8px 0;
+		padding: 8px 0;
 	}
-	
 	.back_btn {
-		padding:20px;
-		position:absolute;
-		left:10px;
-		z-index:50000000;
-		top:40%;
-		cursor:pointer
+		padding: 20px;
+		position: absolute;
+		left: 10px;
+		z-index: 50000000;
+		top: 40%;
+		cursor: pointer
 	}
-	
 	.next_btn {
-		padding:20px;
-		position:absolute;
-		right:10px;
-		z-index:50000000;
-		top:40%;
-		cursor:pointer
+		padding: 20px;
+		position: absolute;
+		right: 10px;
+		z-index: 50000000;
+		top: 40%;
+		cursor: pointer
 	}
-	
 	.no_select {
-		-moz-user-select:none;
-		-webkit-user-select:none;
-		-ms-user-select:none;
-		user-select:none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 		background-color: rgb(255, 255, 255);
-		background-color:rgba(255,255,255,0.8);
+		background-color: rgba(255, 255, 255, 0.8);
 	}
 	.back_btn {
-		padding:20px;
-		position:absolute;
-		left:10px;
-		z-index:50000000;
-		top:40%;
-		cursor:pointer
+		padding: 20px;
+		position: absolute;
+		left: 10px;
+		z-index: 50000000;
+		top: 40%;
+		cursor: pointer
 	}
 	.next_btn {
-		padding:20px;
-		position:absolute;
-		right:10px;
-		z-index:50000000;
-		top:40%;
-		cursor:pointer
+		padding: 20px;
+		position: absolute;
+		right: 10px;
+		z-index: 50000000;
+		top: 40%;
+		cursor: pointer
 	}
 	.header {
 		background-color: #fff;
@@ -128,7 +124,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		width: 350px;
 		border: 2px solid #97a6bf;
 		padding: 5px;
-/* 		height: 15px; */
+		/* 		height: 15px; */
 		border-radius: 5px;
 		outline: none;
 		color: #97a6bf;
@@ -204,7 +200,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: block;
 		margin-left: 2%;
 	}
-	
 	.blog_aside {
 		position: fixed;
 		background-color: #FFF;
@@ -214,7 +209,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: block;
 		margin-left: 2%;
 	}
-	
 	.blog_post {
 		width: 40%;
 		display: block;
@@ -229,135 +223,135 @@ flat(ctrl++shift+f) 절대로 금지 */
 		padding-top: 5px;
 		position: relative;
 	}
-	.infinite_scroll .postImg1{
+	.infinite_scroll .postImg1 {
 		width: 100%;
-		margin:0;
+		margin: 0;
 		display: inline-block;
 	}
-	.postImg1 .postInner1{
-		width:100%;
-		height:auto;
+	.postImg1 .postInner1 {
+		width: 100%;
+		height: auto;
 		display: inline-block;
 	}
-	.infinite_scroll .postImg2{
+	.infinite_scroll .postImg2 {
 		width: 50%;
 		min-height: 20%;
 		height: 20%;
 		display: inline-block;
 		margin: 0;
-		overflow:hidden;
+		overflow: hidden;
 		float: left;
 	}
-	.infinite_scroll .postImg2:after{
+	.infinite_scroll .postImg2:after {
 		clear: both;
 	}
-	.postImg2 .postInner2{
-		width:100%;
-		height:auto;
-		display: inline-block;
-		margin:0;
-	}
-	.infinite_scroll .postImg3{
-		width:50%;
-		min-height: 20%;
-		height:20%;
+	.postImg2 .postInner2 {
+		width: 100%;
+		height: auto;
 		display: inline-block;
 		margin: 0;
-		overflow:hidden;
+	}
+	.infinite_scroll .postImg3 {
+		width: 50%;
+		min-height: 20%;
+		height: 20%;
+		display: inline-block;
+		margin: 0;
+		overflow: hidden;
 		float: left;
 	}
-	.infinite_scroll .postImg3:after{
+	.infinite_scroll .postImg3:after {
 		clear: both;
 	}
-	.postImg3 .postInner3{
-		width:100%;
+	.postImg3 .postInner3 {
+		width: 100%;
 		height: auto;
 		margin: 0;
 		position: relative;
 	}
 	.detailDim .postImg4 .mainimg {
-		opacity:1;
+		opacity: 1;
 	}
-	.infinite_scroll .postImg4{
+	.infinite_scroll .postImg4 {
 		width: 100%;
 		height: 100%;
-		margin:0;
-		padding:0;
+		margin: 0;
+		padding: 0;
 		display: inline-block;
 		position: relative;
-		overflow:hidden;
-		vertical-align:top;
+		overflow: hidden;
+		vertical-align: top;
 	}
-	.postImg4 .postInner4{
-		width:100%;
-		height:auto;
+	.postImg4 .postInner4 {
+		width: 100%;
+		height: auto;
 		display: inline-block;
 		position: relative;
 	}
-	.infinite_scroll>img{
-		width:60%;
+	.infinite_scroll>img {
+		width: 60%;
 	}
-	.det{
-		width:38%;
+	.det {
+		width: 38%;
 	}
-	.detailDim{
-		position:relative; 
-		top:20%; 
-		left:30%; 
-		width:38%; 
-		height: 50%; 
-		background-color:#FFF; 
-		opacity:1; 
-		z-index:10;
-		overflow:hidden;
-		white-space:nowrap;
-		margin:0;
+	.detailDim {
+		position: relative;
+		top: 20%;
+		left: 30%;
+		width: 38%;
+		height: 50%;
+		background-color: #FFF;
+		opacity: 1;
+		z-index: 10;
+		overflow: hidden;
+		white-space: nowrap;
+		margin: 0;
 	}
-	.infinite_scroll .postImg3:nth-child(n+7){
+	.infinite_scroll .postImg3:nth-child(n+7) {
 		display: none;
 	}
-	.infinite_scroll .postImg3:nth-child(6){
-	    background-color: #000;
-	    opacity: 1;
-	    width: 50%;
-	    height: 20%;
-	    font-size: 3rem;
-	    text-align: center;
-	    position: relative;
-	    cursor: pointer;
+	.infinite_scroll .postImg3:nth-child(6) {
+		background-color: #000;
+		opacity: 1;
+		width: 50%;
+		height: 20%;
+		font-size: 3rem;
+		text-align: center;
+		position: relative;
+		cursor: pointer;
 	}
-	.infinite_scroll .postImg3:nth-child(6) img{
+	.infinite_scroll .postImg3:nth-child(6) img {
 		opacity: 0.5;
 		display: inline;
 	}
-	.infinite_scroll .postImg3:nth-child(6) span{
+	.infinite_scroll .postImg3:nth-child(6) span {
 		position: absolute;
-		top:75px;
-		left:30px;
-		right:30px;
-		color:white;
+		top: 75px;
+		left: 30px;
+		right: 30px;
+		color: white;
 	}
-	.postImgCaption{
+	.postImgCaption {
 		background-color: #000;
 		z-index: 10;
 		opacity: 0.5;
-		width:50%;
-		height:20%;
+		width: 50%;
+		height: 20%;
 	}
-	.imgPre{
-		min-width:150px;
-		min-height:100px;
-		width:150px;
-		height:100px;
+	.imgPre {
+		min-width: 150px;
+		min-height: 100px;
+		width: 150px;
+		height: 100px;
 		margin: 5px;
 		display: inline-block;
 		overflow: hidden;
 	}
-	.imgPre img{
-		width:100%;
-		height:auto;
+	.imgPre img {
+		width: 100%;
+		height: auto;
 	}
-	.postImgCaption:hover{
+	.postImgCaption:hover {
 		opacity: 0.2;
 	}
 	.page_margin {
@@ -378,7 +372,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 		margin-bottom: 25px;
 		width: 90%;
 	}
-	
 	.type_choice_box {
 		background-color: #FFF;
 		border-radius: 5px;
@@ -390,14 +383,14 @@ flat(ctrl++shift+f) 절대로 금지 */
 		padding-left: 20px;
 		padding-right: 20px;
 	}
-	.commentView{
+	.commentView {
 		clear: both;
 	}
-	.postUid{
-		padding-top:5px;
-		padding-bottom:5px;
+	.postUid {
+		padding-top: 5px;
+		padding-bottom: 5px;
 	}
-	.postUid span{
+	.postUid span {
 		font-size: medium;
 	}
 
@@ -518,7 +511,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: block;
 		float: left;
 	}
-	.commentBtn{
+	.commentBtn {
 		float: left;
 		width: 15%;
 		height: 30px;
@@ -530,19 +523,19 @@ flat(ctrl++shift+f) 절대로 금지 */
 		color: white;
 		display: block;
 	}
-	.commentView{
+	.commentView {
 		position: relative;
 		top: 15px;
 	}
-	.commentViewMid{
+	.commentViewMid {
 		font-weight: bold;
 		font-size: 0.9em;
 	}
-	.commentViewCre{
+	.commentViewCre {
 		font-size: 0.8em;
-		margin-left: 5px; 
+		margin-left: 5px;
 	}
-	.commentViewMid{
+	.commentViewMid {
 		font-size: 0.9em;
 	}
 	.comment_textarea:focus {
@@ -569,8 +562,6 @@ flat(ctrl++shift+f) 절대로 금지 */
 		display: inline-block;
 		float: left;
 	}
-	
-	
 	.on {
 		position: relative;
 		cursor: pointer;
@@ -652,23 +643,90 @@ flat(ctrl++shift+f) 절대로 금지 */
 	hr {
 		margin-bottom: 3px;
 	}
-	.postImg{
-		height: 200px; 
-		width: 50%; 
+	.postImg {
+		height: 200px;
+		width: 50%;
 		display: inline;
 	}
-	.postVideo{
-		width: 50%; 
-		height: 240px; 
+	.postVideo {
+		width: 50%;
+		height: 240px;
 	}
-	.postLayoutClear{
-		clear:both;
+	.postLayoutClear {
+		clear: both;
 	}
-	@keyframes heart-burst {
-		from { 
-			background-position: left;
-		}
-		to {
-			background-position: right;
-		}
+	@
+	keyframes heart-burst {from { background-position:left;
+		
 	}
+	to {
+		background-position: right;
+	}
+}
+
+.stageWrapper{
+	background-color: #000;
+    height: 100%;
+    min-height: 480px;
+    position: relative;
+    text-align: center;
+}
+.stage {
+	cursor: pointer;
+	display: block;
+	font-size: 0;
+	height: 100%;
+	min-height: 402px;
+	position: relative;
+	text-align: center;
+	width: 100%;
+}
+
+
+.modal a.prev {
+	height: 45px;
+	margin-top: -22px;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateZ(0);
+	transition: opacity .2s;
+	width: 27px;
+	z-index: 11;
+}
+
+.prevIcon {
+	
+}
+
+.modal a.next {
+	eight: 45px;
+	margin-top: -22px;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateZ(0);
+	transition: opacity .2s;
+	width: 45px;
+	z-index: 11;
+}
+
+.prevIcon {
+	display: block;
+	background-image: url(https://www.facebook.com/rsrc.php/v3/yI/r/3_rCco2pYS1.png);
+    background-repeat: no-repeat;
+    background-size: 50px 350px;
+    background-position: 0 -50px;
+    height: 48px;
+    width: 48px;
+}
+
+.nextIcon {
+	display: block;
+	background-image: url(https://www.facebook.com/rsrc.php/v3/yI/r/3_rCco2pYS1.png);
+    background-repeat: no-repeat;
+    background-size: 50px 350px;
+    background-position: 0 0;
+    height: 45px;
+    width: 40px;
+}

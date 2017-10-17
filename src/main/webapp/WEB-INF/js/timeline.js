@@ -69,9 +69,88 @@ $(function() {
 		$('#place').val('');
 	});
 	
+	
+	$('body').on('click', '.postInner3', function(e){
+		console.log("이미지 팝업");
+		var modal =document.getElementById("myModal");
+		//Get the image and insert it inside the modal - use its "alt" text as a caption
+		var img =  e.currentTarget;
+		var modalImg = document.getElementById("popUpImage");
+		console.log($(this).attr('data-index'));
+		console.log($(this).attr('data-total'));
+		$('.prevIcon').attr('data-id', $(this).attr('id'));
+		$('.prevIcon').attr('data-index', $(this).attr('data-index'));
+		$('.prevIcon').attr('data-total', $(this).attr('data-total'));
+
+		$('.nextIcon').attr('data-id', $(this).attr('id'));
+		$('.nextIcon').attr('data-index', $(this).attr('data-index'));
+		$('.nextIcon').attr('data-total', $(this).attr('data-total'));
+		
+		if($(this).attr('data-index') == 0){
+			$('.prevIcon').hide();
+		}
+		if($(this).attr('data-index') == $(this).attr('data-total')-1){
+			$('.next').hide();
+		}
+		//var captionText = document.getElementById("caption");
+
+		modal.style.display = "block";
+		modalImg.src = img.src;
+		//captionText.innerHTML = this.alt;
+	});
+	
+	$('body').on('click', '.prevIcon', function(){
+		var prefix = $(this).attr('data-id').split('-')[0];
+		var index = parseInt($(this).attr('data-id').split('-')[1]) - 1;
+		console.log($(this).attr('data-id'));
+		console.log(prefix+index);
+		$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
+		if(index == 0){
+			$('.prevIcon').hide();
+		}
+		$('.nextIcon').show();
+		
+		$('.prevIcon').attr('data-id', prefix+'-'+index);
+		$('.prevIcon').attr('data-index', index);
+		$('.prevIcon').attr('data-total', $(this).attr('data-total'));
+
+		$('.nextIcon').attr('data-id', prefix+'-'+index);
+		$('.nextIcon').attr('data-index', index);
+		$('.nextIcon').attr('data-total', $(this).attr('data-total'));
+	});
+	
+	$('body').on('click', '.nextIcon', function(){
+		var prefix = $(this).attr('data-id').split('-')[0];
+		var index = parseInt($(this).attr('data-id').split('-')[1]) + 1;
+		console.log($(this).attr('data-id'));
+		console.log(prefix+index);
+		$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
+		if(index == $(this).attr('data-total')-1){
+			$('.nextIcon').hide();
+		}
+		$('.prevIcon').show();
+		
+		$('.prevIcon').attr('data-id', prefix+'-'+index);
+		$('.prevIcon').attr('data-index', index);
+		$('.prevIcon').attr('data-total', $(this).attr('data-total'));
+
+		$('.nextIcon').attr('data-id', prefix+'-'+index);
+		$('.nextIcon').attr('data-index', index);
+		$('.nextIcon').attr('data-total', $(this).attr('data-total'));
+	});
+	
+	
+	$('body').on('click', '.nextIcon', function(){
+		
+	});
+	
+	//When the user clicks on <span> (x), close the modal
+	$('body').on('click', '.popupClose', function(){
+		var modal =document.getElementById("myModal");
+		modal.style.display = "none";
+	});
 });
-$(function(){
-	// 이미지 상세화면 닫기
+$(function(){	
 	$('.dimClose').on('click', function(){
 		console.log('click');
 //		if($('.det').hasClass('show')){

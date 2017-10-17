@@ -96,6 +96,23 @@
 				<!-- 포스트 뷰 끝 -->
 			</div>
 		</div>
+		<!-- 이미지 팝업 Modal  -->
+			<div id="myModal" class="modal" style="z-index:9999;">
+				<!-- The Close Button -->
+				<span class="popupClose">&times;</span>
+				<!-- Modal Content (The Image) -->
+				<div class="display: inline-block; margin: 20px;">
+				<div class="stageWrapper">
+				<div class="stage" style="position: relative; text-align: center; width: 70%; margin: auto; height: 100%;">
+					<img class="modal-content" id="popUpImage" style="width: 100%;">
+					<a class="prev"><div class="prevIcon" data-id="" data-index="" data-total=""></div></a>
+					<a class="next"><div class="nextIcon" data-id="" data-index="" data-total=""></div></a>
+				</div>
+				</div>
+				</div>
+				<!-- Modal Caption (Image Text) -->
+				<div id="caption" value="image popup"></div>
+			</div>
 		<jsp:include page="rightmenu.jsp"></jsp:include>
 		
 	<!-- 채팅 메신저 -->

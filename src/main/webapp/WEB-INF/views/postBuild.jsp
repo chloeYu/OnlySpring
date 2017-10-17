@@ -5,6 +5,7 @@
 <%@ include file="sessionChk.jsp"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:if test="${not empty plist }">
 	<c:forEach var="post" items="${plist }">
 		<li class='infinite_scroll'>
@@ -47,12 +48,12 @@
 						<div class="postImg3">
 							<c:choose>
 								<c:when test="${i.index == 3}">
-									<img id='post${post.pid }-${i.index}' class="postInner3"
+									<img id='post${post.pid }-${i.index}' data-total="${fn:length(post.files)}" data-index = "${i.index }" class="postInner3"
 										src='${path }/only/img_timeline/${file.url }'>
 									<span>+More</span>
 								</c:when>
 								<c:otherwise>
-									<img id='post${post.pid }-${i.index}' class="postInner3"
+									<img id='post${post.pid }-${i.index}' data-total="${fn:length(post.files)}" data-index = "${i.index }" class="postInner3"
 										src='${path }/only/img_timeline/${file.url }'>
 								</c:otherwise>
 							</c:choose>
@@ -94,7 +95,7 @@
 				<div class='sendBtn' id="commentBtn-post-${post.pid }"></div>
 			</div>
 			<div class='postLayoutClear'></div>
-			<div class="det hide" id='det${post.pid }'>
+			<%-- <div class="det hide" id='det${post.pid }'>
 				<div class="imgDetail" style="position:fixed; z-index:100; top:0; left:0; width:100%; height:100%;">
 					<div class="dimBackground" style="position:absolute; background-color:#000; opacity:0.5; width:100%; height:100%; top:0; left:0;">
 					</div>
@@ -105,14 +106,14 @@
 						<c:if test="${not empty post.files }">
 							<c:forEach var="file" items="${post.files }" varStatus="i">
 							<div class="postImg4">
-			<%-- 				<img id='post${post.pid }-${i.index}' class="postInner4" src='${path }/only/img_timeline/${file.url }'> --%>
+							<img id='post${post.pid }-${i.index}' class="postInner4" src='${path }/only/img_timeline/${file.url }'>
 								<img class="postInner4" src='${path }/only/img_timeline/${file.url }'>
 							</div>
 							</c:forEach>
 						</c:if> 
 					</div>
 				</div>
-			</div>
+			</div> --%>
 		</li>
 	</c:forEach>
 

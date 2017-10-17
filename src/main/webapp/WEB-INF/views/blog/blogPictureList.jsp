@@ -43,7 +43,7 @@
 			<!-- 이미지 팝업 Modal  -->
 			<div id="myModal" class="modal" style="z-index:9999;">
 				<!-- The Close Button -->
-				<span class="close">&times;</span>
+				<span class="popupClose">&times;</span>
 				<!-- Modal Content (The Image) -->
 				<img class="modal-content" id="img01">
 				<!-- Modal Caption (Image Text) -->

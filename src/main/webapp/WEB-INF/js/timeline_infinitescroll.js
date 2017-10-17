@@ -98,12 +98,12 @@ function getPostPage(page) {
 						$("#"+cList[key].id).html(cdata);
 					});
 				});
-				$('.infinite_scroll .postImg3:nth-child(6)').on('click',function(e){
-					if(!$('.det').hasClass('show')){
-						$(this).parent().children('.det').addClass('show').removeClass('hide');
-					}
+//				$('.infinite_scroll .postImg3:nth-child(6)').on('click',function(e){
+//					if(!$('.det').hasClass('show')){
+//						$(this).parent().children('.det').addClass('show').removeClass('hide');
+//					}
 //					init();
-				});
+//				});
 			});
 		}
 	} else if(window.location.href.indexOf('http://' + window.location.host + '/only/blog') > -1  && window.location.href.indexOf('friendList') < 0 && window.location.href.indexOf('photos') < 0){
