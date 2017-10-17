@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="messages">
+	<resultMap type="chat" id="messageResult">
+		<id property="chatID" column="chatID" />
+		<result property="fromID" column="fromID" />
+		<result property="toID" column="toID" />
+		<result property="chatContent" column="chatContent" />
+		<result property="chatTime" column="chatTime" />
+	</resultMap>
+
+	<select id="messageList" parameterType="String" resultMap="messageResult">
+		<!-- SELECT * FROM ( SELECT * FROM chat ORDER BY chatTime DESC ) AS subQuery 
+			GROUP BY DATE_FORMAT(chatTime,'%Y-%m-%d'), fromID=#{fromID} ORDER BY fromID=#{fromID} 
+			DESC, chatTime DESC limit 1; -->
+		SELECT * FROM
+		(
+		SELECT *
+		FROM chat
+		ORDER BY chatTime DESC
+		) AS subQuery
+		GROUP BY chatRoom
+	</select>
+
+</mapper>
