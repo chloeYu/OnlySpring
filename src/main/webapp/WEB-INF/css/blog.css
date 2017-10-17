@@ -62,7 +62,7 @@ body.blogLayout {
 .coverWrap .photo {
 	image-rendering: optimizeQuality;
 	min-height: 100%;
-	min-width: 100%;
+	width: 100%;
 	position: absolute;
 	left: 0;
 }
