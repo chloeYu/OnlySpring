@@ -30,7 +30,8 @@
 					</div>
 				</c:if>
 			</div>
-			<hr> <c:if test="${not empty post.files }">
+			<hr> 
+			<c:if test="${not empty post.files }">
 				<c:forEach var="file" items="${post.files }" varStatus="i">
 					<c:if test="${post.files.size() < 4 }">
 						<div class="postImg1">
@@ -93,6 +94,23 @@
 				<div class='sendBtn' id="commentBtn-post-${post.pid }"></div>
 			</div>
 			<div class='postLayoutClear'></div>
+			<div class="det" id='det${post.pid }'>
+				<div class="imgDetail" style="position:fixed; z-index:100; top:0; left:0; width:100%; height:100%;">
+					<div class="dimBackground" style="position:absolute; background-color:#000; opacity:0.5; width:100%; height:100%; top:0; left:0;">
+					</div>
+					<div class="detailDim">
+						<div class="dimClose" style="float:right; cursor:pointer;">X</div>
+						<c:if test="${not empty post.files }">
+							<div class="postImg4">
+							<c:forEach var="file" items="${post.files }" varStatus="i">
+			<%-- 				<img id='post${post.pid }-${i.index}' class="postInner4" src='${path }/only/img_timeline/${file.url }'> --%>
+								<img class="postInner4" src='${path }/only/img_timeline/${file.url }'>
+							</c:forEach>
+							</div>
+						</c:if> 
+					</div>
+				</div>
+			</div>
 		</li>
 	</c:forEach>
 

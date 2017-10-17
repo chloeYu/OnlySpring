@@ -21,21 +21,21 @@
 			<div id="leftCol"></div>
 			<jsp:include page="blogHeader.jsp"></jsp:include>
 
-			<!-- 친구 리스트 -->
+			<!-- 사진 리스트 -->
 			<div class="blogFriendList" style="display: node;">
 				<div class="container">
 					<div class="title">
 						<div class="titleWraper">
 							<h3>
 								<img
-									src="https://www.facebook.com/rsrc.php/v3/yj/r/6Umpm6yvtbH.png"
+									src="https://www.facebook.com/rsrc.php/v3/yl/r/DjG18OrMbQh.png"
 									style="margin: 0 9px 0 0; vertical-align: middle;"> <a
-									href="#" style="color: #4b4f56;">Friends</a>
+									href="#" style="color: #4b4f56;">Photos</a>
 							</h3>
 						</div>
 					</div>
 					<div class="friendListWraper">
-						<ul id="friendListDisplay" style="margin-left: -13px;">
+						<ul id="photoListDisplay">
 						</ul>
 					</div>
 				</div>

@@ -16,4 +16,6 @@ public interface MemberDao {
 
 	int updateThumbProfile(String userid, String url);
 
+	int updateCoverProfile(String userid, String url);
+
 }

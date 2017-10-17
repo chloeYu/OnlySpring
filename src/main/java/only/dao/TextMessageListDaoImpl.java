@@ -13,10 +13,10 @@ public class TextMessageListDaoImpl implements TextMessageListDao {
 
 	@Autowired
 	SqlSession ss;
-	
+
 	@Override
-	public List<Chat> getChatMessageList() {
-		return ss.selectList("messages.messageList");
+	public List<Chat> getChatMessageList(String userid) {
+		return ss.selectList("messages.messageList", userid);
 	}
 
 }

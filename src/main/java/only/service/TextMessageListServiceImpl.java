@@ -15,8 +15,8 @@ public class TextMessageListServiceImpl implements TextMessageListService {
 	TextMessageListDao tml;
 	
 	@Override
-	public List<Chat> getChatMessageList() {
-		return tml.getChatMessageList();
+	public List<Chat> getChatMessageList(String userid) {
+		return tml.getChatMessageList(userid);
 	}
 
 }

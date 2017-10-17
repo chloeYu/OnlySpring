@@ -3,9 +3,11 @@ package only.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -45,7 +47,7 @@ public class FileUploadController {
 		return "forward:/postWriteAction";
 	}
 	@RequestMapping(value = "/postWriteAction", method = RequestMethod.POST)
-	public String postWriteAction(Post post, HttpServletRequest request) {
+	public void postWriteAction(Post post, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String rootPath =  request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
 		char[] type = { 'n', 'n', 'n', 'n', 'n', 'n', 'n' };
 		String text = post.getText();
@@ -73,7 +75,7 @@ public class FileUploadController {
 					System.out.println("Server File Location=" + serverFile.getAbsolutePath());
 
 				} catch (Exception e) {
-					return "You failed to upload " + file.getName() + " => " + e.getMessage();
+					//return "You failed to upload " + file.getName() + " => " + e.getMessage();
 				}
 			}
 		}
@@ -141,7 +143,8 @@ public class FileUploadController {
 			}
 		}
 		// return "timeline";
-		return "redirect:/timeline";
+		response.sendRedirect(request.getHeader("referer"));
+		// return "redirect:/timeline";
 	}
 
 	/**

@@ -25,6 +25,7 @@ import only.model.Likes;
 import only.model.Member;
 import only.model.Post;
 import only.service.CommentService;
+import only.service.FriendListService;
 import only.service.LikesService;
 import only.service.MemberService;
 import only.service.PostService;
@@ -44,24 +45,19 @@ public class OnlyController {
 	@Autowired
 	private LikesService ls;
 	@Autowired
+	private FriendListService fs;
+	@Autowired
 	private TextMessageListService tmls;
 
 	// 채팅 컨트롤러
-	@RequestMapping("/chat")
-	public String chat(String userID, HttpSession session) {
-		Member member = ms.getMemberById(userID);
-		if (member != null) {
-			session.setAttribute("userID", member.getUserid());
-			session.setAttribute("nickname", member.getUsername());
-		}
-		return "chat";
-	}
-
-	@RequestMapping("/messageList")
-	public String messageList(Model model) {
-		List<Chat> messageList = tmls.getChatMessageList();
+	@RequestMapping(value = "/messageList", method = RequestMethod.POST)
+	public @ResponseBody List<Chat> messageList(Model model, HttpSession session) {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		List<Chat> messageList = tmls.getChatMessageList(userid);
 		model.addAttribute("messageList", messageList);
-		return "chat";
+		System.out.println(messageList);
+
+		return messageList;
 	}
 	// 채팅 컨트롤러 끝
 
@@ -127,13 +123,13 @@ public class OnlyController {
 		return result;
 	}
 
-	@RequestMapping(value = { "/searchResult"})
+	@RequestMapping(value = { "/searchResult" })
 	public String searchResult(String searchTerm, HttpServletRequest request, HttpSession session, Model model) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
 		List<Member> result = ms.searchMember(searchTerm, userid);
 		model.addAttribute("searchResult", result);
 		System.out.println(request.getServerName());
-		for(Member m : result) {
+		for (Member m : result) {
 			System.out.println(m);
 		}
 		return "searchResult";
@@ -242,14 +238,58 @@ public class OnlyController {
 		return "profileDone";
 	}
 
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/timeline";
+	}
+
 	@RequestMapping(value = "/blog/{owner}")
-	public String blog(@PathVariable String owner, Model model) {
+	public String blog(@PathVariable String owner, HttpSession session, Model model) {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
 		System.out.println("owner: " + owner);
 		Member blogOwner = ms.getMemberById(owner);
+		List<String> photoList = ps.getImagesByUserid(owner, 1);
+		List<Member> friendList = fs.friendListLoad(owner, userid, 1);
 		model.addAttribute("owner", blogOwner);
+		model.addAttribute("photoList", photoList);
+		model.addAttribute("friendList", friendList);
 		return "blog/blog";
 	}
 
+	// 블로그 About 페이지
+	@RequestMapping(value = "/blog/{owner}/about")
+	public String about(@PathVariable String owner, HttpSession session, Model model) {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		System.out.println("owner: " + owner);
+		Member blogOwner = ms.getMemberById(owner);
+		List<Member> friendList = fs.friendListLoad(owner, userid, 1);
+		List<String> photoList = ps.getImagesByUserid(userid, 1);
+		model.addAttribute("owner", blogOwner);
+		model.addAttribute("friendList", friendList);
+		model.addAttribute("photoList", photoList);		
+		return "blog/about";
+	}
+
+	// 블로그 Photos 페이지
+	@RequestMapping(value = "/blog/{owner}/photos")
+	public String photos(@PathVariable String owner, HttpSession session, Model model) {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		System.out.println("owner: " + owner);
+		Member blogOwner = ms.getMemberById(owner);
+
+		model.addAttribute("owner", blogOwner);
+		return "blog/blogPictureList";
+	}
+
+	// 블로그 Photos 불러오기
+	@RequestMapping(value = "/appendPictureList")
+	public String appendPhotos(String owner, int pageNum, HttpSession session, Model model) {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		List<String> photoList = ps.getImagesByUserid(userid, pageNum);
+		model.addAttribute("photoList", photoList);
+		return "blog/photoList";
+	}
 	
 	// User가 해당 포스트 좋아요를 눌렀는지 체크
 	// @RequestMapping(value = "/isLiked")
@@ -303,19 +343,27 @@ public class OnlyController {
 
 	// ThumbProfile Image Update - existing image
 	@RequestMapping(value = "/updateProfileImage", method = RequestMethod.GET)
-	public String updateProfileImage(@RequestParam("url") String url, HttpSession session) {
+	public String updateProfileImage(@RequestParam("url") String url, @RequestParam("type") int updateType,
+			HttpSession session) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
-		int result = ms.updateThumbProfile(userid, url);
 		Member member = (Member) session.getAttribute("member");
-		member.setProfile_image(url);
+		int result = 0;
+		if (updateType == 0) {
+			result = ms.updateCoverProfile(userid, url);
+			member.setCover_image(url);
+		} else if (updateType == 1) {
+			result = ms.updateThumbProfile(userid, url);
+			member.setProfile_image(url);
+		}
 		return "redirect:blog/" + userid;
 	}
 
 	// ThumbProfile Image Update - new image
 	@RequestMapping(value = "/updateProfileImage", method = RequestMethod.POST)
-	public String updateProfileImage2(MultipartFile file, HttpServletRequest request, HttpSession session) {
+	public String updateProfileImage2(MultipartFile file, int updateType, HttpServletRequest request,
+			HttpSession session) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
-		System.out.println("Uploaded File: " + file.getOriginalFilename());
+		System.out.println("Uploaded File: " + file.getOriginalFilename() + ", " + updateType);
 		Member member = (Member) session.getAttribute("member");
 		if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
 			try {
@@ -328,8 +376,15 @@ public class OnlyController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			int result = ms.updateThumbProfile(userid, file.getOriginalFilename());
-			member.setProfile_image(file.getOriginalFilename());
+			if (updateType == 0) {
+				ms.updateCoverProfile(userid, file.getOriginalFilename());
+				member.setCover_image(file.getOriginalFilename());
+
+			} else if (updateType == 1) {
+				ms.updateThumbProfile(userid, file.getOriginalFilename());
+				member.setProfile_image(file.getOriginalFilename());
+			}
+
 		}
 		return "redirect:blog/" + userid;
 	}

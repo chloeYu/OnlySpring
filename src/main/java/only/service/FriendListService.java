@@ -8,6 +8,8 @@ import only.model.Member;
 public interface FriendListService {
 
 	public List<Member> friendListLoad(String owner, String userid);
+	
+	public List<Member> friendListLoad(String owner, String userid, int pageNum);
 
 	public List<Member> pendingListLoad(String member_id);
 

@@ -29,6 +29,7 @@ public class FriendListDaoImpl implements FriendListDao {
 
 	@Override
 	public List<Member> friendListLoad(String owner, String userid, int pageNum) {
+		System.out.println(owner+userid+pageNum);
 		int startRow = (pageNum - 1) * FRIENDPERPAGE; // 1페이지:1 2페이지: 11 3페이지:21 ...
 		int endRow = startRow + FRIENDPERPAGE ; // 1페이지: 10 2페이지: 20 3페이지: 30
 		int total = sst.selectOne("friendlistns.getTotalFriend", owner);

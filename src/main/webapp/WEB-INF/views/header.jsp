@@ -72,7 +72,7 @@
 				<div id="myDropdown" class="dropdown-content">
 					<a href="#createPage">Create Page</a> <a href="#createGroup">Create
 						Group</a> <a href="/only/changeProfile">Profile Setting</a> <a
-						href="logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
+						href="/only/logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
 				</div>
 			</div>
 		</div>

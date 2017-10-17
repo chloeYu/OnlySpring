@@ -48,4 +48,9 @@ public class FriendListServiceImpl implements FriendListService {
 	public int insertUserSwitchedRequest(Friendlist f) {
 		return fd.insertUserSwitchedRequest(f);
 	}
+
+	@Override
+	public List<Member> friendListLoad(String owner, String userid, int pageNum) {
+		return fd.friendListLoad(owner, userid, pageNum);
+	}
 }
