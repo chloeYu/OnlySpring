@@ -7,7 +7,7 @@
 			<div class="search_profile">
 				<a style="border: none; margin: 2px 3px 3px 2px; padding: 0; display: inline-block;
     outline: none; position: relative;
-    vertical-align: bottom;"><img
+    vertical-align: bottom;"><img class="img"
 					src='${path}/only/img_timeline/${photo }'
 					style="dlsplay: block; width: 195; height: 195;"></a>
 			</div>
