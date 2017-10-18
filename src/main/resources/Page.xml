@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pagens">
+	<resultMap type="page" id="pageResult">
+		<id property="pid" column="pid" />
+		<result property="category" column="category" />
+		<result property="pname" column="pname" />
+		<result property="logo_image" column="logo_image" />
+		<result property="cover_image" column="cover_image" />
+		<result property="created" column="created" />
+		<result property="modified" column="modified" />
+		<result property="del" column="del" />
+	</resultMap>
+	
+	<!-- <insert id="insert" parameterType="post">
+		insert into POST values (#{userid}, .. , now(), now(), 'n')
+	</insert> -->
+
+	<!-- <select id="select" parameterType="String" resultType="member">
+		select * from member where userid=#{member_id}
+	</select>
+
+	<select id="search" parameterType="hashMap" resultMap="memberResult">
+		select m.*, f.uid1 as uid2, f.uid2 as uid1, f.status as relation from (select * from member where username LIKE CONCAT('%',#{searchTerm},'%')) m left join follow f on ((userid=uid1 and uid2=#{userid}) or (userid=uid2 and uid1=#{userid}))
+	</select>
+	
+
+	
+	<update id="update" parameterType="member">
+		update member set username=#{username}, password=#{password}, email=#{email}, modified=now(),  profile_image=#{profile_image}, tel=#{tel}, birth=#{birth} where userid=#{userid}
+	</update>
+	
+	<update id="updateThumbProfile" parameterType="hashMap">
+		update member set profile_image=#{url} where userid=#{userid}
+	</update>
+	
+	<update id="updateCoverProfile" parameterType="hashMap">
+		update member set cover_image=#{url} where userid=#{userid}
+	</update> -->
+	
+</mapper>
