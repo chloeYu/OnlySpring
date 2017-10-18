@@ -201,17 +201,13 @@ $(document).ready(function() {
 						receiveMessage();
 					}, 1000 + (Math.random() * 20) * 100);*/
 	}
-	
-	//채팅창 메세지 리스트 갯수
-	chatListFunction('ten');
-	
+
 	//채팅창 메세지 리스트 불러오기
 	var lastID = 0;
 	function chatListFunction(type, toIDsender) {
 		var fromID = '<%=userid%>';
 		var toID = toIDsender;
 
-		
 		$.ajax({
 			type : "POST",
 			url : "./chatListServlet",
@@ -290,7 +286,6 @@ $(document).ready(function() {
 					chatContent = list.chatContent;
 					chatTime = list.chatTime;
 					chatRoom = list.chatRoom;
-					console.log(chatContent);
 					
 					var ampm = chatTime.substring(11,13);
 					if(ampm >= 12) {
