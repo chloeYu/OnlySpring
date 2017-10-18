@@ -71,11 +71,27 @@ $(function() {
 	
 	
 	$('body').on('click', '.postInner3', function(e){
-		console.log("이미지 팝업");
+		
 		var modal =document.getElementById("myModal");
 		//Get the image and insert it inside the modal - use its "alt" text as a caption
 		var img =  e.currentTarget;
-		var modalImg = document.getElementById("popUpImage");
+		console.log(img.src);
+		var type = 0; // 0 : 이미지 1 : 비디오
+		if(isImage(e.currentTarget.src)){
+			$('#popUpImage').show();
+			var modalImg = document.getElementById("popUpImage");
+			modal.style.display = "block";
+			modalImg.src = e.currentTarget.src;
+			$('#iframeYoutube').hide();
+		}
+		if(isVideo(e.currentTarget.src)){
+			$('#iframeYoutube').show();
+			$('#popUpImage').hide();
+			var modalVideo = document.getElementById("iframeYoutube");
+			modal.style.display = "block";
+			modalVideo.src = e.currentTarget.src;
+		}
+
 		console.log($(this).attr('data-index'));
 		console.log($(this).attr('data-total'));
 		$('.prevIcon').attr('data-id', $(this).attr('id'));
@@ -93,9 +109,6 @@ $(function() {
 			$('.next').hide();
 		}
 		//var captionText = document.getElementById("caption");
-
-		modal.style.display = "block";
-		modalImg.src = img.src;
 		//captionText.innerHTML = this.alt;
 	});
 	
@@ -104,7 +117,18 @@ $(function() {
 		var index = parseInt($(this).attr('data-id').split('-')[1]) - 1;
 		console.log($(this).attr('data-id'));
 		console.log(prefix+index);
-		$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
+		
+		if(isImage($('#'+prefix+'-'+index).attr('src'))){
+			$('#popUpImage').show();
+			$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
+			$('#iframeYoutube').hide();
+		}
+		if(isVideo($('#'+prefix+'-'+index).attr('src'))){
+			$('#iframeYoutube').show();
+			$('#iframeYoutube').attr('src', $('#'+prefix+'-'+index).attr('src'));
+			$('#popUpImage').hide();
+		}
+		
 		if(index == 0){
 			$('.prevIcon').hide();
 		}
@@ -124,7 +148,17 @@ $(function() {
 		var index = parseInt($(this).attr('data-id').split('-')[1]) + 1;
 		console.log($(this).attr('data-id'));
 		console.log(prefix+index);
-		$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
+		if(isImage($('#'+prefix+'-'+index).attr('src'))){
+			$('#popUpImage').show();
+			$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
+			$('#iframeYoutube').hide();
+		}
+		if(isVideo($('#'+prefix+'-'+index).attr('src'))){
+			$('#iframeYoutube').show();
+			$('#iframeYoutube').attr('src', $('#'+prefix+'-'+index).attr('src'));
+			$('#popUpImage').hide();
+		}
+		
 		if(index == $(this).attr('data-total')-1){
 			$('.nextIcon').hide();
 		}
@@ -180,63 +214,40 @@ $(function(){
  */
 // Like 버튼 활성화 끝
 
-// Post Layout Build => 사용 안함
-function buildPost(postData) {
-	var heart = "<div class='heart' id='heart-" + postData.userid + "'></div>";
-	var shareOut = "<div class='share_out' onclick='openLayer('layerPop',200,18)'></div>";
-	var comment = "<form action='commentWrite'>"
-			+ "<div class='commentForm'><input type='hidden' value='"
-			+ userid
-			+ "' name='userid'>"
-			+ "<textarea row='1' cols='1' name='commentText' placeholder='Comments' class='comment_textarea'></textarea>"
-			+ "<button class='commentBtn'>입력</button>"
-			+ "<input type='hidden' value='" + postData.pid
-			+ "' name='commentPid'>" + "</div>"
-			+ "<div class='postLayoutClear'></div>" + "</form>";
-
-	var postView = "<li class='infinite_scroll'><div class='postUid'><span>" + postData.username + "</span></div><hr>";
-	if(postData.files != null){
-	 for (var i = 0; i < postData.files.length; i++) {
-		 if(postData.files.length == 1){ // 이미지 1개
-			postView = postView + "<div class='postImg1'><img class='postInner1' src='img_timeline/" + postData.files[i].url + "'></div>"        
-		 } else if(postData.files.length == 4){ // 이미지 4개
-			postView = postView + "<div class='postImg2'><img class='postInner2' src='img_timeline/" + postData.files[i].url + "'></div>"
-		 } else if (postData.files.length > 4){ // 이미지 4개 이상
-			if(i==3){
-				postView  = postView + "<div class='postImg3'><img id='post"+postData.pid+"-"+i+"' class='postInner3' src='img_timeline/" + postData.files[i].url + "'><span>+More</span></div>"        
-			}else{
-				postView  = postView + "<div class='postImg3'><img id='post"+postData.pid+"-"+i+"' class='postInner3' src='img_timeline/" + postData.files[i].url + "'></div>"        
-			}
-		 }
-	 }
-	 $('.infinite_scroll .postImg3:nth-child(6)').on('click',function(e){
-		 var detailContainer = '<div class="det"></div>';
-		 var appendDetail = '<div class="imgDetail" style="position:fixed; z-index:100; top:0; left:0; width:100%; height:100%;">'
-			 +'<div class="dimBackground" style="position:absolute; background-color:#000; opacity:0.5; width:100%; height:100%; top:0; left:0;">'
-			 +'</div>'
-			 +'<div class="detailDim" style="position:absolute; top:50%; left:20%; width:38%; height:auto; background-color:#FFF; opacity:1; z-index:10;">'
-			 +'<div class="postImg4">'
-			 +'<img class="postInner4" src="img_timeline/'+ +'">'
-			 +'</div>'
-			 +'</div>'
-			 +'</div>';
-		 
-		 var imgPr = $(this);
-		 $(this).parent().append(detailContainer);
-		 $('.det').append(appendDetail);
-		 layer_popup(imgPr);
-	});
-	}
-	if (postData.text != null) {
-		postView = postView + "<h3>" + postData.text + "</h3>"
-	}
-	postView = postView + "<div class='reactBtn'>" + heart + shareOut
-			+ "</div>";
-	postView = postView + comment;
-	postView = postView + "</li>";
-
-	return postView;
+// 파일 타입 확인 메소드 시작 //
+function getExtension(filename) {
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
 }
+
+function isImage(filename) {
+    var ext = getExtension(filename);
+    switch (ext.toLowerCase()) {
+    case 'jpg':
+    case 'gif':
+    case 'bmp':
+    case 'png':
+        //etc
+        return true;
+    }
+    return false;
+}
+
+function isVideo(filename) {
+    var ext = getExtension(filename);
+    switch (ext.toLowerCase()) {
+    case 'm4v':
+    case 'avi':
+    case 'mpg':
+    case 'mp4':
+    case 'wmv':
+        // etc
+        return true;
+    }
+    return false;
+}
+//파일 타입 확인 메소드 끝 //
+
 
 // 이미지 미리보기
 var sel_files = [];
@@ -248,18 +259,15 @@ function handleImgFileSelect(e) {
 	/*
 	 * sel_files = []; $("#preview").empty();
 	 */
-
+	console.log(e.target.files);
 	var files = e.target.files;
 	var filesArr = Array.prototype.slice.call(files);
-
 	var index = 0;
 
 	filesArr
 			.forEach(function(f) {
 				sel_files.push(f);
-
 				var reader = new FileReader();
-
 				reader.onload = function(e) {
 					var image = new Image();
 					var html = "<div class='imgPre'><a onclick=\"deleteImageAction("

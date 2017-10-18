@@ -58,18 +58,13 @@
  							</div>
  							<div class="write_type_choice">
 								<a class="choice_type" id="preview"></a>
-								<a class="choice_type"> <br><img alt="" src="img_timeline/picture.svg"
+								<a class="choice_type"> <br>
+								<img alt="" src="img_timeline/picture.svg"
 									class="img_hide img_hidden type_photo" width="30px" border='0'
 									onclick='document.all.files.click();'> 
 									<input
 									type="file" name="files" style='display: none;' id="input_img"
-									accept="image/*, video/*" onchange="previewFiles()" multiple>
-								<!-- </a> <a class="choice_type"> <img
-									src='img_timeline/video-camera.svg'
-									class="img_hide img_hidden img_video" width="30px" border='0'
-									onclick='document.all.videoUpload.click();'> <input
-									type="file" name="videoUpload" style='display: none;'
-									accept="video/mp4"> -->
+									accept="image/*, video/*" multiple="multiple">
 								</a>
 								<a class="choice_type"><img alt="" src="img_timeline/location.svg"
 									class="img_hide img_hidden type_photo" width="30px" border='0'
@@ -105,6 +100,7 @@
 				<div class="stageWrapper">
 				<div class="stage" style="position: relative; text-align: center; width: 70%; margin: auto; height: 100%;">
 					<img class="modal-content" id="popUpImage" style="width: 100%;">
+					<video id="iframeYoutube" width="100%" src="" autoplay="autoplay" controls="controls"></video>
 					<a class="prev"><div class="prevIcon" data-id="" data-index="" data-total=""></div></a>
 					<a class="next"><div class="nextIcon" data-id="" data-index="" data-total=""></div></a>
 				</div>
