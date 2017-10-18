@@ -69,18 +69,17 @@ public class OnlyController {
 
 		return messageList;
 	}
-	/*@RequestMapping(value = "/toIDsender", method = RequestMethod.POST)
-	public @ResponseBody List<Chat> toIDsender(@RequestParam("toID") String toID, @RequestParam("fromID") String fromID, Model model, HttpSession session) {
-		Chat cm = new Chat();
-		cm.setToID(toID);
-		cm.setFromID(fromID);
-		List<Chat> toIDsender = tmls.getToIDsender(cm);
-		model.addAttribute("toIDsender", toIDsender);
-		System.out.println(toID);
-		System.out.println(fromID);
-		
-		return toIDsender;
-	}*/
+	/*
+	 * @RequestMapping(value = "/toIDsender", method = RequestMethod.POST)
+	 * public @ResponseBody List<Chat> toIDsender(@RequestParam("toID") String
+	 * toID, @RequestParam("fromID") String fromID, Model model, HttpSession
+	 * session) { Chat cm = new Chat(); cm.setToID(toID); cm.setFromID(fromID);
+	 * List<Chat> toIDsender = tmls.getToIDsender(cm);
+	 * model.addAttribute("toIDsender", toIDsender); System.out.println(toID);
+	 * System.out.println(fromID);
+	 * 
+	 * return toIDsender; }
+	 */
 	// 채팅 컨트롤러 끝
 
 	@RequestMapping("/id_check")
@@ -410,4 +409,23 @@ public class OnlyController {
 		}
 		return "redirect:blog/" + userid;
 	}
+
+	// 페이지
+	@RequestMapping("/page")
+	public String page() {
+		return "page/page";
+	}
+
+	@RequestMapping("/pagemain/{userid}")
+	public String pagemain(@PathVariable String userid, Model model) {
+		Member pageOwner = ms.getMemberById(userid);
+		model.addAttribute("owner", pageOwner);
+		return "page/pagemain";
+	}
+
+	@RequestMapping("/pageCreate")
+	public String pageCreate() {
+		return "page/pageCreate";
+	}
+
 }
