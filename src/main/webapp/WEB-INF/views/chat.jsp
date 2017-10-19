@@ -8,6 +8,7 @@
 	if (request.getParameter("toID") != null) {
 		toID = (String) request.getParameter("toID");
 	}
+	String messageCount = (String) request.getParameter("messageCount");
 %>
 <!DOCTYPE html>
 <html>
@@ -60,6 +61,7 @@ $(document).ready(function() {
 				if(type === 'message'){
 					appendMessage(event.data);
 				} else if (type === 'messageList') {
+					MessageCount();
 					MessageList();
 				}
 			}
@@ -102,6 +104,7 @@ $(document).ready(function() {
 	$(window).load(function() {
 		connect();
 		$messages.mCustomScrollbar();
+		MessageCount();
 		MessageList();
 	});
 	
@@ -260,7 +263,9 @@ $(document).ready(function() {
 	}
 	
 	//최신 메시지 목록 불러오기
-	function MessageList() {
+	function MessageList(count) {
+
+		var messageCount = count;
 		
 		$.ajax({
 			type : "POST",
@@ -274,7 +279,7 @@ $(document).ready(function() {
 				var chatContent = null;
 				var chatTime = null;
 				var chatRoom = null;
-				
+								
 				var timeType = '오전';
 				// fromID > toID toID-fromID ; fromID < fromID=-toID
 				// chatRoom = fromID+'-'+toID; 
@@ -295,21 +300,28 @@ $(document).ready(function() {
 					var resultTime = timeType + " " + ampm + ":" + chatTime.substring(14,16 + "");
 					
 					if(fromID ==='<%=userid%>') {
-							$('.people').prepend('<li class="person" data-toID=' + toID + ' data-fromID=' + fromID + '><img src="/only/img_all/user.png" alt=""/>'+ 
-									'<span class="name">'+ toID +'</span><span class="time">' + resultTime
-									+ '</span><span class="preview">'+ chatContent +'</span></li>');
+						$('.people').prepend('<li class="person" data-toID=' + toID + ' data-fromID=' + fromID + '><img src="/only/img_all/user.png" alt=""/>'+ 
+								'<span class="name">'+ toID +'</span><span class="time">' + resultTime
+								+ '</span><span class="preview">'+ chatContent + '</span></li>');
+						if (messageCount != '0') {
+							$('.person').append('<div class="removeCount"><span class="messageCount">'+ messageCount +'</span></div>');
+						}
 					} else if(toID ==='<%=userid%>') {
-						$('.people').prepend('<li class="person" data-toID=' + fromID + ' data-toID=' + toID + '><img src="/only/img_all/user.png" alt=""/>'+ 
+						$('.people').prepend('<li class="person" data-toID=' + fromID + ' data-fromID=' + toID + '><img src="/only/img_all/user.png" alt=""/>'+ 
 								'<span class="name">'+ fromID +'</span><span class="time">' + resultTime
-								+ '</span><span class="preview">'+ chatContent +'</span></li>');
+								+ '</span><span class="preview">'+ chatContent + '</span></li>');
+						if (messageCount != '0') {
+							$('.person').append('<div class="removeCount"><span class="messageCount">'+ messageCount +'</span></div>');
+						}
 					}	
 				});	
 			}
 	 	});
 	}
 	
-	// 클릭 시 toID 전달 및 채팅창 팝업
+	// 최근 메시지 목록 클릭 시 toID 전달 및 채팅창 팝업
 	$(document).on('click','.person', function() {
+		
 		
 		var toID = $(this).data('toid');
 		var type = "ten";
@@ -319,9 +331,26 @@ $(document).ready(function() {
 		
 		$('.avenue-messenger').css("transform","translateY(0px)");
 		
+		$('.removeCount').html('');
 		$('.chat-title').html('<h1>'+ toID + '</h1>');
 		$('.message-submit').attr("data-toID",toID);
 	});
+	
+	// 메시지 카운트
+	function MessageCount() {
+		var userid = '<%=userid%>';
+		
+		$.ajax({
+			type : "POST",
+			url : "${path}/messageCount",
+			dataType : 'json',
+			success : function (data) {
+				console.log(data);
+				var messageCount = data;
+				MessageList(messageCount);
+			}
+		});
+	}
 });
 </script>
 </head>

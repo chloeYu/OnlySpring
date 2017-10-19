@@ -69,6 +69,15 @@ public class OnlyController {
 
 		return messageList;
 	}
+	
+	@RequestMapping(value = "/messageCount", method = RequestMethod.POST)
+	public @ResponseBody int messageCount(Model model, HttpSession session, String userid) {
+		userid = (String) session.getAttribute(WebConstants.USER_ID);
+		int messageCount = tmls.getUnreadMessageCount(userid);
+		model.addAttribute("messageCount", messageCount);
+		System.out.println("읽지않은 메시지= " + messageCount);
+		return messageCount;
+	}
 	/*@RequestMapping(value = "/toIDsender", method = RequestMethod.POST)
 	public @ResponseBody List<Chat> toIDsender(@RequestParam("toID") String toID, @RequestParam("fromID") String fromID, Model model, HttpSession session) {
 		Chat cm = new Chat();
