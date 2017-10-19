@@ -1,137 +1,188 @@
-.dropbtn {
-	padding-top: 15px;
+/* 상단 오른쪽 메뉴 드롭다운 수정중 김재은 */
+* {
+	transition: .25s ease-in-out;
 }
 
-.dropbtn:hover, .dropbtn:focus {
-	cursor: pointer;
-    color: #00ffff;
-} 
-
-.dropdown {
-    float: right;
-    position: relative;
-    display: inline-block;
-    
+#hamburegerSpan {
+	display: block;
+	background: #566973;
+	border-radius: 2px;
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    right: 0;
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown a:hover {background-color: #f1f1f1}
-
-.friendlistplace{
-	position: absolute;
-    background-color: white;
-    width: 200px;
-    max-height: 388px;
-    overflow-x: hidden;
-    word-wrap:break-word;
-    overflow-y: hidden;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    top: 50px;
-}
-
-.dropdown{
-	background-image: url("../img_all/more.png");
-	background-size: 80%;
-    background-repeat: no-repeat;
-    background-position: 5px;
-	width: 40px;
-    height: 40px;
-    position: absolute;
-    top: 5px;
-    right: 10px;
-}
-
-.disapper {
-	display: none;
-}
-
-.profileDropdown:hover, .profileDropdown:focus {
-	cursor: pointer;
-    color: #00ffff;
-} 
-
-.profileDropdown {
+#menu-toggle {
+	float: right;
 	position: relative;
-    display: inline-block;
-    width: 100%;
-    height: 100%;
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	right: 35px;
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    right: 0;
-    top:43px;
-    z-index: 1;
+#menu-toggle:hover {
+	background: rgba(255, 255, 255, 0.8);
 }
 
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+#menu-toggle #hamburger {
+	position: absolute;
+	height: 100%;
+	width: 100%;
 }
 
-.dropdown a:hover {
-	background-color: #f1f1f1
-	}
-.fld{
+#menu-toggle #hamburger span {
+	width: 30px;
+	height: 2px;
+	position: relative;
+	left: 22px;
+	top: 5px;
+	margin: 8px 0;
+}
+
+#menu-toggle #hamburger span:nth-child(1) {
+	transition-delay: .5s;
+}
+
+#menu-toggle #hamburger span:nth-child(2) {
+	transition-delay: .625s;
+}
+
+#menu-toggle #hamburger span:nth-child(3) {
+	transition-delay: .75s;
+}
+
+#menu-toggle #cross {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 16px;
+	transform: rotate(45deg);
+}
+
+#menu-toggle #cross span:nth-child(1) {
+	height: 0%;
+	width: 2px;
+	position: absolute;
+	top: 10%;
+	left: 25px;
+	transition-delay: 0s;
+}
+
+#menu-toggle #cross span:nth-child(2) {
+	width: 0%;
+	height: 2px;
+	position: absolute;
+	left: 30%;
+	top: 18px;
+	transition-delay: .25s;
+}
+
+#menu-toggle.open #hamburger span {
+	width: 0%;
+}
+
+#menu-toggle.open #hamburger span:nth-child(1) {
+	transition-delay: 0s;
+}
+
+#menu-toggle.open #hamburger span:nth-child(2) {
+	transition-delay: .125s;
+}
+
+#menu-toggle.open #hamburger span:nth-child(3) {
+	transition-delay: .25s;
+}
+
+#menu-toggle.open #cross span:nth-child(1) {
+	height: 100%;
+	transition-delay: .625s;
+}
+
+#menu-toggle.open #cross span:nth-child(2) {
+	width: 100%;
+	transition-delay: .375s;
+}
+
+#menu-container .menu-list {
+	font-family: 'Dosis', sans-serif;
+	display: block;
+	position: absolute;
+	top: 50px;
+	width: 100%;
+	max-width: 150px;
+	background: white;
+	box-shadow: rgba(100, 100, 100, 0.2) 6px 2px 10px;
+	z-index: 999;
+	overflow-y: auto;
+	overflow-x: hidden;
+	right: -100%;
+	border-radius: 0 3.5px;
+}
+
+#menu-container .menu-list {
+	letter-spacing: 1px;
+}
+
+a.menu-link {
+	color: #474747;
+	font-family: "Dosis", sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	width: 100%;
+	line-height: 28px;
+	padding: 0 5px 1px;
+	position: relative;
+	text-decoration: none;
+	text-align: center;
+	font-family: "Dosis", sans-serif;
+	padding-top: 5px;
+}
+
+a.menu-link:hover {
+	background-color: #83b9e4;
+	color: white;
+}
+
+.fld {
 	text-align: center;
 	-webkit-transition: background-color 0.5s;
-	 transition: background-color 0.5s;
-	 padding: 5px;
-	 padding-left: 0px;
-	 height: 30px;
+	transition: background-color 0.5s;
+	padding: 5px;
+	padding-left: 0px;
+	height: 30px;
 }
-.flp{
+
+.flp {
 	text-align: center;
 }
-.fld:hover{
+
+.fld:hover {
 	cursor: pointer;
 	background-color: #c9d0db;
 }
-.flp:hover{
+
+.flp:hover {
 	cursor: pointer;
 }
-.flh2{
+
+.flh2 {
 	text-align: center;
 	font-weight: bolder;
 	font-size: larger;
 	padding: 10px;
 }
-.instant p{
+
+.instant p {
 	width: 198px;
 	height: 20px;
 }
-.instant hr{
+
+.instant hr {
 	margin: 0px;
 }
 
 .instant button {
-	 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	 border-radius: 5px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
 }
 
 .instant button:hover {

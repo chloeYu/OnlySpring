@@ -32,7 +32,6 @@ span.err {
 <script src="${path}/js/timeline_infinitescroll.js"></script>
 <script src="${path}/js/signUp.js"></script>
 <script src="${path}/js/search.js"></script>
-<script src="${path}/js/changeProfile.js"></script>
 <script src="${path}/js/post.js"></script>
 <script src="${path}/js/blog.js"></script>
 <script src="${path}/js/friendlist.js"></script>

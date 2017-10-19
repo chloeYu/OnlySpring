@@ -2,6 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="sessionChk.jsp"%>
 <c:set var="path" value="${pageContext.request.contextPath }"></c:set>
+<html>
+<head>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Dosis'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+</head>
 <div class="header">
 	<!-- 상단고정바 로고 -->
 	<div class="head_logo">
@@ -58,7 +64,6 @@
 
 			<div class="nav_icon">
 				<div class="message_list" data-click="message_list_icon">
-					<a class="info" id="chatList" data-id="${sessionId }">
 						<div id="message_notification">
 							<span>Message</span>
 						</div>
@@ -67,14 +72,47 @@
 				</div>
 			</div>
 
-			<div class="dropdown">
-				<span class="profileDropdown"></span>
-				<div id="myDropdown" class="dropdown-content">
+			<div id="menu-toggle">
+  				<div id="hamburger">
+    				<span id="hamburegerSpan"></span>
+    				<span id="hamburegerSpan"></span>
+    				<span id="hamburegerSpan"></span>
+  				</div>
+  				<div id="cross">
+    				<span id="hamburegerSpan"></span>
+    				<span id="hamburegerSpan"></span>
+  				</div>
+			</div>
+			<div id="menu-container">
+  				<ul class="menu-list accordion">
+      				<li id="nav1" class="toggle accordion-toggle"> 
+         				<span class="icon-plus"></span>
+         				<a class="menu-link" href="#createPage">Create Page</a>
+      				</li>
+     			
+      				<!-- menu-submenu accordon-content-->
+     				<li id="nav2" class="toggle accordion-toggle"> 
+         				<span class="icon-plus"></span>
+         				<a class="menu-link" href="#createGroup">Create Group</a>
+      				</li>
+      				<!-- menu-submenu accordon-content-->
+           			<li id="nav3" class="toggle accordion-toggle"> 
+         				<span class="icon-plus"></span>
+         				<a class="menu-link profileSetting">Profile Setting</a>
+      				</li>
+      				
+      				<li id="nav4" class="toggle accordion-toggle"> 
+         				<span class="icon-plus"></span>
+         				<a class="menu-link" href="/only/logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
+      				</li>
+    				<!-- menu-submenu accordon-content-->
+   				</ul>
+   			</div>
+				<!--  <div id="myDropdown" class="dropdown-content">
 					<a href="#createPage">Create Page</a> <a href="#createGroup">Create
 						Group</a> <a class="profileSetting">Profile Setting</a> <a
 						href="/only/logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
-				</div>
-			</div>
+				</div> -->
 		</div>
 	</div>
 </div>
@@ -82,3 +120,5 @@
 <input type="hidden" id="member_id" name="member_id" value="<%=userid%>">
 </form>
 <!-- 상단고정바 끝 -->
+
+</html>

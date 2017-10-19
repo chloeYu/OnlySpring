@@ -364,42 +364,28 @@ function deleteImageAction(index) {
 
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
+
+//드롭다운
 $(function() {
-	$('.profileDropdown').on('click', function() {
-		if ($('.dropdown-content').hasClass('show')) {
-			$('.dropdown-content').removeClass('show');
-		} else {
-			$('.dropdown-content').addClass('show');
-		}
+	function slideMenu() {
+	    var activeState = $("#menu-container .menu-list").hasClass("active");
+	    $("#menu-container .menu-list").animate(
+	      {
+	        right: activeState ? "0%" : "-100%"
+	      },
+	      500
+	    );
+	}
+	$("#menu-toggle").click(function(event) {
+		$(this).toggleClass('open');
+	    event.stopPropagation();
+	    $("#menu-container .menu-list").toggleClass("active");
+	    slideMenu();
+
+	    $("body").toggleClass("overflow-hidden");
 	});
 });
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-	if (!event.target.matches('.profileDropdown')) {
-
-		var dropdowns = document.getElementsByClassName("dropdown-content");
-		var i;
-		for (i = 0; i < dropdowns.length; i++) {
-			var openDropdown = dropdowns[i];
-			if (openDropdown.classList.contains('show')) {
-				openDropdown.classList.remove('show');
-			}
-		}
-	}
-	if(!event.target.matches('.instant')){
-		if(a){
-			$(".friendlistplace").addClass("disapper").removeClass("show");
-			a=!a;
-		}
-	}
-//	if(!event.target.matches('.det')){
-//		if(a){
-//			$('.det').removeClass('show');
-//			a=!a;
-//		}
-//	}
-}
 //지도
 var google_map_place;
 
