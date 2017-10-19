@@ -44,7 +44,7 @@
 						</div>
 					</div>
 				</div>
-						<div class="friendlistplace disapper instant"><h2 class="flh2 instant">친구목록</h2><div class="instant" id="friendload"></div></div>
+						<div class="friendlistplace disapper instant"><div class="instant" id="friendload"></div></div>
 			</div>
 			<div class="nav_icon">
 				<div class="alarm_list" data-click="alarm_list_icon">
@@ -78,13 +78,6 @@
 		</div>
 	</div>
 </div>
-<div class="popupLayer">
-		<div>
-			<span onClick="closeLayer(this)"
-				style="cursor: pointer; font-size: 1.5em" title="닫기">X</span>
-		</div>
-		여긴 레이어~<br> 클릭하면 바로 나타나는 레이어에요^^
-	</div>
 <form id="formfriend" action="friendList">
 <input type="hidden" id="member_id" name="member_id" value="<%=userid%>">
 </form>

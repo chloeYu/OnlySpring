@@ -31,4 +31,6 @@ public interface PostDao {
 	List<String> getImagesByUserid(String userid, int pageNum);
 
 	int getImageTotal(String userid);
+
+	int insertHashTag(int pid, String hashTag);
 }

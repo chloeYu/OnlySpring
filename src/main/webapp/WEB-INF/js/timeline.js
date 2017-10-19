@@ -14,6 +14,31 @@ var longitude = 127.412501;
 var a = false;
 
 $(function() {
+	$(".type_choice_textarea").bind("keydown", function(e) {
+		var text = $(".type_choice_textarea").val();
+		var positionOfhash = new Array();
+		var positionOfspace = new Array();
+		var indexOfhash = text.indexOf("#");
+		var indexOfspace = text.indexOf(" ", indexOfhash);
+		while (indexOfhash > -1) {
+			if(indexOfspace==-1)
+				indexOfspace=null;
+			positionOfhash.push(indexOfhash);
+			positionOfspace.push(indexOfspace);
+			indexOfhash = text.indexOf("#", indexOfhash + 1);
+			indexOfspace = text.indexOf(" ", indexOfhash);
+		}
+		if (positionOfhash == null || positionOfspace == null)
+			return true;
+		else {
+			for (var i = 0; i < positionOfhash.length; i++)
+			if (positionOfspace[i]==null) {
+				console.log("hashTag not finished");
+				console.log(text.slice(positionOfhash[i]));
+			} else
+				console.log(text.slice(positionOfhash[i], positionOfspace[i]));
+		}
+	});
 	$(".friend_list").on("click", function(){
 		if(a){
 			$(".friendlistplace").addClass("disapper").removeClass("show");
