@@ -74,4 +74,10 @@ public class PostServiceImpl implements PostService{
 	public int getImageTotal(String userid) {
 		return pd.getImageTotal(userid);
 	}
+
+	@Override
+	public int insertHashTag(int pid, String HashTag) {
+		// TODO Auto-generated method stub
+		return pd.insertHashTag(pid, HashTag);
+	}
 }

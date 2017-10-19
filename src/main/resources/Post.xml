@@ -109,5 +109,8 @@
 	<select id="getTaggedFriends" parameterType="int" resultType="string">
 		select userid from POST_MEMBERTAG where pid=#{pid}
 	</select>
+	<insert id="insertHashTag" parameterType="hashMap">
+		insert into POST_HASHTAG values(#{pid}, #{hashTag})
+	</insert>
 </mapper>
 
