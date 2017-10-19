@@ -1,0 +1,54 @@
+*{
+	outline: none;
+	box-sizing: border-box;
+}
+body{
+	line-height: 30px;
+}
+input{
+	border:1px solid #ccc;
+	border-radius: 4px;
+	padding: 7px;
+}
+input:focus{
+	border:2px solid #97a6bf;
+}
+.profileModify{
+	padding: 50px;
+	padding-top: 100px;
+}
+.profileModify>div{
+	margin-bottom: 20px;
+}
+.profileCell{
+	margin-left: 30px;
+	display: inline-block;
+}
+.profileLabel{
+	width:150px;
+	text-align: right;
+	display: inline-block;
+}
+.profileLabel:after{
+	clear: both;
+}
+.profileImageFieldset input{
+	cursor: pointer;
+}
+.submitFieldset{
+	margin-top: 20px;
+	margin-left: 80px;
+}
+.submitFieldset input{
+	border: 0;
+	background-color: #97a6bf;
+	color: #FFF;
+	cursor: pointer;
+}
+#imageplace img{
+	position: absolute;
+    left: 500px;
+    top: 100px;
+    width: 300px;
+    height: auto;
+}
