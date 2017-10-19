@@ -71,7 +71,6 @@ $(function() {
 	
 	
 	$('body').on('click', '.postInner3', function(e){
-		
 		var modal =document.getElementById("myModal");
 		//Get the image and insert it inside the modal - use its "alt" text as a caption
 		var img =  e.currentTarget;

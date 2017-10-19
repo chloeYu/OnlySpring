@@ -176,6 +176,7 @@
 .comment_text .sendBtn {
 	width: 20px;
 	height: 20px;
+	cursor: pointer;
 }
 
 .sendBtn {
