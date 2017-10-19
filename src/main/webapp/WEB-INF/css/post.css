@@ -176,7 +176,6 @@
 .comment_text .sendBtn {
 	width: 20px;
 	height: 20px;
-	cursor: pointer;
 }
 
 .sendBtn {
@@ -187,6 +186,7 @@
 	height: 30px;
 	width: 30px;
 	display: inline-block;
+	cursor: pointer;
 }
 
 .removeMapBtn {
