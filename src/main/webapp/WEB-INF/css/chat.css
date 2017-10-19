@@ -137,6 +137,16 @@ Body
   text-overflow: ellipsis;
   color: #999;
 }
+.left .people .person .messageCount {
+  font-size: 11px;
+  position: absolute;
+  top: 32px;
+  right: 10%;
+  padding: 2px 3px 2px 3px;
+  color: #fff;
+  background-color: #ffbb33;
+  border-radius: 3.5px;
+}
 .left .people .person.active, .left .people .person:hover {
   margin-top: -1px;
   margin-left: -1px;

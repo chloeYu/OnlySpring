@@ -8,4 +8,6 @@ public interface TextMessageListDao {
 	
 	public List<Chat> getChatMessageList(String userid);
 	
+	public int getUnreadMessageCount(String userid);
+	
 }
