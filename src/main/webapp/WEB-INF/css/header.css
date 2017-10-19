@@ -103,7 +103,6 @@
 }
 
 #menu-container .menu-list {
-	font-family: 'Dosis', sans-serif;
 	display: block;
 	position: absolute;
 	top: 50px;
@@ -118,15 +117,11 @@
 	border-radius: 0 3.5px;
 }
 
-#menu-container .menu-list {
-	letter-spacing: 1px;
-}
-
 a.menu-link {
 	color: #474747;
-	font-family: "Dosis", sans-serif;
-	font-size: 15px;
-	font-weight: bold;
+	font-family: "Source Sans Pro", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
 	width: 100%;
 	line-height: 28px;
 	padding: 0 5px 1px;
