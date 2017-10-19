@@ -9,7 +9,7 @@
 		width: 100%;
 		height: 50px;
 		position: fixed;
-		z-index: 999;
+		z-index: 998;
 		border-bottom: 1.5px solid #a8b1bf;
 		box-sizing: border-box;
 	}

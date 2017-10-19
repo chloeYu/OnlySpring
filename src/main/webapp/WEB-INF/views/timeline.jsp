@@ -110,10 +110,10 @@
 				<div id="caption" value="image popup"></div>
 			</div>
 		<jsp:include page="rightmenu.jsp"></jsp:include>
-		
 	<!-- 채팅 메신저 -->
 		<jsp:include page="chat.jsp"></jsp:include>
-		
+	<!-- 프로필 수정 -->
+		<jsp:include page="changeProfile.jsp"></jsp:include>
 	</div>
 	
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1aRB-FJzz3Vtd6iiZdlCCk1DCfDxWDko&libraries=places&&callback=initAutocomplete1"
