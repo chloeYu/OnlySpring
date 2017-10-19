@@ -16,7 +16,7 @@
 	<div class="profileModify">
 		<form name="changeProfile" action="profileDone" method="post" enctype="multipart/form-data" onsubmit="return chk()">
 			<div class="useridFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="userId">
 		       		아이디
 				</label>
 	         	<div class="profileCell modifyUserid">
@@ -24,7 +24,7 @@
 	         	</div>
 			</div>
 			<div class="passwordFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="password">
 		   	     	비밀번호
 				</label>
 	         	<div class="profileCell modifyPassword">
@@ -32,7 +32,7 @@
 	         	</div>
 			</div>
 			<div class="passwordChkFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="password2">
 					비밀번호확인
 				</label>
 	         	<div class="profileCell modifyPasswordChk">
@@ -40,23 +40,23 @@
 	         	</div>
 			</div>
 			<div class="usernameFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="username">
 					닉네임
 				</label>
 	         	<div class="profileCell modifyUsername">
-					<input type="text" name="username" value="${member.username }">
+					<input type="text" name="username" id="username" value="${member.username }">
 	         	</div>
 			</div>
 			<div class="emailFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="email">
 		   			이메일
 				</label>
 	         	<div class="profileCell modifyEmail">
-	       			<input type="email" name="email" value="${member.email }">
+	       			<input type="email" name="email" id="email" value="${member.email }">
 	         	</div>
 			</div>
 			<div class="createdFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="created">
 		   	     	생성날짜
 				</label>
 	         	<div class="profileCell modifyCreatedDate">
@@ -64,7 +64,7 @@
 	         	</div>
 			</div>
 			<div class="modifiedFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="modified">
 		   	     	수정날짜
 				</label>
 	         	<div class="profileCell modifyModifiedDate">
@@ -72,7 +72,7 @@
 	         	</div>
 			</div>
 			<div class="profileImageFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="fileload">
 					프로필이미지
 				</label>
 	         	<div class="profileCell modifyProfileImage">
@@ -82,19 +82,19 @@
 	      		<div id="imageplace"></div>
 			</div>
       		<div class="telFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="profileTel">
 		         	전화번호
 				</label>
 	         	<div class="profileCell modifyTel">
-		         	<input type="tel" name="tel" value="${member.tel }" onkeypress="return telValidate(event);" maxlength="12">
+		         	<input type="tel" name="tel" id="profileTel" value="${member.tel }" onkeypress="return telValidate(event);" maxlength="12">
 	         	</div>
       		</div>
       		<div class="birthFieldset">
-				<label class="profileLabel">
+				<label class="profileLabel" for="profileBirth">
 		       		생년월일
 				</label>
 	         	<div class="profileCell modifyBirth">
-		       		<input type="date" name="birth1" value="${member.birth }">
+		       		<input type="date" name="birth1" id="profileBirth" value="${member.birth }">
 	         	</div>
       		</div>
       		<div class="submitFieldset">

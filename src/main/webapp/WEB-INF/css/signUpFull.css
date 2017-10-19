@@ -51,7 +51,7 @@
 		border-spacing: 0;
 	}
 	input, button {
-		outline: 0;
+		outline: none;
 	}
 	.login-signup {
 		width: 300px;
