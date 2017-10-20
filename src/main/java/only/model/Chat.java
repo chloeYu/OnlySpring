@@ -8,7 +8,16 @@ public class Chat {
 	String chatTime;
 	String chatRoom;
 	int chatRead;
+	int chatCount;
 	
+	public int getChatCount() {
+		return chatCount;
+	}
+
+	public void setChatCount(int chatCount) {
+		this.chatCount = chatCount;
+	}
+
 	public int getChatRead() {
 		return chatRead;
 	}
@@ -68,6 +77,6 @@ public class Chat {
 	@Override
 	public String toString() {
 		return "Chat [chatID=" + chatID + ", fromID=" + fromID + ", toID=" + toID + ", chatContent=" + chatContent
-				+ ", chatTime=" + chatTime + ", chatRoom=" + chatRoom + ", chatRead=" + chatRead +  "]";
+				+ ", chatTime=" + chatTime + ", chatRoom=" + chatRoom + ", chatRead=" + chatRead +", chatCount=" + chatCount + "]";
 	}
 }

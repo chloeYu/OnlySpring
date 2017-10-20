@@ -263,23 +263,20 @@ $(document).ready(function() {
 	}
 	
 	//최신 메시지 목록 불러오기
-	function MessageList(count) {
-
-		var messageCount = count;
+	function MessageList() {
 		
 		$.ajax({
 			type : "POST",
 			url : "${path}/messageList",
 			dataType : "json",
 			success : function(data) {
-				var type = null;
 				var chatID = null;
 				var fromID = null;
 				var toID = null;
 				var chatContent = null;
 				var chatTime = null;
 				var chatRoom = null;
-								
+				
 				var timeType = '오전';
 				// fromID > toID toID-fromID ; fromID < fromID=-toID
 				// chatRoom = fromID+'-'+toID; 
@@ -303,18 +300,13 @@ $(document).ready(function() {
 						$('.people').prepend('<li class="person" data-toID=' + toID + ' data-fromID=' + fromID + '><img src="/only/img_all/user.png" alt=""/>'+ 
 								'<span class="name">'+ toID +'</span><span class="time">' + resultTime
 								+ '</span><span class="preview">'+ chatContent + '</span></li>');
-						if (messageCount != '0') {
-							$('.person').append('<div class="removeCount"><span class="messageCount">'+ messageCount +'</span></div>');
-						}
 					} else if(toID ==='<%=userid%>') {
 						$('.people').prepend('<li class="person" data-toID=' + fromID + ' data-fromID=' + toID + '><img src="/only/img_all/user.png" alt=""/>'+ 
 								'<span class="name">'+ fromID +'</span><span class="time">' + resultTime
 								+ '</span><span class="preview">'+ chatContent + '</span></li>');
-						if (messageCount != '0') {
-							$('.person').append('<div class="removeCount"><span class="messageCount">'+ messageCount +'</span></div>');
-						}
-					}	
-				});	
+					}
+					MessageRoomCount(chatRoom);
+				});
 			}
 	 	});
 	}
@@ -336,9 +328,8 @@ $(document).ready(function() {
 		$('.message-submit').attr("data-toID",toID);
 	});
 	
-	// 메시지 카운트
+	// 메시지 총 카운트
 	function MessageCount() {
-		var userid = '<%=userid%>';
 		
 		$.ajax({
 			type : "POST",
@@ -346,8 +337,33 @@ $(document).ready(function() {
 			dataType : 'json',
 			success : function (data) {
 				console.log(data);
-				var messageCount = data;
-				MessageList(messageCount);
+			}
+		});
+	}
+	// 개인 메세지 카운트
+	function MessageRoomCount(userRoom) {
+		var chatCount = null;
+		var chatRoom = null;
+		var chatUserRoom = userRoom;
+		
+		$.ajax({
+			type : "POST",
+			url : "${path}/messageRoomCount",
+			dataType : 'json',
+			success : function (data) {
+				console.log(data);
+				$.each(data, function(key, list) {
+					chatCount = list.chatCount;
+					chatRoom = list.chatRoom;
+					console.log("chatUserRoom = " + chatUserRoom);
+					console.log("chatRoom = " + chatRoom);
+					
+					if (chatCount > 0 && chatRoom != chatUserRoom) {
+						$('.person').append('<div class="removeCount"><span class="messageCount">'+ chatCount +'</span></div>');
+					} else {
+						$('.removeCount').html('');
+					}
+				});
 			}
 		});
 	}

@@ -24,4 +24,9 @@ public class TextMessageListServiceImpl implements TextMessageListService {
 		return tml.getUnreadMessageCount(userid);
 	}
 
+	@Override
+	public List<Chat> UnreadRoomMessageCount(String userid) {
+		return tml.UnreadRoomMessageCount(userid);
+	}
+
 }

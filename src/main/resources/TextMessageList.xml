@@ -9,6 +9,9 @@
 		<result property="toID" column="toID" />
 		<result property="chatContent" column="chatContent" />
 		<result property="chatTime" column="chatTime" />
+		<result property="chatRoom" column="chatRoom" />
+		<result property="chatCount" column="chatCount" />
+		
 	</resultMap>
 
 	<select id="messageList" parameterType="String" resultMap="messageResult">
@@ -24,7 +27,17 @@
 		GROUP BY chatRoom
 	</select>
 	
-	<select id="messageCount" parameterType="string" resultType="int">
+	<select id="messageCount" parameterType="string" resultMap="messageResult">
+		SELECT count(chatID) chatCount, chatRoom FROM
+		(
+		SELECT *
+		FROM chat
+		where toID=#{userid} and chatRead = 0
+		) AS subQuery
+		GROUP BY chatRoom
+	</select>
+	
+	<select id="messageCountAll" parameterType="string" resultType="int">
 		select count(chatID) from chat where toID = #{userid} and chatRead = 0
 	</select>
 </mapper>

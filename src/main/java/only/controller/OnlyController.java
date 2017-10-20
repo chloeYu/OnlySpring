@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,21 +76,18 @@ public class OnlyController {
 		userid = (String) session.getAttribute(WebConstants.USER_ID);
 		int messageCount = tmls.getUnreadMessageCount(userid);
 		model.addAttribute("messageCount", messageCount);
-		System.out.println("읽지않은 메시지= " + messageCount);
+		System.out.println("읽지않은 메시지 총= " + messageCount);
 		return messageCount;
 	}
-	/*@RequestMapping(value = "/toIDsender", method = RequestMethod.POST)
-	public @ResponseBody List<Chat> toIDsender(@RequestParam("toID") String toID, @RequestParam("fromID") String fromID, Model model, HttpSession session) {
-		Chat cm = new Chat();
-		cm.setToID(toID);
-		cm.setFromID(fromID);
-		List<Chat> toIDsender = tmls.getToIDsender(cm);
-		model.addAttribute("toIDsender", toIDsender);
-		System.out.println(toID);
-		System.out.println(fromID);
-		
-		return toIDsender;
-	}*/
+	
+	@RequestMapping(value = "/messageRoomCount", method = RequestMethod.POST)
+	public @ResponseBody List<Chat> messageRoomCount(Model model, HttpSession session, String userid) {
+		userid = (String) session.getAttribute(WebConstants.USER_ID);
+		List<Chat> messageRoomCount = tmls.UnreadRoomMessageCount(userid);
+		model.addAttribute("messageCount", messageRoomCount);
+		System.out.println("chatRoom 별로 데이터값 = " + messageRoomCount);
+		return messageRoomCount;
+	}
 	// 채팅 컨트롤러 끝
 
 	@RequestMapping("/id_check")
