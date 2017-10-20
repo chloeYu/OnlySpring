@@ -62,7 +62,7 @@ $(document).ready(function() {
 					appendMessage(event.data);
 				} else if (type === 'messageList') {
 					MessageCount();
-					MessageList();
+					MessageRoomCount();
 				}
 			}
 		});
@@ -105,7 +105,7 @@ $(document).ready(function() {
 		connect();
 		$messages.mCustomScrollbar();
 		MessageCount();
-		MessageList();
+		MessageRoomCount();
 	});
 	
 	$(window).on('unload', (function() {
@@ -263,7 +263,10 @@ $(document).ready(function() {
 	}
 	
 	//최신 메시지 목록 불러오기
-	function MessageList() {
+	function MessageList(chatCount, chatUserRoom) {
+		
+		var chatCount = chatCount;
+		var chatUserRoom = chatUserRoom;
 		
 		$.ajax({
 			type : "POST",
@@ -305,7 +308,14 @@ $(document).ready(function() {
 								'<span class="name">'+ fromID +'</span><span class="time">' + resultTime
 								+ '</span><span class="preview">'+ chatContent + '</span></li>');
 					}
-					MessageRoomCount(chatRoom);
+					console.log(chatCount);
+					console.log(chatRoom);
+					console.log(chatUserRoom);
+					if (chatRoom === chatUserRoom) {
+						$('.person').append('<div class="removeCount"><span class="messageCount">'+ chatCount +'</span></div>');
+					} else {
+						$('.person').append('<div class="removeCount"></div>');
+					}
 				});
 			}
 	 	});
@@ -341,10 +351,7 @@ $(document).ready(function() {
 		});
 	}
 	// 개인 메세지 카운트
-	function MessageRoomCount(userRoom) {
-		var chatCount = null;
-		var chatRoom = null;
-		var chatUserRoom = userRoom;
+	function MessageRoomCount() {
 		
 		$.ajax({
 			type : "POST",
@@ -355,15 +362,8 @@ $(document).ready(function() {
 				$.each(data, function(key, list) {
 					chatCount = list.chatCount;
 					chatRoom = list.chatRoom;
-					console.log("chatUserRoom = " + chatUserRoom);
-					console.log("chatRoom = " + chatRoom);
-					
-					if (chatCount > 0 && chatRoom != chatUserRoom) {
-						$('.person').append('<div class="removeCount"><span class="messageCount">'+ chatCount +'</span></div>');
-					} else {
-						$('.removeCount').html('');
-					}
 				});
+				MessageList(chatCount, chatRoom);
 			}
 		});
 	}
