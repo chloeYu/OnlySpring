@@ -1,6 +1,6 @@
 /* 상단 오른쪽 메뉴 드롭다운 수정중 김재은 */
 * {
-	transition: .25s ease-in-out;
+	
 }
 
 #hamburegerSpan {
@@ -36,6 +36,7 @@
 	left: 22px;
 	top: 5px;
 	margin: 8px 0;
+	transition: .25s ease-in-out;
 }
 
 #menu-toggle #hamburger span:nth-child(1) {
@@ -57,7 +58,9 @@
 	left: 16px;
 	transform: rotate(45deg);
 }
-
+#menu-toggle #cross span {
+	transition: .25s ease-in-out;
+}
 #menu-toggle #cross span:nth-child(1) {
 	height: 0%;
 	width: 2px;
