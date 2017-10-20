@@ -7,17 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Page</title>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#pageCreate').on('click', pageover);
-});
-
-function pageover() {
-	if(${page.pid } > 0){
-		alert("페이지는 한개만 설정 가능");
-	}
-}
-</script>
 </head>
 <body class="pageLayout">
 	<div id="header"><jsp:include page="../header.jsp"></jsp:include></div>
@@ -28,11 +17,12 @@ function pageover() {
 				<a>전체 페이지</a> <a>좋아하는 페이지</a>
 			</div>
 			<div id="menubar_right">
-				<a href="${path}/pagemain/${page.pid}">회원님의 페이지</a> <a
-					href="${path}/pageCreate" id="pageCreate">페이지 만들기</a>
+				<a href="${path}/pagemain/${member.userid}">회원님의 페이지</a> <a
+					href="${path}/pageCreate">페이지 만들기</a>
 			</div>
 		</div>
 		<div id="mainContainer">
+		<h2>페이지 생성 완료</h2>
 		</div>
 	</div>
 </body>

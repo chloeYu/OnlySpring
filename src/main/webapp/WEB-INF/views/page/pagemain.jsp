@@ -6,27 +6,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${owner.username }'sPage</title>
+<title>${pp.pname } Page</title>
 <script type="text/javascript">
-var i = 0;
-	function page_like() {
-		if(i=0){
-			
-		}
-	}
+
 </script>
 </head>
 <body class="pageLayout">
-	<%
-		String pagename = member.getUserid();
-	%>
 	<div id="header"><jsp:include page="../header.jsp"></jsp:include></div>
 	<div class="header_hidden"></div>
 	<div id="pageContainer">
 		<div id="left_menu">
 			<img alt=""
-				src="http://mblogthumb2.phinf.naver.net/20160128_109/weddingvvip_14539470773015Yfft_PNG/12.png?type=w2">
-			<br> <a href="${path}/pagemain/${member.userid}"
+				src="../img_timeline/${pp.logo_image }">
+			<br> <a href="${path}/pagemain/${pp.pid}"
 				id="text_pagehome">page</a> <br>
 			<ul id="left_menu_ul">
 				<li><a>홈</a></li>
@@ -41,12 +33,13 @@ var i = 0;
 		<div id="pageTimeline_view">
 			<div id="main_img">
 				<img alt=""
-					src="http://cfile3.uf.tistory.com/image/0246DF4850CA112A047289">
+					src="../img_timeline/${pp.cover_image }">
 			</div>
 			<div id="pageTimeline_centermenu">
 				<input type="hidden" name="username" value="${member.username}"
 					id="username"> <input type="button" value="좋아요"
 					id="like_button" onclick="page_like()" style="background-color: black;">
+					
 			</div>
 			<div id="pageTimeline_left">
 				<div id="main_container">
@@ -130,7 +123,8 @@ var i = 0;
 			</div>
 			<div id="pageTimeline_right">
 				<h2>pageTimeline_right</h2>
-				<p id="tt"></p>
+				<p>${pp.pid }</p>
+				<p>${pp.pname }</p>
 			</div>
 		</div>
 	</div>

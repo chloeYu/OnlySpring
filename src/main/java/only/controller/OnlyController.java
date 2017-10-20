@@ -1,5 +1,7 @@
 package only.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,11 +25,13 @@ import only.model.Chat;
 import only.model.Comments;
 import only.model.Likes;
 import only.model.Member;
+import only.model.Page;
 import only.model.Post;
 import only.service.CommentService;
 import only.service.FriendListService;
 import only.service.LikesService;
 import only.service.MemberService;
+import only.service.PageService;
 import only.service.PostService;
 import only.service.TextMessageListService;
 import only.utils.WebConstants;
@@ -48,6 +52,8 @@ public class OnlyController {
 	private FriendListService fs;
 	@Autowired
 	private TextMessageListService tmls;
+	@Autowired
+	private PageService pages;
 
 	// 채팅 컨트롤러
 	@RequestMapping("/chat")
@@ -412,20 +418,49 @@ public class OnlyController {
 
 	// 페이지
 	@RequestMapping("/page")
-	public String page() {
+	public String page(Page page, HttpSession session) throws Exception {
+		page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+		int i = pages.pcount(page);
+		if (i > 0) {
+			page.setPid(pages.selet_pid(page));
+		}
+		System.out.println("pid="+page.getPid());
+		System.out.println("pname"+page.getPname());
 		return "page/page";
 	}
 
-	@RequestMapping("/pagemain/{userid}")
-	public String pagemain(@PathVariable String userid, Model model) {
-		Member pageOwner = ms.getMemberById(userid);
-		model.addAttribute("owner", pageOwner);
+	@RequestMapping("/pagemain/{pp}")
+	public String pagemain(@PathVariable String pp, Member member, Model model, HttpSession session) throws Exception {
+		/*page.setUserid((String) session.getAttribute(WebConstants.USER_ID));*/
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		Page pagepp = pages.getPageById(pp);
+		model.addAttribute("pp", pagepp);
+		int i = pages.pcount(pagepp);
+		if(i<1) {
+			return "page/pageCreate";
+		}
 		return "page/pagemain";
 	}
 
-	@RequestMapping("/pageCreate")
-	public String pageCreate() {
+	@RequestMapping(value = "/pageCreate", method = RequestMethod.GET)
+	public String pageCreate(Page page, HttpSession session) throws Exception {
+		page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+		page.setPid(pages.count(page));
+		int i = pages.pcount(page);
+		if(i>0) {
+			page.setPid(pages.selet_pid(page));
+			return "page/page";
+		}
 		return "page/pageCreate";
+	}
+
+	@RequestMapping(value = "/pageCreate", method = RequestMethod.POST)
+	public String pageCreate(Page page, Model model, HttpSession session) throws Exception {
+		page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+		model.addAttribute("page", page);
+		pages.insert(page);
+		System.out.println("wel" + page.getPid());
+		return "page/pageWel";
 	}
 
 }

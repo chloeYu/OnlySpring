@@ -13,7 +13,7 @@
 		<typeAlias  type="only.model.Friendlist" alias="friendlist"/>
 		<typeAlias  type="only.model.Likes" alias="likes"/>
 		<typeAlias  type="only.model.Post_Location" alias="location"/>
-		<!-- <typeAlias  type="only.model.Page" alias="page"/> -->
+		<typeAlias  type="only.model.Page" alias="page"/>
 	</typeAliases>
 
 	<mappers>
@@ -23,6 +23,6 @@
 		<mapper resource="Comments.xml" />
 		<mapper resource="Friendlist.xml" />
 		<mapper resource="Likes.xml" />
-		<!-- <mapper resource="Page.xml" /> -->
+		<mapper resource="Page.xml" />
 	</mappers>
 </configuration>
