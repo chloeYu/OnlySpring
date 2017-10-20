@@ -84,7 +84,7 @@
   				<ul class="menu-list accordion">
       				<li id="nav1" class="toggle accordion-toggle">
          				<span class="icon-plus"></span>
-         				<a class="menu-link" href="#createPage">Create Page</a>
+         				<a class="menu-link" href="${path }/page">Page</a>
       				</li>
 
       				<!-- menu-submenu accordon-content-->
