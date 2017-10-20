@@ -39,7 +39,7 @@ $(document).ready(function() {
 	var root = url + appCtx;
 	
 	var $messages = $('.messages-content'), d, h, m, i = 0; // 스크롤
-	
+	/* test */
 	// 웹소켓 커넥션
 	function connect() { 
 		websocket = new WebSocket("ws://" + root + "/chat-ws");
