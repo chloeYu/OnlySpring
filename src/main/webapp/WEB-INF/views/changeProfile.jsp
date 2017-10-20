@@ -8,8 +8,6 @@
 <link href="${path}/css/modifyProfile.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ChangeProfile</title>
-<link rel='stylesheet prefetch'
-	href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
 <script type="text/javascript">
 	$(document).ready(
 			function() {

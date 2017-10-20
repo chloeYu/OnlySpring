@@ -4,8 +4,6 @@
 <c:set var="path" value="${pageContext.request.contextPath }"></c:set>
 <html>
 <head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 </head>
 <div class="header">
 	<!-- 상단고정바 로고 -->
