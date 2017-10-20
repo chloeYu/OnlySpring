@@ -3,6 +3,10 @@
 	
 }
 
+.disapper {
+	display: none;
+}
+
 #hamburegerSpan {
 	display: block;
 	background: #566973;
@@ -58,9 +62,11 @@
 	left: 16px;
 	transform: rotate(45deg);
 }
+
 #menu-toggle #cross span {
 	transition: .25s ease-in-out;
 }
+
 #menu-toggle #cross span:nth-child(1) {
 	height: 0%;
 	width: 2px;

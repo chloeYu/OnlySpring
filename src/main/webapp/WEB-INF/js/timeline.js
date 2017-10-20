@@ -385,7 +385,15 @@ $(function() {
 	    $("body").toggleClass("overflow-hidden");
 	});
 });
-
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+	if(!event.target.matches('.instant')){
+		if(a){
+			$(".friendlistplace").addClass("disapper").removeClass("show");
+			a=!a;
+		}
+	}
+}
 //지도
 var google_map_place;
 
