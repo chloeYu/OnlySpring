@@ -7,6 +7,17 @@
 	display: none;
 }
 
+#messageCountAll #CountAll {
+	font-size: 11px;
+	position: absolute;
+	top: 2px;
+	padding: 4px 6px 4px 6px;
+	color: #fff;
+	background-color: #ff1a66;
+	border-radius: 15px;
+	margin-left: 6px;
+}
+
 #hamburegerSpan {
 	display: block;
 	background: #566973;

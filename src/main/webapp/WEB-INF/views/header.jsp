@@ -64,6 +64,9 @@
 						<div id="message_notification">
 							<span>Message</span>
 						</div>
+						<div id="messageCountAll">
+							<span id="CountAll">1</span>
+						</div>
 					</a>
 					<div id="displayChatList" class="chatListToggle"></div>
 				</div>
