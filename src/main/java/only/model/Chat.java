@@ -7,6 +7,15 @@ public class Chat {
 	String chatContent;
 	String chatTime;
 	String chatRoom;
+	int chatRead;
+	
+	public int getChatRead() {
+		return chatRead;
+	}
+
+	public void setChatRead(int chatRead) {
+		this.chatRead = chatRead;
+	}
 
 	public String getChatRoom() {
 		return chatRoom;
@@ -59,6 +68,6 @@ public class Chat {
 	@Override
 	public String toString() {
 		return "Chat [chatID=" + chatID + ", fromID=" + fromID + ", toID=" + toID + ", chatContent=" + chatContent
-				+ ", chatTime=" + chatTime + "chatRoom=" + chatRoom + "]";
+				+ ", chatTime=" + chatTime + ", chatRoom=" + chatRoom + ", chatRead=" + chatRead +  "]";
 	}
 }

@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="sessionChk.jsp"%>
 <c:set var="path" value="${pageContext.request.contextPath }"></c:set>
+<html>
+<head>
+</head>
 <div class="header">
 	<!-- 상단고정바 로고 -->
 	<div class="head_logo">
@@ -30,7 +33,7 @@
 			<a id="user_profile_url" href="${path }/blog/<%=userid%>">
 				<span class="userProfileName"><%=member.getUsername()%></span>
 				<span class="userProfileImg_span">
-					<img style="vertical-align: middle" src="${path}/img_timeline/<%=member.getProfile_image()%>"> 
+					<img style="vertical-align: middle" src="${path}/img_timeline/<%=member.getProfile_image()%>">
 				</span>
 			</a>
 		</div>
@@ -44,7 +47,7 @@
 						</div>
 					</div>
 				</div>
-						<div class="friendlistplace disapper instant"><h2 class="flh2 instant">친구목록</h2><div class="instant" id="friendload"></div></div>
+						<div class="friendlistplace disapper instant"><div class="instant" id="friendload"></div></div>
 			</div>
 			<div class="nav_icon">
 				<div class="alarm_list" data-click="alarm_list_icon">
@@ -58,7 +61,6 @@
 
 			<div class="nav_icon">
 				<div class="message_list" data-click="message_list_icon">
-					<a class="info" id="chatList" data-id="${sessionId }">
 						<div id="message_notification">
 							<span>Message</span>
 						</div>
@@ -67,25 +69,53 @@
 				</div>
 			</div>
 
-			<div class="dropdown">
-				<span class="profileDropdown"></span>
-				<div id="myDropdown" class="dropdown-content">
-					<a href="${path }/page">Page</a> <a href="#createGroup">Create
-						Group</a> <a href="/only/changeProfile">Profile Setting</a> <a
-						href="/only/logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
-				</div>
+			<div id="menu-toggle">
+  				<div id="hamburger">
+    				<span id="hamburegerSpan"></span>
+    				<span id="hamburegerSpan"></span>
+    				<span id="hamburegerSpan"></span>
+  				</div>
+  				<div id="cross">
+    				<span id="hamburegerSpan"></span>
+    				<span id="hamburegerSpan"></span>
+  				</div>
 			</div>
+			<div id="menu-container">
+  				<ul class="menu-list accordion">
+      				<li id="nav1" class="toggle accordion-toggle">
+         				<span class="icon-plus"></span>
+         				<a class="menu-link" href="#createPage">Create Page</a>
+      				</li>
+
+      				<!-- menu-submenu accordon-content-->
+     				<li id="nav2" class="toggle accordion-toggle">
+         				<span class="icon-plus"></span>
+         				<a class="menu-link" href="#createGroup">Create Group</a>
+      				</li>
+      				<!-- menu-submenu accordon-content-->
+           			<li id="nav3" class="toggle accordion-toggle">
+         				<span class="icon-plus"></span>
+         				<a class="menu-link profileSetting">Profile Setting</a>
+      				</li>
+
+      				<li id="nav4" class="toggle accordion-toggle">
+         				<span class="icon-plus"></span>
+         				<a class="menu-link" href="/only/logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
+      				</li>
+    				<!-- menu-submenu accordon-content-->
+   				</ul>
+   			</div>
+				<!--  <div id="myDropdown" class="dropdown-content">
+					<a href="#createPage">Create Page</a> <a href="#createGroup">Create
+						Group</a> <a class="profileSetting">Profile Setting</a> <a
+						href="/only/logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
+				</div> -->
 		</div>
 	</div>
 </div>
-<div class="popupLayer">
-		<div>
-			<span onClick="closeLayer(this)"
-				style="cursor: pointer; font-size: 1.5em" title="닫기">X</span>
-		</div>
-		여긴 레이어~<br> 클릭하면 바로 나타나는 레이어에요^^
-	</div>
 <form id="formfriend" action="friendList">
 <input type="hidden" id="member_id" name="member_id" value="<%=userid%>">
 </form>
 <!-- 상단고정바 끝 -->
+
+</html>

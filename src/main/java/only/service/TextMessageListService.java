@@ -8,4 +8,5 @@ public interface TextMessageListService {
 	
 	public List<Chat> getChatMessageList(String userid);
 	
+	public int getUnreadMessageCount(String userid);
 }

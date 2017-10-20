@@ -14,6 +14,31 @@ var longitude = 127.412501;
 var a = false;
 
 $(function() {
+	$(".type_choice_textarea").bind("keydown", function(e) {
+		var text = $(".type_choice_textarea").val();
+		var positionOfhash = new Array();
+		var positionOfspace = new Array();
+		var indexOfhash = text.indexOf("#");
+		var indexOfspace = text.indexOf(" ", indexOfhash);
+		while (indexOfhash > -1) {
+			if(indexOfspace==-1)
+				indexOfspace=null;
+			positionOfhash.push(indexOfhash);
+			positionOfspace.push(indexOfspace);
+			indexOfhash = text.indexOf("#", indexOfhash + 1);
+			indexOfspace = text.indexOf(" ", indexOfhash);
+		}
+		if (positionOfhash == null || positionOfspace == null)
+			return true;
+		else {
+			for (var i = 0; i < positionOfhash.length; i++)
+			if (positionOfspace[i]==null) {
+				console.log("hashTag not finished");
+				console.log(text.slice(positionOfhash[i]));
+			} else
+				console.log(text.slice(positionOfhash[i], positionOfspace[i]));
+		}
+	});
 	$(".friend_list").on("click", function(){
 		if(a){
 			$(".friendlistplace").addClass("disapper").removeClass("show");
@@ -71,7 +96,6 @@ $(function() {
 	
 	
 	$('body').on('click', '.postInner3', function(e){
-		
 		var modal =document.getElementById("myModal");
 		//Get the image and insert it inside the modal - use its "alt" text as a caption
 		var img =  e.currentTarget;
@@ -340,41 +364,35 @@ function deleteImageAction(index) {
 
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
+
+//드롭다운
 $(function() {
-	$('.profileDropdown').on('click', function() {
-		if ($('.dropdown-content').hasClass('show')) {
-			$('.dropdown-content').removeClass('show');
-		} else {
-			$('.dropdown-content').addClass('show');
-		}
+	function slideMenu() {
+	    var activeState = $("#menu-container .menu-list").hasClass("active");
+	    $("#menu-container .menu-list").animate(
+	      {
+	        right: activeState ? "0%" : "-100%"
+	      },
+	      500
+	    );
+	}
+	$("#menu-toggle").click(function(event) {
+		$(this).toggleClass('open');
+	    event.stopPropagation();
+	    $("#menu-container .menu-list").toggleClass("active");
+	    slideMenu();
+
+	    $("body").toggleClass("overflow-hidden");
 	});
 });
-
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-	if (!event.target.matches('.profileDropdown')) {
-
-		var dropdowns = document.getElementsByClassName("dropdown-content");
-		var i;
-		for (i = 0; i < dropdowns.length; i++) {
-			var openDropdown = dropdowns[i];
-			if (openDropdown.classList.contains('show')) {
-				openDropdown.classList.remove('show');
-			}
-		}
-	}
 	if(!event.target.matches('.instant')){
 		if(a){
 			$(".friendlistplace").addClass("disapper").removeClass("show");
 			a=!a;
 		}
 	}
-//	if(!event.target.matches('.det')){
-//		if(a){
-//			$('.det').removeClass('show');
-//			a=!a;
-//		}
-//	}
 }
 //지도
 var google_map_place;

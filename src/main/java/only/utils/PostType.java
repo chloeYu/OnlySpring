@@ -5,7 +5,7 @@ public enum PostType {
 	PHOTO_VIDEO,
 	LOCATION,
 	TAG_FRIENDS,
-	
+	HASHTAG,
 	FEELING_ACTIVITY,
 	STICKER
 }

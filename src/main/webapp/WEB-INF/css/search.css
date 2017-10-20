@@ -200,12 +200,13 @@ body {
 #friend_notification {
 	position: relative;
 	cursor: pointer;
-	height: 45px;
-	width: 45px;
-	background-image: url(../img_all/notification.png);
-	background-position: 0 -185px;
+	top: 7px;
+	right: 15px;
+	height: 32px;
+	width: 32px;
+	background-image: url(../img_all/headeruser.png);
 	background-repeat: no-repeat;
-	background-size: 45px;
+	background-size: 32px;
 	overflow: hidden;
 	display: inline-block;
 	float: left;
@@ -245,12 +246,11 @@ body {
 #alarm_notification {
 	position: relative;
 	cursor: pointer;
-	height: 45px;
-	width: 45px;
-	background-image: url(../img_all/notification.png);
-	background-position: 0 -142px;
+	height: 32px;
+	width: 32px;
+	background-image: url(../img_all/bell.png);
 	background-repeat: no-repeat;
-	background-size: 45px;
+	background-size: 32px;
 	overflow: hidden;
 	display: inline-block;
 	float: left;
@@ -275,12 +275,13 @@ body {
 #message_notification {
 	position: relative;
 	cursor: pointer;
-	height: 45px;
-	width: 45px;
-	background-image: url(../img_all/notification.png);
-	background-position: 0 -518px;
+	top: 7px;
+	left: 15px;
+	height: 32px;
+	width: 32px;
+	background-image: url(../img_all/note.png);
 	background-repeat: no-repeat;
-	background-size: 45px;
+	background-size: 32px;
 	overflow: hidden;
 	display: inline-block;
 	float: left;
@@ -311,7 +312,8 @@ body {
 }
  */
 .header_profile a {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #474747;
+	font-family: "나눔고딕", sans-serif;
 	background-color: transparent;
 	display: inline-block;
 	font-size: 17px;
@@ -323,6 +325,7 @@ body {
 	position: relative;
 	text-decoration: none;
 	white-space: nowrap;
+	top: 7px;
 }
 
 .header_profile a img {

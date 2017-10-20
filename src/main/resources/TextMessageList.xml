@@ -23,4 +23,8 @@
 		) AS subQuery
 		GROUP BY chatRoom
 	</select>
+	
+	<select id="messageCount" parameterType="string" resultType="int">
+		select count(chatID) from chat where toID = #{userid} and chatRead = 0
+	</select>
 </mapper>

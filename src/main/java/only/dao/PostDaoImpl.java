@@ -184,4 +184,12 @@ public class PostDaoImpl implements PostDao {
 	public int getImageTotal(String userid) {
 		return sst.selectOne("postns.getImageTotal", userid);
 	}
+
+	@Override
+	public int insertHashTag(int pid, String hashTag) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("pid", Integer.toString(pid));
+		map.put("member", hashTag);
+		return sst.insert("postns.insertHashTag", map);
+	}
 }

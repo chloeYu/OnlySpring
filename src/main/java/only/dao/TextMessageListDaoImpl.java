@@ -19,4 +19,9 @@ public class TextMessageListDaoImpl implements TextMessageListDao {
 		return ss.selectList("messages.messageList", userid);
 	}
 
+	@Override
+	public int getUnreadMessageCount(String userid) {
+		return ss.selectOne("messages.messageCount", userid);
+	}
+
 }
