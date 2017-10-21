@@ -18,4 +18,6 @@ public interface MemberService{
 
 	int updateCoverProfile(String userid, String url);
 
+	List<Member> getLoggedInMembers(String name);
+
 }

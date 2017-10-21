@@ -116,16 +116,6 @@ public class OnlyController {
 		return "joinus/signUpForm";
 	}
 
-	@RequestMapping(value = "login2", method = RequestMethod.GET)
-	public void login(@RequestParam(value = "error", required = false) boolean error, HttpSession session,
-			Model model) {
-		if (error == true) {
-			// HOW DO I PROVIDE A CUSTOM ERROR MESSAGE?
-			model.addAttribute("error", "You have entered an invalid username or password!");
-		}
-		logger.info("Welcome login! {}", session.getId());
-	}
-
 	@RequestMapping("/joinus/signUp")
 	public String signUp(Member member, Model model) {
 		System.out.println(member.getUserid() + ", " + member.getUsername() + ", " + member.getPassword() + ", "
@@ -177,15 +167,32 @@ public class OnlyController {
 		return "searchResult";
 	}
 
-	@RequestMapping("/timeline")
-	public String timeline(HttpSession session) {
+	@RequestMapping("/login")
+	public String login(HttpSession session, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getName(); // get logged in username
-		System.out.println("timeline: " + name);
-		Member member = ms.getMemberById(name);
+		String name = auth.getName(); 
+		System.out.println("session registered for " + name);
+		Member member =ms.getMemberById(name);
 		session.setAttribute("member", member);
 		session.setAttribute(WebConstants.USER_ID, name);
-		System.out.println("현재 로그인 중인 사용자 : " + sessionRegistry.getAllPrincipals().size());
+		System.out.println(member);
+		return "login";
+	}
+	
+	@RequestMapping("/contactUpdate")
+	public String contactUpdate(String userid, HttpSession session, Model model) {
+		String id = (String) session.getAttribute(WebConstants.USER_ID);
+		List<Member> contacts = ms.getLoggedInMembers(id);
+		model.addAttribute("contacts", contacts);
+		return "contactUpdate";
+	}
+	
+	@RequestMapping("/timeline")
+	public String timeline(HttpSession session, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName(); 
+		List<Member> contacts = ms.getLoggedInMembers(name);
+		model.addAttribute("contacts", contacts);
 		for (Object p : sessionRegistry.getAllPrincipals()) {
 			if (p instanceof User) {
 				User user = (User) p;
@@ -207,7 +214,7 @@ public class OnlyController {
 		if (userid == null || userid.equals("")) {
 			userid = (String) session.getAttribute(WebConstants.USER_ID);
 		}
-		// System.out.println("loadPost().." + userid + "," + pageNum);
+		System.out.println("loadPost().." + userid + "," + pageNum);
 		List<Post> plist = ps.getTimelinePost(userid, pageNum);
 		for (Post post : plist) {
 			post.setCommentCount(cs.getCommentCount(post.getPid(), 0));
@@ -299,13 +306,13 @@ public class OnlyController {
 		}
 		return "profileDone";
 	}
-
+	
 	@RequestMapping(value = "/logout")
 	public void logout(HttpSession session) {
 		System.out.println("Welcome logout!" + session.getId());
 		session.invalidate();
 	}
-	
+
 	@RequestMapping(value="/login_duplicate")
 	public String login_duplicate(RedirectAttributes redirectAttributes, Model model) {
 		System.out.println("forward to relogin");

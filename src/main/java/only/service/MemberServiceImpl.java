@@ -46,4 +46,9 @@ public class MemberServiceImpl implements MemberService {
 	public int updateCoverProfile(String userid, String url) {
 		return md.updateCoverProfile(userid, url);
 	}
+
+	@Override
+	public List<Member> getLoggedInMembers(String userid) {
+		return md.getLoggedInMembers(userid);
+	}
 }

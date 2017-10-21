@@ -21,6 +21,14 @@
 		<result property="relation" column="relation" />
 	</resultMap>
 
+	<select id="loggedInMembers" parameterType="hashMap" resultMap="memberResult">
+		select * from member where userid in 
+		<foreach collection="principals" item="item" index="index"  open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        and userid != #{userid}
+	</select>
+	
 	<select id="select" parameterType="String" resultType="member">
 		select * from member where userid=#{member_id}
 	</select>

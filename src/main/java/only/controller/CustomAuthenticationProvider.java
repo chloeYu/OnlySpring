@@ -40,17 +40,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             member =  userservice.loadUserByUsername(username);
             System.out.println(username + password +"done");
             
-            // 이용자가 로그인 폼에서 입력한 비밀번호와 DB로부터 가져온 암호화된 비밀번호를 비교한다
+            // �씠�슜�옄媛� 濡쒓렇�씤 �뤌�뿉�꽌 �엯�젰�븳 鍮꾨�踰덊샇�� DB濡쒕��꽣 媛��졇�삩 �븫�샇�솕�맂 鍮꾨�踰덊샇瑜� 鍮꾧탳�븳�떎
             System.out.println("member pw: "+ member.getPassword() + user_pw);
             if (!member.getPassword().equals(user_pw)) {
-            	throw new BadCredentialsException("비밀번호 불일치");
+            	throw new BadCredentialsException("鍮꾨�踰덊샇 遺덉씪移�");
             }
             authorities = (Collection<GrantedAuthority>) member.getAuthorities();
         } catch(UsernameNotFoundException e) {
-            System.out.println("없는 아이디입니다");
+            System.out.println("�뾾�뒗 �븘�씠�뵒�엯�땲�떎");
             throw new UsernameNotFoundException(e.getMessage());
         } catch(BadCredentialsException e) {
-            System.out.println("비밀번호 불일치");
+            System.out.println("鍮꾨�踰덊샇 遺덉씪移�");
             throw new BadCredentialsException(e.getMessage());
         } catch(Exception e) {
         	System.out.println("Login error : " + e.getMessage());

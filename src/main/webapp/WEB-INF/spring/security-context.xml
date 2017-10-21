@@ -6,14 +6,25 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+	<http pattern="/resources/**" security="none" />
+	<http pattern="/css/**" security="none" />
+	<http pattern="/js/**" security="none" />
+	<http pattern="/fonts/**" security="none" />
+	<http pattern="/img_timeline/**" security="none" />
+	<http pattern="/img_all/**" security="none" />
+	
+	
 	<http auto-config='true'>
+		
 		<intercept-url pattern="/joinus/signUpForm" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/login_duplicate" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/abc/*" access="ROLE_USER" />
 		<intercept-url pattern="/**" access="ROLE_USER" />
-		<form-login login-page="/joinus/signUpForm" username-parameter="member_id"
-			password-parameter="password" login-processing-url="/joinus/loginProcess"
-			default-target-url="/timeline" authentication-failure-url="/joinus/signUpForm"
+		<form-login login-page="/joinus/signUpForm" 
+			username-parameter="member_id"
+			password-parameter="password" 
+			login-processing-url="/joinus/loginProcess"
+			default-target-url="/login" 
+			authentication-failure-url="/joinus/signUpForm"
 			always-use-default-target='true' />
 		<logout invalidate-session="true" 
 				logout-success-url="/joinus/signUpForm"

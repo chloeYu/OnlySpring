@@ -7,6 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>OnLy</title>
 </head>
+<c:if test="${not empty login }">
+<script type="text/javascript">
+alert("${login}");
+</script>
+</c:if>
 <body>
 	<div id="wrapper">
 		<div id="layerPop">
@@ -21,7 +26,9 @@
 	<div id="header"><jsp:include page="header.jsp"></jsp:include></div>
 	<div class="header_hidden"></div>
 	<!-- POST 내용 들어갈 부분 -->
+	
 	<div class="timeline_main">
+	<jsp:include page="contacts.jsp"></jsp:include>
 		<!-- 포스트작성 / 뷰 부분 -->
 		<div class="timeline_post">
 			<div class="page_margin"></div>

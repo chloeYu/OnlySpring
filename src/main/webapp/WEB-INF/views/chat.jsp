@@ -54,7 +54,7 @@ $(document).ready(function() {
 	
 	function onMessage(event) {
 		var type = null;
-		
+
 		$.each(JSON.parse(event.data), function(key, value) {
 			if(key === 'type'){
 				type = value;
@@ -63,8 +63,18 @@ $(document).ready(function() {
 				} else if (type === 'messageList') {
 					MessageCount();
 					MessageRoomCount();
+				} else if(type == 'contacts'){
+					setTimeout(function(){ contactUpdate(); }, 1500);
+					
 				}
 			}
+		});
+	}
+	// 로그인된 사용자 update
+	function contactUpdate(){
+		console.log("update contacts");
+		$.post('/only/contactUpdate', "userid=${member.userid}", function(data){
+			$('#contact_list').html(data);
 		});
 	}
 	

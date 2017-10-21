@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +16,9 @@ import only.model.Member;
 public class MemberDaoImpl implements MemberDao {
 	@Autowired
 	private SqlSessionTemplate sst;
+	
+	@Autowired
+	private SessionRegistry sessionRegistry;
 
 	@Override
 	public Member getMemberById(String member_id) {
@@ -60,5 +64,21 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public UserDetails getUserDetails(String userid) {
 		return sst.selectOne("memberns.getUserDetails", userid);
+	}
+
+	@Override
+	public List<Member> getLoggedInMembers(String userid) {
+		Map map = new HashMap();
+		map.put("userid", userid);
+		map.put("principals", sessionRegistry.getAllPrincipals());
+		for(Object p : sessionRegistry.getAllPrincipals()) {
+			if(p instanceof String) {
+				System.out.println((String) p);
+			}
+		}
+		if(sessionRegistry.getAllPrincipals().size()>0) {
+			return sst.selectList("memberns.loggedInMembers", map);
+		}
+		return null;
 	}
 }

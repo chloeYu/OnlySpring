@@ -22,4 +22,6 @@ public interface MemberDao {
 
 	UserDetails getUserDetails(String userid);
 
+	List<Member> getLoggedInMembers(String userid);
+
 }
