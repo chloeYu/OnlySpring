@@ -3,6 +3,7 @@ package only.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.security.Principal;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import only.model.Chat;
 import only.model.Comments;
 import only.model.Likes;
 import only.model.Member;
 import only.model.Post;
+import only.model.User;
 import only.service.CommentService;
 import only.service.FriendListService;
 import only.service.LikesService;
@@ -32,9 +38,12 @@ import only.service.MemberService;
 import only.service.PostService;
 import only.service.TextMessageListService;
 import only.utils.WebConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class OnlyController {
+	private static final Logger logger = LoggerFactory.getLogger(OnlyController.class);
 	static int currentPage = 1;
 
 	@Autowired
@@ -49,6 +58,8 @@ public class OnlyController {
 	private FriendListService fs;
 	@Autowired
 	private TextMessageListService tmls;
+	@Autowired
+	private SessionRegistry sessionRegistry;
 
 	// 채팅 컨트롤러
 	@RequestMapping("/chat")
@@ -70,7 +81,7 @@ public class OnlyController {
 
 		return messageList;
 	}
-	
+
 	@RequestMapping(value = "/messageCount", method = RequestMethod.POST)
 	public @ResponseBody int messageCount(Model model, HttpSession session, String userid) {
 		userid = (String) session.getAttribute(WebConstants.USER_ID);
@@ -79,7 +90,7 @@ public class OnlyController {
 		System.out.println("읽지않은 메시지 총= " + messageCount);
 		return messageCount;
 	}
-	
+
 	@RequestMapping(value = "/messageRoomCount", method = RequestMethod.POST)
 	public @ResponseBody List<Chat> messageRoomCount(Model model, HttpSession session, String userid) {
 		userid = (String) session.getAttribute(WebConstants.USER_ID);
@@ -100,9 +111,19 @@ public class OnlyController {
 		}
 	}
 
-	@RequestMapping("/joinus/signUpForm")
+	@RequestMapping(value = "/joinus/signUpForm", method = RequestMethod.GET)
 	public String signUpForm() {
 		return "joinus/signUpForm";
+	}
+
+	@RequestMapping(value = "login2", method = RequestMethod.GET)
+	public void login(@RequestParam(value = "error", required = false) boolean error, HttpSession session,
+			Model model) {
+		if (error == true) {
+			// HOW DO I PROVIDE A CUSTOM ERROR MESSAGE?
+			model.addAttribute("error", "You have entered an invalid username or password!");
+		}
+		logger.info("Welcome login! {}", session.getId());
 	}
 
 	@RequestMapping("/joinus/signUp")
@@ -121,27 +142,19 @@ public class OnlyController {
 		return "joinus/signUpForm";
 	}
 
-	@RequestMapping("/joinus/login")
-	public String login(String member_id, String password, Model model, HttpSession session) {
-		System.out.println("login : " + member_id);
-		Member member = ms.getMemberById(member_id);
-		if (member == null) {
-			System.out.println("ID가 존재하지 않습니다");
-			model.addAttribute("message", "ID가 존재하지 않습니다");
-			return "joinus/signUpForm";
-		} else {
-			if (!member.getPassword().equals(password)) {
-				System.out.println("비밀번호가 일치하지 않습니다");
-				model.addAttribute("message", "비밀번호가 일치하지 않습니다");
-				return "joinus/signUpForm";
-			} else {
-				System.out.println("로그인 성공");
-				session.setAttribute(WebConstants.USER_ID, member_id);
-				session.setAttribute("member", member);
-				return "redirect:/timeline";
-			}
-		}
-	}
+	/*
+	 * @RequestMapping("/joinus/login") public String login(String member_id, String
+	 * password, Model model, HttpSession session) { System.out.println("login : " +
+	 * member_id); Member member = ms.getMemberById(member_id); if (member == null)
+	 * { System.out.println("ID가 존재하지 않습니다"); model.addAttribute("message",
+	 * "ID가 존재하지 않습니다"); return "joinus/signUpForm"; } else { if
+	 * (!member.getPassword().equals(password)) {
+	 * System.out.println("비밀번호가 일치하지 않습니다"); model.addAttribute("message",
+	 * "비밀번호가 일치하지 않습니다"); return "joinus/signUpForm"; } else {
+	 * System.out.println("로그인 성공"); session.setAttribute(WebConstants.USER_ID,
+	 * member_id); session.setAttribute("member", member); return
+	 * "redirect:/timeline"; } } }
+	 */
 
 	@RequestMapping("/search")
 	public @ResponseBody List<Member> search(String searchTerm, HttpSession session) {
@@ -165,7 +178,27 @@ public class OnlyController {
 	}
 
 	@RequestMapping("/timeline")
-	public String timeline() {
+	public String timeline(HttpSession session) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName(); // get logged in username
+		System.out.println("timeline: " + name);
+		Member member = ms.getMemberById(name);
+		session.setAttribute("member", member);
+		session.setAttribute(WebConstants.USER_ID, name);
+		System.out.println("현재 로그인 중인 사용자 : " + sessionRegistry.getAllPrincipals().size());
+		for (Object p : sessionRegistry.getAllPrincipals()) {
+			if (p instanceof User) {
+				User user = (User) p;
+				System.out.println(user.getUsername());
+			} else if (p instanceof Member) {
+				Member m = (Member) p;
+				System.out.println(m.getUsername());
+			} else if (p instanceof String) {
+				System.out.println(p);
+			} else {
+				System.out.println("무슨 타입인지 모름");
+			}
+		}
 		return "timeline";
 	}
 
@@ -268,11 +301,18 @@ public class OnlyController {
 	}
 
 	@RequestMapping(value = "/logout")
-	public String logout(HttpSession session) {
+	public void logout(HttpSession session) {
+		System.out.println("Welcome logout!" + session.getId());
 		session.invalidate();
-		return "redirect:/timeline";
 	}
-
+	
+	@RequestMapping(value="/login_duplicate")
+	public String login_duplicate(RedirectAttributes redirectAttributes, Model model) {
+		System.out.println("forward to relogin");
+		redirectAttributes.addFlashAttribute("error", "다른 기기에서 로그인 하였습니다");
+		return "redirect:/joinus/signUpForm";
+	}
+	
 	@RequestMapping(value = "/blog/{owner}")
 	public String blog(@PathVariable String owner, HttpSession session, Model model) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);

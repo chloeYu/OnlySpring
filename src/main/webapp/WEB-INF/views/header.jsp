@@ -103,7 +103,7 @@
       				
       				<li id="nav4" class="toggle accordion-toggle"> 
          				<span class="icon-plus"></span>
-         				<a class="menu-link" href="/only/logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
+         				<a class="menu-link" href="${path }/logout" onclick="alert('로그아웃 되었습니다');">Log Out</a>
       				</li>
     				<!-- menu-submenu accordon-content-->
    				</ul>

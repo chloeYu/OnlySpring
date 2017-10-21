@@ -7,6 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login</title>
 </head>
+<c:if test="${not empty error }">
+<script type="text/javascript">
+	alert("${error}");
+</script>>
+</c:if>
 <body>
 	<div class="signUpContain">
 		<!-- 로그인 폼 시작 -->	
@@ -27,7 +32,8 @@
 				<div class="input-name">
 					<h2>ID</h2>
 				</div>
-				<form action="login" name="loginForm" method="post">
+				<!-- <form action="login" name="loginForm" method="post"> -->
+				<form action="loginProcess" name="loginForm" method="post">
 					<input type="text" name="member_id" value="" class="field-input"
 						id="login_inputId" autofocus="autofocus" />
 					<div class="input-name input-margin">

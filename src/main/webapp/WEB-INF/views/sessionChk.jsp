@@ -5,14 +5,14 @@
 String userid = (String) session.getAttribute(WebConstants.USER_ID);
 String username = (String) session.getAttribute("username");
 Member member = (Member) session.getAttribute("member");
-if(userid==null || userid.equals("")){
+/* if(userid==null || userid.equals("")){
 	response.sendRedirect("/only/joinus/signUpForm");
 	return;
 }
 if(member==null){
 	response.sendRedirect("/only/joinus/signUpForm");
 	return;
-}
+} */
 %>
 <c:set var="member" value="<%=member %>"></c:set>
 <script type="text/javascript">

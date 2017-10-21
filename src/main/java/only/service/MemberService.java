@@ -5,7 +5,7 @@ import java.util.List;
 import only.model.Member;
 import only.model.Post;
 
-public interface MemberService {
+public interface MemberService{
 	Member getMemberById(String member_id);
 
 	List<Member> searchMember(String searchTerm, String userid);

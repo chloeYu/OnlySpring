@@ -10,7 +10,6 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
-
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -37,12 +36,13 @@
 		<beans:property name="maxUploadSize" value="524288000" />
 
 	</beans:bean>
-
-
+	
 	<context:component-scan base-package="only" />
 
 	<beans:bean id="chatHandler" class="only.controller.ChatWebSocketHandler" />
+	
 	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/chat-ws" />
 	</websocket:handlers>
+
 </beans:beans>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import only.model.Member;
@@ -54,5 +55,10 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("userid", userid);
 		map.put("url", url);
 		return sst.update("memberns.updateCoverProfile", map);
+	}
+
+	@Override
+	public UserDetails getUserDetails(String userid) {
+		return sst.selectOne("memberns.getUserDetails", userid);
 	}
 }

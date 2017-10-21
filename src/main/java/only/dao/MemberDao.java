@@ -2,6 +2,8 @@ package only.dao;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import only.model.Member;
 import only.model.Post;
 
@@ -17,5 +19,7 @@ public interface MemberDao {
 	int updateThumbProfile(String userid, String url);
 
 	int updateCoverProfile(String userid, String url);
+
+	UserDetails getUserDetails(String userid);
 
 }

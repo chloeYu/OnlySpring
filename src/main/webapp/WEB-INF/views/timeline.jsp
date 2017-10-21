@@ -30,14 +30,14 @@
 					<li class="type_choice_box" id="infinite_container">
 						<form action="postWrite" method="post"
 							enctype="multipart/form-data">
-							<input type="hidden" value="<%=userid%>" name="userid">
+							<input type="hidden" value="${member.userid }" name="userid">
 							<input type="hidden"
 								value="<%=application.getRealPath("/fileSave")%>" name="path">
 							<%
 								System.out.println("path=" + application.getRealPath("/fileSave"));
 							%>
 							<textarea rows="1" cols="1" class="type_choice_textarea"
-								name="text" placeholder="What's on your mind, <%=userid%>?"></textarea>
+								name="text" placeholder="What's on your mind, ${member.username }?"></textarea>
 							<!-- 지도 -->
 							<div id="google_place_view"></div>
 							<input type="hidden" name="place" id="place" value =''>

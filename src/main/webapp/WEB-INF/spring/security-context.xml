@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<http auto-config='true'>
+		<intercept-url pattern="/joinus/signUpForm" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/login_duplicate" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/abc/*" access="ROLE_USER" />
+		<intercept-url pattern="/**" access="ROLE_USER" />
+		<form-login login-page="/joinus/signUpForm" username-parameter="member_id"
+			password-parameter="password" login-processing-url="/joinus/loginProcess"
+			default-target-url="/timeline" authentication-failure-url="/joinus/signUpForm"
+			always-use-default-target='true' />
+		<logout invalidate-session="true" 
+				logout-success-url="/joinus/signUpForm"
+				logout-url="/logout" />
+
+
+		<session-management>
+			<concurrency-control max-sessions="1"
+				expired-url="/login_duplicate" />
+		</session-management>
+
+	</http>
+
+	<authentication-manager>
+		<authentication-provider ref="customAuthenticationProvider" />
+		<authentication-provider user-service-ref="userService" />
+	</authentication-manager>
+</beans:beans>
