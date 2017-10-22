@@ -332,7 +332,7 @@ $(document).ready(function() {
 	}
 	
 	// 최근 메시지 목록 클릭 시 toID 전달 및 채팅창 팝업
-	$(document).on('click','.person', function() {
+	$(document).on('click','.person, .chatStart', function()  {
 		
 		
 		var toID = $(this).data('toid');

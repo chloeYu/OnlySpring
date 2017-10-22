@@ -15,7 +15,7 @@
 							<table style="width: 150px;">
 							<c:forEach var="contact" items="${contacts }">
 										<tr>
-										<td width="90%" style="padding-top: 10px;"><a id="user_profile_url" href="${path }/only/${contact.userid}">
+										<td width="90%" style="padding-top: 10px;"><a class="chatStart" data-toID="${contact.userid }" data-fromID='${member.userid }' >
 										<span class="usreProfileImg_span"><img style="vertical-align: middle; width: 34px; height: 34px;" src="${path }/only/img_timeline/${contact.profile_image}"></span>
 										<span class="userProfileName">${contact.username }</span></a></td>
 										<td width="10%" style="padding-top: 10px;"><div style="width:20%;"><span style="background: rgb(66, 183, 42); border-radius: 50%; display: inline-block; height: 6px; margin-left: 4px; width: 6px;"></span></div></td>

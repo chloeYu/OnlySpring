@@ -11,7 +11,7 @@
 			<c:forEach var="contact" items="${contacts }">
 				<tr>
 					<td width="90%" style="padding-top: 10px;"><a
-						id="user_profile_url" href="${path }/only/${contact.userid}">
+						id="user_profile_url" href="${path }/only/blog/${contact.userid}">
 							<span class="usreProfileImg_span"><img
 								style="vertical-align: middle; width: 34px; height: 34px;"
 								src="${path }/only/img_timeline/${contact.profile_image}"></span>
