@@ -371,13 +371,16 @@ $(document).ready(function() {
 	}
 	// 개인 메세지 카운트
 	function MessageRoomCount() {
-		
 		$.ajax({
 			type : "POST",
 			url : "${path}/messageRoomCount",
 			dataType : 'json',
 			success : function (data) {
 				console.log(data);
+
+				var chatCount = null;
+				var chatRoom = null;
+				
 				$.each(data, function(key, list) {
 					chatCount = list.chatCount;
 					chatRoom = list.chatRoom;
