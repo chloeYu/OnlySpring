@@ -1,4 +1,4 @@
-package only.controller;
+﻿package only.controller;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,27 +15,27 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
-		System.out.println("�쑀���븘�씠�뵒 �엯�젰�꽦怨�");
+		System.out.println("유저아이디 입력성공");
 		users.put(session.getId(), session);
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-		System.out.println("�쑀���븘�씠�뵒 吏��슦湲곗꽦怨�");
+		System.out.println("유저아이디 지우기성공");
 		users.remove(session.getId());
 	}
 	
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("handleTextMessage");
-		// �쟾�넚�릺�뼱 �삩 硫붿떆吏�
+		// 전송되어 온 메시지
 		String msg = message.getPayload();
-		// �븵�쓽 4湲��옄瑜� �젣�쇅�븳 遺�遺꾩쓣 媛�吏�怨� 硫붿떆吏� 留뚮뱾湲�
+		// 앞의 4글자를 제외한 부분을 가지고 메시지 만들기
 		TextMessage mes = new TextMessage(msg);
 		System.out.println(mes);
-		// Map�쓽 紐⑤뱺 Value瑜� 媛��졇�삤湲�
+		// Map의 모든 Value를 가져오기
 		Collection<WebSocketSession> set = users.values();
-		// set�쓽 紐⑤뱺 援ъ꽦 �슂�냼�뿉 mes瑜� �쟾�넚
+		// set의 모든 구성 요소에 mes를 전송
 		for (WebSocketSession s : set) {
 			s.sendMessage(mes);
 		}
