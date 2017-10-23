@@ -108,8 +108,8 @@ alert("${login}");
 				<div class="stage" style="position: relative; text-align: center; width: 70%; margin: auto; height: 100%;">
 					<img class="modal-content" id="popUpImage" style="width: 100%;">
 					<video id="iframeYoutube" width="100%" src="" autoplay="autoplay" controls="controls"></video>
-					<a class="prev"><div class="prevIcon" data-id="" data-index="" data-total=""></div></a>
-					<a class="next"><div class="nextIcon" data-id="" data-index="" data-total=""></div></a>
+					<a class="prev"><div class="prevIcon" data-id="" data-index="" data-total="" data-type=""></div></a>
+					<a class="next"><div class="nextIcon" data-id="" data-index="" data-total="" data-type=""></div></a>
 				</div>
 				</div>
 				</div>

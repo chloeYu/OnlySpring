@@ -80,4 +80,10 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return pd.insertHashTag(pid, HashTag);
 	}
+
+	@Override
+	public List<Post_Files> getImagesByPid(int pid) {
+		return pd.getImagesByPid(pid);
+	}
+
 }

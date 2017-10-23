@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="alertns">
+	<resultMap type="alert" id="alertResult">
+		<id property="aid" column="aid" />
+		<result property="type" column="type" />
+		<result property="status" column="status" />
+		<result property="uid1" column="uid1" />
+		<result property="uid2" column="uid2" />
+		<result property="url" column="url" />
+		<result property="created" column="created" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="alert">
+		insert into alert (type, status, uid1, uid2, url, created)
+  		values (#{type}, 'n', #{uid1}, #{uid2}, #{url}, now())
+	</insert> 
+	
+	<select id="uncheckedAlerts" parameterType="String" resultType="int">
+		select count(aid) from alert where uid2 = #{userid} and status='n'
+	</select>
+	
+	<select id="alertList" parameterType="String" resultType="alert">
+		select * from alert where uid2 = #{userid} order by aid desc
+	</select>
+	
+	<update id="checkNotification" parameterType="int">
+		update Alert set status='y' where aid = #{aid}
+	</update>
+</mapper>

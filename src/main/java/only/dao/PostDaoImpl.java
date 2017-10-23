@@ -26,8 +26,8 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public List<Post> getTimelinePost(String userid, String pageNum) {
-		int startRow = (Integer.parseInt(pageNum) - 1) * POSTPERPAGE; // 1페이지:1 2페이지: 11 3페이지:21 ...
-		int endRow = startRow + POSTPERPAGE ; // 1페이지: 10 2페이지: 20 3페이지: 30
+		int startRow = (Integer.parseInt(pageNum) - 1) * POSTPERPAGE; // 1�럹�씠吏�:1 2�럹�씠吏�: 11 3�럹�씠吏�:21 ...
+		int endRow = startRow + POSTPERPAGE ; // 1�럹�씠吏�: 10 2�럹�씠吏�: 20 3�럹�씠吏�: 30
 		int total = sst.selectOne("postns.getTimelineTotal", userid);
 		System.out.println("startRow: " + startRow + ", endRow: " + endRow + ", total: " + total);
 		if (endRow > total)
@@ -132,8 +132,8 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public List<Post> getBlogPost(String ownerid, String pageNum) {
-		int startRow = (Integer.parseInt(pageNum) - 1) * POSTPERPAGE; // 1페이지:1 2페이지: 11 3페이지:21 ...
-		int endRow = startRow + POSTPERPAGE ; // 1페이지: 10 2페이지: 20 3페이지: 30
+		int startRow = (Integer.parseInt(pageNum) - 1) * POSTPERPAGE; // 1�럹�씠吏�:1 2�럹�씠吏�: 11 3�럹�씠吏�:21 ...
+		int endRow = startRow + POSTPERPAGE ; // 1�럹�씠吏�: 10 2�럹�씠吏�: 20 3�럹�씠吏�: 30
 		int total = sst.selectOne("postns.getBlogTotal", ownerid);
 		System.out.println("startRow: " + startRow + ", endRow: " + endRow + ", total: " + total);
 		if (endRow > total)
@@ -170,8 +170,8 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public List<String> getImagesByUserid(String userid, int pageNum) {
-		int startRow = (pageNum- 1) * IMAGEPERPAGE; // 1페이지:1 2페이지: 11 3페이지:21 ...
-		int endRow = startRow + IMAGEPERPAGE ; // 1페이지: 10 2페이지: 20 3페이지: 30
+		int startRow = (pageNum- 1) * IMAGEPERPAGE; // 1�럹�씠吏�:1 2�럹�씠吏�: 11 3�럹�씠吏�:21 ...
+		int endRow = startRow + IMAGEPERPAGE ; // 1�럹�씠吏�: 10 2�럹�씠吏�: 20 3�럹�씠吏�: 30
 		int total = sst.selectOne("postns.getImageTotal", userid);
 		if (endRow > total)
 			endRow = total;
@@ -191,5 +191,10 @@ public class PostDaoImpl implements PostDao {
 		map.put("pid", Integer.toString(pid));
 		map.put("member", hashTag);
 		return sst.insert("postns.insertHashTag", map);
+	}
+
+	@Override
+	public List<Post_Files> getImagesByPid(int pid) {
+		return sst.selectList("postns.getImagesByPid", pid);
 	}
 }

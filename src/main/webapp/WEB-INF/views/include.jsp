@@ -37,6 +37,7 @@ span.err {
 <script src="${path}/js/friendlist.js"></script>
 <script src="${path}/js/page.js"></script>
 <script src="${path}/js/telChk.js"></script>
+<script src="${path}/js/alert.js"></script>
 <script type="text/javascript">
 	console.log("header included");
 </script>

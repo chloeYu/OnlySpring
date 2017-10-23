@@ -28,6 +28,10 @@
 		<result property="lng" column="lng" />
 	</resultMap>
 	
+	<select id="getImagesByPid" parameterType="int" resultMap="postFilesResult">
+		select * from POST_FILES where pid=#{pid}
+	</select>
+	
 	<select id="timelinelist" parameterType="String" resultMap="postResult">
  		<!-- select p.*, m.username from post p, member m where p.userid=#{userid} and p.userid = m.userid order by pid desc; -->
 		<!-- select * from post where userid=#{userid} -->
@@ -83,7 +87,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="post">
-		insert into POST values(#{pid},#{userid}, #{type}, 0, now(), now(),'n')
+		{call insert_post(#{pid},#{userid},#{type})}
+		<!-- insert into POST values(#{pid},#{userid}, #{type}, 0, now(), now(),'n') -->
 	</insert>
 	
 	<insert id="insertText" parameterType="hashMap">
@@ -112,5 +117,6 @@
 	<insert id="insertHashTag" parameterType="hashMap">
 		insert into POST_HASHTAG values(#{pid}, #{hashTag})
 	</insert>
+		
 </mapper>
 

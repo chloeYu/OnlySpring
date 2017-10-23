@@ -34,4 +34,7 @@ public interface PostService {
 	
 	int insertHashTag(int pid, String HashTag);
 
+	List<Post_Files> getImagesByPid(int pid);
+
+
 }

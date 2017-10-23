@@ -14,6 +14,7 @@
 		<typeAlias  type="only.model.Likes" alias="likes"/>
 		<typeAlias  type="only.model.Post_Location" alias="location"/>
 		<!-- <typeAlias  type="only.model.Page" alias="page"/> -->
+		<typeAlias  type="only.model.Alert" alias="alert"/>
 	</typeAliases>
 
 	<mappers>
@@ -24,5 +25,7 @@
 		<mapper resource="Friendlist.xml" />
 		<mapper resource="Likes.xml" />
 		<!-- <mapper resource="Page.xml" /> -->
+		<mapper resource="Alert.xml" />
+		
 	</mappers>
 </configuration>

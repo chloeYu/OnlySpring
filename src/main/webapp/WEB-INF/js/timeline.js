@@ -13,7 +13,7 @@ var latitude  = 36.322473;
 var longitude = 127.412501;
 var a = false;
 
-$(function() {
+$(function() {	
 	$(".type_choice_textarea").bind("keydown", function(e) {
 		var text = $(".type_choice_textarea").val();
 		var positionOfhash = new Array();
@@ -78,7 +78,7 @@ $(function() {
 			$("#google_button").hide();
 		}
 	});
-	//지도
+	// 지도
 	$('#google').on('click', function() {
 		$("#pac-input").show();
 		$("#map").show();
@@ -97,7 +97,8 @@ $(function() {
 	
 	$('body').on('click', '.postInner3', function(e){
 		var modal =document.getElementById("myModal");
-		//Get the image and insert it inside the modal - use its "alt" text as a caption
+		// Get the image and insert it inside the modal - use its "alt" text as
+		// a caption
 		var img =  e.currentTarget;
 		console.log(img.src);
 		var type = 0; // 0 : 이미지 1 : 비디오
@@ -121,80 +122,86 @@ $(function() {
 		$('.prevIcon').attr('data-id', $(this).attr('id'));
 		$('.prevIcon').attr('data-index', $(this).attr('data-index'));
 		$('.prevIcon').attr('data-total', $(this).attr('data-total'));
+		$('.prevIcon').attr('data-type', 'timeline');
 
 		$('.nextIcon').attr('data-id', $(this).attr('id'));
 		$('.nextIcon').attr('data-index', $(this).attr('data-index'));
 		$('.nextIcon').attr('data-total', $(this).attr('data-total'));
+		$('.nextIcon').attr('data-type', 'timeline');
 		
 		if($(this).attr('data-index') == 0){
 			$('.prevIcon').hide();
 		}
 		if($(this).attr('data-index') == $(this).attr('data-total')-1){
-			$('.next').hide();
+			$('.nextIcon').hide();
 		}
-		//var captionText = document.getElementById("caption");
-		//captionText.innerHTML = this.alt;
+		// var captionText = document.getElementById("caption");
+		// captionText.innerHTML = this.alt;
 	});
 	
 	$('body').on('click', '.prevIcon', function(){
-		var prefix = $(this).attr('data-id').split('-')[0];
-		var index = parseInt($(this).attr('data-id').split('-')[1]) - 1;
-		console.log($(this).attr('data-id'));
-		console.log(prefix+index);
-		
-		if(isImage($('#'+prefix+'-'+index).attr('src'))){
-			$('#popUpImage').show();
-			$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
-			$('#iframeYoutube').hide();
+		if($(this).attr('data-type')=='timeline'){
+			var prefix = $(this).attr('data-id').split('-')[0];
+			var index = parseInt($(this).attr('data-id').split('-')[1]) - 1;
+			console.log($(this).attr('data-id'));
+			console.log(prefix+index);
+			
+			if(isImage($('#'+prefix+'-'+index).attr('src'))){
+				$('#popUpImage').show();
+				$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
+				$('#iframeYoutube').hide();
+			}
+			if(isVideo($('#'+prefix+'-'+index).attr('src'))){
+				$('#iframeYoutube').show();
+				$('#iframeYoutube').attr('src', $('#'+prefix+'-'+index).attr('src'));
+				$('#popUpImage').hide();
+			}
+			
+			if(index == 0){
+				$('.prevIcon').hide();
+			}
+			$('.nextIcon').show();
+			
+			$('.prevIcon').attr('data-id', prefix+'-'+index);
+			$('.prevIcon').attr('data-index', index);
+			$('.prevIcon').attr('data-total', $(this).attr('data-total'));
+	
+			$('.nextIcon').attr('data-id', prefix+'-'+index);
+			$('.nextIcon').attr('data-index', index);
+			$('.nextIcon').attr('data-total', $(this).attr('data-total'));
 		}
-		if(isVideo($('#'+prefix+'-'+index).attr('src'))){
-			$('#iframeYoutube').show();
-			$('#iframeYoutube').attr('src', $('#'+prefix+'-'+index).attr('src'));
-			$('#popUpImage').hide();
-		}
-		
-		if(index == 0){
-			$('.prevIcon').hide();
-		}
-		$('.nextIcon').show();
-		
-		$('.prevIcon').attr('data-id', prefix+'-'+index);
-		$('.prevIcon').attr('data-index', index);
-		$('.prevIcon').attr('data-total', $(this).attr('data-total'));
-
-		$('.nextIcon').attr('data-id', prefix+'-'+index);
-		$('.nextIcon').attr('data-index', index);
-		$('.nextIcon').attr('data-total', $(this).attr('data-total'));
 	});
 	
 	$('body').on('click', '.nextIcon', function(){
-		var prefix = $(this).attr('data-id').split('-')[0];
-		var index = parseInt($(this).attr('data-id').split('-')[1]) + 1;
-		console.log($(this).attr('data-id'));
-		console.log(prefix+index);
-		if(isImage($('#'+prefix+'-'+index).attr('src'))){
-			$('#popUpImage').show();
-			$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
-			$('#iframeYoutube').hide();
+		if($(this).attr('data-type')=='timeline'){
+			var prefix = $(this).attr('data-id').split('-')[0];
+			var index = parseInt($(this).attr('data-id').split('-')[1]) + 1;
+			console.log($(this).attr('data-id'));
+			console.log(prefix+index);
+			if(isImage($('#'+prefix+'-'+index).attr('src'))){
+				$('#popUpImage').show();
+				$('#popUpImage').attr('src', $('#'+prefix+'-'+index).attr('src'));
+				$('#iframeYoutube').hide();
+			}
+			if(isVideo($('#'+prefix+'-'+index).attr('src'))){
+				$('#iframeYoutube').show();
+				$('#iframeYoutube').attr('src', $('#'+prefix+'-'+index).attr('src'));
+				$('#popUpImage').hide();
+			}
+			
+			if(index == $(this).attr('data-total')-1){
+				$('.nextIcon').hide();
+			}
+			$('.prevIcon').show();
+			
+			$('.prevIcon').attr('data-id', prefix+'-'+index);
+			$('.prevIcon').attr('data-index', index);
+			$('.prevIcon').attr('data-total', $(this).attr('data-total'));
+	
+			$('.nextIcon').attr('data-id', prefix+'-'+index);
+			$('.nextIcon').attr('data-index', index);
+			$('.nextIcon').attr('data-total', $(this).attr('data-total'));
 		}
-		if(isVideo($('#'+prefix+'-'+index).attr('src'))){
-			$('#iframeYoutube').show();
-			$('#iframeYoutube').attr('src', $('#'+prefix+'-'+index).attr('src'));
-			$('#popUpImage').hide();
-		}
-		
-		if(index == $(this).attr('data-total')-1){
-			$('.nextIcon').hide();
-		}
-		$('.prevIcon').show();
-		
-		$('.prevIcon').attr('data-id', prefix+'-'+index);
-		$('.prevIcon').attr('data-index', index);
-		$('.prevIcon').attr('data-total', $(this).attr('data-total'));
-
-		$('.nextIcon').attr('data-id', prefix+'-'+index);
-		$('.nextIcon').attr('data-index', index);
-		$('.nextIcon').attr('data-total', $(this).attr('data-total'));
 	});
 	
 	
@@ -202,7 +209,7 @@ $(function() {
 		
 	});
 	
-	//When the user clicks on <span> (x), close the modal
+	// When the user clicks on <span> (x), close the modal
 	$('body').on('click', '.popupClose', function(){
 		var modal =document.getElementById("myModal");
 		modal.style.display = "none";
@@ -211,9 +218,9 @@ $(function() {
 $(function(){	
 	$('.dimClose').on('click', function(){
 		console.log('click');
-//		if($('.det').hasClass('show')){
+// if($('.det').hasClass('show')){
 		$(this).parents().children('.det').addClass('hide').removeClass('show');
-//		}
+// }
 	});
 });
 // infinite scroll 구현
@@ -251,7 +258,7 @@ function isImage(filename) {
     case 'gif':
     case 'bmp':
     case 'png':
-        //etc
+        // etc
         return true;
     }
     return false;
@@ -270,7 +277,7 @@ function isVideo(filename) {
     }
     return false;
 }
-//파일 타입 확인 메소드 끝 //
+// 파일 타입 확인 메소드 끝 //
 
 
 // 이미지 미리보기
@@ -327,45 +334,47 @@ function deleteImageAction(index) {
 }
 
 // 이미지 상세(확장)
-//function layer_popup(el){
+// function layer_popup(el){
 //
-//    var $el = $(el);        // 레이어의 id를 $el 변수에 저장
-//    var isDim = $el.prev().hasClass('.postInner');   // dimmed 레이어를 감지하기 위한
-//														// boolean 변수
+// var $el = $(el); // 레이어의 id를 $el 변수에 저장
+// var isDim = $el.prev().hasClass('.postInner'); // dimmed 레이어를 감지하기 위한
+// // boolean 변수
 //
-//    isDim ? $('.imgDetail').fadeIn() : $el.fadeIn();
+// isDim ? $('.imgDetail').fadeIn() : $el.fadeIn();
 //
-//    var $elWidth = ~~($el.outerWidth()),
-//        $elHeight = ~~($el.outerHeight()),
-//        docWidth = $(document).width(),
-//        docHeight = $(document).height();
+// var $elWidth = ~~($el.outerWidth()),
+// $elHeight = ~~($el.outerHeight()),
+// docWidth = $(document).width(),
+// docHeight = $(document).height();
 //
-//    // 화면의 중앙에 레이어를 띄운다.
-////    if ($elHeight < docHeight || $elWidth < docWidth) {
-////        $el.css({
-////            marginTop: -$elHeight /2,
-////            marginLeft: -$elWidth/2
-////        })
-////    } else {
-////        $el.css({top: 0, left: 0});
-////    }
+// // 화면의 중앙에 레이어를 띄운다.
+// // if ($elHeight < docHeight || $elWidth < docWidth) {
+// // $el.css({
+// // marginTop: -$elHeight /2,
+// // marginLeft: -$elWidth/2
+// // })
+// // } else {
+// // $el.css({top: 0, left: 0});
+// // }
 //
-//    $el.find('a.btn-layerClose').click(function(){
-//        isDim ? $('.imgDetail').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가
-//															// 닫힌다.
-//        return false;
-//    });
+// $el.find('a.btn-layerClose').click(function(){
+// isDim ? $('.imgDetail').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가
+// // 닫힌다.
+// return false;
+// });
 //
-//    $('.body').click(function(){
-//        $('.imgDetail').fadeOut();
-//        return false;
-//    });
-//}
+// $('.body').click(function(){
+// $('.imgDetail').fadeOut();
+// return false;
+// });
+// }
 
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
+/*
+ * When the user clicks on the button, toggle between hiding and showing the
+ * dropdown content
+ */
 
-//드롭다운
+// 드롭다운
 $(function() {
 	function slideMenu() {
 	    var activeState = $("#menu-container .menu-list").hasClass("active");
@@ -394,7 +403,7 @@ window.onclick = function(event) {
 		}
 	}
 }
-//지도
+// 지도
 var google_map_place;
 
 function initAutocomplete1() {
@@ -406,7 +415,7 @@ function initAutocomplete1() {
 
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
-    /*map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);*/
+    /* map.controls[google.maps.ControlPosition.TOP_LEFT].push(input); */
     var google_button = document.getElementById('google_button');
 
     map.addListener('bounds_changed', function() {
@@ -448,7 +457,7 @@ function initAutocomplete1() {
           position: place.geometry.location
         }));
         
-        /*google_map_place = place.name;*/
+        /* google_map_place = place.name; */
         google_map_place = place;
         if (place.geometry.viewport) {
           bounds.union(place.geometry.viewport);
@@ -467,7 +476,8 @@ function initAutocomplete1() {
     	$("#place").val(google_map_place.name);
     	$("#lat").val(google_map_place.geometry.location.lat());
     	$("#lng").val(google_map_place.geometry.location.lng());
-//+google_map_place.geometry.location + ", " + google_map_place.geometry.location.lat()
+// +google_map_place.geometry.location + ", " +
+// google_map_place.geometry.location.lat()
     });
  }
 
@@ -485,7 +495,7 @@ function getLocation(){
 function showPosition(position) {
     latitude  = position.coords.latitude;
     longitude = position.coords.longitude;
-/*    alert('latitude:' + latitude + 'longitude:' + longitude );*/
+/* alert('latitude:' + latitude + 'longitude:' + longitude ); */
 }
 
 function friendupdate(status, uid1, uid2){

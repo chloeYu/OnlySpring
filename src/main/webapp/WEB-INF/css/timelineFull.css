@@ -711,7 +711,8 @@ flat(ctrl++shift+f) 절대로 금지 */
 	z-index: 11;
 }
 
-.prevIcon {
+.prevIcon,
+.postPopupPrev {
 	display: block;
 	background-image: url(https://www.facebook.com/rsrc.php/v3/yI/r/3_rCco2pYS1.png);
     background-repeat: no-repeat;
@@ -721,7 +722,8 @@ flat(ctrl++shift+f) 절대로 금지 */
     width: 48px;
 }
 
-.nextIcon {
+.nextIcon,
+.postPopupNext {
 	display: block;
 	background-image: url(https://www.facebook.com/rsrc.php/v3/yI/r/3_rCco2pYS1.png);
     background-repeat: no-repeat;

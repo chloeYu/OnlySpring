@@ -246,6 +246,7 @@ body {
 #alarm_notification {
 	position: relative;
 	cursor: pointer;
+	top:7px;
 	height: 32px;
 	width: 32px;
 	background-image: url(../img_all/bell.png);
@@ -270,6 +271,7 @@ body {
 	display: inline-block;
 	float: left;
 	overflow: visible;
+	top:0px;
 }
 
 #message_notification {
@@ -347,7 +349,25 @@ span {
 	width: 1px;
 }
 
-#displayChatList span {
+#displayAlarmList{
+	border: 2px solid #adbed8;
+	display: none;
+	position: absolute;
+	top: 50px;
+	font-weight: bold;
+	font-size: 0.8em;
+	background-color: #FFF;
+	color: #000;
+	text-align: left;
+	width: 20%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#displayChatList span
+{
+	display: none;
 	border: 2px solid #adbed8;
 	border-radius: 10px;
 	padding: 5px;
@@ -365,28 +385,32 @@ span {
 	overflow: hidden;
 }
 
-#displayChatList span ul {
+#displayChatList span ul,
+#displayAlarmList ul {
 	padding: 0;
 	color: #000;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
-#displayChatList span ul li {
+#displayChatList span ul li,
+#displayAlarmList span ul li {
 	border-bottom: 1px solid #adbed8;
 	color: #000;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
-#displayChatList span ul li:last-child {
+#displayChatList span ul li:last-child,
+#displayAlarmList span ul li:last-child {
 	border-bottom: 0;
 	color: #000;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
-#displayChatList span ul li a {
+#displayChatList span ul li a,
+#displayAlarmList span ul li a{
 	color: #000;
 	text-overflow: ellipsis;
 	overflow: hidden;

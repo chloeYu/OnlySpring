@@ -25,12 +25,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import only.model.Alert;
 import only.model.Chat;
 import only.model.Comments;
 import only.model.Likes;
 import only.model.Member;
 import only.model.Post;
+import only.model.Post_Files;
 import only.model.User;
+import only.service.AlertService;
 import only.service.CommentService;
 import only.service.FriendListService;
 import only.service.LikesService;
@@ -56,6 +59,8 @@ public class OnlyController {
 	private LikesService ls;
 	@Autowired
 	private FriendListService fs;
+	@Autowired
+	private AlertService as;
 	@Autowired
 	private TextMessageListService tmls;
 	@Autowired
@@ -101,6 +106,27 @@ public class OnlyController {
 	}
 	// 채팅 컨트롤러 끝
 
+	// Alarm List
+	@RequestMapping("/alarmList")
+	public String alarmList(String userid, Model model) {
+		System.out.println("Alert List called");
+		List<Alert> alerts = as.getAlertList(userid);
+		model.addAttribute("alerts", alerts);
+		return "alertList";
+	}
+	
+	@RequestMapping("/checkReadNotification")
+	public int checkReadNotification(int aid) {
+		int result = as.checkNotification(aid);
+		return result;
+	}
+	
+	@RequestMapping("/getPostFiles")
+	public @ResponseBody List<Post_Files> postFiles(int pid, Model model) {
+		List<Post_Files> files = ps.getImagesByPid(pid);
+		return files;
+	}
+	
 	@RequestMapping("/id_check")
 	public @ResponseBody int joinusIdChk(String id) {
 		Member member = ms.getMemberById(id);
@@ -463,5 +489,21 @@ public class OnlyController {
 
 		}
 		return "redirect:blog/" + userid;
+	}
+	
+	// Alert 
+	@RequestMapping("/updateNotification")
+	public @ResponseBody int notificationUpdate(String type, HttpSession session) {
+		int unchecked = 0;
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		if(type.equals("chat")){
+			//ChatDao cdo = ChatDao.getInstance();
+			//unchecked = cdo.checkUnreadMessage((String) session.getAttribute("sessionId"));
+			//System.out.println("unread message: " + unchecked);
+		} else if(type.equals("post")){
+			unchecked = as.uncheckedAlert(userid);
+			System.out.println("unchecked alert: "+ unchecked);
+		}
+		return unchecked;
 	}
 }
