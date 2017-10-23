@@ -60,6 +60,13 @@ alert("${login}");
 							<span><input onkeyup="runSearch(event)" id="friendTagInput" placeholder='Who are you with?'>
 							</span>
 							</div></td></tr></table></div>
+							<div class="tagInput" id="friendTag">
+							<table style='display: none;'>
+							<tr  style="border-color: #adbed8;"><td class="withWho" style="font-weight: bolder; font-size: larger;">#</td>
+							<td><div id="selectedhash" class="friendTagListSpan">
+							<span><input name="hashtag" id="hashtag" placeholder='#hashtag'>
+							</span>
+							</div></td></tr></table></div>
 							<div class="bloc" style="display: none;">
  							<select id="friendTagList" ></select>
  							</div>
