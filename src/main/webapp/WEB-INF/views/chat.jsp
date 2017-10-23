@@ -65,7 +65,13 @@ $(document).ready(function() {
 					MessageRoomCount();
 				} else if(type == 'contacts'){
 					setTimeout(function(){ contactUpdate(); }, 1500);
-					
+				} else if(type == 'post'){
+					setTimeout(function(){  
+						$.post("/only/updateNotification", {type : "post"}, function(data) {
+							console.log("updateNotification for post");
+							updateAlertNotification(data);
+						});
+					}, 1500);
 				}
 			}
 		});

@@ -47,7 +47,7 @@ public class FileUploadController {
 		return "forward:/postWriteAction";
 	}
 	@RequestMapping(value = "/postWriteAction", method = RequestMethod.POST)
-	public void postWriteAction(Post post, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String postWriteAction(Post post, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String rootPath =  request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
 		char[] type = { 'n', 'n', 'n', 'n', 'n', 'n', 'n' };
 		String text = post.getText();
@@ -142,8 +142,8 @@ public class FileUploadController {
 				}
 			}
 		}
-		// return "timeline";
-		response.sendRedirect(request.getHeader("referer"));
+		 return "postAlert";
+		// response.sendRedirect(request.getHeader("referer"));
 		// return "redirect:/timeline";
 	}
 

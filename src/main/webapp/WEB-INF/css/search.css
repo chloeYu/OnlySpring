@@ -207,7 +207,7 @@ body {
 	background-size: 32px;
 	overflow: hidden;
 	display: inline-block;
-	float: left;
+	/* float: left; */
 	overflow: visible;
 }
 
@@ -284,7 +284,7 @@ body {
 	background-size: 32px;
 	overflow: hidden;
 	display: inline-block;
-	float: left;
+	/* float: left; */
 	overflow: visible;
 }
 

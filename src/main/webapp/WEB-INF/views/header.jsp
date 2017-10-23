@@ -111,8 +111,9 @@
 						</div>
 						<div id="displayAlarmList"></div>
 					<!-- </a> -->
+					<div id="alertCountAll"></div>
 				</div>
-				<div id="alertCountAll"></div>
+				
 			</div>
 
 			<div class="nav_icon">
