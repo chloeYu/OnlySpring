@@ -232,6 +232,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		width: 100%;
 		height: auto;
 		display: inline-block;
+		cursor: pointer;
 	}
 	.infinite_scroll .postImg2 {
 		width: 50%;
@@ -250,6 +251,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		height: auto;
 		display: inline-block;
 		margin: 0;
+		cursor: pointer;
 	}
 	.infinite_scroll .postImg3 {
 		width: 50%;
@@ -268,6 +270,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		height: auto;
 		margin: 0;
 		position: relative;
+		cursor: pointer;
 	}
 	.detailDim .postImg4 .mainimg {
 		opacity: 1;
