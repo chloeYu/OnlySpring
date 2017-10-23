@@ -33,6 +33,16 @@ function pageover() {
 			</div>
 		</div>
 		<div id="mainContainer">
+			<div id="page_box_Container">
+				<div class="page_box" id="page_box_1">
+					<img alt=""
+						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_OHGUdWw_d6uII-s3E1v3zVTVUwL06Ak6oVySI4EZDbVtrw1KMA">
+					<br>
+					<div id="pagename">
+						<a href="#pageLike">pagename</a> <br> <b>pagecategory</b>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

@@ -431,8 +431,6 @@ public class OnlyController {
 			if (i > 0) {
 				page.setPid(pages.selet_pid(page));
 			}
-			System.out.println("pid="+page.getPid());
-			System.out.println("pname"+page.getPname());
 			return "page/page";
 		}
 
@@ -466,7 +464,6 @@ public class OnlyController {
 			page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
 			model.addAttribute("page", page);
 			pages.insert(page);
-			System.out.println("wel" + page.getPid());
 			return "page/pageWel";
 		}
 }

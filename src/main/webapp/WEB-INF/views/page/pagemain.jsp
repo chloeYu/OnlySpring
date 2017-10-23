@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${pp.pname } Page</title>
+<title>${pp.pname }Page</title>
 <script type="text/javascript">
-
+	
 </script>
 </head>
 <body class="pageLayout">
@@ -16,10 +16,9 @@
 	<div class="header_hidden"></div>
 	<div id="pageContainer">
 		<div id="left_menu">
-			<img alt=""
-				src="../img_timeline/${pp.logo_image }">
-			<br> <a href="${path}/pagemain/${pp.pid}"
-				id="text_pagehome">page</a> <br>
+			<img alt="" src="../img_timeline/${pp.logo_image }"> <br>
+			<a href="${path}/pagemain/${pp.pid}" id="text_pagehome">${pp.pname }</a>
+			<br>
 			<ul id="left_menu_ul">
 				<li><a>홈</a></li>
 				<li><a>게시물</a></li>
@@ -32,14 +31,12 @@
 		</div>
 		<div id="pageTimeline_view">
 			<div id="main_img">
-				<img alt=""
-					src="../img_timeline/${pp.cover_image }">
+				<img alt="" src="../img_timeline/${pp.cover_image }">
 			</div>
 			<div id="pageTimeline_centermenu">
-				<input type="hidden" name="username" value="${member.username}"
-					id="username"> <input type="button" value="좋아요"
-					id="like_button" onclick="page_like()" style="background-color: black;">
-					
+				<%-- <input type="hidden" name="username" value="${member.username}" id="username">  --%>
+				<input type="button" value="좋아요" id="like_button" onclick="page_like()" style="background-color: #ffffff;">
+				<input type="button" value="설정" id="pageset">
 			</div>
 			<div id="pageTimeline_left">
 				<div id="main_container">
