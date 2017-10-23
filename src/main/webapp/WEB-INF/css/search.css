@@ -99,12 +99,10 @@ body {
 .header_profile .header_wraper {
 	display: inline-block;
 	padding: 0 50px 0 0;
-	height: 22px;
+	height: auto;
 }
 
 .post_header img {
-	height: 30px;
-	width: 30px;
 	border-radius: 50px;
 }
 
@@ -337,7 +335,10 @@ body {
 span {
 	font-family: inherit;
 }
-
+.userProfileName{
+    position: absolute;
+    left: -40px;
+}
 .accessible_elem {
 	clip: rect(1px, 1px, 1px, 1px);
 	height: 1px;

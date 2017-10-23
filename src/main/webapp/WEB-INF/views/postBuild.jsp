@@ -13,7 +13,9 @@
 				<c:if test="${not empty post.username }">	
 					<div class="post_header">
 						<a href="blog/${post.userid }"> 
-						<img style="vertical-align: middle" src="${path }/only/img_timeline/<%=member.getProfile_image()%>">
+						<div class="commentUserImg">
+							<img style="vertical-align: middle" src="${path }/only/img_timeline/<%=member.getProfile_image()%>">
+						</div>
 						<span>[${post.pid }]${post.username }</span>
 							<c:if test="${not empty post.taggedFriend or not empty post.place }"> is 
 							</c:if>
@@ -50,7 +52,7 @@
 								<c:when test="${i.index == 3}">
 									<img id='post${post.pid }-${i.index}' data-total="${fn:length(post.files)}" data-index = "${i.index }" class="postInner3"
 										src='${path }/only/img_timeline/${file.url }'>
-									<span>+More</span>
+									<!-- <span>+More</span> -->
 								</c:when>
 								<c:otherwise>
 									<img id='post${post.pid }-${i.index}' data-total="${fn:length(post.files)}" data-index = "${i.index }" class="postInner3"

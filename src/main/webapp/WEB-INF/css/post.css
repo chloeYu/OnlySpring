@@ -14,9 +14,19 @@
 }
 
 .commentTh img {
-	height: 30px;
+	height: 100%;
 }
 
+.commentUserImg{
+	width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 40px;
+    display: inline-block;
+}
+.commentUserImg img{
+	height: 100%;
+}
 .commentReact {
 	display: inline;
 	padding-left: 1em;

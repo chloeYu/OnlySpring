@@ -204,3 +204,8 @@ a.menu-link:hover {
 .instant button:hover {
 	cursor: pointer;
 }
+.userProfileName{
+	position: absolute;
+    left: -30px;
+    top: 5px;
+}

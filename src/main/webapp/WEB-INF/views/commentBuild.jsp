@@ -10,12 +10,20 @@
 		<div class="commentSpace" id="commentView-comment-${comment.cid }">
 			<table width="90%" style="margin-left: ${comment.re_level * 50}px">
 				<tr>
-					<td class="commentTh"><a href="blog/${comment.userid }"><img
-							src="img_timeline/<%=member.getProfile_image()%>"></a></td>
-					<td><a href="blog/${comment.userid }"><span
-							class="commentViewMid">${comment.userid }</span></a> <span
-						class="commentViewCre">${comment.created }</span> <br> <span
-						class="commentViewText">${comment.text }</span>
+					<td class="commentTh">
+						<a href="blog/${comment.userid }">
+							<div class="commentUserImg">
+								<img src="img_timeline/<%=member.getProfile_image()%>">
+							</div>
+						</a>
+					</td>
+					<td>
+						<a href="blog/${comment.userid }">
+							<span class="commentViewMid">${comment.userid }</span>
+						</a>
+						<span class="commentViewCre">${comment.created }</span>
+						<br>
+						<span class="commentViewText">${comment.text }</span>
 						<div class="commentReact">
 							<a onclick="fa_heart_click(event)">
 								<c:if test="${comment.isLiked==true }">

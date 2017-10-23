@@ -48,11 +48,12 @@
 	<!-- 서치 끝 -->
 	<div class="header_profile">
 		<div class="header_wraper userProfile" data-click="profile_icon">
-			<a id="user_profile_url" href="${path }/blog/<%=userid%>"> <span
-				class="userProfileName"><%=member.getUsername()%></span> <span
-				class="userProfileImg_span"> <img
-					style="vertical-align: middle"
-					src="${path}/img_timeline/<%=member.getProfile_image()%>">
+			<a id="user_profile_url" href="${path }/blog/<%=userid%>">
+			<span class="userProfileName"><%=member.getUsername()%></span>
+			<span class="userProfileImg_span">
+				<div class="commentUserImg">
+					<img style="vertical-align: middle" src="${path}/img_timeline/<%=member.getProfile_image()%>">
+				</div>
 			</span>
 			</a>
 		</div>
