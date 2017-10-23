@@ -192,4 +192,10 @@ public class PostDaoImpl implements PostDao {
 		map.put("member", hashTag);
 		return sst.insert("postns.insertHashTag", map);
 	}
+	
+	@Override
+	public int deletePost(Post post) {
+		
+		return 0;
+	}
 }
