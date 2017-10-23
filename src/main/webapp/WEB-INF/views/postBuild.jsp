@@ -50,7 +50,7 @@
 								<c:when test="${i.index == 3}">
 									<img id='post${post.pid }-${i.index}' data-total="${fn:length(post.files)}" data-index = "${i.index }" class="postInner3"
 										src='${path }/only/img_timeline/${file.url }'>
-									<span>+More</span>
+									<!-- <span>+More</span> -->
 								</c:when>
 								<c:otherwise>
 									<img id='post${post.pid }-${i.index}' data-total="${fn:length(post.files)}" data-index = "${i.index }" class="postInner3"

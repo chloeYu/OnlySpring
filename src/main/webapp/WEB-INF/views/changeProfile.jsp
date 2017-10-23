@@ -175,8 +175,8 @@
 					</div>
 					<div class="submitFieldset">
 						<div class="profileCell modifySubmit">
-							<input type="submit" value="개인정보수정"> 
-							<input class="cd-popup-close" type="button" value="취소" onclick="exit()">
+							<input class="submitTop" type="submit" value="개인정보수정"> 
+							<input class="cd-popup-close submitBottom" type="button" value="취소" onclick="exit()">
 						</div>
 					</div>
 					<input type="hidden" name="existingImage"
