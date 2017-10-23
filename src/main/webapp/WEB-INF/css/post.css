@@ -262,3 +262,37 @@
     border:0;
     display: block;
 }
+.post_header_more{
+    position: absolute;
+    top: 0px;
+    right: 120;
+}
+.post_header_more span{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 15px;
+    right: 35px;
+    color: black;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    background-image: url(../img_all/moreBtn.png);
+    background-size: 30px;
+    cursor:pointer;
+}
+.postMore{
+	position: absolute;
+    right: 0;
+}
+.postMore ul{
+    background: white;
+    width: 100px;
+    border: 1px solid #ccc;
+}
+.postMore ul li{
+	height: 30px;
+    text-align: center;
+    padding: 6px;
+    cursor: pointer;
+}

@@ -27,9 +27,17 @@
 								</c:forEach>
 							</c:if>
 							<c:if test="${not empty post.place }">
-							@ <a class="searchByLocation" id="${post.lat }-${post.lng}"style="color:#0000FF;text-align:left">${post.place}</a></div>
+							@ <a class="searchByLocation" id="${post.lat }-${post.lng}"style="color:#0000FF;text-align:left">${post.place}</a>
 							</c:if>
 						</a>
+						<div class="post_header_more">
+							<span class="headerMoreBtn"></span>
+						</div>
+						<div class="postMore">
+							<ul>
+								<li>Delete</li>
+							</ul>
+						</div>
 					</div>
 				</c:if>
 			</div>

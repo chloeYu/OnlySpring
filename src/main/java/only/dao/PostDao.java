@@ -33,4 +33,6 @@ public interface PostDao {
 	int getImageTotal(String userid);
 
 	int insertHashTag(int pid, String hashTag);
+	
+	int deletePost(Post post);
 }
