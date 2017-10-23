@@ -26,8 +26,3 @@
 		</div>
 	</c:forEach>
 </c:if>
-	<c:forEach var="friend" items="${friendList }">
-		<div class="fld instant">
-			<p class="instant">${friend.username }</p>
-		</div>
-	</c:forEach>
