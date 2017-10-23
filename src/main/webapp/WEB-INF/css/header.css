@@ -7,10 +7,15 @@
 	display: none;
 }
 
-#messageCountAll #CountAll {
+#messageCountAll #CountAll,
+#alertCountAll span
+ {
 	font-size: 11px;
-	position: absolute;
-	top: 2px;
+	/* position: absolute; */
+	position: relative;
+	/* top: 2px; */
+	left: 32px;
+	top: -25px;
 	padding: 4px 6px 4px 6px;
 	color: #fff;
 	background-color: #ff1a66;
@@ -204,3 +209,7 @@ a.menu-link:hover {
 .instant button:hover {
 	cursor: pointer;
 }
+
+.userProfileName{
+	position: relative;
+} 

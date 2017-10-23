@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		location.href = "joinus/signUpForm";
+		location.href = "timeline";
 	</script>
 </body>
 </html>

@@ -8,12 +8,14 @@
 	function updateAlertNotification(num) {
 		console.log(num);
 		if (num == 0 || num == "0") {
-			$("#alarm_notification").html("<span>새 글 없음</span>");
-			$("#alarm_notification").removeClass('alert');
+			/* $("#alarm_notification").html("<span>새 글 없음</span>");
+			$("#alarm_notification").removeClass('alert'); */
+			$('#alertCountAll').html('');
 		} else {
-			$("#alarm_notification").html(
+			/* $("#alarm_notification").html(
 					"<span>" + num + "개의 읽지 않은 새 글</span>");
-			$("#alarm_notification").addClass('alert');
+			$("#alarm_notification").addClass('alert'); */
+			$('#alertCountAll').html('<span style="left:12px;">'+num+'</span>');
 		}
 	}
 
@@ -79,8 +81,8 @@
 	<div class="header_profile">
 		<div class="header_wraper userProfile" data-click="profile_icon">
 			<a id="user_profile_url" href="${path }/blog/<%=userid%>">
-			<span class="userProfileName"><%=member.getUsername()%></span>
-			<span class="userProfileImg_span">
+			<span class="userProfileName" style="float: right;"><%=member.getUsername()%></span>
+			<span class="userProfileImg_span" style="float: left;">
 				<div class="commentUserImg">
 					<img style="vertical-align: middle" src="${path}/img_timeline/<%=member.getProfile_image()%>">
 				</div>
@@ -110,6 +112,7 @@
 						<div id="displayAlarmList"></div>
 					<!-- </a> -->
 				</div>
+				<div id="alertCountAll"></div>
 			</div>
 
 			<div class="nav_icon">

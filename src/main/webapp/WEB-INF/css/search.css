@@ -99,12 +99,10 @@ body {
 .header_profile .header_wraper {
 	display: inline-block;
 	padding: 0 50px 0 0;
-	height: 22px;
+	height: auto;	
 }
 
 .post_header img {
-	height: 30px;
-	width: 30px;
 	border-radius: 50px;
 }
 
@@ -327,7 +325,7 @@ body {
 	position: relative;
 	text-decoration: none;
 	white-space: nowrap;
-	top: 7px;
+	/* top: 7px; */
 }
 
 .header_profile a img {
@@ -339,7 +337,6 @@ body {
 span {
 	font-family: inherit;
 }
-
 .accessible_elem {
 	clip: rect(1px, 1px, 1px, 1px);
 	height: 1px;
