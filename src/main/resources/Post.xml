@@ -47,7 +47,8 @@
 	</select>
 
 	<select id="getTimelineTotal" parameterType="String" resultType="int">
-		select count(pid) from post where userid=#{userid}
+		<!-- select count(pid) from post where userid=#{userid} -->
+		select count(p.pid) from post p where userid in (select distinct(userid) from (select m.* from member m join follow f on (f.uid1 = m.userid or f.uid2 = m.userid) where (f.status = 1 and (f.uid1=#{userid} or f.uid2=#{userid} ))) a) or pid in (select distinct(pid) from post_membertag where userid = #{userid})
 	</select>
 	
 	<select id="getBlogTotal" parameterType="String" resultType="int">

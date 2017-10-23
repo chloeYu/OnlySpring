@@ -11,6 +11,9 @@
 		<result property="uid2" column="uid2" />
 		<result property="url" column="url" />
 		<result property="created" column="created" />
+		<result property="userid" column="userid" />
+		<result property="username" column="username" />
+		<result property="profile_image" column="profile_image" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="alert">
@@ -23,7 +26,7 @@
 	</select>
 	
 	<select id="alertList" parameterType="String" resultType="alert">
-		select * from alert where uid2 = #{userid} order by aid desc
+		select a.*, m.userid, m.username, m.profile_image from alert a join member m on a.uid2 = m.userid where uid2 = #{userid} order by aid desc
 	</select>
 	
 	<update id="checkNotification" parameterType="int">

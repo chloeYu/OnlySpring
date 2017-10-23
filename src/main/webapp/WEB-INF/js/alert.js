@@ -9,6 +9,12 @@ $(function(){
 				console.log("Read");
 			}
 		});
+		setTimeout(function(){  
+			$.post("/only/updateNotification", {type : "post"}, function(data) {
+				console.log("updateNotification for post");
+				updateAlertNotification(data);
+			});
+		}, 1500);
 		$.post('getPostFiles', "pid="+$(this).attr('data-pid'), function(data){
 			console.log("postPopup");
 			console.log(data);

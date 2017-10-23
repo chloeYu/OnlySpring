@@ -72,6 +72,11 @@ $(document).ready(function() {
 							updateAlertNotification(data);
 						});
 					}, 1500);
+					if($('#displayAlarmList').css('display')!='none'){
+						$.post("/only/alarmList", "userid="+userid, function(data) {
+							$("#displayAlarmList").html(data);
+						});
+					}
 				}
 			}
 		});

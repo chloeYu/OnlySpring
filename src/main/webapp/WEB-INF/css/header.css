@@ -1,4 +1,4 @@
-/* 상단 오른쪽 메뉴 드롭다운 수정중 김재은 */
+/* �긽�떒 �삤瑜몄そ 硫붾돱 �뱶濡��떎�슫 �닔�젙以� 源��옱�� */
 * {
 	
 }
@@ -213,3 +213,15 @@ a.menu-link:hover {
 .userProfileName{
 	position: relative;
 } 
+
+
+.postPopup{
+	padding: 10px 0px;
+ 	cursor: pointer;
+ 	background-color: #ffffff;
+ 	border-bottom: 0.5px solid #dddddd;
+}
+
+.postPopup.read{
+	background-color: #c9d0db;
+}

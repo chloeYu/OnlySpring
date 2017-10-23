@@ -11,6 +11,10 @@ public class Alert {
 	private String url;		//  `url` varchar(50) NOT NULL,
 	private Date created; 	//  `created` date NOT NULL,
 	
+	private String userid;
+	private String username;
+	private String profile_image;
+	
 	public int getAid() {
 		return aid;
 	}
@@ -52,5 +56,25 @@ public class Alert {
 	}
 	public void setCreated(Date created) {
 		this.created = created;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getProfile_image() {
+		return profile_image;
+	}
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
 	}	
+	
+	
 }
