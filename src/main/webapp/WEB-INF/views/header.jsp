@@ -5,6 +5,18 @@
 <html>
 <head>
 <script type="text/javascript">
+	function updateAlertNotification(num) {
+		console.log(num);
+		if (num == 0 || num == "0") {
+			$("#alarm_notification").html("<span>새 글 없음</span>");
+			$("#alarm_notification").removeClass('alert');
+		} else {
+			$("#alarm_notification").html(
+					"<span>" + num + "개의 읽지 않은 새 글</span>");
+			$("#alarm_notification").addClass('alert');
+		}
+	}
+
 	function logout() {
 		alert("logout");
 		var websocket;
@@ -21,6 +33,24 @@
 			location.href="${path}/logout";
 		};
 	}
+	$(function() {
+		console.log("update notification");
+		$.post("/only/updateNotification", {type : "post"}, function(data) {
+			console.log("updateNotification for post");
+			updateAlertNotification(data);
+		});
+		
+		$("#alarm_notification").click(function(e) {
+			$.post("/only/alarmList", "userid="+userid, function(data) {
+				$("#displayAlarmList").html(data);
+				if($('#displayAlarmList').css('display')=='none'){
+					$('#displayAlarmList').show();	
+				}else{
+					$('#displayAlarmList').hide();
+				}
+			});
+		});		
+	});
 </script>
 </head>
 <div class="header">
@@ -48,11 +78,12 @@
 	<!-- 서치 끝 -->
 	<div class="header_profile">
 		<div class="header_wraper userProfile" data-click="profile_icon">
-			<a id="user_profile_url" href="${path }/blog/<%=userid%>"> <span
-				class="userProfileName"><%=member.getUsername()%></span> <span
-				class="userProfileImg_span"> <img
-					style="vertical-align: middle"
-					src="${path}/img_timeline/<%=member.getProfile_image()%>">
+			<a id="user_profile_url" href="${path }/blog/<%=userid%>">
+			<span class="userProfileName"><%=member.getUsername()%></span>
+			<span class="userProfileImg_span">
+				<div class="commentUserImg">
+					<img style="vertical-align: middle" src="${path}/img_timeline/<%=member.getProfile_image()%>">
+				</div>
 			</span>
 			</a>
 		</div>
@@ -72,11 +103,12 @@
 			</div>
 			<div class="nav_icon">
 				<div class="alarm_list" data-click="alarm_list_icon">
-					<a href="./timeline.jsp" id="alarmList" class="info">
+					<!-- <a href="./timeline.jsp" id="alarmList" class="info"> -->
 						<div id="alarm_notification">
 							<span>Notifications</span>
 						</div>
-					</a>
+						<div id="displayAlarmList"></div>
+					<!-- </a> -->
 				</div>
 			</div>
 
