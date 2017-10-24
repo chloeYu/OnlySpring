@@ -427,6 +427,8 @@ public class OnlyController {
 		@RequestMapping("/page")
 		public String page(Page page, HttpSession session) throws Exception {
 			page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+			System.out.println(page.getDel());
+			page.setDel(pages.count(page));
 			int i = pages.pcount(page);
 			if (i > 0) {
 				page.setPid(pages.selet_pid(page));
@@ -436,13 +438,13 @@ public class OnlyController {
 
 		@RequestMapping("/pagemain/{pp}")
 		public String pagemain(@PathVariable String pp, Member member, Model model, HttpSession session) throws Exception {
-			/*page.setUserid((String) session.getAttribute(WebConstants.USER_ID));*/
 			String userid = (String) session.getAttribute(WebConstants.USER_ID);
 			Page pagepp = pages.getPageById(pp);
+			System.out.println(pagepp.getDel());
 			model.addAttribute("pp", pagepp);
 			int i = pages.pcount(pagepp);
 			if(i<1) {
-				return "page/pageCreate";
+				return "page/page";
 			}
 			return "page/pagemain";
 		}
@@ -450,6 +452,7 @@ public class OnlyController {
 		@RequestMapping(value = "/pageCreate", method = RequestMethod.GET)
 		public String pageCreate(Page page, HttpSession session) throws Exception {
 			page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+			page.setDel(pages.count(page));
 			page.setPid(pages.count(page));
 			int i = pages.pcount(page);
 			if(i>0) {
@@ -463,7 +466,8 @@ public class OnlyController {
 		public String pageCreate(Page page, Model model, HttpSession session) throws Exception {
 			page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
 			model.addAttribute("page", page);
+			page.setDel(pages.count(page));
 			pages.insert(page);
-			return "page/pageWel";
+			return "page/page";
 		}
 }

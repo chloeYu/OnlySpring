@@ -6,9 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${pp.pname }Page</title>
+<title>${pp.pname } Page</title>
 <script type="text/javascript">
-	
+$(function() {
+    if($("#puserid").val() != $("#muserid").val()){
+    	$("#pageset").hide();
+    }
+});
 </script>
 </head>
 <body class="pageLayout">
@@ -16,8 +20,10 @@
 	<div class="header_hidden"></div>
 	<div id="pageContainer">
 		<div id="left_menu">
-			<img alt="" src="../img_timeline/${pp.logo_image }"> <br>
-			<a href="${path}/pagemain/${pp.pid}" id="text_pagehome">${pp.pname }</a>
+			<img alt=""
+				src="<%-- ../img_timeline/${pp.logo_image } --%>
+			https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQISsJjhBMxd4wE6TvpP5A9Cu9Mz54luurjgTGLNQV6W9jQi3n4jw">
+			<br> <a href="${path}/pagemain/${pp.pid}" id="text_pagehome">${pp.pname }</a>
 			<br>
 			<ul id="left_menu_ul">
 				<li><a>홈</a></li>
@@ -31,12 +37,15 @@
 		</div>
 		<div id="pageTimeline_view">
 			<div id="main_img">
-				<img alt="" src="../img_timeline/${pp.cover_image }">
+				<img alt=""
+					src="https://i1.daumcdn.net/thumb/C720x360/?fname=http://t1.daumcdn.net/brunch/service/user/1ekq/image/kYsgk2G31uDmg6I1lf-9_ViXOhQ.jpg
+				<%-- ../img_timeline/${pp.cover_image } --%>">
 			</div>
 			<div id="pageTimeline_centermenu">
 				<%-- <input type="hidden" name="username" value="${member.username}" id="username">  --%>
-				<input type="button" value="좋아요" id="like_button" onclick="page_like()" style="background-color: #ffffff;">
-				<input type="button" value="설정" id="pageset">
+				<input type="button" value="좋아요" id="like_button"
+					onclick="page_like()"> <input type="button" value="설정"
+					id="pageset">
 			</div>
 			<div id="pageTimeline_left">
 				<div id="main_container">
@@ -119,9 +128,16 @@
 				</div>
 			</div>
 			<div id="pageTimeline_right">
-				<h2>pageTimeline_right</h2>
-				<p>${pp.pid }</p>
-				<p>${pp.pname }</p>
+			<input type="hidden" value="${pp.userid }" id="puserid">
+			<input type="hidden" value="${member.userid }" id="muserid">	
+				<div id="pageTimeline_right_veiw1">
+					<input id="category" type="hidden" value="${pp.category }">
+					<b id="category_view"></b><br> <b id="page_text">좋아요 수 : </b><b
+						id="page_like_view"></b>
+				</div>
+				<div id="pageTimeline_right_veiw2">
+					<b id="page_text">정보 : </b> <b id="ptext">${pp.ptext}</b>
+				</div>
 			</div>
 		</div>
 	</div>

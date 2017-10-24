@@ -103,31 +103,65 @@ body.pageLayout{
 	background-color: #ffffff;
 	heigth: 200px;
 	margin-bottom: 15px;
-}
-
-#like_button {
-	padding: 5px;
-	margin: 15px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 
 #pageTimeline_left {
 	width: 450px;
 	float: left;
-	border: 1px solid #555;
 }
 
 #pageTimeline_right {
-	width: 250px;
+	width: 280px;
 	height: auto;
 	float: right;
-	border: 1px solid #555;
-	margin: 5px;
-	padding: 5px;
+}
+
+#like_button {
+	padding: 10px;
+	margin: 10px;
+	border: none;
+	background-color: #a7aeff;;
+	border-radius: 5px;
+}
+
+#pageset{
+	float: right;
+	padding: 10px;
+	margin: 10px;
+	border: none;
+	background-color: #a7dfff;
+	border-radius: 5px;
+}
+#pageTimeline_right_veiw1{
+	width: 100%;
+    border-radius: 5px;
+	background-color: #ffffff;
+}
+#category_view, #page_text, #page_like_view, #ptext {
+	font-size: 15px;
+	margin: 15px;
+	line-height: 1.6;
+}
+
+#pageTimeline_right_veiw2{
+	margin-top: 10px;
+	width: 100%;
+	border-radius: 5px;
+	background-color: #ffffff;
 }
 
 //page
-.page_box{}
+#page_box_Container{}
+#page_box_Container{
+	height: 1000px;
+	margin: 0 auto;
+	padding-left: 10%;
+}
+
 .page_box {
+	display: inline-block;
 	float: left;
 	width: 250px;
 	height: 230px;
@@ -159,6 +193,11 @@ body.pageLayout{
 	color:#333333;
 	padding-left: 5px;
 }
+/* #allpage{
+	font-weight:bold;
+	padding: 5px;
+	border-bottom: 2px solid #1d405f;
+} */
 
 //pageCreate
 
