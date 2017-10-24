@@ -313,7 +313,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 	.infinite_scroll .postImg3:nth-child(n+7) {
 		display: none;
 	}
-	.infinite_scroll .postImg3:nth-child(6) {
+	/* .infinite_scroll .postImg3:nth-child(6) {
 		background-color: #000;
 		opacity: 1;
 		width: 50%;
@@ -322,7 +322,7 @@ flat(ctrl++shift+f) 절대로 금지 */
 		text-align: center;
 		position: relative;
 		cursor: pointer;
-	}
+	} */
 	/* .infinite_scroll .postImg3:nth-child(6) img {
 		opacity: 0.5;
 		display: inline;
