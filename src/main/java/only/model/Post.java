@@ -29,8 +29,15 @@ public class Post {
 	private float lng;
 	// Tagged Friends
 	private List<String> taggedFriend;
+	private List<String> hashtag;
 	
 	
+	public List<String> getHashtag() {
+		return hashtag;
+	}
+	public void setHashtag(List<String> hashtag) {
+		this.hashtag = hashtag;
+	}
 	@Override
 	public String toString() {
 		return "Post [pid=" + pid + ", created=" + created + ", del=" + del + ", userid=" + userid + ", username="

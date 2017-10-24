@@ -86,8 +86,8 @@ public class FileUploadController {
 			type[PostType.LOCATION.ordinal()] = 'y';
 			System.out.println(post.getTaggedFriend().size()+"명의 친구 Tagged");
 		}
-		if(post.getTaggedFriend() != null && post.getTaggedFriend().size()>0) {
-			type[PostType.TAG_FRIENDS.ordinal()]='y';
+		if(post.getHashtag() != null && post.getHashtag().size()>0) {
+			type[PostType.HASHTAG.ordinal()]='y';
 		}
 		
 		System.out.println(String.copyValueOf(type) + String.copyValueOf(type).length());
@@ -151,6 +151,11 @@ public class FileUploadController {
 				if(i == PostType.TAG_FRIENDS.ordinal()) {
 					for(String member : post.getTaggedFriend()) {
 						int r = ps.insertMemberTag(pid, member);
+					}
+				}
+				if(i == PostType.HASHTAG.ordinal()) {
+					for(String member : post.getHashtag()) {
+						int r = ps.insertHashTag(pid, member);
 					}
 				}
 			}
