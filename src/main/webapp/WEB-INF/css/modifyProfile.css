@@ -115,7 +115,7 @@ section .profileModify .profileModify-inner {
 	border-bottom-right-radius: 0px;
 }
 .submitTop:hover{
-	background-color: #8da4c6;
+	background-color: #c0dde8;
 	transition: 1s;
 }
 .submitBottom{
@@ -125,7 +125,7 @@ section .profileModify .profileModify-inner {
 	border-bottom-right-radius: 6px;
 }
 .submitBottom:hover{
-	background-color: #8da4c6;
+	background-color: #c0dde8;
 	transition: 1s;
 }
 #imageplace img{
