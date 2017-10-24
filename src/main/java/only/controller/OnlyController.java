@@ -3,12 +3,14 @@ package only.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -340,10 +342,10 @@ public class OnlyController {
 	}
 
 	@RequestMapping(value="/login_duplicate")
-	public String login_duplicate(RedirectAttributes redirectAttributes, Model model) {
+	public String login_duplicate(RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response, Model model) throws IOException {
 		System.out.println("forward to relogin");
 		redirectAttributes.addFlashAttribute("error", "다른 기기에서 로그인 하였습니다");
-		return "redirect:/joinus/signUpForm";
+		return "redirect:/timeline";
 	}
 	
 	@RequestMapping(value = "/blog/{owner}")
