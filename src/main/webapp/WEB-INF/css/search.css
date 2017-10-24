@@ -95,6 +95,9 @@ body {
 	left: 80px;
 	top: 10px;
 }
+.header_profile:after {
+	clear: both;
+}
 
 .header_profile .header_wraper {
 	display: inline-block;

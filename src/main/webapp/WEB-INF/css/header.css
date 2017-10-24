@@ -1,16 +1,12 @@
-/* �긽�떒 �삤瑜몄そ 硫붾돱 �뱶濡��떎�슫 �닔�젙以� 源��옱�� */
 * {
 	
 }
-
 .disapper {
 	display: none;
 }
-
 #messageCountAll {
 	position: absolute;
 }
-
 #messageCountAll #CountAll, #alertCountAll span {
 	font-size: 11px;
 	/* position: absolute; */
@@ -24,22 +20,19 @@
 	border-radius: 15px;
 	margin-left: 6px;
 }
-
 #hamburegerSpan {
 	display: block;
 	background: #566973;
 	border-radius: 2px;
 }
-
 #menu-toggle {
-	float: right;
-	position: relative;
-	display: inline-block;
-	width: 32px;
-	height: 32px;
-	position: absolute;
-	right: 35px;
-	top: -0.5px;
+    float: right;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: 35px;
+    top: -8px;
 }
 
 #menu-toggle:hover {
@@ -178,54 +171,54 @@ a.menu-link:hover {
 .flp {
 	text-align: center;
 }
-
 .fld:hover {
 	cursor: pointer;
 	background-color: #c9d0db;
 }
-
 .flp:hover {
 	cursor: pointer;
 }
-
 .flh2 {
 	text-align: center;
 	font-weight: bolder;
 	font-size: larger;
 	padding: 10px;
 }
-
 .instant p {
 	width: 198px;
 	height: 20px;
 }
-
 .instant hr {
 	margin: 0px;
 }
-
 .instant button {
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
 }
-
 .instant button:hover {
 	cursor: pointer;
 }
-
 .userProfileName {
 	position: relative;
-	float: right;
-	top: 5px;
+	float:right;
+	top:5px;
 }
-
+.userProfile{
+    top: 0px;
+    position: absolute;
+}
+.userApplication{
+	top: 10px;
+    position: absolute;
+    right: 0px;
+    width: 25%;
+}
 .postPopup {
 	padding: 10px 0px;
 	cursor: pointer;
 	background-color: #ffffff;
 	border-bottom: 0.5px solid #dddddd;
 }
-
 .postPopup.read {
 	background-color: #c9d0db;
 }
