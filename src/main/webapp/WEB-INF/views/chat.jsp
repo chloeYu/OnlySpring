@@ -64,7 +64,7 @@ $(document).ready(function() {
 					MessageCount();
 					MessageRoomCount();
 				} else if(type == 'contacts'){
-					setTimeout(function(){ contactUpdate(); }, 1500);
+					setTimeout(function(){ contactUpdate(); }, 2000);
 				} else if(type == 'post'){
 					setTimeout(function(){  
 						$.post("/only/updateNotification", {type : "post"}, function(data) {
@@ -93,7 +93,8 @@ $(document).ready(function() {
             	$('#contact_list').html(response);
             },
             error : function(error) {
-                alert("Error!");
+                alert("Session Expired!");
+                location.href="${path}/joinus/signUpForm";	
             }
    		});
 		

@@ -18,7 +18,6 @@ public class AjaxAwareAuthenticationEntryPoint extends LoginUrlAuthenticationEnt
 		String ajaxHeader = ((HttpServletRequest) request).getHeader("X-Requested-With");
 		boolean isAjax = "XMLHttpRequest".equals(ajaxHeader);
 		if (isAjax) {
-			System.out.println("Session Expired");
 			response.sendError(HttpServletResponse.SC_FORBIDDEN, "Ajax REquest Denied (Session Expired)");
 		} else {
 			super.commence(request, response, authException);
