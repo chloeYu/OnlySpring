@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import only.model.Comments;
 import only.model.Post;
@@ -47,7 +50,7 @@ public class FileUploadController {
 		return "forward:/postWriteAction";
 	}
 	@RequestMapping(value = "/postWriteAction", method = RequestMethod.POST)
-	public String postWriteAction(Post post, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void postWriteAction(Post post, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String rootPath =  request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
 		char[] type = { 'n', 'n', 'n', 'n', 'n', 'n', 'n' };
 		String text = post.getText();
@@ -120,6 +123,16 @@ public class FileUploadController {
 							System.out.println("Image 입력실패");
 						}
 					}
+					Collection<WebSocketSession> set = ChatWebSocketHandler.users.values();
+		            TextMessage mes = new TextMessage("{\"type\":\"post\"}");
+		            System.out.println("post uploaded:" + mes);
+		            for (WebSocketSession s : set) {
+		    			try {
+							s.sendMessage(mes);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}	    		
+		    		}
 				}
 				if (i == PostType.LOCATION.ordinal()) { // Add location
 					Post_Location location = new Post_Location();
@@ -142,8 +155,8 @@ public class FileUploadController {
 				}
 			}
 		}
-		 return "postAlert";
-		// response.sendRedirect(request.getHeader("referer"));
+		// return "postAlert";
+		response.sendRedirect(request.getHeader("referer"));
 		// return "redirect:/timeline";
 	}
 

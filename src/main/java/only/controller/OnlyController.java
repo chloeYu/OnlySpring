@@ -202,7 +202,7 @@ public class OnlyController {
 		session.setAttribute("member", member);
 		session.setAttribute(WebConstants.USER_ID, name);
 		System.out.println(member);
-		return "login";
+		return "redirect:/timeline";
 	}
 	
 	@RequestMapping("/contactUpdate")

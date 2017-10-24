@@ -15,7 +15,8 @@
 			/* $("#alarm_notification").html(
 					"<span>" + num + "개의 읽지 않은 새 글</span>");
 			$("#alarm_notification").addClass('alert'); */
-			$('#alertCountAll').html('<span style="left:12px;">'+num+'</span>');
+			$('#alertCountAll').html(
+					'<span style="left:12px;">' + num + '</span>');
 		}
 	}
 
@@ -32,26 +33,28 @@
 			websocket.send(JSON.stringify({
 				type : "contacts"
 			}));
-			location.href="${path}/logout";
+			location.href = "${path}/logout";
 		};
 	}
 	$(function() {
 		console.log("update notification");
-		$.post("/only/updateNotification", {type : "post"}, function(data) {
+		$.post("/only/updateNotification", {
+			type : "post"
+		}, function(data) {
 			console.log("updateNotification for post");
 			updateAlertNotification(data);
 		});
-		
+
 		$("#alarm_notification").click(function(e) {
-			$.post("/only/alarmList", "userid="+userid, function(data) {
+			$.post("/only/alarmList", "userid=" + userid, function(data) {
 				$("#displayAlarmList").html(data);
-				if($('#displayAlarmList').css('display')=='none'){
-					$('#displayAlarmList').show();	
-				}else{
+				if ($('#displayAlarmList').css('display') == 'none') {
+					$('#displayAlarmList').show();
+				} else {
 					$('#displayAlarmList').hide();
 				}
 			});
-		});		
+		});
 	});
 </script>
 </head>

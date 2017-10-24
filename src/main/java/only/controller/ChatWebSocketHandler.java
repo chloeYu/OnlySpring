@@ -11,7 +11,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 	
-	Map<String, WebSocketSession> users = new HashMap<String, WebSocketSession>();
+	static Map<String, WebSocketSession> users = new HashMap<String, WebSocketSession>();
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {

@@ -30,8 +30,10 @@
 	<context:component-scan base-package="only"></context:component-scan>
 	<bean
 		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
-	<bean id="customAuthenticationProvider"
-		class="only.controller.CustomAuthenticationProvider" />
+	<bean id="customAuthenticationProvider" class="only.controller.CustomAuthenticationProvider" />
 	<bean id="userService" class="only.service.CustomUserDetailsService"
 		autowire-candidate="default" autowire="byType" />
+	<bean id="authenticationEntryPoint" class="only.controller.AjaxAwareAuthenticationEntryPoint">
+		<constructor-arg name="loginUrl" value="/joinus/signUpForm" />
+	</bean>
 </beans>

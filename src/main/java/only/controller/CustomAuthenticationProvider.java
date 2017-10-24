@@ -1,12 +1,15 @@
 package only.controller;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.*;
 import org.springframework.security.core.userdetails.*;
-	
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+
 import only.model.User;
 import only.service.CustomUserDetailsService;
 
@@ -54,6 +57,18 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             throw new RuntimeException(e.getMessage());
         }
         System.out.println("Add new Auth Token: " + username + ", " + password + ", " + authorities);
+        Collection<WebSocketSession> set = ChatWebSocketHandler.users.values();
+        TextMessage mes = new TextMessage("{\"type\":\"contacts\"}");
+        System.out.println("login send msg :" + mes);
+        for (WebSocketSession s : set) {
+        	System.out.println(s.getPrincipal().getName());
+			try {
+				s.sendMessage(mes);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	    		
+		}
         return new UsernamePasswordAuthenticationToken(username, password, authorities);
 	}
 

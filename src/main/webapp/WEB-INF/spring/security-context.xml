@@ -14,7 +14,7 @@
 	<http pattern="/img_all/**" security="none" />
 	
 	
-	<http auto-config='true'>
+	<http auto-config='true' entry-point-ref="authenticationEntryPoint">
 		
 		<intercept-url pattern="/joinus/signUpForm" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/login_duplicate" access="IS_AUTHENTICATED_ANONYMOUSLY" />

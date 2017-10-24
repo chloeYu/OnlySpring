@@ -71,6 +71,7 @@ public class MemberDaoImpl implements MemberDao {
 		Map map = new HashMap();
 		map.put("userid", userid);
 		map.put("principals", sessionRegistry.getAllPrincipals());
+		System.out.println("get Logged in members");
 		for(Object p : sessionRegistry.getAllPrincipals()) {
 			if(p instanceof String) {
 				System.out.println((String) p);

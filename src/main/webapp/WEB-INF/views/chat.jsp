@@ -84,9 +84,22 @@ $(document).ready(function() {
 	// 로그인된 사용자 update
 	function contactUpdate(){
 		console.log("update contacts");
-		$.post('/only/contactUpdate', "userid=${member.userid}", function(data){
+		
+		$.ajax({
+            type : "GET",
+            url : "/only/contactUpdate",
+            data : "userid=${member.userid}",
+            success : function(response) {
+            	$('#contact_list').html(response);
+            },
+            error : function(error) {
+                alert("Error!");
+            }
+   		});
+		
+		/* $.post('/only/contactUpdate', "userid=${member.userid}", function(data){
 			$('#contact_list').html(data);
-		});
+		}); */
 	}
 	
 	// 웹소켓에 저장된 메세지 출력
