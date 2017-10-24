@@ -10,7 +10,13 @@
 		<h3>인기 HashTag!</h3>
 		<hr>
 		<c:forEach items="${hashtags }" var="hashtag">
-		#${hashtag.hashtag }<span style="float:right; color: lightgrey">#${hashtag.count }번 태그 됨</span>
+		<span class="hashTagName">
+			<span class="hash">#</span>${hashtag.hashtag }
+		</span>
+		<span class="favoriteTag">
+			<span class="hash">#</span>
+			${hashtag.count }번 태그 됨
+		</span>
 		<br>
 		</c:forEach>
 	</c:if>

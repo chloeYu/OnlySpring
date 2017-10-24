@@ -735,3 +735,16 @@ flat(ctrl++shift+f) 절대로 금지 */
     height: 45px;
     width: 40px;
 }
+.favoriteTag{
+	float:right; 
+	color: #8e8e8e;
+}
+.favoriteTag:after{
+	clear: both;
+}
+.hash{
+	font-weight: bold;
+}
+.hashTagName{
+	color: #88b1d8;
+}
