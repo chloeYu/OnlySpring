@@ -81,7 +81,7 @@
 	<div class="header_profile">
 		<div class="header_wraper userProfile" data-click="profile_icon">
 			<a id="user_profile_url" href="${path }/blog/<%=userid%>">
-			<span class="userProfileName" style="float: right;"><%=member.getUsername()%></span>
+			<span class="userProfileName"><%=member.getUsername()%></span>
 			<span class="userProfileImg_span" style="float: left;">
 				<div class="commentUserImg">
 					<img style="vertical-align: middle" src="${path}/img_timeline/<%=member.getProfile_image()%>">

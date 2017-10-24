@@ -200,7 +200,6 @@ body {
 #friend_notification {
 	position: relative;
 	cursor: pointer;
-	top: 7px;
 	right: 15px;
 	height: 32px;
 	width: 32px;
@@ -246,7 +245,6 @@ body {
 #alarm_notification {
 	position: relative;
 	cursor: pointer;
-	top:7px;
 	height: 32px;
 	width: 32px;
 	background-image: url(../img_all/bell.png);
@@ -277,7 +275,6 @@ body {
 #message_notification {
 	position: relative;
 	cursor: pointer;
-	top: 7px;
 	left: 15px;
 	height: 32px;
 	width: 32px;
@@ -327,7 +324,7 @@ body {
 	position: relative;
 	text-decoration: none;
 	white-space: nowrap;
-	/* top: 7px; */
+	top: 5px;
 }
 
 .header_profile a img {

@@ -7,15 +7,17 @@
 	display: none;
 }
 
-#messageCountAll #CountAll,
-#alertCountAll span
- {
+#messageCountAll {
+	position: absolute;
+}
+
+#messageCountAll #CountAll, #alertCountAll span {
 	font-size: 11px;
 	/* position: absolute; */
 	position: relative;
 	/* top: 2px; */
 	left: 32px;
-	top: -25px;
+	top: -32px;
 	padding: 4px 6px 4px 6px;
 	color: #fff;
 	background-color: #ff1a66;
@@ -210,18 +212,19 @@ a.menu-link:hover {
 	cursor: pointer;
 }
 
-.userProfileName{
+.userProfileName {
 	position: relative;
-} 
-
-
-.postPopup{
-	padding: 10px 0px;
- 	cursor: pointer;
- 	background-color: #ffffff;
- 	border-bottom: 0.5px solid #dddddd;
+	float:right;
+	top:5px;
 }
 
-.postPopup.read{
+.postPopup {
+	padding: 10px 0px;
+	cursor: pointer;
+	background-color: #ffffff;
+	border-bottom: 0.5px solid #dddddd;
+}
+
+.postPopup.read {
 	background-color: #c9d0db;
 }
