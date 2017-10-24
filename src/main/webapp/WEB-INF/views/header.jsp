@@ -124,7 +124,6 @@
 					<div id="message_notification">
 						<span>Message</span>
 					</div>
-					<div id="displayChatList" class="chatListToggle"></div>
 				</div>
 			</div>
 

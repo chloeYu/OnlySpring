@@ -374,7 +374,7 @@ $(document).ready(function() {
 	});
 	
 	$(document).on('click','#message_notification', function() {
-		$('#messageCountAll').html('');
+		$('#messageCountAll').remove();
 	});
 	
 	// 메시지 총 카운트
@@ -386,6 +386,7 @@ $(document).ready(function() {
 			dataType : 'json',
 			success : function (data) {
 				console.log(data);
+				$('#messageCountAll').remove();
 				if(data != 0) {
 					$('.message_list').append('<div id="messageCountAll"><span id="CountAll">'+ data +'</span></div>');
 				} else {
