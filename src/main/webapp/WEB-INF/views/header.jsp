@@ -138,9 +138,10 @@
 			</div>
 			<div id="menu-container">
 				<ul class="menu-list accordion">
-					<li id="nav1" class="toggle accordion-toggle"><span
-						class="icon-plus"></span> <a class="menu-link" href="#createPage">Create
-							Page</a></li>
+					<li id="nav1" class="toggle accordion-toggle">
+         				<span class="icon-plus"></span>
+         				<a class="menu-link" href="${path }/page">Page</a>
+      				</li>
 
 					<!-- menu-submenu accordon-content-->
 					<li id="nav2" class="toggle accordion-toggle"><span

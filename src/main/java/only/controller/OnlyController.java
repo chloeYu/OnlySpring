@@ -33,6 +33,7 @@ import only.model.Comments;
 import only.model.HashTag;
 import only.model.Likes;
 import only.model.Member;
+import only.model.Page;
 import only.model.Post;
 import only.model.Post_Files;
 import only.model.User;
@@ -42,6 +43,7 @@ import only.service.FriendListService;
 import only.service.HashTagService;
 import only.service.LikesService;
 import only.service.MemberService;
+import only.service.PageService;
 import only.service.PostService;
 import only.service.TextMessageListService;
 import only.utils.WebConstants;
@@ -71,7 +73,9 @@ public class OnlyController {
 	private SessionRegistry sessionRegistry;
 	@Autowired
 	private HashTagService hs;
-
+	@Autowired
+	private PageService pages;
+	
 	// 채팅 컨트롤러
 	@RequestMapping("/chat")
 	public String chat(String userID, HttpSession session) {
@@ -120,19 +124,19 @@ public class OnlyController {
 		model.addAttribute("alerts", alerts);
 		return "alertList";
 	}
-	
+
 	@RequestMapping("/checkReadNotification")
 	public int checkReadNotification(int aid) {
 		int result = as.checkNotification(aid);
 		return result;
 	}
-	
+
 	@RequestMapping("/getPostFiles")
 	public @ResponseBody List<Post_Files> postFiles(int pid, Model model) {
 		List<Post_Files> files = ps.getImagesByPid(pid);
 		return files;
 	}
-	
+
 	@RequestMapping("/id_check")
 	public @ResponseBody int joinusIdChk(String id) {
 		Member member = ms.getMemberById(id);
@@ -202,15 +206,15 @@ public class OnlyController {
 	@RequestMapping("/login")
 	public String login(HttpSession session, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getName(); 
+		String name = auth.getName();
 		System.out.println("session registered for " + name);
-		Member member =ms.getMemberById(name);
+		Member member = ms.getMemberById(name);
 		session.setAttribute("member", member);
 		session.setAttribute(WebConstants.USER_ID, name);
 		System.out.println(member);
 		return "redirect:/timeline";
 	}
-	
+
 	@RequestMapping("/contactUpdate")
 	public String contactUpdate(String userid, HttpSession session, Model model) {
 		String id = (String) session.getAttribute(WebConstants.USER_ID);
@@ -218,14 +222,14 @@ public class OnlyController {
 		model.addAttribute("contacts", contacts);
 		return "contactUpdate";
 	}
-	
+
 	@RequestMapping("/timeline")
 	public String timeline(HttpSession session, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getName(); 
+		String name = auth.getName();
 		List<Member> contacts = ms.getLoggedInMembers(name);
 		List<HashTag> hashtags = hs.getTopNHashTags(10);
-		System.out.println(hashtags.size()+"개의 hashtag");
+		System.out.println(hashtags.size() + "개의 hashtag");
 		model.addAttribute("contacts", contacts);
 		model.addAttribute("hashtags", hashtags);
 		for (Object p : sessionRegistry.getAllPrincipals()) {
@@ -341,20 +345,21 @@ public class OnlyController {
 		}
 		return "profileDone";
 	}
-	
+
 	@RequestMapping(value = "/logout")
 	public void logout(HttpSession session) {
 		System.out.println("Welcome logout!" + session.getId());
 		session.invalidate();
 	}
 
-	@RequestMapping(value="/login_duplicate")
-	public String login_duplicate(RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response, Model model) throws IOException {
+	@RequestMapping(value = "/login_duplicate")
+	public String login_duplicate(RedirectAttributes redirectAttributes, HttpSession session,
+			HttpServletResponse response, Model model) throws IOException {
 		System.out.println("forward to relogin");
 		redirectAttributes.addFlashAttribute("error", "다른 기기에서 로그인 하였습니다");
 		return "redirect:/timeline";
 	}
-	
+
 	@RequestMapping(value = "/blog/{owner}")
 	public String blog(@PathVariable String owner, HttpSession session, Model model) {
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
@@ -499,20 +504,69 @@ public class OnlyController {
 		}
 		return "redirect:blog/" + userid;
 	}
-	
-	// Alert 
+
+	// Alert
 	@RequestMapping("/updateNotification")
 	public @ResponseBody int notificationUpdate(String type, HttpSession session) {
 		int unchecked = 0;
 		String userid = (String) session.getAttribute(WebConstants.USER_ID);
-		if(type.equals("chat")){
-			//ChatDao cdo = ChatDao.getInstance();
-			//unchecked = cdo.checkUnreadMessage((String) session.getAttribute("sessionId"));
-			//System.out.println("unread message: " + unchecked);
-		} else if(type.equals("post")){
+		if (type.equals("chat")) {
+			// ChatDao cdo = ChatDao.getInstance();
+			// unchecked = cdo.checkUnreadMessage((String)
+			// session.getAttribute("sessionId"));
+			// System.out.println("unread message: " + unchecked);
+		} else if (type.equals("post")) {
 			unchecked = as.uncheckedAlert(userid);
-			System.out.println("unchecked alert: "+ unchecked);
+			System.out.println("unchecked alert: " + unchecked);
 		}
 		return unchecked;
+	}
+
+	// 페이지
+	@RequestMapping("/page")
+	public String page(Page page, HttpSession session) throws Exception {
+		page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+		System.out.println(page.getDel());
+		page.setDel(pages.count(page));
+		int i = pages.pcount(page);
+		if (i > 0) {
+			page.setPid(pages.selet_pid(page));
+		}
+		return "page/page";
+	}
+
+	@RequestMapping("/pagemain/{pp}")
+	public String pagemain(@PathVariable String pp, Member member, Model model, HttpSession session) throws Exception {
+		String userid = (String) session.getAttribute(WebConstants.USER_ID);
+		Page pagepp = pages.getPageById(pp);
+		System.out.println(pagepp.getDel());
+		model.addAttribute("pp", pagepp);
+		int i = pages.pcount(pagepp);
+		if (i < 1) {
+			return "page/page";
+		}
+		return "page/pagemain";
+	}
+
+	@RequestMapping(value = "/pageCreate", method = RequestMethod.GET)
+	public String pageCreate(Page page, HttpSession session) throws Exception {
+		page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+		page.setDel(pages.count(page));
+		page.setPid(pages.count(page));
+		int i = pages.pcount(page);
+		if (i > 0) {
+			page.setPid(pages.selet_pid(page));
+			return "page/page";
+		}
+		return "page/pageCreate";
+	}
+
+	@RequestMapping(value = "/pageCreate", method = RequestMethod.POST)
+	public String pageCreate(Page page, Model model, HttpSession session) throws Exception {
+		page.setUserid((String) session.getAttribute(WebConstants.USER_ID));
+		model.addAttribute("page", page);
+		page.setDel(pages.count(page));
+		pages.insert(page);
+		return "page/page";
 	}
 }

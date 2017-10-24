@@ -5,8 +5,10 @@
 <mapper namespace="pagens">
 	<resultMap type="page" id="pageResult">
 		<id property="pid" column="pid" />
+		<result property="userid" column="userid" />
 		<result property="category" column="category" />
 		<result property="pname" column="pname" />
+		<result property="ptext" column="ptext" />
 		<result property="logo_image" column="logo_image" />
 		<result property="cover_image" column="cover_image" />
 		<result property="created" column="created" />
@@ -14,30 +16,23 @@
 		<result property="del" column="del" />
 	</resultMap>
 	
-	<!-- <insert id="insert" parameterType="post">
-		insert into POST values (#{userid}, .. , now(), now(), 'n')
-	</insert> -->
-
-	<!-- <select id="select" parameterType="String" resultType="member">
-		select * from member where userid=#{member_id}
+	<select id="select" parameterType="String" resultType="page">
+		select * from page where pid=#{pid}
 	</select>
-
-	<select id="search" parameterType="hashMap" resultMap="memberResult">
-		select m.*, f.uid1 as uid2, f.uid2 as uid1, f.status as relation from (select * from member where username LIKE CONCAT('%',#{searchTerm},'%')) m left join follow f on ((userid=uid1 and uid2=#{userid}) or (userid=uid2 and uid1=#{userid}))
+	<insert id="insert" parameterType="page">
+		insert into PAGE values (#{pid}, #{userid}, #{category}, #{pname}, #{ptext}, 'default_profile.png', 'default_profile.png', now(), now(), #{del})
+	</insert>
+	<select id="count" parameterType="page" resultType="int">
+		select count(*) from page
 	</select>
-	
-
-	
-	<update id="update" parameterType="member">
-		update member set username=#{username}, password=#{password}, email=#{email}, modified=now(),  profile_image=#{profile_image}, tel=#{tel}, birth=#{birth} where userid=#{userid}
-	</update>
-	
-	<update id="updateThumbProfile" parameterType="hashMap">
-		update member set profile_image=#{url} where userid=#{userid}
-	</update>
-	
-	<update id="updateCoverProfile" parameterType="hashMap">
-		update member set cover_image=#{url} where userid=#{userid}
-	</update> -->
+	<select id="pcount" parameterType="page" resultType="int">
+		select count(*) from page where userid=#{userid}
+	</select>
+	<select id="selet_pid" parameterType="page" resultType="int">
+		select pid from page where userid=#{userid}
+	</select>
+	<!-- <select id="pcount" parameterType="page" resultType="int">
+		select count(*) a pid from page a join member b on a.userid=b.userid
+	</select> -->
 	
 </mapper>
