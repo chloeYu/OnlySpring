@@ -12,7 +12,7 @@ public class Page {
 	private String cover_image;
 	private Date created;
 	private Date modified;
-	private String del;
+	private int del;
 	
 	@Override
 	public String toString() {
@@ -75,10 +75,10 @@ public class Page {
 	public void setModified(Date modified) {
 		this.modified = modified;
 	}
-	public String getDel() {
+	public int getDel() {
 		return del;
 	}
-	public void setDel(String del) {
+	public void setDel(int del) {
 		this.del = del;
 	}
 	

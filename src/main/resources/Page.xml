@@ -20,7 +20,7 @@
 		select * from page where pid=#{pid}
 	</select>
 	<insert id="insert" parameterType="page">
-		insert into PAGE values (#{pid}, #{userid}, #{category}, #{pname}, #{ptext}, 'default_profile.png', 'default_profile.png', now(), now(), null)
+		insert into PAGE values (#{pid}, #{userid}, #{category}, #{pname}, #{ptext}, 'default_profile.png', 'default_profile.png', now(), now(), #{del})
 	</insert>
 	<select id="count" parameterType="page" resultType="int">
 		select count(*) from page
