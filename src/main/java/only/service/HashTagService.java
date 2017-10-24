@@ -11,4 +11,6 @@ public interface HashTagService {
 	HashTag getTag(int hid);
 	
 	int insertHashTag(HashTag tag);
+
+	List<HashTag> getTopNHashTags(int i);
 }

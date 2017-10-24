@@ -15,6 +15,7 @@
 		<typeAlias  type="only.model.Post_Location" alias="location"/>
 		<!-- <typeAlias  type="only.model.Page" alias="page"/> -->
 		<typeAlias  type="only.model.Alert" alias="alert"/>
+		<typeAlias  type="only.model.HashTag" alias="hashtag"/>
 	</typeAliases>
 
 	<mappers>
@@ -26,6 +27,7 @@
 		<mapper resource="Likes.xml" />
 		<!-- <mapper resource="Page.xml" /> -->
 		<mapper resource="Alert.xml" />
+		<mapper resource="HashTag.xml" />
 		
 	</mappers>
 </configuration>

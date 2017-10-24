@@ -3,10 +3,12 @@ package only.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import only.dao.HashTagDao;
 import only.model.HashTag;
 
+@Service
 public class HashTagServiceImpl implements HashTagService {
 	@Autowired
 	private HashTagDao hashD;
@@ -24,5 +26,10 @@ public class HashTagServiceImpl implements HashTagService {
 	@Override
 	public int insertHashTag(HashTag tag) {
 		return hashD.insertHashTag(tag);
+	}
+
+	@Override
+	public List<HashTag> getTopNHashTags(int n) {
+		return hashD.getTopNHashTags(n);
 	}
 }

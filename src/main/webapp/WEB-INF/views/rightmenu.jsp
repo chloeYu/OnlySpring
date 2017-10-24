@@ -6,15 +6,16 @@
 <div class="timeline_aside">
 	<div class="page_margin"></div>
 	<div class="aside_follow">
-		<h3>팔로우 추천 테스트</h3>
+	<c:if test="${not empty hashtags }">
+		<h3>인기 HashTag!</h3>
 		<hr>
-		내용 테스트<br> 내용 테스트<br> 내용 테스트<br>
+		<c:forEach items="${hashtags }" var="hashtag">
+		#${hashtag.hashtag }<span style="float:right; color: lightgrey">#${hashtag.count }번 태그 됨</span>
+		<br>
+		</c:forEach>
+	</c:if>
 	</div>
-	<div class="aside_interested">
-		<h3>내 관심사 테스트</h3>
-		<hr>
-		내용 테스트<br> 내용 테스트<br> 내용 테스트<br>
-	</div>
+
 
 	<div class="page_margin"></div>
 	<div class="chatProfile chatListToggle">

@@ -3,18 +3,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="tagns">
-	<resultMap type="HashTag" id="tagResult">
-		<id property="hid" column="hid" />
-		<result property="hName" column="hName" />
+	<resultMap type="hashtag" id="tagResult">
+		<result property="hashtag" column="hashtag" />
 		<result property="pid" column="pid" />
+		<result property="count" column="count" />
 	</resultMap>
-	<select id="select" parameterType="String" resultType="member">
-		select * from member where userid=#{member_id}
+
+	<select id="selectpopulartag" resultMap="tagResult">
+		select hashtag, count(hashtag) count from post_hashTag group by hashtag order by count desc;
 	</select>
-	<select id="search" parameterType="String" resultMap="memberResult">
-		select * from member where userid like '%'|| #{searchTerm} || '%'
-	</select>
-	<insert id="insertHashTag" parameterType="tag">
-		insert into Hash_Tag values(#{hid),#{hName},#{pid})
-	</insert>
 </mapper>

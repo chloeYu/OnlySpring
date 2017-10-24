@@ -10,4 +10,6 @@ public interface HashTagDao {
 	HashTag getTag(int hid);
 	
 	int insertHashTag(HashTag tag);
+
+	List<HashTag> getTopNHashTags(int n);
 }

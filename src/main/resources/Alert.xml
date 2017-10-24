@@ -26,7 +26,7 @@
 	</select>
 	
 	<select id="alertList" parameterType="String" resultType="alert">
-		select a.*, m.userid, m.username, m.profile_image from alert a join member m on a.uid2 = m.userid where uid2 = #{userid} order by aid desc
+		select a.*, m.userid, m.username, m.profile_image from alert a join member m on a.uid1 = m.userid where uid2 = #{userid} order by aid desc
 	</select>
 	
 	<update id="checkNotification" parameterType="int">

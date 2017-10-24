@@ -1,8 +1,11 @@
 package only.model;
 
 public class HashTag {
+	
 	private String hashtag;
 	private int pid;
+	private int count;
+	
 	public String getHashtag() {
 		return hashtag;
 	}
@@ -14,6 +17,12 @@ public class HashTag {
 	}
 	public void setPid(int pid) {
 		this.pid = pid;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 

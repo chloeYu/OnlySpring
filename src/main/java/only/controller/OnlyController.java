@@ -30,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import only.model.Alert;
 import only.model.Chat;
 import only.model.Comments;
+import only.model.HashTag;
 import only.model.Likes;
 import only.model.Member;
 import only.model.Post;
@@ -38,6 +39,7 @@ import only.model.User;
 import only.service.AlertService;
 import only.service.CommentService;
 import only.service.FriendListService;
+import only.service.HashTagService;
 import only.service.LikesService;
 import only.service.MemberService;
 import only.service.PostService;
@@ -67,6 +69,8 @@ public class OnlyController {
 	private TextMessageListService tmls;
 	@Autowired
 	private SessionRegistry sessionRegistry;
+	@Autowired
+	private HashTagService hs;
 
 	// 채팅 컨트롤러
 	@RequestMapping("/chat")
@@ -220,7 +224,10 @@ public class OnlyController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName(); 
 		List<Member> contacts = ms.getLoggedInMembers(name);
+		List<HashTag> hashtags = hs.getTopNHashTags(10);
+		System.out.println(hashtags.size()+"개의 hashtag");
 		model.addAttribute("contacts", contacts);
+		model.addAttribute("hashtags", hashtags);
 		for (Object p : sessionRegistry.getAllPrincipals()) {
 			if (p instanceof User) {
 				User user = (User) p;
