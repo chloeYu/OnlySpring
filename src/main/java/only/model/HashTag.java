@@ -1,32 +1,21 @@
 package only.model;
 
 public class HashTag {
-	private String hName;
-	private int hid;
+	private String hashtag;
 	private int pid;
-
-	public String gethName() {
-		return hName;
+	public String getHashtag() {
+		return hashtag;
 	}
-
-	public void setTagName(String hName) {
-		this.hName = hName;
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
 	}
-
-	public int gethid() {
-		return hid;
-	}
-
-	public void sethid(int hid) {
-		this.hid = hid;
-	}
-
-	public int getpid() {
+	public int getPid() {
 		return pid;
 	}
-
-	public void setpid(int pid) {
+	public void setPid(int pid) {
 		this.pid = pid;
 	}
+
+
 
 }

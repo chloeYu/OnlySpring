@@ -29,13 +29,13 @@ public class Post {
 	private float lng;
 	// Tagged Friends
 	private List<String> taggedFriend;
-	private List<String> hashtag;
+	private String hashtag;
 	
 	
-	public List<String> getHashtag() {
+	public String getHashtag() {
 		return hashtag;
 	}
-	public void setHashtag(List<String> hashtag) {
+	public void setHashtag(String hashtag) {
 		this.hashtag = hashtag;
 	}
 	@Override

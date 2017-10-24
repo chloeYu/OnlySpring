@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import only.model.HashTag;
 import only.model.Post;
 import only.model.Post_Files;
 import only.model.Post_Location;
@@ -187,10 +188,10 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public int insertHashTag(int pid, String hashTag) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("pid", Integer.toString(pid));
-		map.put("member", hashTag);
-		return sst.insert("postns.insertHashTag", map);
+		HashTag h = new HashTag();
+		h.setPid(pid);
+		h.setHashtag(hashTag);
+		return sst.insert("postns.insertHashTag", h);
 	}
 	
 	@Override

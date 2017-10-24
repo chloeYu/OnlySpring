@@ -40,18 +40,19 @@ public class FileUploadController {
 
 	@Autowired
 	private PostService ps;
-	
+
 	@Autowired
 	private CommentService cs;
 
-	
 	@RequestMapping(value = "/postWrite", method = RequestMethod.POST)
 	public String postWrite(Post post, HttpServletRequest request, Model model) {
 		return "forward:/postWriteAction";
 	}
+
 	@RequestMapping(value = "/postWriteAction", method = RequestMethod.POST)
-	public void postWriteAction(Post post, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String rootPath =  request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
+	public void postWriteAction(Post post, HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		String rootPath = request.getSession().getServletContext().getRealPath("/WEB-INF/img_timeline");
 		char[] type = { 'n', 'n', 'n', 'n', 'n', 'n', 'n' };
 		String text = post.getText();
 		if (text != null && !text.equals("")) {
@@ -60,14 +61,17 @@ public class FileUploadController {
 		List<MultipartFile> files = post.getFiles();
 		if (files.size() > 0) { // upload된 image파일이 있을 경우
 			for (MultipartFile file : files) {
-				if(file.getOriginalFilename().equals("")) continue;
-				else type[PostType.PHOTO_VIDEO.ordinal()] = 'y';
+				if (file.getOriginalFilename().equals(""))
+					continue;
+				else
+					type[PostType.PHOTO_VIDEO.ordinal()] = 'y';
 				try {
 					byte[] bytes = file.getBytes();
 					// Creating the directory to store file
-					/*File dir = new File(rootPath + File.separator + "uploadFiles");
-					if (!dir.exists())
-						dir.mkdirs();*/
+					/*
+					 * File dir = new File(rootPath + File.separator + "uploadFiles"); if
+					 * (!dir.exists()) dir.mkdirs();
+					 */
 
 					// Create the file on server
 					File serverFile = new File(rootPath + File.separator + file.getOriginalFilename());
@@ -78,18 +82,21 @@ public class FileUploadController {
 					System.out.println("Server File Location=" + serverFile.getAbsolutePath());
 
 				} catch (Exception e) {
-					//return "You failed to upload " + file.getName() + " => " + e.getMessage();
+					// return "You failed to upload " + file.getName() + " => " + e.getMessage();
 				}
 			}
 		}
-		if(post.getPlace() != null && !post.getPlace().equals("")) {
+		if (post.getPlace() != null && !post.getPlace().equals("")) {
 			type[PostType.LOCATION.ordinal()] = 'y';
-			System.out.println(post.getTaggedFriend().size()+"명의 친구 Tagged");
+			System.out.println(post.getTaggedFriend().size() + "명의 친구 Tagged");
 		}
-		if(post.getHashtag() != null && post.getHashtag().size()>0) {
-			type[PostType.HASHTAG.ordinal()]='y';
+		if (post.getTaggedFriend() != null && post.getTaggedFriend().size() > 0) {
+			type[PostType.TAG_FRIENDS.ordinal()] = 'y';
 		}
-		
+		if (post.getHashtag() != null && !post.getHashtag().equals("")) {
+			type[PostType.HASHTAG.ordinal()] = 'y';
+		}
+
 		System.out.println(String.copyValueOf(type) + String.copyValueOf(type).length());
 		post.setType(String.copyValueOf(type));
 		int pid = ps.nextPid();
@@ -124,15 +131,15 @@ public class FileUploadController {
 						}
 					}
 					Collection<WebSocketSession> set = ChatWebSocketHandler.users.values();
-		            TextMessage mes = new TextMessage("{\"type\":\"post\"}");
-		            System.out.println("post uploaded:" + mes);
-		            for (WebSocketSession s : set) {
-		    			try {
+					TextMessage mes = new TextMessage("{\"type\":\"post\"}");
+					System.out.println("post uploaded:" + mes);
+					for (WebSocketSession s : set) {
+						try {
 							s.sendMessage(mes);
 						} catch (IOException e) {
 							e.printStackTrace();
-						}	    		
-		    		}
+						}
+					}
 				}
 				if (i == PostType.LOCATION.ordinal()) { // Add location
 					Post_Location location = new Post_Location();
@@ -140,7 +147,7 @@ public class FileUploadController {
 					location.setPlace(post.getPlace());
 					location.setLat(post.getLat());
 					location.setLng(post.getLng());
-						
+
 					System.out.println(location.getPlace() + location.getLat());
 					if (ps.insertLocation(pid, location) > 0) {
 						System.out.println("location 입력성공");
@@ -148,14 +155,20 @@ public class FileUploadController {
 						System.out.println("location 입력실패");
 					}
 				}
-				if(i == PostType.TAG_FRIENDS.ordinal()) {
-					for(String member : post.getTaggedFriend()) {
+				if (i == PostType.TAG_FRIENDS.ordinal()) {
+					for (String member : post.getTaggedFriend()) {
 						int r = ps.insertMemberTag(pid, member);
 					}
 				}
-				if(i == PostType.HASHTAG.ordinal()) {
-					for(String member : post.getHashtag()) {
-						int r = ps.insertHashTag(pid, member);
+				if (i == PostType.HASHTAG.ordinal()) {
+					boolean a = true;
+					String[] hashtagresult = post.getHashtag().split("#");
+					for (String hashtag : hashtagresult) {
+						if (hashtag.equals("")) {
+							System.out.println("공백제거");
+						} else {
+							int r = ps.insertHashTag(pid, hashtag);
+						}
 					}
 				}
 			}
@@ -237,25 +250,28 @@ public class FileUploadController {
 		}
 		return message;
 	}
-	
+
 	@RequestMapping(value = "/writeComment", method = RequestMethod.POST)
 	public String writeComment(int ref_id, String text, int ref_type, HttpSession session, Model model) {
 		Comments comment = new Comments();
 		comment.setRef_id(ref_id);
 		comment.setText(text);
 		comment.setUserid((String) session.getAttribute(WebConstants.USER_ID));
-		if(ref_type==0) comment.setRe_level(0);
-		else comment.setRe_level(1);
-		
+		if (ref_type == 0)
+			comment.setRe_level(0);
+		else
+			comment.setRe_level(1);
+
 		int result = cs.insert(comment);
 		model.addAttribute("ref_id", ref_id);
 		model.addAttribute("ref_type", ref_type);
 		model.addAttribute("pageNum", 1);
-		
-		/*List<Comments> clist = cs.getComments(ref_id, ref_type, 1);
-		model.addAttribute("clist", clist);
-		System.out.println("comment Size: "+ clist.size());
-		*/
+
+		/*
+		 * List<Comments> clist = cs.getComments(ref_id, ref_type, 1);
+		 * model.addAttribute("clist", clist); System.out.println("comment Size: "+
+		 * clist.size());
+		 */
 		return "redirect:/loadComment";
 	}
 }

@@ -61,7 +61,7 @@ alert("${login}");
 							</span>
 							</div></td></tr></table></div>
 							<div class="tagInput" id="friendTag">
-							<table style='display: none;'>
+							<table style='display: none;' >
 							<tr  style="border-color: #adbed8;"><td class="withWho" style="font-weight: bolder; font-size: larger;">#</td>
 							<td><div id="selectedhash" class="friendTagListSpan">
 							<span><input name="hashtag" id="hashtag" placeholder='#hashtag'>

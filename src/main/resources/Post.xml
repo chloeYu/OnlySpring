@@ -116,7 +116,8 @@
 		select userid from POST_MEMBERTAG where pid=#{pid}
 	</select>
 	<insert id="insertHashTag" parameterType="hashMap">
-		insert into POST_HASHTAG values(#{pid}, #{hashTag})
+		{call insert_hashtag(#{pid}, #{hashtag} )}
+		<!-- insert into POST_HASHTAG values(#{hashtag}, #{pid}) -->
 	</insert>
 		
 </mapper>
